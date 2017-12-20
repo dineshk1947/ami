@@ -1,0 +1,98 @@
+
+<div class="hireachy">
+  <div layout="row" >
+      <div flex="10">
+        <label for="">Discom</label>
+      </div>
+      <div flex="20">
+
+        <md-select ng-change="model.getCircles()" ng-model="model.discomid" placeholder="select Discom" class="md-underline">
+          <md-option value="">Select Discom</md-option>
+          <md-option ng-repeat="x in model.discoms"  value="{{x[1]}}">{{x[0]}}</md-option>
+        </md-select>
+      </div>
+      <div flex="10">
+        <label for="">Circles</label>
+      </div>
+      <div flex="20">
+        <md-select ng-change="model.getDivisions()" ng-model="model.circleid" placeholder="select Circles" class="md-underline">
+          <md-option value="">Select Circles</md-option>
+          <md-option ng-repeat="x in model.circles"  value="{{x[1]}}">{{x[0]}}</md-option>
+        </md-select>
+      </div>
+      <div flex="10">
+        <label for="">Division</label>
+      </div>
+      <div flex="30">
+        <md-select ng-change="model.getSubDivisions()" ng-model="model.divisionid" placeholder="select Discom" class="md-underline">
+          <md-option value="">Select Discom</md-option>
+          <md-option ng-repeat="x in model.divisions"  value="{{x[1]}}">{{x[0]}}</md-option>
+        </md-select>
+      </div>
+
+  </div>
+  <div layout="row">
+      <div flex="10">
+        <label for="">subdivision</label>
+      </div>
+      <div flex="20">
+        <md-select ng-change="model.getSections()" ng-model="model.subdivisionid" placeholder="select Discom" class="md-underline">
+          <md-option value="">Select subdivision</md-option>
+          <md-option ng-repeat="x in model.subdivisions"  value="{{x[1]}}">{{x[0]}}</md-option>
+        </md-select>
+      </div>
+      <div flex="10">
+        <label for="">Section</label>
+      </div>
+      <div flex="20">
+        <md-select ng-change="model.getSubStations()" ng-model="model.sectionid" placeholder="select Section" class="md-underline">
+          <md-option value="">Select Section</md-option>
+          <md-option ng-repeat="x in model.sections"  value="{{x[1]}}">{{x[0]}}</md-option>
+        </md-select>
+      </div>
+      <div flex="10">
+        <label for="">Substations</label>
+      </div>
+      <div flex="30">
+        <md-select ng-change="model.getFeeder()" ng-model="model.substationid" placeholder="select Substation" class="md-underline">
+          <md-option value="">Select Substations</md-option>
+          <md-option ng-repeat="x in model.substations"  value="{{x[1]}}">{{x[0]}}</md-option>
+        </md-select>
+      </div>
+
+  </div>
+  <div layout="row" layout-align="space-between center">
+      <div flex="10">
+        <label for="">Feeder</label>
+      </div>
+      <div flex="20">
+        <md-select ng-change="model.getSections()" ng-model="model.feederid" placeholder="select Feeder" class="md-underline">
+          <md-option value="">Select Feeder</md-option>
+          <md-option ng-repeat="x in model.feeders"  value="{{x[1]}}">{{x[0]}}</md-option>
+        </md-select>
+      </div>
+      <div flex="10">
+        <label for="">DTR</label>
+      </div>
+      <div flex="20">
+        <md-select ng-change="model.getSubStations()" ng-model="model.dtrid" placeholder="select DTR" class="md-underline">
+          <md-option value="">Select DTR</md-option>
+          <md-option ng-repeat="x in model.dtrsdtrs"  value="{{x[1]}}">{{x[0]}}</md-option>
+        </md-select>
+      </div>
+      <div flex>
+
+      </div>
+      <!-- <div flex="10">
+        <label for="">Substations</label>
+      </div>
+      <div flex="23">
+        <md-select ng-change="model.getFeeder()" ng-model="model.substationid" placeholder="select Discom" class="md-underline">
+          <md-option value="">Select Substations</md-option>
+          <md-option ng-repeat="x in model.substations"  value="{{x[1]}}">{{x[0]}}</md-option>
+        </md-select>
+      </div> -->
+
+  </div>
+
+</div>

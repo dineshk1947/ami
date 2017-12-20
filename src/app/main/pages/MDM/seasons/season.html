@@ -1,0 +1,67 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Master Data Managment</span>
+            </div>
+
+            <div class="title">Seasons </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+
+
+        <div layout="row">
+
+            <div class="form-wrapper md-whiteframe-1dp" flex="100">
+              <form name="basicForm" class="md-inline-form" ng-submit="vm.seasonss()" id="seasons-form">
+
+
+                    <div layout="row" ng-repeat="each in vm.seasons track by $index">
+
+                        <div flex="10" class="zone-names" > <span><h3>Season {{$index+1}} </h3></span></div>
+                        <div flex="15">
+                          <span> <h6>Start Date : </h6></span>
+                        </div>
+
+                        <div flex="25">
+                          <md-datepicker ng-model="each.start"  md-min-date="vm.minDate" md-placeholder="Enter date" md-open-on-focus ></md-datepicker>
+                            <!-- <input type="date" ng-model="each.start" placeholder="Enter Date"> -->
+                        </div>
+
+                        <div flex="15">
+                          <span> <h6>End Date : </h6></span>
+                        </div>
+                        <div flex="25">
+                            <md-datepicker ng-model="each.end"  md-min-date="vm.minDate" md-placeholder="Enter date" md-open-on-focus ></md-datepicker>
+                            <!-- <input type="date" ng-model="each.end" placeholder="Enter Date"> -->
+
+                        </div>
+                        <div flex="10">
+                          <span ng-show="!each.valid" style="color:red;">error</span>
+                        </div>
+                        <!-- <md-input-container flex="20">
+                          <md-switch ng-model="each.status" aria-label="Switch 1" ng-true-value="'Active'" ng-false-value="'In Active'" ng-change="vm.perform(1)">
+                               {{ each.status }}
+                          </md-switch>
+                        </md-input-container> -->
+                    </div>
+
+
+                    <md-button type="submit" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,64 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Master Data Managment</span>
+            </div>
+
+            <div class="title">Holiday </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+
+        <div layout="row">
+
+
+          <!-- BASIC FORM -->
+          <div class="form-wrapper md-whiteframe-1dp" flex="100">
+            <form name="colorForm" ng-submit="vm.holiday()" id="holiday-form" >
+              <div flex ="20">
+                <md-icon md-font-icon="icon-plus-circle" show-gt-sm="" role="button" aria-label="icon-plus-circle"  ng-click="vm.addHols($index)"></md-icon>
+              </div>
+              <div layout="row" ng-repeat="items in vm.holidays track by $index" >
+                <div flex="5">
+                </div>
+                <div flex="10" class="hol-name">
+                  <p>HOLIDAY {{$index+1}}</p>
+                </div>
+                <div flex="5">
+                </div>
+                <md-input-container flex="40">
+                    <input name="holidayName" ng-model="items.name" placeholder="Holiday Name">
+                </md-input-container>
+                <div flex="10">
+                </div>
+                <div flex="40">
+                    <md-datepicker ng-model="items.date" md-placeholder="Enter date" md-open-on-focus ></md-datepicker>
+                    <!-- <input type="date" name="holidayName" ng-model="items.date"> -->
+                </div>
+                <div flex="5">
+                   <div ng-show="!items.valid" style="color:red">
+                    Error
+                  </div>
+                </div>
+                <div flex ="5">
+                  <md-icon ng-show="items.opt" md-font-icon="icon-minus-circle" show-gt-sm="" role="button" aria-label="icon-plus-circle"  ng-click="vm.deleteHols($index)"></md-icon>
+                </div>
+              </div>
+              <div>
+                <md-button type="submit" value="Submit" class="md-accent md-raised">Submit</md-button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+</div>

@@ -1,0 +1,27 @@
+<form name ="meterCat" id="make-form" class="md-inline-form" flex="90" ng-submit="vm.TypeSubmit()">
+  <div class="demo-md-panel-animation md-padding metermaster-class">
+     <div layout="row">
+       <div flex="40">
+         <div ng-repeat = "items in vm.types track by $index">
+           <md-input-container>
+             <label>Enter Device Type</label>
+             <input ng-model="items.type">
+           </md-input-container>
+         </div>
+       </div>
+       <div flex ="20">
+         <md-icon md-font-icon="icon-plus-circle" show-gt-sm="" role="button" aria-label="icon-plus-circle"  ng-click="vm.addTypes($index)"></md-icon>
+       </div>
+     </div>
+
+     <div layout="row">
+       <div flex ="30">
+       </div>
+       <div flex="40">
+         <md-button type="submit" value="Submit" class="md-accent md-raised">Submit</md-button>
+       </div>
+       <div flex ="30">
+       </div>
+     </div>
+   </div>
+</form>

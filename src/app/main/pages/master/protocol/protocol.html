@@ -1,0 +1,23 @@
+
+<form name ="meterProtocol" id="protocol-form" ng-submit="vm.protocol1()">
+  <div class="demo-md-panel-animation metermaster-class">
+      <div flex ="25">
+        <md-icon md-font-icon="icon-plus-circle" show-gt-sm="" role="button" aria-label="icon-plus-circle"  ng-click="vm.addProtocols($index)"></md-icon>
+      </div>
+    <div layout="row" ng-repeat = "items in vm.protocols track by $index">
+      <div flex="45">
+        <div layout="row">
+          <div flex="40">
+            <p>Protocol {{$index+1}} : </p>
+          </div>
+          <div flex ="60">
+            <md-input-container>
+              <input ng-model="items.protocol">
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <md-button type="submit" value="Submit" class="md-accent md-raised">Submit</md-button>
+  </div>
+</form>

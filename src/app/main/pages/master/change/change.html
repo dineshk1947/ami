@@ -1,0 +1,190 @@
+<form name ="meterChange" id="change-form" ng-submit ="vm.changes()">
+  <div class="demo-md-panel-animation md-padding metermaster-class">
+
+
+    <div layout="row">
+      <div class="heading">
+          <p>Existing Meter Details</p>
+      </div>
+    </div>
+
+    <div layout="row">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p>Consumer Number :</p>
+            </div>
+            <div flex="50">
+              <md-select ng-change="vm.getSno(vm.change.cId)"  ng-model="vm.change.cNo" placeholder="select Consumer Id" class="md-underline">
+                <md-option ng-repeat="x in vm.cNo"  value="{{x[0]}},{{x[1]}}">{{x[0]}}</md-option>
+              </md-select>
+              <!-- <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in query(searchText)">
+                <md-item-template>
+                  <span md-highlight-text="searchText">{{item}}</span>
+                </md-item-template>
+              </md-autocomplete> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div flex="10">
+
+      </div>
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p>Existing Meter Serial Number :</p>
+            </div>
+            <div flex="50">
+              <md-input-container class="md-block" flex-gt-sm>
+                <input ng-model="vm.change.sNo" placeholder="Enter Name" value="<b>vm.change.sNo</b>" disabled style="font-weight:600;color:#000;cursor: not-allowed;">
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div layout="row">
+      <div flex="20" class="each-item">
+          <p>Last Reading :</p>
+      </div>
+
+      <div flex="15">
+        <md-input-container class="md-block" flex-gt-xs>
+          <input ng-model="vm.change.kwh" placeholder="KWH" >
+        </md-input-container>
+      </div>
+      <div flex="5">
+
+      </div>
+      <div flex="15">
+        <md-input-container class="md-block" flex-gt-xs>
+          <input ng-model="vm.change.kvah" placeholder="KVAH" >
+        </md-input-container>
+      </div>
+      <div flex="5">
+
+      </div>
+      <div flex="15">
+        <md-input-container class="md-block" flex-gt-xs>
+          <input ng-model="vm.change.kvarh" placeholder="KVARH">
+        </md-input-container>
+      </div>
+      <div flex="5">
+
+      </div>
+      <div flex="15">
+        <md-input-container class="md-block" flex-gt-xs>
+          <input ng-model="vm.change.demand" placeholder="Demand">
+        </md-input-container>
+      </div>
+      <div flex="5">
+
+      </div>
+    </div>
+
+    <div layout="row">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p>Date Of Failure :</p>
+            </div>
+            <div flex="50">
+              <md-datepicker ng-model="vm.change.failDate" md-max-date="vm.maxDate" md-placeholder="Enter date" md-open-on-focus required></md-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div layout="row">
+      <div class="heading">
+          <p>New Meter Details</p>
+      </div>
+    </div>
+
+
+    <div layout="row">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p>Meter Serial No :</p>
+            </div>
+            <div flex="50">
+              <md-input-container>
+                <label></label>
+                <input ng-model="items.nmsno" placeholder="Meter Seial No">
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div flex="10">
+
+      </div>
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p>Installed Date :</p>
+            </div>
+            <div flex="50">
+              <md-datepicker ng-model="vm.change.installedDate" md-max-date="vm.maxDate" md-placeholder="Enter date" md-open-on-focus required></md-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p>Estimation required for missing parameters :</p>
+            </div>
+            <div flex="50">
+              <md-input-container flex="50">
+                <md-switch ng-model="vm.parameters" aria-label="Switch 1" ng-true-value="'Y'" ng-false-value="'N'"> {{vm.parameters}} </md-switch>
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div flex="10">
+
+      </div>
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p>Commisioned Date :</p>
+            </div>
+            <div flex="50">
+              <md-datepicker ng-model="vm.change.commisionedDate" md-max-date="vm.maxDate" md-placeholder="Enter date" md-open-on-focus required></md-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div layout="row">
+      <div flex="45">
+
+      </div>
+      <div flex="10">
+        <md-button type="submit" class="md-accent md-raised">Submit</md-button>
+      </div>
+      <div flex="45">
+
+      </div>
+    </div>
+  </div>
+
+
+</form>

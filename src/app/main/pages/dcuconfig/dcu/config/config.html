@@ -1,0 +1,159 @@
+<form name="basicForm" class="md-inline-form" ng-submit="vm.dcuConfigureSubmit()" id="Dcu-Config-Form">
+    <md-content class="md-padding">
+      <div class="demo-md-panel-animation md-padding metermaster-class">
+        <div layout="row">
+          <div flex = "45">
+            <div layout="row">
+              <div flex="50">
+                <span class="p">DCU SERIAL No:</span>
+              </div>
+              <div flex="50">
+                <md-input-container>
+                  <input ng-model="vm.dcuSelected.dcuSRno"  required >
+                </md-input-container>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+               <span class="p">Select Type</span>
+              </div>
+              <div flex="50">
+                <md-select ng-model="vm.dcuSelected.devicetypes" required >
+                  <md-option ng-repeat="x in vm.devicetypes"  value="{{x[0]}}">{{x[1]}}</md-option>
+                </md-select>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                <span class="p"> Installed Date : </span>
+              </div>
+              <div flex="50">
+                <md-input-container>
+                  <input type="date" ng-model="vm.dcuSelected.installed" placeholder="Enter Date" required >
+                </md-input-container>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                <span class="p">Firmware Version</span>
+              </div>
+              <div flex="50">
+                <md-input-container>
+                  <input ng-model="vm.dcuSelected.FirmwareVersion" required >
+                </md-input-container>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                <span class="p">Latitude: (degrees) </span>
+              </div>
+              <div flex="50">
+                <md-input-container >
+                  <input ng-model="vm.dcuSelected.latitude" required >
+                </md-input-container>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                <span class="p">Port Number : </span>
+              </div>
+              <div flex="50">
+                <md-input-container class="md-block">
+                  <input type="number" ng-model="vm.dcuSelected.portnumber" required numbers-only>
+                </md-input-container>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50"><span class="p">IP Address :</span>
+              </div>
+              <div flex="50">
+               <table>
+                 <tr>
+                   <td><input id="ip1"  ng-model="vm.ip1"  required size="4" ng-minlength="3" ng-maxlength="3"  ng-keyup="vm.ip1keyupevt(vm.ip1)"></td>
+                   <td><input id="ip2"  ng-model="vm.ip2"  required size="4" ng-minlength="3" ng-maxlength="3" ng-keyup="vm.ip2keyupevt(vm.ip2)"></td>
+                   <td><input id="ip3"  ng-model="vm.ip3"  required size="4" ng-minlength="3" ng-maxlength="3" ng-keyup="vm.ip3keyupevt(vm.ip3)"></td>
+                   <td><input id="ip4"  ng-model="vm.ip4"  required size="4" ng-minlength="3" ng-maxlength="3"></td>
+                 </tr>
+               </table>
+             </div>
+           </div>
+          </div>
+          <div flex = "10">
+          </div>
+          <div flex = "45">
+            <div layout="row">
+              <div flex="50">
+                 <span class="p">Select DCU Make</span>
+               </div>
+               <div flex="50">
+                 <md-select placeholder=""  ng-model="vm.dcuSelected.devicemakes" ng-required="true">
+                   <md-option ng-repeat="x in vm.devicemakes"  value="{{x[0]}}">{{x[1]}}</md-option>
+                 </md-select>
+               </div>
+             </div>
+             <div layout="row">
+               <div flex="50">
+                 <span class="p">Select Protocol</span>
+               </div>
+               <div flex="50">
+                 <md-select ng-model="vm.dcuSelected.deviceprotocols" required>
+                    <md-option ng-repeat="x in vm.deviceprotocols"  value="{{x[0]}}">{{x[1]}}</md-option>
+                  </md-select>
+                </div>
+              </div>
+              <div layout="row">
+                <div flex="50">
+                  <span class="p"> Commisoned Date :</span>
+                </div>
+                <div flex="50">
+                  <md-input-container>
+                    <input type="date" ng-model="vm.dcuSelected.commisoned" placeholder="Enter Date" required>
+                  </md-input-container>
+                </div>
+              </div>
+              <div layout="row">
+                <div flex="50">
+                  <span class="p">Select Status</span>
+                </div>
+                <div flex="50">
+                  <md-select ng-model="vm.dcuSelected.devicestatuses" required>
+                    <md-option ng-repeat="x in vm.devicestatuses"  value="{{x[0]}}" ng-slected="">{{x[1]}}</md-option>
+                  </md-select>
+                </div>
+              </div>
+              <div layout="row">
+                <div flex="50">
+                  <span class="p">Longitude: (degrees) </span>
+                </div>
+                  <div flex="50">
+                    <md-input-container >
+                      <input ng-model="vm.dcuSelected.longitude" required >
+                    </md-input-container>
+                  </div>
+                </div>
+                <div layout="row">
+                  <div flex="50">
+                    <span class="p">HES ID : </span>
+                  </div>
+                  <div flex="50">
+                    <md-input-container >
+                      <input ng-model="vm.dcuSelected.hesid" required type="number">
+                    </md-input-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </md-content>
+
+    <div layout="row">
+        <div flex="50">
+          <span class="p" hidden=""> </span>
+        </div>
+        <div flex="50">
+          <md-input-container class="md-block">
+            <md-button type="submit" value="Submit" class="md-accent md-raised">Submit</md-button>
+          </md-input-container>
+        </div>
+      </div>
+</form>

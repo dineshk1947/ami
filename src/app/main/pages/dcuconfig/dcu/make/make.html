@@ -1,0 +1,47 @@
+<form name ="meterMake" id="make-form" class="md-inline-form" flex="90" ng-submit="vm.made()">
+  <div class="demo-md-panel-animation md-padding metermaster-class">
+
+    <div layout="row">
+      <div flex="15">
+
+      </div>
+      <div flex="50">
+        <div layout="row" ng-repeat = "items in vm.manufacturers track by $index">
+          <div flex ="45">
+            <md-input-container>
+              <label>Manufacturer Code</label>
+              <input ng-model="items.mcode">
+            </md-input-container>
+          </div>
+          <div flex ="10">
+
+          </div>
+          <div flex ="45">
+            <md-input-container>
+              <label>Manufacturer Name</label>
+              <input ng-model="items.mname">
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+      <div flex="15">
+
+      </div>
+      <div flex ="20">
+        <md-icon md-font-icon="icon-plus-circle" show-gt-sm="" role="button" aria-label="icon-plus-circle"  ng-click="vm.addManufacturers($index)"></md-icon>
+      </div>
+
+    </div>
+
+
+    <div layout="row">
+      <div flex ="30">
+      </div>
+      <div flex="40">
+        <md-button type="submit" value="Submit" class="md-accent md-raised">Submit</md-button>
+      </div>
+      <div flex ="30">
+      </div>
+    </div>
+  </div>
+</form>

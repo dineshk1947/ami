@@ -1,0 +1,32 @@
+#simmaster-form {
+  margin: 30px;
+  p {
+    margin: 25px 0 26px 0;
+   font-size: 16px;
+   text-transform: uppercase;
+  }
+  md-input-container {
+    margin: 10px 0;
+  }
+  h4 {
+    margin: 0;
+   text-transform: uppercase;
+   font-weight: 600;
+   font-size: 16px;
+  }
+}
+md-toast {
+  &.error {
+    .md-toast-content {
+      background: #d9534f;
+      color: white;
+    }
+  }
+  &.success {
+    .md-toast-content {
+      background: #398439;
+      color: white;
+
+    }
+  }
+}

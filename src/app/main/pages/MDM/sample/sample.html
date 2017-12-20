@@ -1,0 +1,70 @@
+
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Master Data Managment</span>
+            </div>
+
+            <div class="title">Time Zones</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+       <ms-hireachey></ms-hireachey>
+
+        <div layout="row">
+
+
+            <!-- BASIC FORM -->
+            <div class="form-wrapper md-whiteframe-1dp" flex="100">
+
+                <form name="basicForm" class="md-inline-form" ng-submit="vm.zoness()" id="timezones-form">
+
+
+
+                    <div layout="row" ng-repeat="each in vm.timezones track by $index">
+
+                        <md-input-container flex="10" class="zone-names"> TimeZone{{$index+1}}</md-input-container>
+                        <md-input-container flex="25">
+                            <input type="time" ng-model="each.start" placeholder="Start Time">
+                        </md-input-container>
+                        <div flex="10">
+
+                        </div>
+
+                        <md-input-container flex="25">
+                            <input type="time" ng-model="each.end" placeholder="End Time">
+
+                        </md-input-container>
+                        <div flex="10">
+                          <span ng-show="!each.valid" style="color:red;">Error</span>
+                        </div>
+                        <md-input-container flex="20">
+                          <md-switch ng-model="each.status" aria-label="Switch 1" ng-true-value="'Active'" ng-false-value="'In Active'" ng-change="vm.perform(1)">
+                               {{ each.status }}
+                          </md-switch>
+                        </md-input-container>
+                    </div>
+
+
+                    <md-button type="submit" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                </form>
+
+            </div>
+            <!-- / BASIC FORM -->
+
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+</div>

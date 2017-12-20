@@ -1,0 +1,22 @@
+<form name ="meterStatus" id="status-form" ng-submit="vm.status1()">
+  <div class="demo-md-panel-animation metermaster-class">
+      <div flex ="25">
+        <md-icon md-font-icon="icon-plus-circle" show-gt-sm="" role="button" aria-label="icon-plus-circle"  ng-click="vm.addStatus($index)"></md-icon>
+      </div>
+    <div layout="row" ng-repeat = "items in vm.statuses track by $index">
+      <div flex="45">
+        <div layout="row">
+          <div flex="40">
+            <p>Status {{$index+1}} : </p>
+          </div>
+          <div flex ="60">
+            <md-input-container>
+              <input ng-model="items.status">
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <md-button type="submit" value="Submit" class="md-accent md-raised">Submit</md-button>
+  </div>
+</form>
