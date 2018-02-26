@@ -1,0 +1,241 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column" >
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Asset Management</span>
+            </div>
+            <div class="subHeaderTitle">Meter Search</div>
+        </div>
+
+    </div>
+
+    <div class="content" layout="column">
+        <div layout="row">
+            <div class="form-wrapper md-whiteframe-1dp" flex="100" id="meter-search">
+                <div layout="row" >
+                    <div flex="5">
+                        <p class="label-font">Discom:</p>
+                    </div>
+                    <div flex="10">
+                        <p class="data-font">{{model.discom}}</p>
+                    </div>
+
+                    <div flex="5"></div>
+
+                    <div flex="5">
+                        <p class="label-font" >Region:</p>
+                    </div>
+
+                    <div flex="10" ng-show="model.region">
+                      <p class="data-font" > {{model.regionName}}</p>
+                    </div>
+                    <md-input-container flex="15" ng-show="model.region1">
+                        <md-select ng-change="model.getRegions()" ng-model="model.discomId" placeholder="select region" class="md-underline">
+                            <md-option ng-repeat="x in model.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <div flex="5"></div>
+
+                    <div flex="5">
+                        <p class="label-font">Circle:</p>
+                    </div>
+                    <div flex="15" ng-show="model.circle">
+                      <p class="data-font"> {{model.circleName}}</p>
+                    </div>
+                    <md-input-container flex="15" ng-show="model.circle1">
+                        <md-select ng-change="model.getCircles()" ng-model="model.regionId" placeholder="select circle" class="md-underline">
+                            <md-option ng-repeat="x in model.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <div flex="5"></div>
+
+                    <div flex="5">
+                        <p class="label-font" style="margin-left:-6px">Division:</p>
+                    </div>
+                    <div flex="10" ng-show="model.division">
+                      <p class="data-font"> {{model.divisionName}}</p>
+                    </div>
+                    <md-input-container flex="10" ng-show="model.division1">
+                        <md-select ng-change="model.getDivisions()" ng-model="model.divisionId" placeholder="select division" class="md-underline">
+                            <md-option ng-repeat="x in model.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <div flex="5"></div>
+
+                    <div flex="5">
+                        <p class="label-font" style="margin-left: -27px;">SubDivision:</p>
+                    </div>
+                    <div flex="15" ng-show="model.subdivision">
+                      <p class="data-font"> {{model.subdivisionName}}</p>
+                    </div>
+                    <md-input-container flex="15" ng-show="model.subdivision1">
+                        <md-select ng-change="model.getSections()" ng-model="model.subdivisionid" placeholder="select subdivision" class="md-underline">
+                            <md-option ng-repeat="x in model.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                </div>
+                <div layout="row">
+
+                    <div flex="5">
+                        <p class="label-font">Section:</p>
+                    </div>
+                    <div flex="10" ng-show="model.section">
+                      <p class="data-font" > {{model.sectionName}}</p>
+                    </div>
+
+                    <md-input-container flex="15" ng-show="model.section1">
+                        <md-select ng-change="model.getSubStations()" ng-model="model.sectionid" placeholder="select section" class="md-underline">
+                            <!-- <md-progress-circular md-mode="indeterminate" ng-show = "model.showProgress"></md-progress-circular> -->
+                            <md-option ng-repeat="x in model.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                      <div flex="5"></div>
+
+                    <div flex="5">
+                        <p class="label-font" style="margin-left: -46px;">SubStation:</p>
+                    </div>
+                    <div flex="15" ng-show="model.substation">
+                      <p class="data-font" >{{model.substation}}</p>
+                    </div>
+                    <md-input-container flex="15" ng-show="model.substation1" style="margin-left: -22px;">
+                        <md-select ng-change="model.getFeeder()" ng-model="model.substationid" placeholder="select substation" class="md-underline">
+                            <!-- <md-progress-circular md-mode="indeterminate" ng-show = "model.showProgress"></md-progress-circular> -->
+                            <md-option ng-repeat="x in model.substations"  value="{{x.substationId}}">{{x.substation}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                      <div flex="5"></div>
+
+                    <div flex="5">
+                        <p class="label-font">Feeder:</p>
+                    </div>
+                    <div flex="15" ng-show="model.feeder">
+                      <p class="data-font" >{{model.feeder}}</p>
+                    </div>
+                    <md-input-container flex="15" ng-show="model.feeder1">
+                        <md-select ng-change="model.getDtr()" ng-model="model.feederid" placeholder="select feeder" class="md-underline">
+                            <!-- <md-progress-circular md-mode="indeterminate" ng-show = "model.showProgress"></md-progress-circular> -->
+                            <md-option ng-repeat="x in model.feeders"  value="{{x.feederId}}">{{x.feeder}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <div flex="5"></div>
+
+                    <div flex="5">
+                        <p class="label-font">DTR:</p>
+                    </div>
+                    <div flex="15" ng-show="model.dtr" class="vhide">
+                      <p class="data-font" >{{model.dtr}}</p>
+                    </div>
+
+                    <md-autocomplete   ng-model="model.selectedItem" ng-show="model.dtr1"
+
+                       md-selected-item="model.selectedItem"
+                       md-search-text-change="model.searchTextChange(model.searchText)"
+                       md-search-text="model.searchText"
+                       md-selected-item-change="model.getMeter(model.selectedItem)"
+
+                       md-items="item in model.dtrs | filter:model.searchText"
+                       md-item-text="item.dtr"
+                       md-min-length="0"
+                       placeholder="Enter dtr"
+                       ng-required="true">
+
+                       <md-item-template>
+                         <span md-highlight-text="model.searchText" md-highlight-flags="^i" > {{item.dtr}}</span>
+                       </md-item-template>
+
+                     </md-autocomplete>
+
+                </div>
+
+                <div layout="row">
+
+                    <div flex="10">
+                        <p class="label-font">Meter No:</p>
+                    </div>
+                    <div flex="20">
+                        <md-input-container flex>
+                            <label for="search-input">Search</label>
+                            <input id="search-input" type="text" ng-model="model.meterSearch.meterNo" />
+                        </md-input-container>
+                    </div>
+                    <div flex="5"></div>
+                    <div flex="10">
+                        <p class="label-font">Service No:</p>
+                    </div>
+                    <div flex="20">
+                        <md-input-container flex>
+                            <label for="serviceId">Search</label>
+                            <input id="serviceId" type="text" ng-model="model.meterSearch.consumerNo" />
+                        </md-input-container>
+                    </div>
+                    <div flex="5"></div>
+                    <div flex="10">
+                        <p class="label-font">ConsumerName:</p>
+                    </div>
+                    <div flex="20">
+                        <md-input-container flex>
+                            <label for="consumerName">Search</label>
+                            <input id="consumerName" type="text" ng-model="model.meterSearch.consumerName" />
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div layout="row">
+                  <md-button type="submit" class="md-accent md-raised"  ng-click="model.searchMeterFun()">Search</md-button>
+                  <md-button type="submit" ng-click="model.clearFun()"  class="md-raised md-accent"  aria-label="Submit" >clear</md-button>
+                  <md-button  class="md-accent md-raised" type="button" ng-click="model.newMetr()"> New Meter </md-button>
+                </div>
+                <md-progress-circular md-mode="indeterminate" ng-show = "model.showProgress" style="margin-left: 50%"></md-progress-circular>
+                <div layout="row" ng-show = "model.showTable">
+                    <table class="dataTable row-border hover" datatable="ng" dt-options="model.dtOptions" style="overflow: hidden;">
+                        <thead>
+                        <tr>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Meter S.No :</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Consumer No :</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Consumer Name:</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">MeterSub-category</span>
+                                </div>
+                            </th>
+
+                        </thead>
+
+                        <tbody>
+
+                        <tr ng-repeat="data in model.searchData">
+                            <td ng-click="model.showTabDialog(data)"><a href="#">{{data.mtrslno}}</a></td>
+                            <td>{{data.consumerNum}}</td>
+                            <td>{{data.consumerName}}</td>
+                            <td>{{data.meterCategoryType}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

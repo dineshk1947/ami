@@ -1,0 +1,63 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column" >
+  <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
+    <div layout="column" layout-align="space-between">
+        <div class="breadcrumb" layout="row" layout-align="start center">
+          <span class="parent">Master Data Management</span>
+        </div>
+        <div class="headerTitle">Billing Determinants</div>
+    </div>
+    <!-- <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()" >
+      <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
+    </md-button> -->
+  </div>
+
+  <!-- <ms-hierarchy  ng-show="vm.showHeader"></ms-hierarchy> -->
+
+  <div class="content" layout="column">
+      <div layout="row">
+        <div class="form-wrapper md-whiteframe-1dp" flex="100" id="billing-determinants">
+          <div class="load-tab">
+            <div ng-cloak>
+              <md-content>
+                <md-tabs md-dynamic-height md-border-bottom md-center-tabs=true md-stretch-tabs="always">
+                  <md-tab>
+                    <md-tab-label>
+                      <md-icon class="fa fa-clock-o" style="font-size:20px"></md-icon>
+                        <b>Timezones</b>
+                    </md-tab-label>
+                    <md-tab-body ng-class="tab.style" layout="column" layout-fill>
+                      <md-content class="md-padding">
+                        <div ng-include="'app/main/pages/MDM/tou/tou.html'"></div>
+                      </md-content>
+                    </md-tab-body>
+                  </md-tab>
+                  <md-tab>
+                    <md-tab-label>
+                      <md-icon class="fa fa-calendar" style="font-size:20px"></md-icon>
+                        <b>Seasons</b>
+                    </md-tab-label>
+                    <md-tab-body ng-class="tab.style" layout="column" layout-fill>
+                      <md-content class="md-padding">
+                        <div ng-include="'app/main/pages/MDM/seasons/season.html'"></div>
+                      </md-content>
+                    </md-tab-body>
+                  </md-tab>
+                  <md-tab>
+                    <md-tab-label>
+                    <md-icon class="fa fa-car" style="font-size:20px"></md-icon>
+                        <b>Holidays</b>
+                    </md-tab-label>
+                    <md-tab-body ng-class="tab.style" layout="column" layout-fill>
+                      <md-content class="md-padding">
+                        <div ng-include="'app/main/pages/MDM/holiday/holiday.html'"></div>
+                      </md-content>
+                    </md-tab-body>
+                  </md-tab>
+               </md-tabs>
+              </md-content>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+#Alogo-Master-Form{
+  md-select {
+     margin: 0px 0 20px 0;
+  }
+
+//   table.dataTable tbody td {
+// padding: 8px 20px;
+// }
+md-checkbox {
+margin-left: 50px;
+}
+table
+{
+  width: 80%;
+}
+
+  .p{
+   font-size: 15px;
+  }
+  //  .lr{
+  //   margin-top: 40px;
+  // }
+
+  .header{
+    //margin: 25px 0 26px 0;
+  font-weight: bold;
+   font-size: 17px;
+   text-transform: uppercase;
+  }
+
+
+  md-input-container {
+    margin: 5px 0;
+  }
+
+  button {
+    margin: 0;
+  }
+ .mrright{
+   margin-right: 100px;
+   margin-top: 50px;
+ }
+ .mrtop{
+   margin-top: 70px;
+
+ }
+ .ct{
+   margin-left: 85px;
+
+ }
+ .mrleft{
+   margin-left: 100px;
+ }
+
+ .md-toolbar-tools {
+     background-color: rgb(7, 128, 185);
+   }
+
+  .md-dialog{
+    height   : 250px;
+    width    : 200px;
+    padding  : 20px 20px 25px;
+    overflow : none;
+    //  .lr{
+    //   padding: 15px;
+    //   height: 70px;
+    // }
+    //
+    //   .input-margin {
+    //     margin-top: -35px;
+    //   }
+    // }
+    md-input-container {
+      margin: 10;
+    }
+    md-checkbox {
+      margin: 10;
+    }
+    .close-button {
+      color: #fff;
+      background-color: #c9302c;
+    }
+
+  }
+
+}

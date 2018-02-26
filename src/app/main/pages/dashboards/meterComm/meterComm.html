@@ -1,0 +1,106 @@
+
+<div  class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Dashboards</span>
+            </div>
+
+            <div class="headerTitle">Meter Communication</div>
+        </div>
+        <!-- <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()">
+          <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
+        </md-button> -->
+    </div>
+      <ms-hierarchys ng-show="vm.showHeader"></ms-hierarchys>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+        <div layout="row">
+
+          <div class="form-wrapper md-whiteframe-1dp" flex="100" id="meter-comm">
+            <div layout="row">
+
+             <div flex="10">
+               <p class="label-font">From Date</p>
+             </div>
+             <div flex="25">
+               <md-datepicker ng-model="vm.meterComm.fromDate" md-placeholder="Enter date" md-open-on-focus md-max-date="vm.currDate" required></md-datepicker>
+             </div>
+             <div flex="10">
+               <p class="label-font">To Date</p>
+             </div>
+             <div flex="25">
+               <md-datepicker ng-model="vm.meterComm.toDate" md-placeholder="Enter date" md-open-on-focus md-max-date="vm.currDate" required></md-datepicker>
+             </div>
+             <!-- <div flex="10"> -->
+                <md-button type="submit" class="md-accent md-raised" ng-click="vm.metercommSubmit()">Submit</md-button>
+                <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.meterComm)">clear</md-button>
+             <!-- </div> -->
+             <div flex="10"></div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                <div layout="row" ng-show="vm.statisticsTable">
+                  <div flex="60">
+                    <md-radio-group ng-model="vm.switch" required ng-click="vm.displayFun(vm.switch)" class="radio-align">
+                      <md-radio-button value="donutChart">Donut Chart</md-radio-button>
+                      <md-radio-button value="barchart">Bar Chart</md-radio-button>
+                    </md-radio-group>
+                  </div>
+                </div>
+                <div layout="row" ng-if="vm.donut">
+                  <div flex="100">
+                      <div class="card">
+                          <nvd3 options="vm.donutChart.options" data="vm.donutChart.data"></nvd3>
+                      </div>
+                  </div>
+
+                </div>
+
+                <div layout="row" ng-if="vm.chart">
+                  <div flex="100" >
+                    <div class="card" style="width:100%;">
+                      <nvd3 options="vm.discreteBarChart.options" data="vm.discreteBarChart.data"></nvd3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div flex="10"></div>
+              <div flex="40">
+                <table  class="tb-stats" ng-show="vm.statisticsTable">
+                  <tbody>
+                    <tr>
+                        <td class="p"><p class="label-font">Total number Of Consumers :</p></td>
+                        <td class="p"><p class="label-font">{{vm.counts.consumerCount}}</p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">Installed :</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('1')">{{vm.counts.installed}}</a></p></td>
+                    </tr>
+                    <tr>
+                        <td class="p"><p class="label-font">Commissioned :</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('2')">{{vm.counts.commissioned}}</a></p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">Meters In Store :</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('3')">{{vm.counts.meterInStore}}</a></p></td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+            <!-- <div id="chartdiv"></div> -->
+
+          </div>
+
+        </div>
+    </div>
+    <!-- / CONTENT -->
+</div>

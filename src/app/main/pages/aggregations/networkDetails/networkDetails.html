@@ -1,0 +1,35 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Aggregations</span>
+            </div>
+
+            <div class="headerTitle">Network Hierarchy</div>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+        <div layout="row">
+
+          <div class="form-wrapper md-whiteframe-1dp" flex="100">
+            <center><h1 class="aggregations-heading">{{vm.discom}} - Network Hierarchy</h1></center>
+            <div layout="row" layout-sm="column" layout-align="space-around" ng-show = "vm.showProgress">
+              <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+            <div layout="row">
+              <div id="network-chart" class="chart-container" ng-show="vm.content"></div>
+            </div>
+          </div>
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+</div>

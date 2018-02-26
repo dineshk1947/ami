@@ -1,0 +1,271 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+      <div layout="column" layout-align="space-between">
+        <div class="breadcrumb" layout="row" layout-align="start center">
+            <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+            <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+            <span class="parent">Dashboards</span>
+        </div>
+        <div class="headerTitle">VEE</div>
+        </div>
+        <!-- <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()" >
+          <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
+        </md-button> -->
+    </div>
+    <!-- / HEADER -->
+    <ms-hierarchys  ng-show="vm.showHeader"></ms-hierarchys>
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+        <div layout="row">
+          <div class="form-wrapper md-whiteframe-1dp" flex="100" id="veeDashBoard">
+            <div layout="row" class="row-margin mrLeft" flex="100">
+              <div flex="10">
+                <p class = "label-font">From Date</p>
+              </div>
+              <div flex="15">
+                <md-datepicker ng-model="vm.Vee.fromDate" ng-disabled="vm.disabled" placeholder="From Date" name="dateField1" md-open-on-focus required md-max-date="vm.currDate"></md-datepicker>
+              </div>
+              <div flex="5">
+              </div>
+              <div flex="10">
+                <p class = "label-font">To Date</p>
+              </div>
+              <div flex="15">
+                <md-datepicker ng-model="vm.Vee.toDate" ng-disabled="vm.disabled" placeholder="To Date" name="dateField2" md-open-on-focus required md-max-date="vm.currDate"></md-datepicker>
+              </div>
+              <div flex="5">
+              </div>
+              <!-- <div flex="20"> -->
+                <md-button type="submit" ng-click="vm.veeSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.Vee)">clear</md-button>
+              <!-- </div> -->
+           </div>
+            <div layout = "row">
+              <div flex="40">
+                <!-- <md-button type="submit" ng-click="vm.veeSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button> -->
+
+              </div>
+              <div flex="5"></div>
+              <div flex="55">
+                <table  class="tb-stats" ng-show="vm.statisticsTable">
+                  <tbody>
+                    <tr>
+                        <td class="p"><p class="label-font">Total number of records</p></td>
+                        <td class="p"><p class="label-font">0</p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">Number of valid records</p></td>
+                        <td class="p"><p class="label-font">0</a></p></td>
+                    </tr>
+                    <tr>
+                        <td class="p"><p class="label-font">Number of failed Records</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('fr')">0</a></p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">Number of edited records</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('edtr')">0</a></p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">Number of estimated records</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('estr')">0</a></p></td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+
+            <div layout="row" ng-show="vm.dataTable">
+              <div flex="100">
+               <div ng-show="vm.tbl2">
+                <div class="tab-heading">
+                  <p>{{vm.veeHeading}}</p>
+                </div>
+                <table class="dataTable row-border hover custom-table" datatable="ng" dt-options="vm.dtOptions" >
+                   <thead>
+                    <tr>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">S No</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text" >
+                         <div class="table-header">
+                             <span class="column-title">Meter S No</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Type of validation</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Spike (Threshold)</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Spike (Value)</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Type of failure</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Notification</span>
+                         </div>
+                       </th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                       <!-- <tr ng-repeat="item in vm.energyDemandObject"> -->
+                         <tr>
+                         <td>{{$index+1}}</td>
+                         <td>S123{{item.mtrSlno}}</td>
+                         <td>Skype{{item.billDate}}</td>
+                         <td>40{{item.referenceValue}}</td>
+                         <td>20{{item.referenceValue}}</td>
+                         <td>Soft{{item.referenceValue}}</td>
+                         <td>Yes{{item.recordedValue}}</td>
+                       </tr>
+                    </tbody>
+                 </table>
+               </div>
+                <div  ng-show="vm.tbl3">
+                  <div class="tab-heading">
+                    <p>{{vm.veeHeading}}</p>
+                  </div>
+                 <table class="dataTable row-border hover custom-table" datatable="ng" dt-options="vm.dtOptions">
+                    <thead>
+                     <tr>
+                        <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">S No</span>
+                          </div>
+                        </th>
+                        <th class="secondary-text" >
+                          <div class="table-header">
+                              <span class="column-title">Meter S No</span>
+                          </div>
+                        </th>
+                        <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">Edit by</span>
+                          </div>
+                        </th>
+                        <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">Edit on</span>
+                          </div>
+                        </th>
+                        <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">Reason</span>
+                          </div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in vm.energyDemandObject">
+                          <td>{{$index+1}}</td>
+                          <td>{{item.mtrSlno}}</td>
+                          <td>{{item.billDate}}</td>
+                          <td>{{item.referenceValue}}</td>
+                          <td>{{item.recordedValue}}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+                </div>
+
+                  <div  ng-show="vm.tbl4">
+                    <div class="tab-heading">
+                      <p>{{vm.veeHeading}}</p>
+                    </div>
+                  <table class="dataTable row-border hover custom-table" datatable="ng" dt-options="vm.dtOptions" ng-show="vm.tbl4">
+                     <thead>
+                      <tr>
+                         <th class="secondary-text">
+                           <div class="table-header">
+                               <span class="column-title">S No</span>
+                           </div>
+                         </th>
+                         <th class="secondary-text" >
+                           <div class="table-header">
+                               <span class="column-title">Meter S No</span>
+                           </div>
+                         </th>
+                         <th class="secondary-text">
+                           <div class="table-header">
+                               <span class="column-title">Estimated</span>
+                           </div>
+                         </th>
+                         <th class="secondary-text">
+                           <div class="table-header">
+                               <span class="column-title">Actual</span>
+                           </div>
+                         </th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                         <tr ng-repeat="item in vm.energyDemandObject">
+                           <td>{{$index+1}}</td>
+                           <td>{{item.mtrSlno}}</td>
+                           <td>{{item.billDate}}</td>
+                           <td>{{item.referenceValue}}</td>
+                         </tr>
+                      </tbody>
+                   </table>
+            </div>
+            </div>
+          </div>
+            <div layout="row" ng-show="vm.statisticsTable">
+              <div flex="30">
+                <!-- <md-select ng-model="vm.switch" ng-change="vm.displayFun(vm.switch)">
+                  <md-option value = "donutChart">Donut Chart</md-option>
+                  <md-option value = "barchart">Bar Chart</md-option>
+
+                </md-select> -->
+                <md-radio-group ng-model="vm.switch" required ng-click="vm.displayFun(vm.switch)" class="radio-align">
+                  <md-radio-button value="donutChart">Donut Chart</md-radio-button>
+                  <md-radio-button value="barchart">Bar Chart</md-radio-button>
+                </md-radio-group>
+              </div>
+            </div>
+
+            <div layout="row" ng-if="vm.donut">
+              <div flex="25">
+
+              </div>
+              <div flex="50"  >
+                  <div class="card">
+                      <nvd3 options="vm.options" data="vm.data"></nvd3>
+                  </div>
+              </div>
+
+            </div>
+
+            <div layout="row" ng-if="vm.chart">
+              <div flex="25">
+
+              </div>
+              <div flex="50" >
+                <div class="card" style="width:100%;">
+                  <nvd3 options="vm.options1" data="vm.data1" ></nvd3>
+                    <!-- <nvd3 options="vm.barchart.options" data="vm.barchart.data"></nvd3> -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+</div>

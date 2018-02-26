@@ -1,0 +1,237 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Dashboards</span>
+            </div>
+
+            <div class="headerTitle">Tampers And Events</div>
+        </div>
+        <!-- <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()" >
+          <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
+        </md-button> -->
+    </div>
+    <!-- / HEADER -->
+      <ms-hierarchys  ng-show="vm.showHeader"></ms-hierarchys>
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+        <div layout="row">
+
+          <div class="form-wrapper md-whiteframe-1dp" flex="100" id="tp-events">
+            <!-- <div layout="row">
+              <div flex="100">
+                  <div id="chart-container"></div>
+              </div>
+            </div> -->
+
+
+            <div layout="row">
+                <div flex="5">
+                  <p class="label-font">From</p>
+                </div>
+                <md-input-container flex="15">
+                  <md-select ng-model="vm.tampersEvents.fmonth" placeholder="select month">
+                    <md-option value = "01">January</md-option>
+                    <md-option value = "02">Febraury</md-option>
+                    <md-option value = "03">March</md-option>
+                    <md-option value = "04">April</md-option>
+                    <md-option value = "05">May</md-option>
+                    <md-option value = "06">June</md-option>
+                    <md-option value = "07">July</md-option>
+                    <md-option value = "08">August</md-option>
+                    <md-option value = "09">September</md-option>
+                    <md-option value = "10">October</md-option>
+                    <md-option value = "11">November</md-option>
+                    <md-option value = "12">December</md-option>
+                  </md-select>
+                </md-input-container>
+                <div flex="5">
+                </div>
+                <md-input-container flex="15">
+                  <md-select ng-model="vm.tampersEvents.fyear" placeholder="select year">
+                    <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
+                    <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
+                    <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <div flex="5">
+                </div>
+                <div flex="5">
+                  <p class="label-font">To</p>
+                </div>
+                <md-input-container flex="15">
+                  <md-select ng-model="vm.tampersEvents.tmonth" placeholder="select month">
+                    <md-option value = "01">January</md-option>
+                    <md-option value = "02">Febraury</md-option>
+                    <md-option value = "03">March</md-option>
+                    <md-option value = "04">April</md-option>
+                    <md-option value = "05">May</md-option>
+                    <md-option value = "06">June</md-option>
+                    <md-option value = "07">July</md-option>
+                    <md-option value = "08">August</md-option>
+                    <md-option value = "09">September</md-option>
+                    <md-option value = "10">October</md-option>
+                    <md-option value = "11">November</md-option>
+                    <md-option value = "12">December</md-option>
+                  </md-select>
+                </md-input-container>
+                <div flex="5">
+                </div>
+                <md-input-container flex="15">
+                  <md-select ng-model="vm.tampersEvents.tyear" placeholder="select year">
+                    <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
+                    <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
+                    <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <div flex="5">
+                </div>
+             <md-button type="submit" ng-click="vm.energyDemandSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+             <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.tampersEvents)">clear</md-button>
+            </div>
+
+            <div layout = "row">
+              <div flex="40">
+                <!-- <md-button type="submit" ng-click="vm.energyDemandSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button> -->
+              </div>
+              <div flex="5"></div>
+              <div flex="55">
+                <table  class="tb-stats" ng-show="vm.statisticsTable">
+                  <tbody>
+                    <tr>
+                        <td class="p"><p class="label-font">Total number of records</p></td>
+                        <td class="p"><p class="label-font">{{vm.counts.consumerCount}}</p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">Voltage Violated</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('1')">{{vm.counts.slvCount}}</a></p></td>
+                    </tr>
+                    <tr>
+                        <td class="p"><p class="label-font">Current Violated</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('2')">{{vm.counts.clvCount}}</a></p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">Power Violated</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('3')">{{vm.counts.drlvCount}}</a></p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">General Violated</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('4')">{{vm.counts.slvCount}}</a></p></td>
+                    </tr>
+                    <tr>
+                        <td class="p"><p class="label-font">Others</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('5')">{{vm.counts.clvCount}}</a></p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">Tansaction Violated</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('6')">{{vm.counts.drlvCount}}</a></p></td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+
+            <div layout="row" ng-show="vm.dataTable">
+              <div flex="100">
+                <div class="tab-heading">
+                  <p>{{vm.energyDemandHeading}}</p>
+                </div>
+
+                <table class="dataTable row-border hover custom-table" datatable="ng" dt-options="vm.dtOptions">
+                   <thead>
+                    <tr>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">S No</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text" >
+                         <div class="table-header">
+                             <span class="column-title">Meter Sno</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Type of tamper</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Occurance Date</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Restoration Date</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Time Elasped</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Restoration Date</span>
+                         </div>
+                       </th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                       <tr ng-repeat="item in vm.energyDemandObject">
+                         <td>{{$index+1}}</td>
+                         <td>{{item.mtrSlno}}</td>
+                         <td>{{item.billDate}}</td>
+                         <td>{{item.referenceValue}}</td>
+                         <td>{{item.recordedValue}}</td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+            </div>
+
+            <div layout="row" ng-show="vm.statisticsTable">
+              <div flex="30">
+                <md-radio-group ng-model="vm.switch" required ng-click="vm.displayFun(vm.switch)" class="radio-align">
+                  <md-radio-button value="donutChart">Donut Chart</md-radio-button>
+                  <md-radio-button value="barchart">Bar Chart</md-radio-button>
+                </md-radio-group>
+              </div>
+            </div>
+
+            <div layout="row" ng-show="vm.donut">
+              <div flex="25">
+
+              </div>
+              <div flex="50"  >
+                  <div class="card">
+                      <nvd3 options="vm.donutChart.options" data="vm.donutChart.data"></nvd3>
+                  </div>
+              </div>
+
+            </div>
+
+            <div layout="row" ng-show="vm.chart">
+              <div flex="25">
+
+              </div>
+              <div flex="50" >
+                <div class="card" style="width:100%;">
+                  <nvd3 options="vm.discreteBarChart.options" data="vm.discreteBarChart.data"></nvd3>
+                    <!-- <nvd3 options="vm.barchart.options" data="vm.barchart.data"></nvd3> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+</div>

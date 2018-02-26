@@ -1,0 +1,47 @@
+<form name="colorForm"  id="holiday-form">
+  <div flex ="20">
+    <md-icon md-font-icon="icon-plus-circle" ng-hide="vm.disabled"  show-gt-sm="" role="button" aria-label="icon-plus-circle"  ng-click="vm.addHols($index)"></md-icon>
+  </div>
+  <div layout="row" ng-repeat="items in vm.holidays track by $index" >
+    <div flex="10">
+    </div>
+    <div flex="10" class="hol-name">
+      <p class="label-font"> Holiday {{$index+1}}</p>
+    </div>
+    <md-input-container flex="30">
+        <input name="holidayName" ng-model="items.name"  class="previous1">
+    </md-input-container>
+
+    <div flex="30">
+          <md-datepicker ng-model="items.date" ng-disabled="vm.disabled" name="dateField"  md-min-date="vm.minDate" md-max-date="vm.maxDate" md-open-on-focus ></md-datepicker>
+        <!-- <div ng-messages="colorForm.dateField.$error">
+          <div ng-message="valid">The entered value is not a date!</div>
+          <div ng-message="required">This date is required!</div>
+          <div ng-message="mindate">Date is too early!</div>
+          <div ng-message="maxdate">Date is too late!</div>
+        </div> -->
+    </div>
+    <div flex="5">
+       <md-icon ng-show="items.opt" md-font-icon="icon-minus-circle" show-gt-sm="" role="button" aria-label="icon-plus-circle"  ng-click="vm.deleteHols($index)"></md-icon>
+    </div>
+    <div flex ="5">
+      <div ng-show="!items.valid" style="color:red">
+       Error
+     </div>
+    </div>
+    <div flex="10">
+    </div>
+  </div>
+  <div  layout="row">
+    <div flex="20">
+    </div>
+    <div flex="10">
+      <md-button class="md-accent md-raised" ng-hide="vm.disabled" type="submit"  value="Submit" ng-click="vm.showConfirm()" >
+        Submit
+      </md-button>
+    </div>
+    <div flex="10">
+      <md-button ng-click="vm.Clear.clearObj(vm.holidays)" class="md-raised md-accent">clear</md-button>
+    </div>
+  </div>
+</form>

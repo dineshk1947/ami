@@ -1,0 +1,249 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+  <div class="header md-accent-bg" layout="row"  id="subHeaderDiv">
+    <div flex="95">
+        <div class="subHeaderTitle">Instantaneous Parameters </div>
+    </div>
+    <div flex="5">
+      <!-- <md-icon class="fa fa-retweet" style="font-size:30px" ng-click="vm.hierarchyShow()"></md-icon> -->
+    </div>
+  </div>
+  <div class="content" layout="column">
+    <div layout="row">
+      <div class="form-wrapper md-whiteframe-1dp" flex="100">
+        <form name="Instantaneous" id="instant-form" ng-submit="vm.instantSubmit()">
+          <div layout="row">
+            <div flex="40">
+            </div>
+            <div flex="20">
+              <md-button type="submit" role="submit" class="md-accent md-raised">Submit</md-button>
+            </div>
+          </div>
+          <div layout="row">
+            <div flex="40">
+            </div>
+            <div flex="20">
+            </div>
+            <div flex="40">
+            </div>
+          </div>
+          <div layout="row" ng-show="vm.showInstantTxn">
+            <div flex="15">
+              <p class="label-font">Transaction ID :</p>
+            </div>
+            <div flex="15">
+                <p class="label-font">{{vm.id}}</p>
+            </div>
+            <div flex="15">
+             <p class="label-font">Status :</p>
+            </div>
+            <div flex="15">
+              <p class="label-font">{{vm.status}}</p>
+
+            </div>
+            <!-- <div flex="20">
+              <md-button type="button" class="md-accent md-raised" ng-click="vm.clickInstant()">VIEW</md-button>
+            </div> -->
+          </div>
+          <div layout="row" id = "instantTable"  ng-show="vm.showInstantTable">
+            <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+                <thead>
+                    <tr>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">S NO</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Date</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">IR</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">IY</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">IB</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Vrn</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Vyn</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Vbn</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">PF(R Phase)</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">PF(Y Phase)</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">PF(B Phase)</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">PF</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Frequency</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">KVA</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">KW</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">KVAR</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Power Failures</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Power Failures Duration</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Tamper Count</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Billing Count</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Program Count</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kWh Import</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kWh Export</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kVArh Q1</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kVArh Q2</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kVArh Q3</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kVArh Q4</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kVAh Import</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kVAh Export</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">MD kW Import</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">MD kVA Import</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in ::vm.ar track by $index">
+                        <td>{{ $index+1 }}</td>
+                        <td ng-click="vm.showInstantDialog(x)" class="label-font"><a href ="">{{ x.newDate }}</a></td>
+                        <td class="label-font">{{ x.currentIr }}</td>
+                        <td class="label-font">{{ x.currentIy }}</td>
+                        <td class="label-font">{{ x.currentIb }}</td>
+                        <td class="label-font">{{ x.voltageVrn }}</td>
+                        <td class="label-font">{{ x.voltageVyn }}</td>
+                        <td class="label-font">{{ x.voltageVbn }}</td>
+                        <td class="label-font">{{ x.signedPwrFactRPh }}</td>
+                        <td class="label-font">{{ x.signedPwrFactYPh }}</td>
+                        <td class="label-font">{{ x.signedPwrFactBPh }}</td>
+                        <td class="label-font">{{ x.signedPwrFactPf }}</td>
+                        <td class="label-font">{{ x.frequency }}</td>
+                        <td class="label-font">{{ x.apparentPwrKva }}</td>
+                        <td class="label-font">{{ x.signedActivePwrKw }}</td>
+                        <td class="label-font">{{ x.signedRectivePwrKvar }}</td>
+                        <td class="label-font">{{ x.numPwrFailure }}</td>
+                        <td class="label-font">{{ x.cumPwrOffDur }}</td>
+                        <td class="label-font">{{ x.cumTamperCount }}</td>
+                        <td class="label-font">{{ x.cumBillingCount }}</td>
+                        <td class="label-font">{{ x.cumProgramCount }}</td>
+                        <td class="label-font">{{ x.cumEngKwhImp }}</td>
+                        <td class="label-font">{{ x.cumEngKwhExp }}</td>
+                        <td class="label-font">{{ x.cumEngKvarhQ1 }}</td>
+                        <td class="label-font">{{ x.cumEngKvarhQ2 }}</td>
+                        <td class="label-font">{{ x.cumEngKvarhQ3 }}</td>
+                        <td class="label-font">{{ x.cumEngKvarhQ4 }}</td>
+                        <td class="label-font">{{ x.cumEngKvahImp }}</td>
+                        <td class="label-font">{{ x.cumEngKvahExp }}</td>
+                        <td class="label-font">{{ x.maxDemandKwImp }}</td>
+                        <td class="label-font">{{ x.maxDemandKvaImp }}</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

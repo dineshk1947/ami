@@ -1,0 +1,165 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column" >
+<div class="header md-accent-bg" layout="row"  id="subHeaderDiv">
+  <div flex="95">
+      <div class="subHeaderTitle">Load Profile </div>
+  </div>
+  <div flex="5">
+  </div>
+</div>
+<form name="loadProfile" id="loadProfile-form" ng-submit="vm.loadProfileFun()">
+  <div class="demo-md-panel-animation md-padding radio_class">
+    <div flex="80">
+      <div layout="row">
+        <div flex="40">
+          <div layout="row">
+            <div flex="20">
+              <p class="label-font">Start Date</p>
+            </div>
+            <div flex="80">
+              <md-datepicker ng-model="vm.loadProfile.startDate" md-placeholder="Enter date" md-open-on-focus md-max-date="vm.currDate" required></md-datepicker>
+            </div>
+          </div>
+        </div>
+        <div flex="40">
+          <div layout="row">
+            <div flex="20">
+              <p class="label-font">End Date</p>
+            </div>
+            <div flex="80">
+              <md-datepicker ng-model="vm.loadProfile.endDate" md-placeholder="Enter date" md-open-on-focus md-max-date="vm.currDate" required></md-datepicker>
+            </div>
+          </div>
+        </div>
+          <div flex ="10">  <md-button type="submit" class="md-accent md-raised" ng-click="vm.viewEnabled()">Submit</md-button></div>
+          <div flex ="10">  <md-button class="md-accent md-raised" ng-click="vm.Clear.clearObj(vm.loadProfile)">Clear</md-button></div>
+
+      </div>
+    </div>
+    <div flex="80">
+      <div layout="row">
+        <div flex="45">
+          <div layout="row">
+            <div flex="30">
+            <p class="label-font">TransactionId:</p>
+            </div>
+            <div flex="70">
+              <p class="label-font" style="color: blue ;" ng-show="vm.success">{{vm.getId}}</p>
+                <p class="label-font" style="color: red ;" ng-show="vm.falure">{{vm.getId}}</p>
+            </div>
+          </div>
+        </div>
+        <div flex="45">
+          <div layout="row">
+            <div flex="20">
+            <p class="label-font">Status:</p>
+            </div>
+            <div flex="80">
+              <p class="label-font" style="color: green;" ng-show="vm.success">{{vm.getStatus}}</p>
+                <p class="label-font" style="color: red;" ng-show="vm.falure">{{vm.getStatus}}</p>
+            </div>
+          </div>
+        </div>
+        <div flex ="10"><md-button  class="md-accent md-raised" ng-disabled="vm.viewEnabled" ng-click="vm.viewTableFun()">View</md-button></div>
+      </div>
+    </div>
+
+
+  </div>
+  <div layout="row" ng-show ="vm.tableShow" id="loadTableScroll">
+    <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" >
+        <thead>
+            <tr>
+              <th class="secondary-text">
+                  <div class="table-header">
+                      <span class="column-title">S No</span>
+                  </div>
+              </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">Date&Time</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">I<sub>R</sub>(amp)</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">I<sub>Y</sub>(amp)</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">I<sub>B</sub>(amp)</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">V<sub>RN</sub>(V)</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">v<sub>YN</sub>(V)</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">v<sub>BN</sub>(V)</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">v<sub>RY</sub>(V)</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">v<sub>BY</sub>(V)</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">kWh(W-H)</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">kvarh(lag)(W-H)</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">kvarh(lead)</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">kVAh(W-H)</span>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="data in ::vm.loadProfileData">
+                <td>{{$index+1}}</td>
+                <td ng-click="vm.showTabDialog(data)"><a href="#">{{data.realTimeClockDateTi}}</a></td>
+                <td>{{data.currentIr}}</td>
+                <td>{{data.currentIy}}</td>
+                <td>{{data.currentIb}}</td>
+                <td>{{data.voltageVrn}}</td>
+                <td>{{data.voltageVyn}}</td>
+                <td>{{data.voltageVbn}}</td>
+                <td>{{data.blockEnergyKvahExp}}</td>
+                <td>{{data.blockEnergyKvahImp}}</td>
+                <td>{{data.blockEnergyKvarhQ1}}</td>
+                <td>{{data.blockEnergyKvarhQ2}}</td>
+                <td>{{data.blockEnergyKvarhQ3}}</td>
+                <td>{{data.blockEnergyKwhExp}}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</form>
+</div>

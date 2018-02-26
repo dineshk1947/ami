@@ -27,38 +27,35 @@
                 }
             });
 
-        // Translation
-        $translatePartialLoaderProvider.addPart('app/main/pages/master');
+        //
+        // msNavigationServiceProvider.saveItem('asset', {
+        //     //title : 'Meter Master',
+        //     group : true,
+        //     weight: 1
+        // });
+        // msNavigationServiceProvider.saveItem('asset.maintain', {
+        //     title : 'Asset Management',
+        //     icon  : 'icon-tile-four',
+        //     class : 'navigation-dashboards',
+        //     weight: 1
+        // });
 
-        // Api
-        msApiProvider.register('sample', ['app/data/sample/sample.json']);
+        // msNavigationServiceProvider.saveItem('mm.master', {
+        //     title : 'Meter Master',
+        //     icon : 'icon-file-image-box',
+        //     class : 'navigation-dashboards',
+        //     state : 'app.master',
+        //     weight: 2
+        // });
 
-        msNavigationServiceProvider.saveItem('mm', {
-            //title : 'Meter Master',
-            group : true,
-            weight: 1
-        });
-
-        msNavigationServiceProvider.saveItem('mm.master', {
-            //title : 'Meter Master',
-            icon : 'icon-file-image-box',
-            class : 'navigation-dashboards',
-            state : 'app.master',
-            weight: 2
-        });
-
-        msNavigationServiceProvider.saveItem('mm.master', {
-            title      : 'Meter Master',
-            state      : 'app.master',
-            //stateParams: {'id': 1},
-            // badge      : {
-            //     content: '21',
-            //     color  : 'red'
-            // },
-            translate  : 'METER.MASTER',
-            class      : 'navigation-dashboards project-dashboard',
-            weight     : 1
-        });
+        // msNavigationServiceProvider.saveItem('asset.maintain.master', {
+        //     title      : 'Maintain Meter',
+        //     //icon       : 'icon-file-image-box',
+        //     state      : 'app.master',
+        //     //translate  : 'METER.MASTER',
+        //     class      : 'navigation-dashboards project-dashboard',
+        //     weight     : 1
+        // });
 
     }
 })();

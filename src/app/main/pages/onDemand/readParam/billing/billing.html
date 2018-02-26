@@ -1,0 +1,200 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+  <div class="header md-accent-bg" layout="row"  id="subHeaderDiv">
+    <div flex="95">
+        <div class="subHeaderTitle">Billing Parameters </div>
+    </div>
+    <div flex="5">
+      <!-- <md-icon class="fa fa-retweet" style="font-size:30px" ng-click="vm.hierarchyShow()"></md-icon> -->
+    </div>
+  </div>
+  <div class="content" layout="column">
+    <div layout="row">
+      <div class="form-wrapper md-whiteframe-1dp" flex="100">
+        <form name="Billing" id="billing-form" ng-submit="vm.billingSubmit()">
+          <div layout="row">
+            <div flex="5">
+              <p>From</p>
+            </div>
+              <md-input-container flex="15">
+                <md-select ng-model="vm.billing.fmonth" placeholder="select From month">
+                  <md-option value = "01">January</md-option>
+                  <md-option value = "02">Febraury</md-option>
+                  <md-option value = "03">March</md-option>
+                  <md-option value = "04">April</md-option>
+                  <md-option value = "05">May</md-option>
+                  <md-option value = "06">June</md-option>
+                  <md-option value = "07">July</md-option>
+                  <md-option value = "08">August</md-option>
+                  <md-option value = "09">September</md-option>
+                  <md-option value = "10">October</md-option>
+                  <md-option value = "11">November</md-option>
+                  <md-option value = "12">December</md-option>
+                </md-select>
+                <!-- <div style="font-size: 10px; color: blue;" label ng-bind="::vm.dateFields[2].label"></div>
+                <md-datepicker ng-model="vm.dateFields.selectedDate"
+                     ng-required="vm.dateFields.required"
+                     md-date-locale="vm.dateFields.locale"
+                     md-mode="month"
+                     md-open-on-focus="true">
+                </md-datepicker> -->
+              </md-input-container>
+              <div flex="5">
+              </div>
+              <md-input-container flex="15">
+                <md-select ng-model="vm.billing.fyear" placeholder="select From Year">
+                  <md-option value = "2015">2015</md-option>
+                  <md-option value = "2016">2016</md-option>
+                  <md-option value = "2017">2017</md-option>
+                  <md-option value = "2018">2018</md-option>
+                </md-select>
+              </md-input-container>
+              <div flex="5">
+              </div>
+              <div flex="5">
+                <p>To</p>
+              </div>
+              <md-input-container flex="15">
+                <md-select ng-model="vm.billing.tmonth" placeholder="select To month">
+                  <md-option value = "01">January</md-option>
+                  <md-option value = "02">Febraury</md-option>
+                  <md-option value = "03">March</md-option>
+                  <md-option value = "04">April</md-option>
+                  <md-option value = "05">May</md-option>
+                  <md-option value = "06">June</md-option>
+                  <md-option value = "07">July</md-option>
+                  <md-option value = "08">August</md-option>
+                  <md-option value = "09">September</md-option>
+                  <md-option value = "10">October</md-option>
+                  <md-option value = "11">November</md-option>
+                  <md-option value = "12">December</md-option>
+                </md-select>
+              </md-input-container>
+              <div flex="5">
+              </div>
+              <md-input-container flex="15">
+                <md-select ng-model="vm.billing.tyear" placeholder="select To Year">
+                  <md-option value = "2015">2015</md-option>
+                  <md-option value = "2016">2016</md-option>
+                  <md-option value = "2017">2017</md-option>
+                  <md-option value = "2018">2018</md-option>
+                </md-select>
+              </md-input-container>
+          </div>
+          <div layout="row">
+            <div flex="40">
+            </div>
+            <div flex="20">
+              <md-button type="submit" role="submit" class="md-accent md-raised">Submit</md-button>
+              <md-button ng-click="vm.Clear.clearObj(vm.billing)" class="md-raised md-accent" aria-label="Submit">clear</md-button>
+            </div>
+            <div flex="20">
+              <!-- <md-button ng-click="vm.Clear.clearObj(vm.billing)" class="md-raised md-accent" aria-label="Submit">clear</md-button> -->
+            </div>
+          </div>
+          <div layout="row" ng-show="vm.showTxn">
+            <div flex="15">
+              <span class="label-font">Transaction ID :</span>
+            </div>
+            <div flex="15" class="label-font">
+              {{vm.billingId}}
+            </div>
+            <div flex="15">
+             <span class="label-font">Status :</span>
+            </div>
+            <div flex="15" class="label-font">
+              {{vm.billingStatus}}
+            </div>
+            <!-- <div flex="20">
+              <md-button type="submit" role="submit" class="md-accent md-raised">VIEW</md-button>
+            </div> -->
+          </div>
+
+          <div layout="row" flex="100" ng-show="vm.showBillingTable" id="billingTable">
+           <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+                <thead>
+                    <tr>
+                        <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">S No</span>
+                          </div>
+                        </th>
+                        <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">Billing Date</span>
+                          </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">kWh</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">kVAH</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">kW</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">kVA</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kWh Export</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kVAh Export</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kVArh Q1</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kVArh Q2</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kVArh Q3</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Cumm Energy kVArh Q4</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in ::vm.billinglist">
+                        <td>{{$index+1}}</td>
+                        <td ng-click="vm.showbillingDialog(x)" class="label-font"><a href ="">{{ x.billingDate }}</a></td>
+                        <td class="label-font">{{ x.cumEngKwh }}</td>
+                        <td class="label-font">{{ x.cumEngKvah }}</td>
+                        <td class="label-font">{{ x.mdKw }}</td>
+                        <td class="label-font">{{ x.mdKva }}</td>
+                        <td class="label-font">{{ x.cumEngKwhExp }}</td>
+                        <td class="label-font">{{ x.cumEngKvahExp }}</td>
+                        <td lass="label-font">{{ x.cumEngKvarhQ1 }}</td>
+                        <td class="label-font">{{ x.cumEngKvarhQ2 }}</td>
+                        <td class="label-font">{{ x.cumEngKvarhQ3 }}</td>
+                        <td class="label-font">{{ x.cumEngKvarhQ4 }}</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

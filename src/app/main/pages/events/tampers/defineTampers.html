@@ -1,0 +1,79 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column" >
+
+  <div class="header md-accent-bg" layout="row" layout-align="space-between" id=headerDiv>
+    <div layout="column" layout-align="space-between">
+        <div class="breadcrumb" layout="row" layout-align="start center">
+            <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+            <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+            <span class="parent">Events & Tampers</span>
+        </div>
+
+        <div class="headerTitle">Configure Tampers </div>
+    </div>
+</div>
+  <form name="AlogoMasterForm" class="md-inline-form" ng-submit="vm.tamperSubmit()" id="Tampers-Form"  >
+   <md-content class="md-padding">
+    <md-card>
+      <div class="demo-md-panel-animation md-padding metermaster-class" ng-show="!vm.progressShow">
+        <md-button  class="md-accent md-raised"  ng-click="vm.addEvent()">Add New Event</md-button>
+        <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" >
+          <thead>
+            <tr>
+              <th class="secondary-text">
+                  <div class="table-header">
+                      <span class="column-title">S.No</span>
+                  </div>
+              </th>
+
+              <th class="secondary-text">
+                  <div class="table-header">
+                      <span class="column-title">Event Code</span>
+                  </div>
+              </th>
+
+              <th class="secondary-text">
+                <div class="table-header">
+                  <span class="column-title">Event Name</span>
+                </div>
+              </th>
+
+              <th class="secondary-text">
+                <div class="table-header">
+                    <span class="column-title">Potentiail Tamper</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr ng-repeat="x in ::vm.eventNames" >
+                 <td>{{$index+1}}</td>
+                 <td>{{ x.eventCode }}</td>
+                  <td>{{ x.eventName }}</td>
+                  <td>
+                    <md-checkbox ng-model="x.tamperFlag" ng-true-value="'Y'" ng-false-value="'N'" ></md-checkbox>
+                  </td>
+              </tr>
+          </tbody>
+
+      </table>
+
+      <div layout="row">
+        <div flex="45"> </div>
+        <div flex="10">
+          <md-input-container class="md-block">
+            <md-button type="submit" class="md-accent md-raised submit-btn" >Submit</md-button>
+          </md-input-container>
+         </div>
+        <div flex="45"> </div>
+      </div>
+
+    </div>
+    <div class="demo-md-panel-animation md-padding metermaster-class" ng-show="vm.progressShow">
+      <div layout="row">
+        <div flex="50">
+        </div>
+        <md-progress-circular md-mode="indeterminate" ></md-progress-circular>
+      </div>
+
+    </div>
+</div>

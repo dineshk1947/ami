@@ -9,9 +9,51 @@
     /** @ngInject */
     function routeConfig($stateProvider, $urlRouterProvider, $locationProvider)
     {
+        //
+
+        // Inject $cookies
+        var $cookies;
+
+        angular.injector(['ngCookies']).invoke([
+            '$cookies', function (_$cookies)
+            {
+                $cookies = _$cookies;
+            }
+        ]);
+
+        var userDetails = {};
+        console.log($cookies.getObject('globals'));
+        var currentUser = $cookies.getObject('globals');
+        console.log("/////\\\\\\\//////////");
+        // console.log(currentUser);
+        if(currentUser === undefined) {
+          $urlRouterProvider.otherwise('/auth/login');
+        } else {
+          $urlRouterProvider.otherwise('/dashboard');
+          // userDetails = currentUser.currentUser;
+          // if(userDetails.roleName == "Administrator")
+          // {
+          //   console.log("Administrator");
+          //     $urlRouterProvider.otherwise('/readParam');
+          // }
+          // else if(userDetails.roleName == "Super User")
+          // {
+          //   console.log("Super User");
+          //     $urlRouterProvider.otherwise('/userAdmin');
+          // }
+          // else
+          // {
+          //   console.log("View All");
+          //   $urlRouterProvider.otherwise('/dashboard');
+          // }
+        }
+
+
+
         $locationProvider.html5Mode(true);
 
-        $urlRouterProvider.otherwise('/sample');
+        //if no url is defined redirects to this url
+        //$urlRouterProvider.otherwise('/dashboard');
 
         /**
          * Layout Style Switcher
@@ -22,15 +64,7 @@
          * typing the template urls into the `State definitions`
          * area and remove this code
          */
-        // Inject $cookies
-        var $cookies;
 
-        angular.injector(['ngCookies']).invoke([
-            '$cookies', function (_$cookies)
-            {
-                $cookies = _$cookies;
-            }
-        ]);
 
         // Get active layout
         var layoutStyle = $cookies.get('layoutStyle') || 'verticalNavigation';

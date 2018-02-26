@@ -1,15 +1,15 @@
 <div  class="page-layout simple fullwidth doc-page" layout="column">
 
     <!-- HEADER -->
-    <div class="header md-accent-bg" layout="row" layout-align="space-between">
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
         <div layout="column" layout-align="space-between">
             <div class="breadcrumb" layout="row" layout-align="start center">
                 <md-icon md-font-icon="icon-home" class="s16"></md-icon>
                 <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">Meter Master</span>
+                <span class="parent">Asset Management</span>
             </div>
 
-            <div class="title">Meter Master </div>
+            <div class="headerTitle">Maintain Meter</div>
         </div>
     </div>
     <!-- / HEADER -->
@@ -22,7 +22,13 @@
           <div class="form-wrapper md-whiteframe-1dp" flex="100" id="master-screen">
             <div ng-cloak>
               <md-content>
-                <md-tabs md-dynamic-height md-border-bottom>
+                <md-tabs md-dynamic-height md-border-bottom md-center-tabs=true md-stretch-tabs="always">
+                  <md-tab label="Meter Master">
+                    <md-content class="md-padding">
+                      <div ng-include="'app/main/pages/master/metermaster/meter-master.html'"></div>
+                    </md-content>
+                  </md-tab>
+                  
                   <md-tab label="Category">
                     <md-content class="md-padding">
                         <div ng-include="'app/main/pages/master/category/category.html'"></div>
@@ -33,11 +39,11 @@
                       <div ng-include="'app/main/pages/master/make/make.html'"></div>
                     </md-content>
                   </md-tab>
-                  <md-tab label="Protocol">
+                  <!-- <md-tab label="Protocol">
                     <md-content class="md-padding">
                       <div ng-include="'app/main/pages/master/protocol/protocol.html'"></div>
                     </md-content>
-                  </md-tab>
+                  </md-tab> -->
                   <md-tab label="Type">
                     <md-content class="md-padding">
                       <div ng-include="'app/main/pages/master/type/type.html'"></div>
@@ -60,11 +66,7 @@
                     </md-content>
                   </md-tab>
 
-                  <md-tab label="Meter Master">
-                    <md-content class="md-padding">
-                      <div ng-include="'app/main/pages/master/metermaster/meter-master.html'"></div>
-                    </md-content>
-                  </md-tab>
+
                 </md-tabs>
               </md-content>
             </div>

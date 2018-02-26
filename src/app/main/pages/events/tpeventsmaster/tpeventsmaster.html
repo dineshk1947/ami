@@ -1,0 +1,106 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg events-master" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Events & Tampers </span>
+
+
+            </div>
+
+            <div class="headerTitle">Events And Tampers Master </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+      <!-- <ms-hireachey></ms-hireachey> -->
+        <!-- <div layout="row"> -->
+
+          <div class="form-wrapper md-whiteframe-1dp" flex="100" id="event-header" ng-show="!vm.progressShow">
+            <md-button type="submit" class="md-accent md-raised"  ng-click="vm.showModal(id)">Configure Event</md-button>
+            <!-- <md-button  class="md-accent md-raised"  ng-click="vm.addEvent()">Add New Event</md-button> -->
+            <div class="demo-md-panel-animation md-padding metermaster-class">
+            <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+              <col width="10">
+
+                <thead>
+                    <tr style="font-size:15px;">
+                      <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">S.No</span>
+                          </div>
+                      </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Event Name</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Notification</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">To whom</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">On Screen</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">SMS</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Email</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Modify</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.eventDetails track by $index" style="font-size:12px;">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.eventName}}</td>
+                        <td>{{item.notificationReq}}</td>
+                        <td>{{item.designationCode}}</td>
+                        <td>{{item.onscreenFlag}}</td>
+                        <td>{{item.smsFlag}}</td>
+                        <td>{{item.emailAddress}}</td>
+                        <td class="up-btn" ng-click="vm.showModal(item)" style="padding:0">
+                          <!-- <md-button type="submit" class="md-accent md-raised">Modify</md-button> -->
+                          <a href="">Modify</md-button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="demo-md-panel-animation md-padding metermaster-class" ng-show="vm.progressShow">
+          <div layout="row">
+            <div flex="50">
+            </div>
+            <md-progress-circular md-mode="indeterminate" ></md-progress-circular>
+          </div>
+        </div>
+
+        <!-- </div> -->
+
+    </div>
+    <!-- / CONTENT -->
+</div>

@@ -1,0 +1,159 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column" >
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Configuration</span>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="child">VEE</span>
+
+            </div>
+
+            <div class="headerTitle">Parameter Threshold Master</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+      <!-- <ms-hireachey></ms-hireachey> -->
+        <div layout="row">
+
+          <div class="form-wrapper md-whiteframe-1dp" flex="100" id="tr-master">
+            <md-button type="submit" class="md-accent md-raised"  ng-click="vm.showModal(id)" style="text-transform:capitalize">Add Parameter</md-button>
+
+            <div layout="row" class="row-margin mrLeft" flex="80" >
+              <div flex="15" >
+                <p class="label-font">Please Select:</p>
+              </div>
+              <div layout="row" flex="30">
+                <div flex="50">
+                  <p class="label-font">Meter Subcategory :</p>
+                </div>
+                <div flex="50" class="input-margin">
+                  <md-select  ng-change="vm.getPhaseHome()"  ng-model="vm.catType" placeholder="select category type" class="md-underline" required>
+                    <md-option ng-repeat="x in vm.meterSubCat"  value="{{x}}">{{x.type}}</md-option>
+                  </md-select>
+                  <!-- <md-input-container>
+                    <input ng-model="eachItem.type" type="text" name = "type" readonly size="45" ng-show="update" style = "font-size : 15px">
+                  </md-input-container> -->
+                </div>
+              </div>
+
+              <div flex="5">
+              </div>
+              <div layout="row" flex="30">
+                <div flex="50">
+                  <p class="label-font">Meter Phase :</p>
+                </div>
+                <div flex="50" class="input-margin">
+                  <md-select ng-change="vm.getPhase1Home()"  ng-model="vm.catPhase" placeholder="select phase" class="md-underline" required>
+                    <md-option ng-repeat="x in vm.phaseHome"  value="{{x}}">{{x.lookupCode}}</md-option>
+                  </md-select>
+                  <!-- <md-input-container>
+                    <input ng-model="eachItem.phase" type="text" name = "phase" readonly size="45" ng-show="update" style = "font-size : 15px">
+                  </md-input-container> -->
+                </div>
+              </div>
+            </div>
+
+
+            <div layout="row" class="row-margin mrLeft" flex="80" >
+              <div flex="15" >
+                <p class="label-font">Showing Results For</p>
+              </div>
+              <div layout="row" flex="30">
+                <div flex="50">
+                  <p class="label-font">Meter Subcategory :</p>
+                </div>
+                <div flex="50" class="input-margin" style="margin-top:10px">
+                  <span class="label-font">{{vm.catTypeDisp}}</span>
+                  <!-- <md-input-container>
+                    <input ng-model="eachItem.type" type="text" name = "type" readonly size="45" ng-show="update" style = "font-size : 15px">
+                  </md-input-container> -->
+                </div>
+              </div>
+
+              <div flex="5">
+              </div>
+              <div layout="row" flex="30">
+                <div flex="50">
+                  <p class="label-font">Meter Phase :</p>
+                </div>
+                <div flex="50" class="input-margin" style="margin-top:10px">
+                    <span class="label-font">{{vm.catPhaseDisp}}</span>
+                  <!-- <md-input-container>
+                    <input ng-model="eachItem.phase" type="text" name = "phase" readonly size="45" ng-show="update" style = "font-size : 15px">
+                  </md-input-container> -->
+                </div>
+              </div>
+            </div>
+
+
+
+            <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+              <col width="10">
+              <col width="100">
+                <thead>
+                    <tr style="font-size:15px;">
+                      <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">S.No</span>
+                          </div>
+                      </th>
+                        <th class="secondary-text" style="text-align:center">
+                            <div class="table-header">
+                                <span class="column-title">Parameter Name</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text" style="text-align:center">
+                            <div class="table-header">
+                                <span class="column-title">Min(value)</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text" style="text-align:center">
+                            <div class="table-header">
+                                <span class="column-title">Max(value)</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text" style="text-align:center">
+                            <div class="table-header">
+                                <span class="column-title">Min(%)</span>
+                            </div>
+                        </th>
+
+                        <th class="secondary-text" style="text-align:center">
+                            <div class="table-header">
+                                <span class="column-title">Max(%)</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text" style="text-align:center">
+                            <div class="table-header">
+                                <span class="column-title">Modify</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.parameterDetails" style="font-size:12px;">
+                        <td>{{$index+1}}</td>
+                        <td style="text-align:center">{{item.veeParaCode}}</td>
+                        <td style="text-align:center">{{item.minValue}}</td>
+                        <td style="text-align:center">{{item.maxValue}}</td>
+                        <td style="text-align:center">{{item.minPercentage}}</td>
+                        <td style="text-align:center">{{item.maxPercentage}}</td>
+                        <td class="up-btn" ng-click="vm.showModal(item)" style="padding:0;text-align:center">
+                          <!-- <md-button type="submit" class="md-accent md-raised" style="text-transform:capitalize">MODIFY</md-button> -->
+                            <a href="">Modify</md-button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+    <!-- / CONTENT -->
+</div>

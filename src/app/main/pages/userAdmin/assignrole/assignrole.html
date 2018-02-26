@@ -1,0 +1,90 @@
+<form name="userAssignForm" class="md-inline-form" ng-submit="vm.userAssignSubmit()" id="user-role-form">
+  <md-content class="md-padding">
+    <div class="demo-md-panel-animation md-padding assignRole-class">
+      <div layout="row">
+        <div flex="10">
+        </div>
+        <div flex="30">
+          <p class="label-font auto-align">User ID:</p>
+        </div>
+        <div flex="30">
+           <md-autocomplete
+               md-selected-item="vm.selectedItem"
+               md-search-text-change="vm.searchTextChange(vm.searchText)"
+               md-search-text="vm.searchText"
+               md-selected-item-change="vm.selectedItemChange(vm.selectedItem)"
+               md-items="item in vm.user | filter:vm.searchText"
+               md-item-text="item.userName"
+               md-min-length="0"
+               placeholder="User Name">
+             <md-item-template>
+               <span md-highlight-text="vm.searchText" md-highlight-flags="^i" > {{item.userName}}</span>
+             </md-item-template>
+           </md-autocomplete>
+         </div>
+        </div>
+          <!-- <div layout="row">
+            <div flex="10">
+            </div>
+              <div flex="30">
+                  <p class="label-font">User Name:</p>
+              </div>
+              <div flex="30">
+              <p class="data-font">{{vm.userdetails.userName}}</p>
+              </div>
+          </div> -->
+          <div layout="row">
+            <div flex="10">
+            </div>
+              <div flex="30">
+                  <p class="label-font auto-align">Designation:</p>
+              </div>
+              <div flex="30">
+                <p class="data-font">{{vm.userdetails.designationCode}}</p>
+              </div>
+          </div>
+          <div layout="row">
+            <div flex="10">
+            </div>
+              <div flex="30">
+                  <p class="label-font auto-align">Location:</p>
+              </div>
+              <div flex="30">
+              <p class="data-font">{{vm.userdetails.location}}</p>
+              </div>
+          </div>
+          <div layout="row">
+            <div flex="10">
+            </div>
+              <div flex="30">
+                  <p class="label-font auto-align">Existing Role:</p>
+              </div>
+              <div flex="30">
+                <p class="data-font">{{vm.userdetails.roleName}}</p>
+              </div>
+          </div>
+          <div layout="row">
+            <div flex="10">
+            </div>
+              <div flex="30">
+                  <p class="label-font auto-align">New Role:</p>
+              </div>
+               <md-input-container flex="30">
+                     <md-select ng-model="vm.userdetails.newRoleSelected" placeholder="Select New Role">
+                       <md-option ng-repeat="x in vm.newRole" value="{{x.roleId}}">{{x.roleName}}</md-option>
+                     </md-select>
+                </md-input-container>
+          </div>
+          <div layout="row">
+            <div flex="30">
+            </div>
+            <div flex = "10">
+              <md-button type="submit"  class="md-accent md-raised">Submit</md-button>
+            </div>
+            <div flex="10">
+              <md-button type="submit" ng-click="vm.Clear.clearObj(vm.userdetails)" class="md-raised md-accent" aria-label="Submit">clear</md-button>
+            </div>
+          </div>
+      </div>
+    </md-content>
+</form>

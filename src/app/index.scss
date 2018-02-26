@@ -11,3 +11,238 @@
  */
 // injector
 // endinjector
+
+// md-progress-circular{
+//   color: rgb(7, 128, 185);
+// }
+body,  {
+ font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;;
+
+}
+.toolBarText {
+  font-size: 12px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  .toolBarPadding{
+    padding-left: 15px;
+  }
+}
+.toolBarDataFont {
+    font-size: 12px;
+    text-transform: uppercase;
+
+}
+.md-toolbar-tools {
+    background-color: rgb(7, 128, 185);
+  }
+
+md-select-menu.md-default-theme md-content md-option, md-select-menu md-content md-option {
+  height: 17px;
+}
+md-select-menu.md-default-theme md-content md-option[selected], md-select-menu md-content md-option[selected] {
+  color: #000;
+}
+.label-font {
+  font-size: 12px !important;
+  text-transform: capitalize;
+  font-weight: 600 !important;
+}
+.label-heading {
+  font-size: 15px;
+  font-weight: 600;
+}
+.data-font {
+  font-size: 12px;
+  text-transform: capitalize;
+}
+.md-tab {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.ms-navigation-node .title{
+  font-size: 10px;
+}
+
+md-input-container.md-default-theme .md-input, md-input-container .md-input {
+  font-size: 12px;
+  letter-spacing: 0.6px;
+}
+md-select,md-select option {
+    font-size: 12px;
+    letter-spacing: 0.6px;
+}
+input[type="number"]::-webkit-input-placeholder {
+  font-size: 12px !important;
+  letter-spacing: 0.6px;
+}
+input[type="text"]::-webkit-input-placeholder {
+  font-size: 12px !important;
+  letter-spacing: 0.6px;
+}
+
+md-toast {
+  &.error {
+    .md-toast-content {
+      background: #d9534f;
+      color: white;
+    }
+  }
+  &.success {
+    .md-toast-content {
+      background: #398439;
+      color: white;
+      }
+    }
+  &.warning {
+    .md-toast-content {
+      background: #f0ad4e;
+      color: white;
+      }
+    }
+  &.info {
+    .md-toast-content {
+      background: #337ab7;
+      color: white;
+      }
+    }
+  }
+
+.dataTables_wrapper {
+  thead {
+    tr {
+      background : #089ce6 !important;
+      .secondary-text {
+        padding: 0;
+        .column-title {
+          color: #fff;
+          font-size: 13px;
+          margin-top: -4px;
+          // color: #000;
+          letter-spacing: 0.5px;
+          :after {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        font-size: 12px;
+        padding: 5px 0;
+      }
+    }
+  }
+  .bottom {
+    padding: 0 !important;
+    min-height: 50px !important;
+    .info {
+      display: block;
+    }
+  }
+  .top {
+    padding-right: 0;
+    input {
+      width: 50%;
+      height: 18px;
+    }
+  }
+}
+.md-button {
+  font-size: 11px;
+  border-radius: 25px;
+  font-weight: 600;
+  min-height: 24px;
+  min-width: 76px;
+  line-height: 27px;
+}
+#headerDiv {
+  .breadcrumb {
+    .parent {
+      color: #fff;
+    }
+  }
+}
+.p-name {
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.headerTitle {
+  font-size: 20px;
+}
+#headerDiv{
+  padding: 15px 25px;
+  min-height: 65px;
+  max-height: 65px;
+}
+ #seasons-form {
+   .flex-20, .flex-10{
+     height: 40px;
+   }
+ }
+ .chart-container {
+  position: relative;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  //overflow: hidden;
+  height: 74vh;
+  width: calc(100% - 24px);
+  border: 2px solid #9c9999;
+  border-radius: 5px;
+  overflow: auto;
+  text-align: center;
+  box-shadow : 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+
+    .orgchart.l2r {
+      position: relative;
+      background-image: none;
+      .node {
+        height: 150px !important;
+        .title {
+          width: 150px !important;
+          transform: rotate(-90deg) translate(-50px,-60px) rotateY(180deg);
+        }
+        .content {
+          font-weight: 600;
+          transform: rotate(-90deg) translate(-50px,-60px) rotateY(180deg);
+          font-size: 9.7px;
+          width: 150px !important;
+        }
+      }
+    }
+  }
+  .chart-container-tb {
+   position: relative;
+   display: inline-block;
+   top: 0;
+   left: 0;
+   //overflow: hidden;
+   height: 72vh;
+   width: calc(100% - 24px);
+   border: 2px solid #9c9999;
+   box-shadow : 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+   border-radius: 5px;
+   overflow: auto;
+   text-align: center;
+     .orgchart {
+       position: relative;
+       background-image: none;
+       .node {
+         width: 150px;
+         margin: 0 10px;
+         .title {
+           width: 150px;
+         }
+         .content {
+           width: 150px;
+         }
+       }
+     }
+   }
+  .aggregations-heading {
+      font-size: 35px;
+      font-weight: 600;
+      margin: 0
+  }

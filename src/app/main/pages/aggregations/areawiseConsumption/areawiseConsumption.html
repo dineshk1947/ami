@@ -1,0 +1,140 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column" id="areawiseConsumption">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Aggregations</span>
+            </div>
+
+            <div class="headerTitle">Areawise Consumption</div>
+        </div>
+        <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()" >
+          <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
+        </md-button>
+    </div>
+    <!-- / HEADER -->
+    <ms-hierarchy3  ng-show="vm.showHeader"></ms-hierarchy3>
+
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+        <div layout="row">
+
+          <div class="form-wrapper md-whiteframe-1dp" flex="100" >
+
+            <div layout="row">
+                <div flex="5">
+                  <p class="label-font">From</p>
+                </div>
+
+
+                <md-input-container flex="10">
+                  <md-select ng-model="vm.areawiseConsumption.fyear" placeholder="select year" ng-change="vm.getMonth()">
+                    <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
+                    <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
+                    <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <div flex="5">
+                </div>
+                <md-input-container flex="15">
+                  <md-select ng-model="vm.areawiseConsumption.fmonth" placeholder="select month" ng-disabled="vm.fmonthDisable">
+                    <!-- <md-option value = "01">January</md-option>
+                    <md-option value = "02">Febraury</md-option>
+                    <md-option value = "03">March</md-option>
+                    <md-option value = "04">April</md-option>
+                    <md-option value = "05">May</md-option>
+                    <md-option value = "06">June</md-option>
+                    <md-option value = "07">July</md-option>
+                    <md-option value = "08">August</md-option>
+                    <md-option value = "09">September</md-option>
+                    <md-option value = "10">October</md-option>
+                    <md-option value = "11">November</md-option>
+                    <md-option value = "12">December</md-option> -->
+                    <md-option ng-repeat="x in vm.fmonth" value="{{x.value}}">{{x.month}}</md-option>
+
+                  </md-select>
+                </md-input-container>
+                <div flex="5">
+                </div>
+                <div flex="5">
+                  <p class="label-font">To</p>
+                </div>
+
+
+                <md-input-container flex="10">
+                  <md-select ng-model="vm.areawiseConsumption.tyear" placeholder="select year" ng-change="vm.getMonth2()">
+                    <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
+                    <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
+                    <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <div flex="5">
+                </div>
+                <md-input-container flex="15">
+                  <md-select ng-model="vm.areawiseConsumption.tmonth" placeholder="select month" ng-disabled="vm.tmonthDisable">
+                    <!-- <md-option value = "01">January</md-option>
+                    <md-option value = "02">Febraury</md-option>
+                    <md-option value = "03">March</md-option>
+                    <md-option value = "04">April</md-option>
+                    <md-option value = "05">May</md-option>
+                    <md-option value = "06">June</md-option>
+                    <md-option value = "07">July</md-option>
+                    <md-option value = "08">August</md-option>
+                    <md-option value = "09">September</md-option>
+                    <md-option value = "10">October</md-option>
+                    <md-option value = "11">November</md-option>
+                    <md-option value = "12">December</md-option> -->
+                    <md-option ng-repeat="x in vm.tmonth" value="{{x.value}}">{{x.month}}</md-option>
+
+                  </md-select>
+                </md-input-container>
+                <div flex="5">
+                </div>
+                <md-input-container flex="15">
+                  <md-select  ng-model="vm.areawiseConsumption.catTypeId" placeholder="select category" class="md-underline" name="type">
+                    <md-option ng-repeat="x in vm.catType"  value="{{x}}">{{x.type}}</md-option>
+                  </md-select>
+                </md-input-container>
+            </div>
+
+            <div layout = "row">
+              <div flex="40">
+                <md-button type="submit" ng-click="vm.areaWiseConsumptionSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.areawiseConsumption)">clear</md-button>
+              </div>
+              <div flex="5"></div>
+              <div flex="55">
+                <md-progress-circular md-mode="indeterminate" ng-show="vm.progressShow"></md-progress-circular>
+                <table  class="tb-stats" ng-show="vm.statisticsTable">
+                  <tbody>
+                    <tr>
+                        <td class="p"><p class="label-font">Consumption:</p></td>
+                        <td class="p"><p>{{vm.consumption.consumptionCount}} &nbsp; {{vm.consumptionUnit}}</p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">Demand:</p></td>
+                        <td class="p"><p>{{vm.consumption.demandCount}} &nbsp; {{vm.demandUnit}} </p></td>
+                    </tr>
+                    <tr>
+                        <td class="p"><p class="label-font">Tamper:</p></td>
+                        <td class="p"><p>{{vm.consumption.tamperCount}}</p></td>
+                    </tr>
+
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+    </div>
+
+    <!-- / CONTENT -->
+</div>

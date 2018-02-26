@@ -1,34 +1,128 @@
-
-<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+<div id="misc-form" class="page-layout simple fullwidth doc-page" layout="column">
 
     <!-- HEADER -->
-    <div class="header md-accent-bg" layout="row" layout-align="space-between">
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
         <div layout="column" layout-align="space-between">
             <div class="breadcrumb" layout="row" layout-align="start center">
                 <md-icon md-font-icon="icon-home" class="s16"></md-icon>
                 <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">Master Data Managment</span>
+                <span class="parent">Master Data Management</span>
             </div>
 
-            <div class="title">Miscellaneous </div>
+            <div class="headerTitle">Miscellaneous </div>
         </div>
     </div>
     <!-- / HEADER -->
     <!-- CONTENT -->
     <div class="content" layout="column">
 
-
         <div layout="row">
+          <div class="white-bg md-whiteframe-4dp">
+              <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+                  <thead>
+                      <tr>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Name</span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Position</span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Office</span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Age</span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Start Date</span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Salary</span>
+                              </div>
+                          </th>
 
-        <!-- BASIC FORM -->
-            <div class="form-wrapper md-whiteframe-1dp" flex="100">
-              
-            </div>
-            <!-- / BASIC FORM
 
+
+
+
+
+
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Name</span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Position</span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Office</span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Age</span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Start Date</span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Salary</span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Start </span>
+                              </div>
+                          </th>
+                          <th class="secondary-text">
+                              <div class="table-header">
+                                  <span class="column-title">Saale</span>
+                              </div>
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="employee in ::vm.employees">
+                          <td>{{ employee.name }}</td>
+                          <td>{{ employee.position }}</td>
+                          <td>{{ employee.office }}</td>
+                          <td>{{ employee.age }}</td>
+                          <td>{{ employee.startDate }}</td>
+                          <td>{{ employee.salary }}</td>
+                          <td>{{ employee.name }}</td>
+                          <td>{{ employee.position }}</td>
+                          <td>{{ employee.office }}</td>
+                          <td>{{ employee.age }}</td>
+                          <td>{{ employee.startDate }}</td>
+                          <td>{{ employee.salary }}</td>
+                          <td>{{ employee.office }}</td>
+                          <td>{{ employee.age }}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
 
         </div>
 
     </div>
-    <!-- / CONTENT
+    <!-- / CONTENT -->
 </div>

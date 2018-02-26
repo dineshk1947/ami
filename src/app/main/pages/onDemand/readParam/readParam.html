@@ -1,0 +1,85 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column" >
+  <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
+    <div layout="column" layout-align="space-between">
+        <div class="breadcrumb" layout="row" layout-align="start center">
+          <span class="parent">On Demand </span>
+        </div>
+        <div class="headerTitle">Read Meter Parameters</div>
+    </div>
+    <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()" >
+      <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
+    </md-button>
+  </div>
+
+  <ms-hierarchy  ng-show="vm.showHeader"></ms-hierarchy>
+
+  <div class="content" layout="column">
+      <div layout="row">
+        <div class="form-wrapper md-whiteframe-1dp" flex="100" id="read-param">
+          <div class="load-tab">
+            <div ng-cloak>
+              <md-content>
+                <md-tabs md-dynamic-height md-border-bottom md-center-tabs=true md-stretch-tabs="always">
+                  <md-tab>
+                    <md-tab-label >
+                      <md-icon class="fa fa-clock-o" style="font-size:20px"></md-icon>
+                        <b >Load Profile </b>
+                    </md-tab-label>
+                    <md-tab-body ng-class="tab.style" layout="column" layout-fill>
+                      <md-content class="md-padding">
+                        <div ng-include="'app/main/pages/onDemand/readParam/loadProfile/loadProfile.html'"></div>
+                      </md-content>
+                    </md-tab-body>
+                  </md-tab>
+                  <md-tab >
+                    <md-tab-label>
+                      <md-icon class="fa fa-usd" style="font-size:20px"></md-icon>
+                        <b>Billing</b>
+                    </md-tab-label>
+                    <md-tab-body ng-class="tab.style" layout="column" layout-fill>
+                      <md-content class="md-padding">
+                        <div ng-include="'app/main/pages/onDemand/readParam/billing/billing.html'"></div>
+                      </md-content>
+                    </md-tab-body>
+                  </md-tab>
+                  <md-tab >
+                    <md-tab-label>
+                    <md-icon class="fa fa-bolt" style="font-size:20px"></md-icon>
+                        <b>Instanteneous</b>
+                    </md-tab-label>
+                    <md-tab-body ng-class="tab.style" layout="column" layout-fill>
+                      <md-content class="md-padding">
+                        <div ng-include="'app/main/pages/onDemand/readParam/instantParam/instantParam.html'"></div>
+                      </md-content>
+                    </md-tab-body>
+                  </md-tab>
+                  <md-tab >
+                    <md-tab-label>
+                      <md-icon class="fa fa-calendar" style="font-size:20px"></md-icon>
+                        <b>Events & Tampers</b>
+                    </md-tab-label>
+                    <md-tab-body ng-class="tab.style" layout="column" layout-fill>
+                      <md-content class="md-padding">
+                        <div ng-include="'app/main/pages/onDemand/readParam/tpEvents/tpEvents.html'"></div>
+                      </md-content>
+                    </md-tab-body>
+                  </md-tab>
+                  <md-tab >
+                    <md-tab-label>
+                    <md-icon class="fa fa-cog" style="font-size:20px"></md-icon>
+                        <b>Remote Config</b>
+                    </md-tab-label>
+                    <md-tab-body ng-class="tab.style" layout="column" layout-fill>
+                      <md-content class="md-padding">
+                        <div ng-include="'app/main/pages/onDemand/readParam/remoteConfig/remoteConfig.html'"></div>
+                      </md-content>
+                    </md-tab-body>
+                  </md-tab>
+               </md-tabs>
+              </md-content>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

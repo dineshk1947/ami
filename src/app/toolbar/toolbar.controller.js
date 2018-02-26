@@ -7,14 +7,65 @@
         .controller('ToolbarController', ToolbarController);
 
     /** @ngInject */
-    function ToolbarController($rootScope, $q, $state, $timeout, $mdSidenav, $translate, $mdToast, msNavigationService)
-    {
+    function ToolbarController($rootScope, $q, $state, $timeout, $mdSidenav, $translate, $mdToast, msNavigationService, $window, $mdDialog, $location, $cookies, AuthenticationService, $localStorage) {
         var vm = this;
+
+        //var userDetails = JSON.parse($window.sessionStorage.getItem('userDetails'));
+        var userDetails = {};
+        console.log($cookies.getObject('globals'));
+        //var currentUser = $cookies.getObject('globals');
+        var currentUser = $localStorage.globals;
+        if(currentUser === undefined) {
+          //
+          console.log("currentuser === undefined");
+        } else {
+          userDetails = currentUser.currentUser;
+          console.log("currentuser !!! undefined");
+        }
+
+        console.log(">>>>>>>>>>>>>>>>>>>>>");
+        console.log(userDetails);
+        vm.userDetails = userDetails;
+        vm.showProgress  = $rootScope.showProgress;
+
+        console.log(vm.showProgress);
+
+        vm.showAdvanced = function() {
+           $mdDialog.show({
+             controller: DialogController,
+             templateUrl: 'app/toolbar/layouts/vertical-navigation/popup.html',
+            // parent: angular.element(document.body),
+             targetEvent: "ev",
+             clickOutsideToClose:true,
+             fullscreen: vm.customFullscreen
+
+           })
+           // controller for popup of loadProfile
+          function DialogController($scope, $mdToast) {
+
+                $scope.userDetails = userDetails;
+                console.log("}}}}}}}}}}}}}}}");
+                console.log($scope.userDetails);
+                 $scope.hide = function() {
+                   $mdDialog.hide();
+                 };
+
+                 $scope.cancel = function() {
+                   $mdDialog.cancel();
+                 };
+
+                 $scope.answer = function(answer) {
+                   $mdDialog.hide(answer);
+                 };
+
+              }
+            };
 
         // Data
         $rootScope.global = {
             search: ''
         };
+
 
         vm.bodyEl = angular.element('body');
         vm.userStatusOptions = [
@@ -114,9 +165,14 @@
         /**
          * Logout Function
          */
-        function logout()
-        {
-            // Do logout here..
+        function logout() {
+          console.log("logout button clicked");
+          // $window.sessionStorage.removeItem('userDetails');
+          // console.log($window.sessionStorage.getItem('userDetails'));
+
+          AuthenticationService.ClearCredentials();
+          $location.path("/auth/login");
+
         }
 
         /**

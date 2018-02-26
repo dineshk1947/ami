@@ -1,0 +1,71 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Asset Management</span>
+            </div>
+
+            <div class="headerTitle">Maintain DCU</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+      <!-- <ms-hireachey></ms-hireachey> -->
+        <div layout="row">
+
+          <div class="form-wrapper md-whiteframe-1dp" flex="100" id="dcu-master">
+            <div ng-cloak>
+              <md-content>
+                <md-tabs md-dynamic-height md-border-bottom md-center-tabs=true md-stretch-tabs="always">
+                  <md-tab label="Make">
+                    <md-content class="md-padding">
+                      <div ng-include="'app/main/pages/dcuConfig/dcu/make/make.html'"></div>
+                    </md-content>
+                  </md-tab>
+                  <!-- <md-tab label="Protocol">
+                    <md-content class="md-padding">
+                      <div ng-include="'app/main/pages/dcuConfig/dcu/protocol/protocol.html'"></div>
+                    </md-content>
+                  </md-tab> -->
+                  <md-tab label="Type">
+                    <md-content class="md-padding">
+                      <div ng-include="'app/main/pages/dcuConfig/dcu/type/type.html'"></div>
+                    </md-content>
+                  </md-tab>
+                  <md-tab label="Status">
+                    <md-content class="md-padding">
+                      <div ng-include="'app/main/pages/dcuConfig/dcu/status/status.html'"></div>
+                    </md-content>
+                  </md-tab>
+                  <md-tab label="Change">
+                    <md-content class="md-padding">
+                      <div ng-include="'app/main/pages/dcuConfig/dcu/change/change.html'"></div>
+                    </md-content>
+                  </md-tab>
+                  <!-- <md-tab label="Destination IP">
+                    <md-content class="md-padding">
+                      <div ng-include="'app/main/pages/dcuConfig/dcu/change/change.html'"></div>
+                    </md-content>
+                  </md-tab> -->
+                  <md-tab label="DCU Configuration">
+                    <md-content class="md-padding">
+                      <div ng-include="'app/main/pages/dcuConfig/dcu/config/config.html'"></div>
+                    </md-content>
+                  </md-tab>
+                </md-tabs>
+              </md-content>
+            </div>
+
+          </div>
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+</div>

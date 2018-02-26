@@ -1,40 +1,58 @@
-
-  <form name="masterform" class="md-inline-form" id="master" >
+<form name="masterform" class="md-inline-form" id="master" >
     <div layout="row">
       <div flex="45">
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Meter S.No :</p>
+              <p class="label-font">Meter S.No :</p>
             </div>
             <md-input-container flex="50">
-              <input ng-model="vm.masterSelected.meterNo" type="text" name="meterNo" required placeholder="Meter S.No">
+              <input ng-model="vm.masterSelected.meterNo" type="text" name="meterNo" required placeholder="meter s.no" tabindex="1">
               <div ng-messages="masterform.meterNo.$error">
                 <div ng-message="required">This is required.</div>
               </div>
-              <!-- <md-select  ng-model="vm.masterSelected.meterNo" name="meterNo" placeholder="select Meter Id" class="md-underline" required>
-                <md-option ng-repeat="x in vm.meterNo"  value="{{x[0]}}">{{x[0]}}</md-option>
-               <span ng-show="masterform.meterNo.$error && masterform.meterNo.$pristine">The name is required.</span>
-              </md-select> -->
-              <!-- <div ng-messages="masterform.meterNo.$error && masterform.meterNo.$dirty">
-                <div ng-message="required">This is required.</div>
-              </div> -->
-              <!-- <div class="errors" ng-messages="masterform.meterNo.$error">
-                <div ng-message="required">Required</div>
-              </div> -->
             </md-input-container>
           </div>
         </div>
-
-
+      </div>
+      <div flex="10">
+      </div>
+      <div flex="45">
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Meter Type :</p>
+              <p class="label-font">Consumer Service No :</p>
+            </div>
+            <div flex="50">
+              <md-autocomplete
+                  md-selected-item="vm.selectedItem"
+                  md-search-text-change="vm.searchTextChange(vm.searchText)"
+                  md-search-text="vm.searchText"
+                  md-selected-item-change="vm.getConsumer(vm.selectedItem)"
+                  md-items="item in vm.cId | filter:vm.searchText"
+                  md-item-text="item.consumerId"
+                  md-min-length="0"
+                  placeholder="consumer service no*"
+                  ng-required="true" tabindex="2">
+                <md-item-template>
+                  <span md-highlight-text="vm.searchText" md-highlight-flags="^i" > {{item.consumerId}}</span>
+                </md-item-template>
+              </md-autocomplete>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p class="label-font">Meter Type :</p>
             </div>
             <md-input-container flex="50">
-              <md-select  ng-model="vm.masterSelected.meterType" placeholder="select Type" class="md-underline" name="type" required>
-                <md-option ng-repeat="x in vm.meterType"  value="{{x[0]}}">{{x[1]}}</md-option>
+              <md-select  ng-model="vm.masterSelected.meterType" placeholder="select type" class="md-underline" name="type" required >
+                <md-option ng-repeat="x in vm.meterType"  value="{{x.typeId}}" tabindex="3">{{x.typeName}}</md-option>
               </md-select>
               <!-- <div ng-messages="masterform.type.$error && masterform.type.$dirty">
                 <div ng-message="required">This is required.</div>
@@ -45,265 +63,281 @@
             </md-input-container>
           </div>
         </div>
-        <div class="each-item">
-          <div layout="row">
-            <div flex="50">
-              <p>Meter Connection Type :</p>
-            </div>
-            <md-input-container flex="50">
-              <md-select  ng-model="vm.masterSelected.conType" placeholder="select Connection Type" class="md-underline" required>
-                <md-option ng-repeat="x in vm.conType"  value="{{x[0]}}">{{x[1]}}</md-option>
-              </md-select>
-            </md-input-container>
-          </div>
-        </div>
-        <div class="each-item">
-          <div layout="row">
-            <div flex="50">
-              <p>Class Of Accuracy :</p>
-            </div>
-            <md-input-container flex="50">
-              <md-select  ng-model="vm.masterSelected.accuracy" placeholder="select Class of Accuracy" class="md-underline" required>
-                <md-option ng-repeat="x in vm.accuracy"  value="{{x[0]}}">{{x[1]}}</md-option>
-              </md-select>
-            </md-input-container>
-          </div>
-        </div>
-        <div class="each-item">
-          <div layout="row">
-            <div flex="50">
-              <p>Meter Status :</p>
-            </div>
-            <md-input-container flex="50">
-              <md-select  ng-model="vm.masterSelected.status" placeholder="select Status" class="md-underline" required>
-                <md-option ng-repeat="x in vm.status"  value="{{x[0]}}">{{x[1]}}</md-option>
-              </md-select>
-            </md-input-container>
-          </div>
-        </div>
-        <div class="each-item">
-          <div layout="row">
-            <div flex="50">
-              <p>Meter Category :</p>
-            </div>
-            <md-input-container flex="50">
-              <md-select  ng-change="vm.getCateType()" ng-model="vm.masterSelected.categoryId" placeholder="select Category" class="md-underline" required>
-                <md-option ng-repeat="x in vm.category"  value="{{x[0]}}">{{x[1]}}</md-option>
-              </md-select>
-            </md-input-container>
-          </div>
-        </div>
-        <div class="each-item">
-          <div layout="row">
-            <div flex="50" >
-              <p>Meter Category Type</p>
-            </div>
-            <md-input-container flex="50">
-              <md-select  ng-change="vm.getResidential()" ng-model="vm.masterSelected.catTypeId" placeholder="select Category Type" class="md-underline" required>
-                <md-option ng-repeat="x in vm.cattype"  value="{{x[0]}}">{{x[1]}}</md-option>
-              </md-select>
-            </md-input-container>
-          </div>
-        </div>
-        <div class="each-item">
-          <div layout="row">
-            <div flex="50">
-              <p>Meter Phase</p>
-            </div>
-            <md-input-container flex="50">
-              <md-select  ng-model="vm.masterSelected.residential" placeholder="select Phase" class="md-underline" required>
-                <md-option ng-repeat="x in vm.residential"  value="{{x[0]}}">{{x[0]}}</md-option>
-              </md-select>
-            </md-input-container>
-          </div>
-        </div>
-        <div class="each-item">
-          <div layout="row">
-            <div flex="50">
-              <p>Time Of Usage :</p>
-            </div>
-            <md-input-container flex="50">
-              <md-switch ng-model="vm.tou" aria-label="Switch 1" ng-true-value="'Y'" ng-false-value="'N'"> {{vm.tou}} </md-switch>
-            </md-input-container>
-          </div>
-        </div>
-
       </div>
       <div flex="10">
+      </div>
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="25">
+              <p class="label-font">Consumer Name :</p>
+            </div>
+            <div flex="25">
+              <md-input-container class="md-block" flex-gt-sm>
+                <input ng-model="vm.cName" value="<b>vm.cName</b>" disabled style="font-weight:600;color:#000;cursor: not-allowed;" tabindex="4">
+              </md-input-container>
+            </div>
 
+            <div flex="25">
+              <p class="label-font">SIM No:</p>
+            </div>
+            <div flex="25">
+              <md-input-container class="md-block" flex-gt-sm>
+                <input ng-model="vm.cName" value="<b>vm.cName</b>" disabled style="font-weight:600;color:#000;cursor: not-allowed;" tabindex="4">
+              </md-input-container>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p class="label-font">Section</p>
+            </div>
+            <md-input-container class="md-block" flex-gt-sm>
+              <input ng-model="vm.sectionName" value="<b>vm.sectionName</b>" disabled style="font-weight:600;color:#000;cursor: not-allowed;" tabindex="4">
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+      <div flex="10">
       </div>
       <div flex="45">
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Consumer Service No :</p>
-            </div>
-            <div flex="50">
-
-
-              <!-- <md-autocomplete  ng-disabled="vm.isDisabled"
-                                md-no-cache="vm.noCache"
-                                md-selected-item="vm.masterSelected.cId"
-                                md-min-length="0"
-                                md-items="item in vm.getMatchingText(searchText, vm.cId)"
-                                md-search-text="searchText" md-item-text="item[1]">
-                <md-item-template>
-                  <span md-highlight-text="searchText">{{item[1]}}</span>
-                </md-item-template>
-                <md-not-found>
-                  No matches found.
-                </md-not-found>
-              </md-autocomplete> -->
-
-              <md-autocomplete
-
-                            md-selected-item="vm.selectedItem"
-                            md-search-text-change="vm.searchTextChange(vm.searchText)"
-                            md-search-text="vm.searchText"
-                            md-selected-item-change="vm.getConsumer(vm.selectedItem)"
-                            md-items="item in vm.cId | filter:vm.searchText"
-                            md-item-text="item[0]"
-                            md-min-length="0"
-                            placeholder="DEVICE SERIAL NUMBER"
-                            ng-required="true">
-                          <md-item-template>
-                            <span md-highlight-text="vm.searchText" md-highlight-flags="^i" > {{item[0]}}</span>
-                          </md-item-template>
-                        </md-autocomplete>
-
-
-
-              <!-- <md-content class="md-padding">
-                <form ng-submit="$event.preventDefault()">
-                  <md-autocomplete ng-change="vm.getConsumer(vm.masterSelected.cId)"  ng-model="vm.masterSelected.cId"
-                      md-selected-item="vm.selectedItem"
-                      md-search-text-change="vm.searchTextChange(vm.searchText)"
-                      md-search-text="vm.searchText"
-                      md-selected-item-change="vm.selectedItemChange(item)"
-                      md-items="item in vm.cId | filter:vm.searchText"
-
-                      md-item-text="item[0]"
-                      md-min-length="0"
-                      placeholder="Consumer Id">
-                    <md-item-template>
-                      <span md-highlight-text="vm.searchText" md-highlight-flags="^i">no {{item[0]}}</span>
-                    </md-item-template>
-                  </md-autocomplete>
-
-                  </form>
-                </md-content> -->
-              <!-- <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in vm.meterNo">
-                <md-item-template>
-                  <span md-highlight-text="searchText">{{item}}</span>
-                </md-item-template>
-              </md-autocomplete> -->
-
-
-              <!-- <md-select ng-change="vm.getConsumer(vm.masterSelected.cId)"  ng-model="vm.masterSelected.cId" placeholder="select Consumer Id" class="md-underline">
-                <md-option ng-repeat="x in vm.cId"  value="{{x[0]}},{{x[1]}}">{{x[0]}}</md-option>
-              </md-select> -->
-            </div>
-          </div>
-        </div>
-        <div class="each-item">
-          <div layout="row">
-            <div flex="50">
-              <p>Consumer Name :</p>
+              <p class="label-font">DTR</p>
             </div>
             <div flex="50">
               <md-input-container class="md-block" flex-gt-sm>
-                <input ng-model="vm.masterSelected.cName" placeholder="Enter Name" value="<b>vm.masterSelected.cName</b>" disabled style="font-weight:600;color:#000;cursor: not-allowed;">
+                <input ng-model="vm.dtrName" value="<b>vm.dtrName</b>" disabled style="font-weight:600;color:#000;cursor: not-allowed;" tabindex="4">
               </md-input-container>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Manufacture Name :</p>
+              <p class="label-font">Meter Connection Type :</p>
             </div>
             <md-input-container flex="50">
-              <md-select  ng-model="vm.masterSelected.make" placeholder="select Meter Make" class="md-underline" required>
-                <md-option ng-repeat="x in vm.make"  value="{{x[0]}}">{{x[1]}}</md-option>
+              <md-select  ng-model="vm.masterSelected.conType" placeholder="select connection type" class="md-underline" required>
+                <md-option ng-repeat="x in vm.conType"  value="{{x.mtrConnTypeId}}" tabindex="5">{{x.mtrConnType}}</md-option>
               </md-select>
             </md-input-container>
           </div>
         </div>
+      </div>
+      <div flex="10"></div>
+      <div flex="45">
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Protocol :</p>
+              <p class="label-font">Manufacture Name :</p>
             </div>
             <md-input-container flex="50">
-              <md-select  ng-model="vm.masterSelected.protocol" placeholder="select Protocol" class="md-underline" required>
-                <md-option ng-repeat="x in vm.protocol"  value="{{x[0]}}">{{x[1]}}</md-option>
+              <md-select  ng-model="vm.masterSelected.make" placeholder="select meter make" class="md-underline"  required>
+                <md-option ng-repeat="x in vm.make"  value="{{x.mtrMakeId}}" tabindex="6">{{x.mtrMakeOrgName}}</md-option>
               </md-select>
             </md-input-container>
           </div>
         </div>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Meter Model :</p>
+              <p class="label-font">Class Of Accuracy :</p>
             </div>
             <md-input-container flex="50">
-              <md-select  ng-model="vm.masterSelected.model" placeholder="select Model" class="md-underline" required>
-                <md-option ng-repeat="x in vm.model"  value="{{x[0]}}">{{x[1]}}</md-option>
+              <md-select  ng-model="vm.masterSelected.accuracy" placeholder="select class of accuracy" class="md-underline" required>
+                <md-option ng-repeat="x in vm.accuracy"  value="{{x.mtrAccuracyId}}" tabindex="7">{{x.mtrAccuracy}}</md-option>
               </md-select>
             </md-input-container>
           </div>
         </div>
+      </div>
+      <div flex="10"></div>
+      <div flex="45">
+        <div class="each-item">
+          <!-- <div layout="row">
+            <div flex="50">
+              <p class="label-font">Protocol :</p>
+            </div>
+            <md-input-container flex="50">
+              <md-select  ng-model="vm.masterSelected.protocol" placeholder="select protocol" class="md-underline" required>
+                <md-option ng-repeat="x in vm.protocol"  value="{{x.protocolId}}" tabindex="8">{{x.name}}</md-option>
+              </md-select>
+            </md-input-container>
+          </div> -->
+
+          <div layout="row">
+            <div flex="50">
+              <p class="label-font">Meter Model :</p>
+            </div>
+            <md-input-container flex="50">
+              <md-select  ng-model="vm.masterSelected.model" placeholder="select model" class="md-underline" required>
+                <md-option ng-repeat="x in vm.model"  value="{{x.mtrModelId}}" tabindex="10">{{x.mtrModel}}</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Demand Integration Period :</p>
+              <p class="label-font">Meter Status :</p>
+            </div>
+            <md-input-container flex="50">
+              <md-select  ng-model="vm.masterSelected.status" placeholder="select status" class="md-underline" >
+                <md-option ng-repeat="x in vm.status"  value="{{x.statusId}}" tabindex="9">{{x.mtrStatus}}</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+      <div flex="10"></div>
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p class="label-font">Demand Integration Period :</p>
             </div>
             <md-input-container flex="50">
               <md-select  ng-model="vm.masterSelected.dip" placeholder="select DIP" class="md-underline" required>
-                <md-option ng-repeat="x in vm.dip"  value="{{x[0]}}">{{x[1]}}</md-option>
+                <md-option ng-repeat="x in vm.dip"  value="{{x.lookupId}}" tabindex="12">{{x.lookupCode}}</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p class="label-font">Meter Category :</p>
+            </div>
+            <md-input-container flex="50">
+              <md-select  ng-change="vm.getCateType()" ng-model="vm.masterSelected.categoryId" placeholder="select category" class="md-underline" required>
+                <md-option ng-repeat="x in vm.category"  value="{{x.categoryId}}" tabindex="11">{{x.name}}</md-option>
               </md-select>
             </md-input-container>
           </div>
         </div>
+      </div>
+      <div flex="10"></div>
+      <div flex="45">
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Load Profile Capture Period :</p>
+              <p class="label-font">Load Profile Capture Period :</p>
             </div>
             <md-input-container flex="50">
               <md-select  ng-model="vm.masterSelected.lpc" placeholder="select LPC" class="md-underline" required>
-                <md-option ng-repeat="x in vm.lpc"  value="{{x[0]}}">{{x[1]}}</md-option>
+                <md-option ng-repeat="x in vm.lpc"  value="{{x.lookupId}}" tabindex="14">{{x.lookupCode}}</md-option>
               </md-select>
             </md-input-container>
           </div>
         </div>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50" >
+              <p class="label-font">Meter Subcategory :</p>
+            </div>
+            <md-input-container flex="50">
+              <md-select  ng-change="vm.getResidential()" ng-model="vm.masterSelected.catTypeId" placeholder="select category type" class="md-underline" required>
+                <md-option ng-repeat="x in vm.cattype"  value="{{x.categoryTypeId}}" tabindex="13">{{x.type}}</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+      <div flex="10"></div>
+      <div flex="45">
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Installed Date :</p>
+              <p class="label-font">Installed Date :</p>
             </div>
-            <div flex="50">
-              <md-datepicker ng-model="vm.masterSelected.installedDate" md-max-date="vm.maxDate" md-placeholder="Enter date" md-open-on-focus required></md-datepicker>
+            <div flex="50"  style="margin-top:10px">
+              <md-datepicker ng-model="vm.masterSelected.installedDate" md-max-date="vm.maxDate" md-placeholder="enter date*" md-open-on-focus required tabindex="16"></md-datepicker>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Commissioned Date :</p>
+              <p class="label-font">Meter Phase</p>
             </div>
+            <md-input-container flex="50">
+              <md-select  ng-model="vm.masterSelected.residential" placeholder="select phase" class="md-underline" required>
+                <md-option ng-repeat="x in vm.residential"  value="{{x.lookupCode}}" tabindex="15">{{x.lookupCode}}</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+      <div flex="10"></div>
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
             <div flex="50">
-              <md-datepicker ng-model="vm.masterSelected.commisionedDate"  md-max-date="vm.maxDate" md-placeholder="Enter date" md-open-on-focus required></md-datepicker>
-              <!-- <div class="hint">commisionedDate should be greater than installedDate!</div> -->
+              <p class="label-font">Commissioned Date :</p>
+            </div>
+            <div flex="50"  style="margin-top:10px">
+              <md-datepicker ng-model="vm.masterSelected.commisionedDate"  md-max-date="vm.maxDate" md-placeholder="enter date*" md-open-on-focus required tabindex="18"></md-datepicker>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p class="label-font">Time Of Usage :</p>
+            </div>
+            <md-input-container flex="50" style="margin:0">
+              <md-switch ng-model="vm.tou" aria-label="Switch 1" ng-true-value="'Y'" ng-false-value="'N'" tabindex="17"> {{vm.tou}} </md-switch>
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+      <div flex="10"></div>
+      <div flex="45">
+        <div class="each-item">
 
+        </div>
       </div>
     </div>
     <div layout="row">
       <div flex="100">
-        <h4>GPS Area</h4>
+        <h4 class="label-font">GPS Area</h4>
       </div>
     </div>
     <div layout="row">
@@ -313,15 +347,14 @@
           <div layout="row">
 
             <div flex="50">
-              <p>Latitude :</p>
+              <p class="label-font"> Latitude (Degrees):</p>
             </div>
             <div flex="50">
               <md-input-container class="md-block" flex-gt-sm>
-                <input ng-model="vm.masterSelected.lat" type="number" name="lat" required placeholder="Latitude">
+                <input ng-model="vm.masterSelected.lat" type="number" name="lat" required placeholder="latitude" tabindex="19">
                 <div ng-messages="masterform.lat.$error">
                   <div ng-message="required">This is required.</div>
                 </div>
-
               </md-input-container>
             </div>
           </div>
@@ -332,15 +365,16 @@
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Longitude :</p>
+              <p class="label-font">Longitude (Degrees) :</p>
             </div>
             <div flex="50">
               <md-input-container class="md-block" flex-gt-sm>
-                <input ng-model="vm.masterSelected.long" type="number" name="long" required placeholder="Longitude">
+                <input ng-model="vm.masterSelected.long" type="number" name="long" required placeholder="longitude" tabindex="20">
                 <div ng-messages="masterform.long.$error">
                   <div ng-message="required">This is required.</div>
                 </div>
               </md-input-container>
+
             </div>
           </div>
         </div>
@@ -348,7 +382,7 @@
     </div>
     <div layout="row">
       <div flex="100">
-        <h4>Multiplication Factor</h4>
+        <h4 class="label-heading">Multiplication Factor</h4>
       </div>
     </div>
     <div layout="row">
@@ -358,11 +392,11 @@
           <div layout="row">
 
             <div flex="50">
-              <p> Current Transformer :</p>
+              <p class="label-font"> Current Transformer :</p>
             </div>
             <div flex="50">
               <md-input-container class="md-block" flex-gt-sm>
-                <input ng-model="vm.masterSelected.ct" type="number" name="ct" required placeholder="CT">
+                <input ng-model="vm.masterSelected.ct" type="number" name="ct" required placeholder="ct" tabindex="21">
                 <div ng-messages="masterform.ct.$error">
                   <div ng-message="required">This is required.</div>
                 </div>
@@ -376,11 +410,11 @@
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Voltage Transformer :</p>
+              <p class="label-font">Voltage Transformer :</p>
             </div>
             <div flex="50">
               <md-input-container class="md-block" flex-gt-sm>
-                <input ng-model="vm.masterSelected.vt" type="number" name="vt" required placeholder="VT" >
+                <input ng-model="vm.masterSelected.vt" type="number" name="vt" required placeholder="vt" tabindex="22">
                 <div ng-messages="masterform.vt.$error">
                   <div ng-message="required">This is required.</div>
                 </div>
@@ -391,5 +425,80 @@
         </div>
       </div>
     </div>
-    <md-button type="submit" ng-click="vm.masters()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+
+    <div layout="row">
+      <div flex="100">
+        <h4 class="label-heading">Meter Intial Readings</h4>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
+        <div class="each-item">
+
+          <div layout="row">
+
+            <div flex="50">
+              <p class="label-font">KWH :</p>
+            </div>
+            <div flex="50">
+              <md-input-container class="md-block" flex-gt-sm>
+                <input ng-model="vm.masterSelected.kwh" type="number" name="kwh" required placeholder="kwh" tabindex="23">
+                <div ng-messages="masterform.kwh.$error">
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div flex="10"></div>
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p class="label-font">KVAH :</p>
+            </div>
+            <div flex="50">
+              <md-input-container class="md-block" flex-gt-sm>
+                <input ng-model="vm.masterSelected.kvah" type="number" name="kvah" required placeholder="kvah" tabindex="24">
+                <div ng-messages="masterform.kvah.$error">
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p class="label-font">KVARH :</p>
+            </div>
+            <div flex="50">
+              <md-input-container class="md-block" flex-gt-sm>
+                <input ng-model="vm.masterSelected.kvarh" type="number" name="kvarh" required placeholder="kvarh" tabindex="25">
+                <div ng-messages="masterform.kvarh.$error">
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div flex="10"></div>
+      <div flex="45">
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="45"> </div>
+      <div flex="10">
+        <md-button type="submit" ng-click="vm.masters()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+      </div>
+      <div flex="10">
+        <md-button type="submit" ng-click="vm.Clear.clearObj(vm.masterSelected)" class="md-raised md-accent" aria-label="Submit">clear</md-button>
+      </div>
+    </div>
   </form>

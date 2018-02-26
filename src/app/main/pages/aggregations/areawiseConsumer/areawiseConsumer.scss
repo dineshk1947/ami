@@ -1,0 +1,32 @@
+#areawiseConsumer {
+  md-input-container {
+    margin: 0;
+  }
+  .area-stats {
+    margin-top: 15px;
+    //background-color: #EFEFEF;
+    width: 100%;
+    border: 1px solid #dddddd;
+    padding: 5px;
+    p {
+      margin: 0;
+    }
+  }
+  .radio-align {
+    display: flex;
+    md-radio-button {
+      width: 100%;
+    }
+  }
+  #chartdiv {
+      width:  40%;
+      height: 450px;
+  }
+
+  #donutchartdiv {
+	width		: 100%;
+	height		: 450px;
+	font-size	: 11px;
+}
+
+}

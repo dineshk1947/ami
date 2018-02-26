@@ -1,0 +1,210 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column" >
+  <!-- Header Open -->
+  <div class="header md-accent-bg" layout="row"  id="subHeaderDiv">
+    <div flex="95">
+        <div class="subHeaderTitle">Events & Tampers </div>
+    </div>
+    <div flex="5">
+    </div>
+  </div>
+  <!-- Header Close -->
+  <form name="loadProfile" id="tpEvents-form" ng-submit="vm.tpEventsSubmit()">
+   <div class="demo-md-panel-animation md-padding radio_class">
+    <div layout="row" >
+      <div flex="20">
+        <div layout="row">
+          <div flex="30">
+           <p class="label-font">Start Date</p>
+          </div>
+          <div flex="70">
+            <md-datepicker ng-model="vm.tpEvents.startDate" md-placeholder="Enter date" md-max-date="vm.currDate" required></md-datepicker>
+          </div>
+        </div>
+      </div>
+      <div flex ="5">
+      </div>
+      <div flex="20">
+        <div layout="row">
+          <div flex="30">
+            <p class="label-font">End Date</p>
+          </div>
+          <div flex="70">
+            <md-datepicker ng-model="vm.tpEvents.endDate" md-placeholder="Enter date" md-max-date="vm.currDate" required></md-datepicker>
+          </div>
+        </div>
+      </div>
+      <div flex ="5">
+      </div>
+      <div flex="25">
+        <div layout="row">
+          <div flex="40">
+            <p class="label-font">Select Event(s)</p>
+          </div>
+          <div flex="60">
+            <md-select  ng-model="vm.tpEvents.eventId" placeholder="Select Event(s)" class="md-underline" ng-change="vm.eventChange(vm.tpEvents.eventId)">
+              <md-option value="">Select Event(s)</md-option>
+              <md-option ng-repeat="x in vm.events"  value="{{x.eventCode}}">{{x.eventName}}</md-option>
+            </md-select>
+          </div>
+        </div>
+      </div>
+      <div flex ="5">
+      </div>
+      <div flex="20">
+        <md-button type="submit" role="submit" class="md-accent md-raised">Submit</md-button>
+        <md-button class="md-accent md-raised" ng-click="vm.Clear.clearObj(vm.tpEvents)">Clear</md-button></div>
+
+      </div>
+    </div>
+    <p></p>
+    <div layout ="row">
+      <div flex="20">
+       <div layout="row">
+         <div flex="50">
+           <p class="label-font">Transaction Id: </p>
+         </div>
+         <div flex="50" class="resultLabels label-font">
+           <span >{{vm.requestId}}</span>
+         </div>
+      </div>
+      </div>
+      <div flex="20">
+       <div layout="row">
+         <div flex="30">
+           <p class="label-font">Status: </p>
+         </div>
+         <div flex="70" class="resultLabels label-font">
+           <span >{{vm.requestStatus}}</span>
+         </div>
+      </div>
+      </div>
+      <div flex="20">
+        <md-button  class="md-accent md-raised" ng-disabled="vm.viewDiasbled" ng-click="vm.viewClick()">View</md-button>
+      </div>
+      <div flex="40">
+      </div>
+    </div>
+    <div layout="row" flex="100" ng-show="vm.tableDiasbled" id="tableScroll">
+     <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="eventTable">
+       <thead>
+         <tr>
+           <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">S.No</span>
+              </div>
+          </th>
+
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Date</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Event Code</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title" > Cumulative Tamper Count</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">R Phase Current</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Y Phase Current</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">B Phase Current</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">R Phase Voltage</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Y Phase Voltage</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">B Phase Voltage</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">R Phase Power Factor</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Y Phase Power Factor</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">B Phase Power Factor</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Single Phase/Total P.F</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Cumulative Energy KWH Import</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Cumulative Energy KWH Export</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Single Phase/Total Current</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Single Phase/Total Voltage</span>
+              </div>
+            </th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="evnt in ::vm.eventList">
+              <td>{{$index+1}}</td>
+              <td ng-click="vm.showTpEventsDialog(evnt)"><a href=""><p class="label-font">{{ evnt.clock }}</p></a></td>
+              <td><p class="label-font">{{ evnt.eventName}}</p></td>
+              <td><p class="label-font">{{ evnt.cumTamperCount}}</p></td>
+              <td><p class="label-font">{{ evnt.rPhCurrent}}</p></td>
+              <td><p class="label-font">{{ evnt.yPhCurrent}}</p></td>
+              <td><p class="label-font">{{ evnt.bPhCurrent}}</p></td>
+              <td><p class="label-font">{{ evnt.rPhVoltage}}</p></td>
+              <td><p class="label-font">{{ evnt.yPhVoltage}}</p></td>
+              <td><p class="label-font">{{ evnt.bPhVoltage}}</p></td>
+              <td><p class="label-font">{{ evnt.rPhPowerFactor}}</p></td>
+              <td><p class="label-font">{{ evnt.yPhPowerFctor}}</p></td>
+              <td><p class="label-font">{{ evnt.bPhPowerFactor}}</p></td>
+              <td><p class="label-font">{{ evnt.singlePhOrTotPf}}</p></td>
+              <td><p class="label-font">{{ evnt.cumEnergyKwhImp}}</p></td>
+              <td><p class="label-font">{{ evnt.cumEnergyKwhExp}}</p></td>
+              <td><p class="label-font">{{ evnt.singlePhOrTotCur}}</p></td>
+              <td><p class="label-font">{{ evnt.singlePhOrTotVol}}</p></td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+   </div>
+  </form>
+</div>

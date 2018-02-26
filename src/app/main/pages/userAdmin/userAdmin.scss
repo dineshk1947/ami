@@ -1,0 +1,21 @@
+.customuser{
+  height: 100px;
+
+// .md-padding {
+//   padding: 10px;
+// }
+
+#user-admin {
+  padding: 0;
+  #adduser-form{
+    .md-padding{
+      .flex-30,.flex-20 {
+        height: 40px;
+      }
+      md-input-container {
+        margin:0;
+      }
+    }
+  }
+}
+}

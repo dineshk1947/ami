@@ -1,0 +1,271 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form ng-cloak  id="eventsDailogForm">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Instantaneous Parameters</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">X
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+     <div class="modal-align">
+        <div layout="row">
+          <div flex="10" style="margin-left:100px;">
+            <p class="label-font">Date : </p>
+           </div>
+           <div flex="10" style="margin-top:9px" >
+            <span  class="mt label-font" >{{ev.newDate}}</span>
+           </div>
+        </div>
+          <div layout="row">
+             <div flex="10" style="margin-left:100px;">
+               <p class="label-font">Meter S No : </p>
+             </div>
+             <div flex="10" style="margin-top:9px">
+              <span  class="mt label-font">1234</span>
+             </div>
+             <div flex="5">
+             </div>
+             <div flex="15">
+               <p class="label-font">Consumer Ser No : </p>
+             </div>
+             <div flex="10" style="margin-top:9px">
+              <span  class="mt label-font" >10001</span>
+             </div>
+             <div flex="5">
+             </div>
+             <div flex="15">
+               <p class="label-font">Consumer Name : </p>
+             </div>
+             <div flex="10" style="19px; margin-top:9px">
+              <span  class="mt label-font">Prasad Rao</span>
+             </div>
+          </div>
+          <div layout="row">
+            <div flex="10" style="margin-left:100px;">
+              <p class="label-font">Type : </p>
+             </div>
+             <div flex="10" style="margin-top:9px" >
+              <span  class="mt label-font" >CTVT</span>
+             </div>
+             <div flex="5">
+             </div>
+             <div flex="15">
+               <p class="label-font">Connection Type :</p>
+             </div>
+             <div flex="10" style="margin-top:9px">
+              <span  class="mt label-font">3Ph3W</span>
+             </div>
+             <div flex="5">
+             </div>
+             <div flex="15">
+               <p class="label-font">Category Type :</p>
+             </div>
+             <div flex="10" style="margin-top:9px">
+              <span  class="mt label-font">Residential</span>
+             </div>
+          </div>
+          <!-- <div layout="row">
+            <div flex="10" style="margin-left:100px;">
+              <p class="label-font">Type : </p>
+             </div>
+             <div flex="10" style="margin-top:9px">
+              <span  class="mt label-font">CTVT</span>
+             </div>
+             <div flex="5">
+             </div>
+             <div flex="10">
+               <p class="label-font">Connection Type : </p>
+             </div>
+             <div flex="10" style="margin-top:9px">
+              <span  class="mt label-font">3Ph3W</span>
+             </div>
+             <div flex="5">
+             </div>
+             <div flex="10">
+               <p class="label-font">Category type : </p>
+             </div>
+             <div flex="10" style="margin-top:9px">
+              <span  class="mt label-font">Residential</span>
+             </div>
+          </div> -->
+        <div layout="column" id="instantPopup">
+         <table  width="90%" border="1px">
+            <tr>
+               <th class="secondary-text" width="55%">
+                  <div class="table-header">
+                       <span class="column-title">Parameter</span>
+                 </div>
+               </th>
+               <th class="secondary-text" width="15%">
+                 <div class="table-header">
+                     <span class="column-title">R</span>
+                 </div>
+                </th>
+               <th class="secondary-text" width="15%">
+                 <div class="table-header">
+                     <span class="column-title">Y</span>
+                 </div>
+               </th>
+               <th class="secondary-text" width="15%">
+                 <div class="table-header">
+                    <span class="column-title">B</span>
+                  </div>
+                </th>
+             </th>
+           </tr>
+           <tr>
+               <td class="p"><p class="label-font">Voltage(V)</p></td>
+               <td class="p"><p class="label-font">{{ev.voltageVrn}}</p></td>
+               <td class="p"><p class="label-font">{{ev.voltageVyn}}</p></td>
+               <td class="p"><p class="label-font">{{ev.voltageVbn}}</p></td>
+           </tr>
+           <tr>
+               <td class="p"><p class="label-font">Current(A)</p></td>
+               <td class="p"><p class="label-font">{{ev.currentIr}}</p></td>
+               <td class="p"><p class="label-font">{{ev.currentIy}}</p></td>
+               <td class="p"><p class="label-font">{{ev.currentIb}}</p></td>
+           </tr>
+           <tr>
+               <td class="p"><p class="label-font">Signed Power Factor (A)</p></td>
+               <td class="p"><p class="label-font">{{ev.signedPwrFactRPh}}</p></td>
+               <td class="p"><p class="label-font">{{ev.signedPwrFactYPh}}</p></td>
+               <td class="p"><p class="label-font">{{ev.signedPwrFactBPh}}</p></td>
+           </tr>
+           </table>
+           <table  width="90%" border="1px" class="mt">
+             <tr>
+              <th class="secondary-text">
+                 <div class="table-header">
+                      <span class="column-title">Parameter</span>
+                </div>
+              </th>
+              <th class="secondary-text">
+                <div class="table-header">
+                    <span class="column-title">Q1</span>
+                </div>
+              </th>
+              <th class="secondary-text">
+                <div class="table-header">
+                    <span class="column-title">Q2</span>
+                </div>
+              </th>
+              <th class="secondary-text">
+                <div class="table-header">
+                    <span class="column-title">Q3</span>
+                </div>
+              </th>
+              <th class="secondary-text">
+                <div class="table-header">
+                    <span class="column-title">Q4</span>
+                </div>
+              </th>
+            </tr>
+            <tr>
+                <td class="p"><p class="label-font">Cummulative energy kVARH</p></td>
+                <td class="p"><p class="label-font">{{ev.cumEngKvarhQ1}}</p></td>
+                <td class="p"><p class="label-font">{{ev.cumEngKvarhQ2}}</p></td>
+                <td class="p"><p class="label-font">{{ev.cumEngKvarhQ3}}</p></td>
+                <td class="p"><p class="label-font">{{ev.cumEngKvarhQ4}}</p></td>
+            </tr>
+        </table>
+        <table  width="90%" border="1px" class="mt">
+          <tr>
+            <th class="secondary-text">
+               <div class="table-header">
+                    <span class="column-title">Parameter</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Import</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Export</span>
+              </div>
+            </th>
+          </tr>
+                <td class="p"><p class="label-font">Cumulative Energy – kWh</p></td>
+                <td class="p"><p class="label-font">{{ev.cumEngKwhImp}}</p></td>
+                <td class="p"><p class="label-font">{{ev.cumEngKwhExp}}</p></td>
+            </tr>
+            <tr>
+                <td class="p"><p class="label-font">Cumulative energy,kVAh</p></td>
+                <td class="p"><p class="label-font">{{ev.cumEngKvahImp}}</p></td>
+                <td class="p"><p class="label-font">{{ev.cumEngKvahExp}}</p></td>
+            </tr>
+            <tr>
+                <td class="p"><p class="label-font">Maximum demand,kW</p></td>
+                <td class="p"><p class="label-font">{{ev.maxDemandKwImp}}</p></td>
+                <td class="p"><p class="label-font"></p></td>
+            </tr>
+            <tr>
+                <td class="p"><p class="label-font">Maximum demand,kVA</p></td>
+                <td class="p"><p class="label-font">{{ev.maxDemandKvaImp}}</p></td>
+                <td class="p"><p class="label-font"></p></td>
+            </tr>
+          </table>
+          <table width="90%" border="1px" class="mt">
+            <tr>
+              <th class="secondary-text" colspan="2">
+                 <div class="table-header">
+                      <span class="column-title">Parameter</span>
+                </div>
+              </th>
+              <th class="secondary-text" >
+                <div class="table-header">
+                    <span class="column-title">Value</span>
+                </div>
+              </th>
+            </tr>
+            <tr>
+               <td class="p" colspan="2"><p class="label-font">Apparent Power – kVA</p></td>
+               <td class="p" style="font-size: 12px;"><p class="label-font" ></p>{{ev.apparentPwrKva}}</td>
+            </tr>
+            <tr>
+              <td class="p" colspan="2"><p class="label-font">Cumulative Billing count</p></td>
+              <td class="p" style="font-size: 12px;"><p class="label-font" ></p>{{ev.cumBillingCount}}</td>
+             </tr>
+             <tr>
+               <td class="p" colspan="2"><p class="label-font">Cumulative programming count</p></td>
+               <td class="p" style="font-size: 12px;"><p class="label-font" ></p>{{ev.cumProgramCount}}</td>
+               </tr>
+              <tr>
+                <td class="p" colspan="2"><p class="label-font">Cumulative power-OFF duration in min</p></td>
+                <td class="p" style="font-size: 12px;"><p class="label-font" ></p>{{ev.cumPwrOffDur}}</td>
+              </tr>
+              <tr>
+               <td class="p" colspan="2"><p class="label-font">Cumulative tamper count</p></td>
+               <td class="p" style="font-size: 12px;"><p class="label-font" ></p>{{ev.cumTamperCount}}</td>
+              </tr>
+              <tr>
+                <td class="p" colspan="2"><p class="label-font">Frequency</p></td>
+                <td class="p" style="font-size: 12px;"><p class="label-font" ></p>{{ev.frequency}}</td>
+              </tr>
+             <tr>
+              <td class="p" colspan="2"><p class="label-font">Number of power-failures</p></td>
+              <td class="p" style="font-size: 12px;"><p class="label-font" ></p>{{ev.numPwrFailure}}</td>
+            </tr>
+            <tr>
+              <td class="p" colspan="2"><p class="label-font">Signed Active Power – kW</p></td>
+              <td class="p" style="font-size: 12px;"><p class="label-font" ></p>{{ev.signedActivePwrKw}}</td>
+            </tr>
+            <tr>
+             <td class="p" colspan="2"><p class="label-font">Signed Reactive Power – kVAr</p></td>
+             <td class="p" style="font-size: 12px;"><p class="label-font" ></p>{{ev.signedRectivePwrKvar}}</td>
+            </tr>
+            <tr>
+             <td class="p" colspan="2"><p class="label-font">Signed Power Factor – PF</p></td>
+             <td class="p" style="font-size: 12px;"><p class="label-font" ></p>{{ev.signedPwrFactPf}}</td>
+           </tr>
+          </table>
+        </div>
+        <div layout="row">
+        </div>
+      </div>
+    </md-dialog-content>
+  </form>
+</md-dialog>

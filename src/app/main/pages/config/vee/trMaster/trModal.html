@@ -1,0 +1,193 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form ng-cloak name="eventMaster" id="eventsmaster-form">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 style="text-transform:capitalize">{{title}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          X
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content style="padding: 20px 24px 0 24px;">
+      <div class="modal-align">
+
+
+        <div layout="row" class="row-margin">
+          <div flex="5">
+
+          </div>
+          <div layout="row" flex="40">
+            <div flex="50">
+              <p class="label-font">Meter Subcategory :</p>
+            </div>
+            <div flex="50" class="input-margin">
+              <md-input-container>
+              <md-select  ng-change="getPhase()" ng-show ="submit" ng-model="eachItem.type" placeholder="select category type" class="md-underline" required>
+                <md-option ng-repeat="x in meterSubCat"  value="{{x}}">{{x.type}}</md-option>
+              </md-select>
+              </md-input-container>
+              <md-input-container>
+                <input ng-model="eachItem.type" type="text" name = "type" readonly size="45" ng-show="update" style = "font-size : 15px">
+              </md-input-container>
+            </div>
+          </div>
+
+          <div flex="5">
+          </div>
+          <div layout="row" flex="40">
+            <div flex="50">
+              <p class="label-font">Meter Phase :</p>
+            </div>
+            <div flex="50" class="input-margin">
+              <md-select ng-change="getPhase1()" ng-show = "submit" ng-model="eachItem.phase" placeholder="select phase" class="md-underline" required>
+                <md-option ng-repeat="x in phase"  value="{{x}}">{{x.lookupCode}}</md-option>
+              </md-select>
+              <md-input-container>
+                <input ng-model="eachItem.lookupCode" type="text" name = "phase" readonly size="45" ng-show="update" style = "font-size : 15px">
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+
+      <div layout="row" class ="row-margin" style="margin-bottom:20px">
+        <div flex="5">
+        </div>
+        <div flex="40">
+          <md-autocomplete
+              md-selected-item="eachItem.veeParaCode"
+              md-search-text-change="vm.searchTextChange(vm.searchText1)"
+              md-search-text="vm.searchText1"
+              md-selected-item-change="vm.selectedItemChange(item)"
+              md-items="item in paramName | filter:vm.searchText1"
+              md-item-text=item.veeParaCode
+              md-min-length="0"
+              placeholder="Parameter Name"
+              ng-required="true"
+              ng-show="submit">
+            <md-item-template>
+              <span md-highlight-text="vm.searchText1" md-highlight-flags="^i^" > {{item.veeParaCode}}</span>
+            </md-item-template>
+          </md-autocomplete>
+          <md-input-container>
+            <input ng-model="eachItem.veeParaCode" type="text" name = "eventName" readonly size="45" ng-show="update" style = "font-size : 15px">
+          </md-input-container>
+        </div>
+        <div flex="5">
+        </div>
+        <div flex="40">
+          <md-autocomplete
+              md-selected-item="eachItem.userName"
+              md-search-text-change="vm.searchTextChange(vm.searchText2)"
+              md-search-text="vm.searchText2"
+              md-selected-item-change="vm.selectedItemChange(item)"
+              md-items="item in paramUser | filter:vm.searchText2"
+              md-item-text=item.userName
+              md-min-length="0"
+              placeholder="User Name"
+              ng-required="true">
+            <md-item-template>
+              <span md-highlight-text="vm.searchText2" md-highlight-flags="^i" > {{item.userName}}</span>
+            </md-item-template>
+          </md-autocomplete>
+        </div>
+      </div>
+
+
+
+      <div layout="row" class="row-margin">
+        <div flex="5">
+
+        </div>
+        <div layout="row" flex="40">
+          <div flex="50">
+            <p class="label-font">Minimum(Value) :</p>
+          </div>
+          <div flex="50" class="input-margin">
+            <md-input-container>
+              <input ng-model="eachItem.minValue" type="number">
+            </md-input-container>
+          </div>
+        </div>
+
+        <div flex="5">
+        </div>
+        <div layout="row" flex="40">
+          <div flex="50">
+            <p class="label-font">Maximu(Value) :</p>
+          </div>
+
+          <div flex="50" class="input-margin">
+            <md-input-container>
+              <input ng-model="eachItem.maxValue" type="number">
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+
+      <div layout="row" class="row-margin">
+        <div flex="5">
+
+        </div>
+        <div layout="row" flex="40">
+          <div flex="50">
+            <p class="label-font">Minimum(%) :</p>
+          </div>
+
+          <div flex="50" class="input-margin">
+            <md-input-container>
+              <input ng-model="eachItem.minPercentage" type="number">
+            </md-input-container>
+          </div>
+        </div>
+
+        <div flex="5">
+        </div>
+
+        <div layout="row" flex="40">
+          <div flex="50">
+            <p class="label-font">Maximum(%) :</p>
+          </div>
+
+          <div flex="50" class="input-margin">
+            <md-input-container>
+              <input ng-model="eachItem.maxPercentage" type="number">
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+
+      <div layout="row" class="row-margin">
+        <div flex="5">
+
+        </div>
+        <div layout="row" flex="40">
+          <div flex="40">
+            <p class="label-font last-p">Effective Date :</p>
+          </div>
+          <div flex="5">
+
+          </div>
+          <div flex="50">
+              <md-datepicker ng-model="eachItem.effectiveDate" md-min-date="minDate" md-open-on-focus required></md-datepicker>
+          </div>
+        </div>
+      </div>
+
+      <div layout="row" class="row-margin">
+        <div flex="30">
+        </div>
+        <div flex="40">
+          <md-button type="submit" class="md-accent md-raised" ng-show="submit" ng-click="paramSubmit()">Submit</md-button>
+          <md-button type="submit" class="md-accent md-raised" ng-show="update" ng-click="paramUpdate()">Modify</md-button>
+          <md-button ng-click="Clear.clearObj(eachItem)" class="md-raised md-accent">clear</md-button>
+
+
+          <md-button class = "md-accent md-raised md-warn" ng-click="cancel()">CLOSE</md-button>
+        </div>
+      </div>
+    </div>
+    </md-dialog-content>
+  </form>
+</md-dialog>

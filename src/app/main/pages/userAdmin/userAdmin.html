@@ -1,0 +1,43 @@
+<div  class="page-layout simple fullwidth doc-page customuser" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">User Administration</span>
+            </div>
+
+            <div class="headerTitle">User Administration</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+      <!-- <ms-hireachey></ms-hireachey> -->
+        <div layout="row">
+
+          <div class="form-wrapper md-whiteframe-1dp" flex="100" id="user-admin">
+            <div ng-cloak>
+              <md-content>
+                <md-tabs md-dynamic-height md-border-bottom md-center-tabs=true md-stretch-tabs="always">
+                  <md-tab label="Add User">
+                    <md-content class="md-padding">
+                      <div ng-include="'app/main/pages/userAdmin/adduser/adduser.html'"></div>
+                    </md-content>
+                  </md-tab>
+                  <md-tab label="Assign Role">
+                    <md-content class="md-padding">
+                      <div ng-include="'app/main/pages/userAdmin/assignrole/assignrole.html'"></div>
+                    </md-content>
+                  </md-tab>
+                </md-tabs>
+              </md-content>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- / CONTENT -->
+</div>

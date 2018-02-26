@@ -1,0 +1,121 @@
+<form name="chnageForm" class="md-inline-form" ng-submit="vm.DcuChangeSubmit()" id="dcu-change-form">
+  <md-content class="md-padding">
+    <div class="demo-md-panel-animation md-padding metermaster-class" >
+      <div layout="row">
+        <div flex="45">
+          <div layout="row">
+            <div flex="50">
+              <!-- <span class="p label-font">Existing Device Serial Number :</span> -->
+              <!-- <p class="label-font ">New Device Serial Number :</p> -->
+              <p class="label-font auto-align">Existing Device Serial Number :</p>
+            </div>
+            <div flex="50">
+              <md-autocomplete  ng-model="vm.dcuChange.exdevsrno"
+                 md-selected-item="vm.selectedItem"
+                 md-search-text-change="vm.searchTextChange(vm.searchText)"
+                 md-search-text="vm.searchText"
+                 md-selected-item-change="vm.selectedItemChangeExi(vm.selectedItem)"
+                 md-items="item in vm.cId | filter:vm.searchText"
+                 md-item-text="item.dcuSlno"
+                 md-min-length="0"
+                 placeholder="Existing Device Serial No"
+                 ng-required="true">
+                 <md-item-template>
+                   <span md-highlight-text="vm.searchText" md-highlight-flags="^i" > {{item.dcuSlno}}</span>
+                 </md-item-template>
+               </md-autocomplete>
+             </div>
+           </div>
+         </div>
+         <div flex="10"></div>
+         <div flex="45">
+           <div layout="row">
+             <div flex="50">
+               <p class="label-font">Date of Failure :</p>
+               <!-- <span class="p">Date of Failure :</span> -->
+             </div>
+             <div flex="50">
+                    <md-datepicker ng-model="vm.dcuChange.failuredate" md-max-date="vm.maxDate" md-placeholder="Enter date" md-open-on-focus required></md-datepicker>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row">
+          <div flex="45">
+            <div layout="row">
+              <div flex="50">
+                <p class="label-font auto-align">New Device Serial Number :</p>
+                <!-- <span class="p">New Device Serial Number:</span> -->
+              </div>
+              <div flex="50">
+                <md-autocomplete  ng-model="vm.dcuChange.newdevsrno"
+                  md-selected-item="vm.selectedItem1"
+                  md-search-text-change="vm.searchTextChange(vm.searchText1)"
+                  md-search-text="vm.searchText1"
+                  md-selected-item-change="vm.selectedItemChangeNew(vm.selectedItem1)"
+                  md-items="item in vm.cId1 | filter:vm.searchText1"
+                  md-item-text="item.dcuSlno"
+                  md-min-length="0"
+                  placeholder="New Device Serial Number"
+                  ng-required="true">
+                  <md-item-template>
+                    <span md-highlight-text="vm.searchText1" md-highlight-flags="^i" > {{item.dcuSlno}}</span>
+                  </md-item-template>
+                </md-autocomplete>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45">
+             <div layout="row">
+               <div flex="50">
+                 <p class="label-font">Date of Installation :</p>
+                 <!-- <span class="p">Date of Installation  :</span> -->
+               </div>
+               <div flex="50">
+                   <md-datepicker  ng-model="vm.dcuChange.installedate" md-max-date="vm.maxDate" md-placeholder="Enter date" md-open-on-focus ></md-datepicker>
+               </div>
+             </div>
+           </div>
+         </div>
+         <div layout="row">
+           <div flex="45">
+             <div layout="row">
+               <div flex="50">
+                 <p class="label-font">Reason for change :</p>
+                 <!-- <span class="p">Reason for change:</span> -->
+               </div>
+               <md-input-container flex="50">
+                 <input type="text" ng-model="vm.dcuChange.reasonForChange" placeholder="reason for change"  required  size="10" >
+               </md-input-container>
+
+             </div>
+           </div>
+           <div flex="10"></div>
+           <div flex="45">
+             <div layout="row">
+               <div flex="50">
+                 <p class="label-font">Status :</p>
+                 <!-- <span class="p">Status:</span> -->
+               </div>
+             <md-input-container flex="50">
+               <md-select ng-model="vm.dcuChange.deviceChangeStatus" required placeholder="select status">
+                  <md-option ng-repeat="x in vm.dcuChangeStatus"  value="{{x.statusId}}" ng-slected="">{{x.mtrStatus}}</md-option>
+               </md-select>
+             </md-input-container>
+           </div>
+         </div>
+       </div>
+       <div layout="row">
+         <div flex="40"> </div>
+         <div flex="10">
+             <md-button type="submit" value="Submit" class="md-accent md-raised">Submit</md-button>
+          </div>
+          <div flex="10">
+            <md-button ng-click="vm.Clear.clearObj(vm.dcuChange)" class="md-raised md-accent" aria-label="Submit">clear</md-button>
+          </div>
+         <div flex="40"> </div>
+       </div>
+     </div>
+  </md-content>
+</form>

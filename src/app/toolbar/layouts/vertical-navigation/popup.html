@@ -1,0 +1,67 @@
+<!-- <md-dialog aria-label="Mango (Fruit)" id="profile-popup">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>My Profile</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">X
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div layout="row">
+        <div flex="20">
+
+        </div>
+        <div flex="30">
+          <p class="label-font">Name :</p>
+          <p class="label-font">Id :</p>
+          <p class="label-font">Level :</p>
+          <p class="label-font">Role :</p>
+          <p class="label-font">Region :</p>
+        </div>
+        <div flex="30">
+          <p class="data-font">{{userDetails.userName}}</p>
+          <p class="data-font">{{userDetails.userId}}</p>
+          <p class="data-font">{{userDetails.levelName}}</p>
+          <p class="data-font">{{userDetails.role}}</p>
+          <p class="data-font">{{userDetails.region}}</p>
+        </div>
+      </div>
+
+    </md-dialog-content>
+</md-dialog> -->
+
+<md-dialog aria-label="Mango (Fruit)" id="profile-popup">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>My Profile</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">X
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div layout="row">
+        <div flex="20">
+
+        </div>
+        <div flex="30">
+          <p class="label-font">Name :</p>
+          <p class="label-font">Designation :</p>
+          <p class="label-font">Role :</p>
+          <!-- <p class="label-font">Location :</p>-->
+          <p class="label-font">Admin Unit :</p>
+          <!-- <p class="label-font">Region :</p> -->
+        </div>
+        <div flex="60">
+          <p class="toolBarDataFont">{{userDetails.userName}}</p>
+          <p class="data-toolBarDataFont">{{userDetails.designation}}</p>
+          <p class="toolBarDataFont">{{userDetails.roleName}}</p>
+          <!-- <p class="data-font">{{userDetails.hierarchyName}}</p>-->
+          <p class="toolBarDataFont">{{userDetails.levelName}}</p>
+          <!-- <p class="data-font">{{userDetails.region}}</p> -->
+        </div>
+      </div>
+
+    </md-dialog-content>
+</md-dialog>

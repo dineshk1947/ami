@@ -81,6 +81,12 @@
     }
 }
 
+#profile-popup {
+  width: 50%;
+  md-dialog-content {
+    padding: 0;
+  }
+}
 #language-menu-content {
 
     md-menu-item {

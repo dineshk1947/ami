@@ -1,0 +1,496 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+  <div class="header md-accent-bg" layout="row"  id="subHeaderDiv">
+   <div flex="95">
+     <div class="subHeaderTitle">Remote Config </div>
+   </div>
+   <div flex="5">
+      <!-- <md-icon class="fa fa-retweet" style="font-size:30px" ng-click="vm.hierarchyShow()"></md-icon> -->
+    </div>
+  </div>
+  <div class="content" layout="column">
+   <div layout="row">
+     <div class="form-wrapper md-whiteframe-1dp" flex="100">
+       <form name="masterform" class="md-inline-form" id="remoteConfigForm" >
+        <div layout="row">
+          <div flex="100">
+            <h4 class="label-heading">Abstract Values</h4>
+          </div>
+        </div>
+        <div layout="row">
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font"> Real Time clock, date and time</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-select  ng-model="vm.remoteConfig.clock" placeholder="" class="md-underline" name="type" required >
+                      <md-option  value="0" >No Synchrinisation</md-option>
+                      <md-option  value="3" >Adjust to minute</md-option>
+                      <md-option  value="5" >Adjust to Preset Time</md-option>
+                      <md-option  value="6" >Shift Time</md-option>
+                    </md-select>
+                    <div ng-messages="masterform.ct.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">Single Action schedule for billing dates</p>
+                </div>
+                <div flex="50">
+                  <!-- <md-input-container class="md-block" flex-gt-sm>
+                    <input ng-model="vm.masterSelected.vt" type="number" name="vt" required placeholder="vt" tabindex="22">
+                    <div ng-messages="masterform.vt.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container> -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row" class="mgtop">
+          <div flex="45">
+            <div class="each-item">
+
+              <div layout="row">
+
+                <div flex="50">
+                  <p class="label-font"> Activity Calendar for Time Zones</p>
+                </div>
+                <div flex="50">
+                  <!-- <md-input-container class="md-block" flex-gt-sm>
+                    <input ng-model="vm.masterSelected.ct" type="number" name="ct" required placeholder="ct" tabindex="21">
+                    <div ng-messages="masterform.ct.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">RS 485 Device address</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-select  ng-model="vm.remoteConfig.deviceAddress" placeholder="" class="md-underline" name="type" required >
+                      <md-option  value="0" >only for serial Port</md-option>
+                    </md-select>
+                    <div ng-messages="masterform.vt.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row" class="mgtop">
+          <div flex="45">
+            <div class="each-item">
+
+              <div layout="row">
+
+                <div flex="50">
+                  <p class="label-font"> Image Transfer</p>
+                </div>
+                <div flex="50">
+                  <!-- <md-input-container class="md-block" flex-gt-sm>
+                    <input ng-model="vm.masterSelected.ct" type="number" name="ct" required placeholder="ct" tabindex="21">
+                    <div ng-messages="masterform.ct.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">LLS secret</p>
+                </div>
+                <div flex="50">
+                  <!-- <md-input-container class="md-block" flex-gt-sm>
+                    <input ng-model="vm.masterSelected.vt" type="number" name="vt" required placeholder="vt" tabindex="22">
+                    <div ng-messages="masterform.vt.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container> -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row" class="mgtop">
+          <div flex="45">
+            <div class="each-item">
+
+              <div layout="row">
+
+                <div flex="50">
+                  <p class="label-font"> HLS key</p>
+                </div>
+                <div flex="50">
+                  <!-- <md-input-container class="md-block" flex-gt-sm>
+                    <input ng-model="vm.masterSelected.ct" type="number" name="ct" required placeholder="ct" tabindex="21">
+                    <div ng-messages="masterform.ct.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">Global key change</p>
+                </div>
+                <div flex="50">
+                  <!-- <md-input-container class="md-block" flex-gt-sm>
+                    <input ng-model="vm.masterSelected.vt" type="number" name="vt" required placeholder="vt" tabindex="22">
+                    <div ng-messages="masterform.vt.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container> -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row" class="mgtop">
+          <div flex="45">
+            <div class="each-item">
+
+              <div layout="row">
+
+                <div flex="50">
+                  <p class="label-font"> Image activation single action schedule</p>
+                </div>
+                <div flex="50">
+                  <!-- <md-input-container class="md-block" flex-gt-sm>
+                    <input ng-model="vm.masterSelected.ct" type="number" name="ct" required placeholder="ct" tabindex="21">
+                    <div ng-messages="masterform.ct.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">ESWF</p>
+                </div>
+                <div flex="50">
+                  <!-- <md-input-container class="md-block" flex-gt-sm>
+                    <input ng-model="vm.masterSelected.vt" type="number" name="vt" required placeholder="vt" tabindex="22">
+                    <div ng-messages="masterform.vt.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container> -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row" class="mgtop">
+          <div flex="45">
+            <div class="each-item">
+
+              <div layout="row">
+
+                <div flex="50">
+                  <p class="label-font"> Metering Mode</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-select  ng-model="vm.remoteConfig.deviceAddress" placeholder="" class="md-underline" name="type" required >
+                      <md-option  value="0" >Forwaded Only Meter</md-option>
+                      <md-option  value="1" >Import and Export Meter</md-option>
+                    </md-select>
+                    <div ng-messages="masterform.ct.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">MD Reset</p>
+                </div>
+                <div flex="50">
+                  <!-- <md-input-container class="md-block" flex-gt-sm>
+                    <input ng-model="vm.masterSelected.vt" type="number" name="vt" required placeholder="vt" tabindex="22">
+                    <div ng-messages="masterform.vt.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container> -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row" >
+          <div flex="100">
+            <h4 class="label-heading">Electrical Values</h4>
+          </div>
+        </div>
+        <div layout="row" >
+          <div flex="45">
+            <div class="each-item">
+
+              <div layout="row">
+
+                <div flex="50">
+                  <p class="label-font">Demand Integration period</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-select  ng-model="vm.remoteConfig.demandIntegrationPeriod" placeholder="" class="md-underline" name="type" required >
+                      <md-option  value="0" >1800 sec</md-option>
+                      <md-option  value="1" >900S sec</md-option>
+                    </md-select>
+                    <div ng-messages="masterform.ct.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">Profile Capture period</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-select  ng-model="vm.remoteConfig.demandIntegrationPeriod" placeholder="" class="md-underline" name="type" required >
+                      <md-option  value="0" >1800 sec</md-option>
+                      <md-option  value="1" >900S sec</md-option>
+                    </md-select>
+                    <div ng-messages="masterform.vt.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row" class="mgtop">
+          <div flex="45">
+            <div class="each-item">
+
+              <div layout="row">
+
+                <div flex="50">
+                  <p class="label-font">Measuring Algorithm for active Power</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-select  ng-model="vm.remoteConfig.mesAlgActivePower" placeholder="" class="md-underline" name="type" required >
+                      <md-option  value="1" >Only fundemental of voltage and current</md-option>
+                      <md-option  value="2" >All hormonics of voltage and current</md-option>
+                    </md-select>
+                    <div ng-messages="masterform.ct.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">Measuring Algorithm for active Energy</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-select  ng-model="vm.remoteConfig.mesAlgActiveEnergy" placeholder="" class="md-underline" name="type" required >
+                      <md-option  value="1" >Only fundemental of voltage and current</md-option>
+                      <md-option  value="2" >All hormonics of voltage and current</md-option>
+                    </md-select>
+                    <div ng-messages="masterform.vt.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row" class="mgtop">
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">Measuring Algorithm for reactive Power</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-select  ng-model="vm.remoteConfig.mesAlgReactivePower" placeholder="" class="md-underline" name="type" required >
+                      <md-option  value="1" > Σ(Q) from each- Ø fundemental of per- Ø(V) and per Ø(I)</md-option>
+                      <md-option  value="2" > Calculated from poly- Ø(S) and poly- Ø(P)</md-option>
+                      <md-option  value="3" >  Σ(Q) from poly- Ø(S) and poly- Ø(P) </md-option>
+                    </md-select>
+                    <div ng-messages="masterform.ct.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">Measuring Algorithm for reactive Energy</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-select  ng-model="vm.remoteConfig.mesAlgReactiveEnergy" placeholder="" class="md-underline" name="type" required >
+                      <md-option  value="1" > Σ(Q) from each- Ø fundemental of per- Ø(V) and per Ø(I)</md-option>
+                      <md-option  value="2" > Calculated from poly- Ø(S) and poly- Ø(P)</md-option>
+                      <md-option  value="3" >  Σ(Q) from poly- Ø(S) and poly- Ø(P) </md-option>
+                    </md-select>
+                    <div ng-messages="masterform.vt.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row" class="mgtop">
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">Measuring Algorithm for apparent Power</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-select  ng-model="vm.remoteConfig.mesAlgApparentPower" placeholder="" class="md-underline" name="type" required >
+                      <md-option  value="1" > With V- fundemental and I- fundemental</md-option>
+                      <md-option  value="5" > With V- Harmonics and I- harmonics</md-option>
+                      <md-option  value="10" > With vectorial  Σ(poly- Ø (P) from fundemental, Q) </md-option>
+                      <md-option  value="3" > With vectorial  Σ(poly- Ø (P) from harmonics, Q) </md-option>
+                    </md-select>
+                    <div ng-messages="masterform.ct.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">Measuring Algorithm for apparent Energy</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-select  ng-model="vm.remoteConfig.mesAlgApparentEnergy" placeholder="" class="md-underline" name="type" required >
+                      <md-option  value="1" > With V- fundemental and I- fundemental</md-option>
+                      <md-option  value="5" > With V- Harmonics and I- harmonics</md-option>
+                      <md-option  value="10" > With vectorial  Σ(poly- Ø (P) from fundemental, Q) </md-option>
+                      <md-option  value="3" > With vectorial  Σ(poly- Ø (P) from harmonics, Q) </md-option>
+                    </md-select>
+                    <div ng-messages="masterform.vt.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row" class="mgtop">
+          <div flex="45">
+            <div class="each-item">
+              <div layout="row">
+                <div flex="50">
+                  <p class="label-font">Measuring Algorithm for Power Factor</p>
+                </div>
+                <div flex="50">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <md-select  ng-model="vm.remoteConfig.mesAlgPowerFactor" placeholder="" class="md-underline" name="type" required >
+                        <md-option  value="1" > From fundemntal KWH and KVAH</md-option>
+                        <md-option  value="2" > From Harmonics KWH and kVAH</md-option>
+                      </md-select>
+                    <div ng-messages="masterform.ct.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="10"></div>
+          <div flex="45"></div>
+         </div>
+        <div layout="row">
+          <div flex="45"> </div>
+          <div flex="10">
+            <md-button type="submit" ng-click="vm.masters()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+          </div>
+          <div flex="10">
+            <md-button class="md-accent md-raised" ng-click="vm.Clear.clearObj(vm.remoteConfig)">Clear</md-button></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

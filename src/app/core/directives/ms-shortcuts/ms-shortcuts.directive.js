@@ -205,12 +205,12 @@
                     {
                         'title'      : 'Sample',
                         'icon'       : 'icon-tile-four',
-                        'state'      : 'app.sample',
+                        'state'      : 'app.tou',
                         'weight'     : 1,
                         'children'   : [],
                         '_id'        : 'sample',
                         '_path'      : 'apps.sample',
-                        'uisref'     : 'app.sample',
+                        'uisref'     : 'app.tou',
                         'hasShortcut': true
                     }
                 ];

@@ -1,0 +1,153 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Aggregations</span>
+            </div>
+
+            <div class="headerTitle">Areawise Consumer Details</div>
+        </div>
+        <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()">
+          <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
+        </md-button>
+    </div>
+    <!-- / HEADER -->
+    <ms-hierarchy3  ng-show="vm.showHeader"></ms-hierarchy3>
+
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+        <div layout="row">
+
+
+          <div class="form-wrapper md-whiteframe-1dp" flex="100" id="areawiseConsumer">
+
+            <div layout="row">
+                <div flex="5">
+                  <p class="label-font">From</p>
+                </div>
+                <md-input-container flex="10">
+                  <md-select ng-model="vm.areawiseConsumer.fyear" placeholder="select year" ng-change = "vm.getMonth()">
+                    <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
+                    <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
+                    <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <div flex="5">
+                </div>
+                <md-input-container flex="15">
+                  <md-select ng-model="vm.areawiseConsumer.fmonth" placeholder="select month" ng-disabled="vm.fmonthDisable">
+                    <md-option ng-repeat="x in vm.fmonth" value="{{x.value}}">{{x.month}}</md-option>
+                  </md-select>
+                </md-input-container>
+
+                <div flex="5">
+                </div>
+                <div flex="5">
+                  <p class="label-font">To</p>
+                </div>
+                <md-input-container flex="10">
+                  <md-select ng-model="vm.areawiseConsumer.tyear" placeholder="select year" ng-change = "vm.getMonth2()">
+                    <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
+                    <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
+                    <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
+                  </md-select>
+                </md-input-container>
+
+                <div flex="5">
+                </div>
+                <md-input-container flex="15">
+                  <md-select ng-model="vm.areawiseConsumer.tmonth" placeholder="select month" ng-disabled="vm.tmonthDisable">
+                    <md-option ng-repeat="x in vm.tmonth" value="{{x.value}}">{{x.month}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <div flex="5">
+                </div>
+                <md-button type="submit" ng-click="vm.areawiseConsumerSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.areawiseConsumer)">clear</md-button>
+
+
+
+            </div>
+            <div layout = "row">
+              <div flex="40">
+                <!-- <md-button type="submit" ng-click="vm.areawiseConsumerSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                <md-button  class="md-accent md-raised"  ng-click="vm.clearForm()">clear</md-button> -->
+              </div>
+              <div flex="5"></div>
+              <div flex="55">
+                <md-progress-circular md-mode="indeterminate" ng-show="vm.progressShow"></md-progress-circular>
+                <table  class="area-stats" ng-show="vm.statisticsTable">
+                  <tbody>
+                    <tr>
+                        <td class="p"><p class="label-font">Total Consumers</p></td>
+                        <td class="p"><p>{{vm.counts.totalCount}}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="p"><p class="label-font">High Tension(HT)</p></td>
+                        <td class="p"><p>{{vm.counts.htConsumerCount}}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="p"><p class="label-font">LTCT</p></td>
+                        <td class="p"><p>{{vm.counts.ltConsumerCount}}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="p"><p class="label-font">WC 1-Phase</p></td>
+                        <td class="p"><p>{{vm.counts.wcspConsumerCount}}</p></td>
+                    </tr>
+                    <tr>
+                        <td class="p"><p class="label-font">WC 3-Phase</p></td>
+                        <td class="p"><p>{{vm.counts.wctpConsumerCount}}</p></td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+
+            <div layout="row" ng-show="vm.statisticsTable">
+              <div flex="30">
+                <!-- <md-select ng-model="vm.switch" ng-change="vm.displayFun(vm.switch)">
+                  <md-option value = "donutChart">Donut Chart</md-option>
+                  <md-option value = "barchart">Bar Chart</md-option>
+
+                </md-select> -->
+                <md-radio-group ng-model="vm.switch" required ng-click="vm.displayFun(vm.switch)" class="radio-align">
+                  <md-radio-button value="donutChart">Donut Chart</md-radio-button>
+                  <md-radio-button value="barchart">Bar Chart</md-radio-button>
+                </md-radio-group>
+              </div>
+            </div>
+
+
+            <div layout="row"  ng-show="vm.statisticsTable && vm.donut">
+              <div flex="100">
+                  <div id="donutchartdiv"></div>
+
+              </div>
+            </div>
+
+            <div layout="row" ng-show="vm.chart && vm.statisticsTable">
+              <div flex="25">
+              </div>
+              <!-- <div flex="50" >
+                <div class="card" style="width:100%;">
+                    <nvd3 options="vm.discreteBarChart.options" data="vm.discreteBarChart.data"></nvd3>
+                </div>
+              </div> -->
+              <div id="chartdiv"></div>
+              </div>
+
+
+          </div>
+
+        </div>
+
+    </div>
+
+    <!-- / CONTENT -->
+</div>

@@ -1,0 +1,79 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+  <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
+    <div layout="column" layout-align="space-between">
+        <div class="breadcrumb" layout="row" layout-align="start center">
+            <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+            <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+            <span class="parent">VEE</span>
+        </div>
+        <div class="headerTitle">VEE Master </div>
+    </div>
+  </div>
+  <form name="AlogoMasterForm" class="md-inline-form" ng-submit="vm.DcuChangeSubmit()" id="Alogo-Master-Form"  >
+   <md-content class="md-padding">
+    <md-card>
+      <div class="demo-md-panel-animation md-padding metermaster-class" ng-show="!vm.progressShow">
+        <md-button  ng-click="vm.showTabDialog('')" class="md-accent md-raised">Create New Algorithm</md-button>
+         <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+            <thead>
+               <tr>
+                 <th class="secondary-text">
+                    <div class="table-header">
+                        <span class="column-title">S.No</span>
+                    </div>
+                </th>
+                <th class="secondary-text">
+                  <div class="table-header">
+                    <span class="column-title">Alogorithm Name</span>
+                  </div>
+                </th>
+                <th class="secondary-text">
+                  <div class="table-header">
+                    <span class="column-title">Type Of Failure</span>
+                  </div>
+                </th>
+                <th class="secondary-text">
+                  <div class="table-header">
+                    <span class="column-title">Notification Requirement</span>
+                  </div>
+                </th>
+                <th class="secondary-text">
+                  <div class="table-header">
+                      <span class="column-title">To Whom</span>
+                  </div>
+                </th>
+                <th class="secondary-text">
+                  <div class="table-header">
+                    <span class="column-title">Modify</span>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="x in vm.algorithmsNew track by $index">
+                  <td>{{$index+1}}</td>
+                  <td>{{ x.algCode }}</td>
+                  <td>{{ x.failureType }}</td>
+                  <td>{{ x.notificationReq }}</td>
+                  <td>{{ x.notifyUser }}</td>
+                  <td class="up-btn" ng-click="vm.showTabDialog(x)">
+                    <!-- <md-button value="Submit" class="md-accent md-raised">MODIFY</md-button> -->
+                    <a href="">Modify</md-button>
+                  </td>
+              </tr>
+          </tbody>
+         </table>
+      </div>
+
+      <div class="demo-md-panel-animation md-padding metermaster-class" ng-show="vm.progressShow">
+        <div layout="row">
+          <div flex="50">
+          </div>
+          <md-progress-circular md-mode="indeterminate" ></md-progress-circular>
+        </div>
+      </div>
+
+    </md-card>
+   </md-content>
+  </form>
+</div>

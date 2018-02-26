@@ -1,0 +1,112 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Dashboards</span>
+            </div>
+
+            <div class="headerTitle">My Dashboard</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+
+    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.progressShow" style="margin-top:200px">
+             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+
+    </div>
+
+    <div class="content" layout="column" id="dashboard-home" ng-show="!vm.progressShow">
+
+        <div layout="row" class="each-row">
+          <div flex="30">
+            <div class="md-title">Energy Demand</div>
+            <div class="card md-whiteframe-4dp" ng-click="vm.redirect('ed')">
+                <div id="energyDemandBar" ></div>
+                <div class="Yaxis"><b>Demand Category</b></div>
+            </div>
+          </div>
+          <div flex="5">
+
+          </div>
+          <div flex="30">
+            <div class="md-title">Energy Consumption</div>
+            <div class="card md-whiteframe-4dp" ng-click="vm.redirect('ec')">
+                <div id="energyConsumptionBar" ></div>
+                <div class="Yaxis"><b>Consumer Category</b></div>
+            </div>
+          </div>
+          <div flex="5">
+
+          </div>
+          <div flex="30">
+            <div class="md-title">Meter Installation Status</div>
+            <div class="card md-whiteframe-4dp" ng-click="vm.redirect('mis')">
+
+                <div id="meterStatusDonut" ></div>
+
+            </div>
+          </div>
+        </div>
+
+        <div layout="row" class="each-row">
+          <!-- <div flex="30">
+            <div class="md-title">Meter Communication</div>
+            <div class="card md-whiteframe-4dp"  ng-click="vm.redirect('mc')">
+                <nvd3 options="vm.donutChart.options" data="vm.donutChart.data"></nvd3>
+            </div>
+          </div> -->
+          <div flex="30">
+            <div class="md-title">Power Quality</div>
+            <div class="card md-whiteframe-4dp"  ng-click="vm.redirect('pf')">
+                <div id="PFPieChart" ></div>
+            </div>
+          </div>
+
+          <div flex="5">
+
+          </div>
+          <!-- <div flex="30">
+            <div class="md-title">Power Quality</div>
+            <div class="card md-whiteframe-4dp"  ng-click="vm.redirect('pf')">
+                <div id="PFPieChart" ></div>
+            </div>
+          </div> -->
+          <div flex="5">
+
+          </div>
+          <!-- <div flex="30">
+            <div class="md-title">VEE</div>
+            <div class="card md-whiteframe-4dp"  ng-click="vm.redirect('vee')">
+                <nvd3 options="vm.donutChart.options" data="vm.donutChart.data"></nvd3>
+            </div>
+          </div> -->
+        </div>
+
+        <div layout="row" class="each-row">
+          <!-- <div flex="30">
+            <div class="md-title">Tamper & Events</div>
+            <div class="card md-whiteframe-4dp"  ng-click="vm.redirect('te')">
+                <nvd3 options="vm.donutChart.options" data="vm.donutChart.data"></nvd3>
+            </div>
+          </div> -->
+          <div flex="5">
+
+          </div>
+          <div flex="30">
+
+          </div>
+          <div flex="5">
+
+          </div>
+          <div flex="30">
+
+          </div>
+        </div>
+    </div>
+    <!-- / CONTENT -->
+</div>

@@ -1,17 +1,17 @@
-<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+<div id="seasons-forms" class="page-layout simple fullwidth doc-page" layout="column">
 
     <!-- HEADER -->
-    <div class="header md-accent-bg" layout="row" layout-align="space-between">
+    <!-- <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
         <div layout="column" layout-align="space-between">
             <div class="breadcrumb" layout="row" layout-align="start center">
                 <md-icon md-font-icon="icon-home" class="s16"></md-icon>
                 <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">Master Data Managment</span>
+                <span class="parent">Master Data Management</span>
             </div>
 
-            <div class="title">Seasons </div>
+            <div class="headerTitle">Seasons </div>
         </div>
-    </div>
+    </div> -->
     <!-- / HEADER -->
     <!-- CONTENT -->
     <div class="content" layout="column">
@@ -25,37 +25,50 @@
 
 
                     <div layout="row" ng-repeat="each in vm.seasons track by $index">
+                      <div flex="10">
 
-                        <div flex="10" class="zone-names" > <span><h3>Season {{$index+1}} </h3></span></div>
-                        <div flex="15">
-                          <span> <h6>Start Date : </h6></span>
+                      </div>
+                        <div flex="10" class="zone-names" > <span><h3 class="label-heading" style="font-weight:100">Season {{$index+1}} </h3></span></div>
+
+                        <div flex="10">
+                          <span > <h6 class="label-font" style="margin-top:15px;">Start Date : </h6></span>
                         </div>
 
-                        <div flex="25">
+                        <div flex="20">
                           <md-datepicker ng-model="each.start"  md-min-date="vm.minDate" md-placeholder="Enter date" md-open-on-focus ></md-datepicker>
-                            <!-- <input type="date" ng-model="each.start" placeholder="Enter Date"> -->
                         </div>
 
-                        <div flex="15">
-                          <span> <h6>End Date : </h6></span>
+                        <div flex="10">
+                          <span> <h6 class="label-font" style="margin-top:15px;">End Date : </h6></span>
                         </div>
-                        <div flex="25">
+
+                        <div flex="20">
                             <md-datepicker ng-model="each.end"  md-min-date="vm.minDate" md-placeholder="Enter date" md-open-on-focus ></md-datepicker>
-                            <!-- <input type="date" ng-model="each.end" placeholder="Enter Date"> -->
-
                         </div>
                         <div flex="10">
-                          <span ng-show="!each.valid" style="color:red;">error</span>
+                          <span ng-show="!each.valid" style="color:red;">Error</span>
                         </div>
+                        <div flex="10">
+
+                        </div>
+
                         <!-- <md-input-container flex="20">
                           <md-switch ng-model="each.status" aria-label="Switch 1" ng-true-value="'Active'" ng-false-value="'In Active'" ng-change="vm.perform(1)">
                                {{ each.status }}
                           </md-switch>
                         </md-input-container> -->
                     </div>
+                    <div layout="row">
+                      <div flex="30">
 
-
-                    <md-button type="submit" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                      </div>
+                      <div flex="10">
+                        <md-button type="submit" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                      </div>
+                      <div flex="10">
+                        <md-button ng-click="vm.Clear.clearObj(vm.seasons)" class="md-raised md-accent">clear</md-button>
+                      </div>
+                    </div>
                 </form>
 
             </div>

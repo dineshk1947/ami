@@ -1,0 +1,250 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form ng-cloak  id="eventsDailogForm">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Billing Parameters</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">X
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+     <div class="modal-align">
+
+       <div layout="row">
+         <div flex="10" style="margin-left:100px;">
+           <p class="label-font">Billing Date: </p>
+          </div>
+          <div flex="10" style="margin-top:9px" >
+           <span  class="mt label-font" >{{ev.billingDate}}</span>
+          </div>
+       </div>
+
+       <div layout="row">
+          <div flex="10" style="margin-left:100px;">
+            <p class="label-font">Meter S No : </p>
+          </div>
+          <div flex="10" style="margin-top:9px">
+           <span  class="mt label-font">1234</span>
+          </div>
+
+          <div flex="5">
+          </div>
+          <div flex="15">
+            <p class="label-font">Consumer Ser No : </p>
+          </div>
+          <div flex="10" style="margin-top:9px">
+           <span  class="mt label-font" >10001</span>
+          </div>
+
+          <div flex="5">
+          </div>
+          <div flex="15">
+            <p class="label-font">Consumer Name : </p>
+          </div>
+          <div flex="10" style="19px; margin-top:9px">
+           <span  class="mt label-font">Prasad Rao</span>
+          </div>
+       </div>
+     <div layout="row">
+       <div flex="10" style="margin-left:100px;">
+         <p class="label-font">Type : </p>
+        </div>
+        <div flex="10" style="margin-top:9px" >
+         <span  class="mt label-font" >CTVT</span>
+        </div>
+        <div flex="5">
+        </div>
+        <div flex="15">
+          <p class="label-font">Connection Type :</p>
+        </div>
+        <div flex="10" style="margin-top:9px">
+         <span  class="mt label-font">3Ph3W</span>
+        </div>
+
+        <div flex="5">
+        </div>
+        <div flex="15">
+          <p class="label-font">Category Type :</p>
+        </div>
+        <div flex="10" style="margin-top:9px">
+         <span  class="mt label-font">Residential</span>
+        </div>
+     </div>
+
+          <div layout="row" class ="row-margin" id="billingTab">
+           <table  width="85%" border="1px">
+              <tr>
+                <th class="secondary-text">
+                </th>
+                <th class="secondary-text" colspan = 2>
+                   <div class="table-header">
+                        <span class="column-title">Energies</span>
+                  </div>
+                </th>
+                <th class="secondary-text" colspan = 2>
+                   <div class="table-header">
+                        <span class="column-title">Demands</span>
+                  </div>
+                </th>
+                <th class="secondary-text">
+                </th>
+              </tr>
+               <tr>
+                 <th class="secondary-text">
+                   <div class="table-header">
+                        <span class="column-title">TOU</span>
+                  </div>
+                 </th>
+                 <th class="secondary-text">
+                    <div class="table-header">
+                         <span class="column-title">kWh</span>
+                   </div>
+                 </th>
+                 <th class="secondary-text">
+                   <div class="table-header">
+                       <span class="column-title">kVAh</span>
+                   </div>
+                 </th>
+                 <th class="secondary-text">
+                   <div class="table-header">
+                       <span class="column-title">KW</span>
+                   </div>
+                 </th>
+                 <th class="secondary-text">
+                   <div class="table-header">
+                       <span class="column-title">kVA</span>
+                   </div>
+                 </td>
+               </th>
+               <th class="secondary-text">
+                 <div class="table-header">
+                     <span class="column-title">Record Inserted on</span>
+                 </div>
+               </td>
+             </th>
+             </tr>
+             <tr>
+                 <td class="p"><p class="label-font">TZ1</p></td>
+                 <td class="p"><p class="label-font">{{ev.cumEngKwhTz1}}</p></td>
+                 <td class="p"><p class="label-font">{{ev.cumEngKvahTz1}}</p></td>
+                 <td class="p"><p class="label-font">{{ev.mdKwTz1}}</p></td>
+                 <td class="p"><p class="label-font">{{ev.mdKvaTz1}}</p></td>
+                 <td class="p"><p class="label-font">{{ev.realTimeClockDateTime}}</p></td>
+             </tr>
+             <tr>
+               <td class="p"><p class="label-font">TZ2</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKwhTz2}}</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvahTz2}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKwTz2}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKvaTz2}}</p></td>
+               <td class="p"><p class="label-font">{{ev.realTimeClockDateTime}}</p></td>
+             </tr>
+             <tr>
+               <td class="p"><p class="label-font">TZ3</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKwhTz3}}</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvahTz3}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKwTz3}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKvaTz3}}</p></td>
+               <td class="p"><p class="label-font">{{ev.realTimeClockDateTime}}</p></td>
+             </tr>
+             <tr>
+               <td class="p"><p class="label-font">TZ4</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKwhTz4}}</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvahTz4}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKwTz4}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKvaTz4}}</p></td>
+               <td class="p"><p class="label-font">{{ev.realTimeClockDateTime}}</p></td>
+             </tr>
+             <tr>
+               <td class="p"><p class="label-font">TZ5</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKwhTz5}}</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvahTz5}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKwTz5}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKvaTz5}}</p></td>
+               <td class="p"><p class="label-font">{{ev.realTimeClockDateTime}}</p></td>
+             </tr>
+             <tr>
+               <td class="p"><p class="label-font">TZ6</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKwhTz6}}</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvahTz6}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKwTz6}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKvaTz6}}</p></td>
+               <td class="p"><p class="label-font">{{ev.realTimeClockDateTime}}</p></td>
+             </tr>
+             <tr>
+               <td class="p"><p class="label-font">TZ7</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKwhTz7}}</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvahTz7}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKwTz7}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKvaTz7}}</p></td>
+               <td class="p"><p class="label-font">{{ev.realTimeClockDateTime}}</p></td>
+             </tr>
+             <tr>
+               <td class="p"><p class="label-font">TZ8</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKwhTz8}}</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvahTz8}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKwTz8}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKvaTz8}}</p></td>
+               <td class="p"><p class="label-font">{{ev.realTimeClockDateTime}}</p></td>
+             </tr>
+             <tr>
+               <td class="p"><p class="label-font">Total</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKwh}}</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvah}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKw}}</p></td>
+               <td class="p"><p class="label-font">{{ev.mdKva}}</p></td>
+               <td class="p"><p class="label-font">{{ev.realTimeClockDateTime}}</p></td>
+             </tr>
+         </table>
+         </div>
+         <div layout="row" class ="row-margin" id = "billingTab2">
+           <table width="85%" border="1px">
+             <tr>
+               <th class="secondary-text">
+               </th>
+               <th class="secondary-text">
+                  <div class="table-header">
+                       <span class="column-title">Q1</span>
+                 </div>
+               </th>
+               <th class="secondary-text">
+                  <div class="table-header">
+                       <span class="column-title">Q2</span>
+                 </div>
+               </th>
+               <th class="secondary-text">
+                  <div class="table-header">
+                       <span class="column-title">Q3</span>
+                 </div>
+               </th>
+               <th class="secondary-text">
+                  <div class="table-header">
+                       <span class="column-title">Q4</span>
+                 </div>
+               </th>
+             </tr>
+             <tr>
+               <td class="p"><p class="label-font">Cummulative KVAH</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvarhQ1}}</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvarhQ2}}</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvarhQ3}}</p></td>
+               <td class="p"><p class="label-font">{{ev.cumEngKvarhQ4}}</p></td>
+             </tr>
+           </table>
+         </div>
+         <div layout="row" class ="row-margin">
+           <div flex="30">
+            <p class="label-font">Cummulative Energy kWh</p>
+           </div>
+           <div flex="25">
+             <p class="label-font">{{ev.cumEngKwhExp}}</p>
+           </div>
+           <div flex="25">
+             <p class="label-font">{{ev.cumEngKvahExp}}</p>
+           </div>
+         </div>
+       </div>
+     </md-dialog-content>
+   </form>
+</md-dialog>

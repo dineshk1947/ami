@@ -1,0 +1,354 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Configuration</span>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="child">VEE</span>
+            </div>
+            <div class="headerTitle">Configure VEE Checks</div>
+        </div>
+    </div>
+    <!-- /HEADER -->
+    <!-- CONTENT -->
+    <div class="form-wrapper md-whiteframe-1dp">
+      <form class="" ng-submit="vm.algConfig()">
+        <div class="outer-block">
+          <table class="table table-bordered" cellpadding=8 cellspacing=8>
+              <thead>
+                <div layout = "row">
+                  <tr>
+                    <th></th>
+                    <th>Inactive</th>
+                    <th>CIC</th>
+                    <th>MIC</th>
+                    <th>Missing Intervals</th>
+                    <th>KVARH</th>
+                    <th>TOU</th>
+                    <th>Contract Demand</th>
+                    <th>Spike</th>
+                    <th>CZC</th>
+                    <th>Pulse Overflow</th>
+                    <th>Dial Rollover</th>
+                    <th>High Usage</th>
+                    <th>Low Usage</th>
+                    <th>SPI</th>
+                  </tr>
+                </div>
+              </thead>
+              <tbody>
+                <div layout = "row">
+                  <tr>
+                    <td>
+                      <div class="form-group">
+                      <span> APEPDCL </span>
+                      </div>
+                    </td>
+                    <td align = "center"><input type="checkbox" value="" ng-model ="discomInactive"></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                    <td align = "center"><input type="checkbox" value=""></td>
+                  </tr>
+                </div>
+                <tr>
+                  <td>
+                      <md-autocomplete
+                          md-selected-item="vm.selectedItem1"
+                          md-search-text-change="vm.searchTextChange(vm.searchText1)"
+                          md-search-text="vm.searchText1"
+                          md-selected-item-change="vm.getDivisions(vm.selectedItem1[1])"
+                          md-items="item in vm.circles | filter:vm.searchText1"
+                          md-item-text="item[0]"
+                          md-min-length="0"
+                          placeholder="Select Circle"
+                          md-no-cache="true">
+                        <md-item-template>
+                          <span md-highlight-text="vm.searchText1" md-highlight-flags="^i" > {{item[0]}}</span>
+                        </md-item-template>
+                      </md-autocomplete>
+                      <!-- <select class="form-control" id="circleSelect">
+                        <option value="">Select Circle</option>
+                        <option value="srikakulam">SRIKAKULAM</option>
+                        <option value="visakhapatnam">VISAKHAPATNAM</option>
+                        <option value="vijayanagaram">VIJAYANAGARAM</option>
+                        <option value="eluru">ELURU</option>
+                        <option value="rajahmundry">RAJAHMUNDRY</option>
+                      </select> -->
+                  </td>
+                  <td align = "center"><input type="checkbox" value=""  ng-model ="CircleInactive"></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                </tr>
+                <tr>
+                  <td>
+                    <md-autocomplete
+                        md-selected-item="vm.selectedItem2"
+                        md-search-text-change="vm.searchTextChange(vm.searchText2)"
+                        md-search-text="vm.searchText2"
+                        md-selected-item-change="vm.getSubDivisions(vm.selectedItem2[1])"
+                        md-items="item in vm.divisions | filter:vm.searchText2"
+                        md-item-text="item[0]"
+                        md-min-length="0"
+                        placeholder="Select Division"
+                        md-no-cache="true"
+                        >
+                      <md-item-template>
+                        <span md-highlight-text="vm.searchText2" md-highlight-flags="^i" > {{item[0]}}</span>
+                      </md-item-template>
+                    </md-autocomplete>
+                  </td>
+                  <td align = "center"><input type="checkbox" value=""  ng-model ="divisionInactive"></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                </tr>
+                <tr>
+                  <td>
+                    <md-autocomplete
+                        md-selected-item="vm.selectedItem3"
+                        md-search-text-change="vm.searchTextChange(vm.searchText3)"
+                        md-search-text="vm.searchText3"
+                        md-selected-item-change="vm.getSections(vm.selectedItem3[1])"
+                        md-items="item in vm.subdivisions | filter:vm.searchText3"
+                        md-item-text="item[0]"
+                        md-min-length="0"
+                        placeholder="Select SubDivision"
+                        md-no-cache="true"
+                        >
+                      <md-item-template>
+                        <span md-highlight-text="vm.searchText3" md-highlight-flags="^i" > {{item[0]}}</span>
+                      </md-item-template>
+                    </md-autocomplete>
+                  </td>
+                  <td align = "center"><input type="checkbox" value="" ng-model ="subDInactive"></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                </tr>
+                <tr>
+                  <td>
+                    <md-autocomplete
+                        md-selected-item="vm.selectedItem4"
+                        md-search-text-change="vm.searchTextChange(vm.searchText4)"
+                        md-search-text="vm.searchText4"
+                        md-selected-item-change="vm.getSubStations(vm.selectedItem4[1])"
+                        md-items="item in vm.sections | filter:vm.searchText4"
+                        md-item-text="item[0]"
+                        md-min-length="0"
+                        placeholder="Select Section"
+                        md-no-cache="true"
+                        >
+                      <md-item-template>
+                        <span md-highlight-text="vm.searchText4" md-highlight-flags="^i" > {{item[0]}}</span>
+                      </md-item-template>
+                    </md-autocomplete>
+                  </td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                </tr>
+                <tr>
+                  <td>
+                    <md-autocomplete
+                        md-selected-item="vm.selectedItem5"
+                        md-search-text-change="vm.searchTextChange(vm.searchText5)"
+                        md-search-text="vm.searchText5"
+                        md-selected-item-change="vm.getFeeder(vm.selectedItem5[1])"
+                        md-items="item in vm.substations | filter:vm.searchText5"
+                        md-item-text="item[0]"
+                        md-min-length="0"
+                        placeholder="Select Substation"
+                        md-no-cache="true"
+                        >
+                      <md-item-template>
+                        <span md-highlight-text="vm.searchText5" md-highlight-flags="^i" > {{item[0]}}</span>
+                      </md-item-template>
+                    </md-autocomplete>
+                  </td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                </tr>
+                <tr>
+                  <td>
+                    <md-autocomplete
+                        md-selected-item="vm.selectedItem6"
+                        md-search-text-change="vm.searchTextChange(vm.searchText6)"
+                        md-search-text="vm.searchText6"
+                        md-selected-item-change="vm.getDtr(vm.selectedItem6[1])"
+                        md-items="item in vm.feeders | filter:vm.searchText6"
+                        md-item-text="item[0]"
+                        md-min-length="0"
+                        placeholder="Select Feeder"
+                        md-no-cache="true"
+                        >
+                      <md-item-template>
+                        <span md-highlight-text="vm.searchText6" md-highlight-flags="^i" > {{item[0]}}</span>
+                      </md-item-template>
+                    </md-autocomplete>
+                  </td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                </tr>
+                <tr>
+                  <td>
+                    <md-autocomplete
+                        md-selected-item="vm.selectedItem7"
+                        md-search-text-change="vm.searchTextChange(vm.searchText7)"
+                        md-search-text="vm.searchText7"
+                        md-selected-item-change="vm.selectedItemChange(vm.selectedItem7[1])"
+                        md-items="item in vm.dtrs | filter:vm.searchText7"
+                        md-item-text="item[0]"
+                        md-min-length="0"
+                        md-no-cache="true"
+                        placeholder="Select DTR"
+                        md-no-cache="true"
+                        >
+                      <md-item-template>
+                        <span md-highlight-text="vm.searchText7" md-highlight-flags="^i" > {{item[0]}}</span>
+                      </md-item-template>
+                    </md-autocomplete>
+                  </td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                  <td align = "center"><input type="checkbox" value=""></td>
+                </tr>
+                <tr>
+                  <td>
+                    <md-autocomplete
+                        md-selected-item="vm.selectedItem8"
+                        md-search-text-change="vm.searchTextChange(vm.searchText8)"
+                        md-search-text="vm.searchText8"
+                        md-selected-item-change="vm.selectedItemChange(item)"
+                        md-items="item in vm.mtrs | filter:vm.searchText8"
+                        md-item-text="item[1]"
+                        md-min-length="0"
+                        md-no-cache="true"
+                        placeholder="Select Meter"
+                        md-no-cache="true"
+                        >
+                      <md-item-template>
+                        <span md-highlight-text="vm.searchText8" md-highlight-flags="^i" > {{item[1]}}</span>
+                      </md-item-template>
+                    </md-autocomplete>
+                  </td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrInactive" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrCIC" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrMIC" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrMsngInt" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrKvarh" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrTou" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrCtrctDem" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrSpike" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrCzc" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrPulseOv" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrDialRoll" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrHigh"value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrLow" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                  <td align = "center"><input type="checkbox" ng-model = "vm.mtrSpi" value="" ng-true-value="'Y'"  ng-false-value="'N'"></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        <div layout="row">
+          <div flex ="40">
+          </div>
+          <div flex="30">
+            <md-button type="submit" value="Submit" class="md-accent md-raised">Submit</md-button>
+          </div>
+          <div flex ="40">
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- /CONTENT -->
+</div>

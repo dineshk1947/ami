@@ -1,0 +1,36 @@
+//
+// .zone-names {
+//   text-align: right;
+// }
+
+#timezones-form {
+  .layout-row {
+    height: 50px;
+    .zone-names {
+      p {
+          margin-top: 17px;
+      }
+    }
+    md-input-container {
+      margin: 5px 0 !important;
+    }
+    .md-inline-form md-switch {
+      margin-top: 5px;
+    }
+  }
+}
+md-toast {
+  &.error {
+    .md-toast-content {
+      background: #d9534f;
+      color: white;
+    }
+  }
+  &.success {
+    .md-toast-content {
+      background: #398439;
+      color: white;
+
+    }
+  }
+}

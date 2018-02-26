@@ -1,0 +1,28 @@
+.outer-block {
+  overflow-x: scroll;
+  table {
+
+    th {
+      font-weight: 500;
+      font-size: 90%;
+    }
+    tr {
+       td {
+
+         padding: 14px;
+         div {
+           span {
+             font-size: 14px;
+           }
+         }
+         select {
+           font-size: 75%;
+           width : 150px;
+         }
+         md-checkbox {
+           font-size: 10px;
+         }
+       }
+     }
+  }
+}

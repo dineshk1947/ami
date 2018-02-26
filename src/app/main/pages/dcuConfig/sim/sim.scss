@@ -1,0 +1,44 @@
+#simmaster-form {
+  padding: 5px;
+  .flex-45,.flex-60,.flex-40,.flex-30,.flex-70,.flex-50 {
+    height: 50px;
+  }
+  .ip-align input {
+    width: 40px;
+  }
+  .radio-align {
+    font-size: 12px;
+    display: flex;
+    margin-top: 25px;
+    md-radio-button {
+      width: 100%;
+    }
+  }
+  p {
+    margin: 25px 0 26px 0;
+  }
+  md-input-container {
+    margin: 10px 0;
+  }
+  h4 {
+    margin: 0;
+   text-transform: uppercase;
+   font-weight: 600;
+   font-size: 16px;
+  }
+}
+md-toast {
+  &.error {
+    .md-toast-content {
+      background: #d9534f;
+      color: white;
+    }
+  }
+  &.success {
+    .md-toast-content {
+      background: #398439;
+      color: white;
+
+    }
+  }
+}

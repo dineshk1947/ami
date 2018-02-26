@@ -1,0 +1,62 @@
+#meter-search {
+  .flex-10,.flex-20 {
+    height: 40px;
+
+  }
+  // .md-button {
+  //   margin: 10px 0;
+  // }
+
+  p{
+    //margin-left: 32px;
+    font-size: 12px;
+  }
+  h4{
+    margin-left: 32px;
+  }
+  .ptag{
+      font-size: 14px;
+      margin-left: 19px;
+      margin-top: 5px;
+  }
+  md-input-container.md-default-theme.flex {
+    margin-top: -8px;
+
+  }
+    button:focus {
+      outline-style: dotted;
+    }
+    md-input-container {
+      margin-left: 5px;
+      margin-top:-5px
+    }
+    // .layout-row {
+    // margin-top: -15px;
+    // }
+
+}
+.meterSearchPopup {
+  padding: 0;
+  .modal-align {
+    height   : auto;
+    width    : 800px;
+    overflow : none;
+    .row-margin{
+      // padding: 12px;
+      // height: 70px;
+      .input-margin {
+        margin-top: -15px;
+      }
+    }
+    md-input-container {
+      margin: 10;
+    }
+    md-checkbox {
+      margin: 10;
+    }
+    .close-button {
+      color: #fff;
+      background-color: #c9302c;
+    }
+  }
+}

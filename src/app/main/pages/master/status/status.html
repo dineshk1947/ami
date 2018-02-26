@@ -4,19 +4,36 @@
         <md-icon md-font-icon="icon-plus-circle" show-gt-sm="" role="button" aria-label="icon-plus-circle"  ng-click="vm.addStatus($index)"></md-icon>
       </div>
     <div layout="row" ng-repeat = "items in vm.statuses track by $index">
-      <div flex="45">
+      <div flex="30"></div>
+      <div flex="30">
         <div layout="row">
-          <div flex="40">
-            <p>Status {{$index+1}} : </p>
+          <div flex="30">
+            <p class="label-font">Status {{$index+1}} : </p>
           </div>
-          <div flex ="60">
+          <div flex ="70">
             <md-input-container>
               <input ng-model="items.status">
             </md-input-container>
           </div>
         </div>
       </div>
+      <div flex="5">
+        <span ng-show="items.svalid" style="color:red;">Error</span>
+      </div>
+      <div flex ="5">
+        <md-icon md-font-icon="icon-minus-circle" show-gt-sm="" role="button" aria-label="icon-plus-circle"  ng-click="vm.deleteStatus($index)"></md-icon>
+      </div>
+      <div flex="30"></div>
     </div>
-    <md-button type="submit" value="Submit" class="md-accent md-raised">Submit</md-button>
+    <div layout="row">
+      <div flex="40"></div>
+      <div flex="10">
+        <md-button type="submit" value="Submit" class="md-accent md-raised">Submit</md-button>
+      </div>
+      <div flex="10">
+        <md-button ng-click="vm.Clear.clearObj(vm.statuses)" class="md-raised md-accent">clear</md-button>
+      </div>
+    </div>
+
   </div>
 </form>

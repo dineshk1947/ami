@@ -9,9 +9,6 @@
     /** @ngInject */
     function MainController($scope, $rootScope)
     {
-        // Data
-
-        //////////
 
         // Remove the splash screen
         $scope.$on('$viewContentAnimationEnded', function (event)
@@ -23,3 +20,5 @@
         });
     }
 })();
+
+//ssh://git-codecommit.us-west-2.amazonaws.com/v1/repos/ANG-MDM

@@ -1,0 +1,122 @@
+
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+  <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
+    <div layout="column" layout-align="space-between">
+        <div class="breadcrumb" layout="row" layout-align="start center">
+          <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+          <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+          <span class="parent">Dashboards </span>
+        </div>
+        <div class="headerTitle">Meter Installation Status</div>
+    </div>
+    <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()">
+      <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
+    </md-button>
+  </div>
+  <ms-hierarchys ng-show="vm.showHeader"></ms-hierarchys>
+
+  <!-- CONTENT -->
+  <div class="content" layout="column">
+
+      <div layout="row">
+
+        <div class="form-wrapper md-whiteframe-1dp" flex="100" id="master-status">
+
+           <div layout="row">
+             <!-- <div flex="5"></div> -->
+            <div flex="10">
+              <p class="label-font">From Date</p>
+            </div>
+            <div flex="25">
+              <md-datepicker ng-model="vm.meterStatus.fromDate" md-placeholder="Enter date" md-open-on-focus md-max-date="vm.currDate" required></md-datepicker>
+            </div>
+            <div flex="10">
+              <p class="label-font">To Date</p>
+            </div>
+            <div flex="25">
+              <md-datepicker ng-model="vm.meterStatus.toDate" md-placeholder="Enter date" md-open-on-focus md-max-date="vm.currDate" required></md-datepicker>
+            </div>
+            <!-- <div flex="10"> -->
+               <md-button type="submit" class="md-accent md-raised" ng-click="vm.meterStatusSubmit()">Submit</md-button>
+              <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.meterStatus)">clear</md-button>
+            <!-- </div> -->
+            <div flex="10"></div>
+           </div>
+
+           <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.progressShow">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+           </div>
+
+
+           <div layout="row">
+             <div flex="40">
+             </div>
+             <div flex="5"></div>
+
+             <div flex="55">
+               <table  class="tb-stats" ng-if="vm.statisticsTable">
+                 <tbody>
+                   <tr>
+                       <td class="p"><p class="label-font">Total number Of Consumers :</p></td>
+                       <td class="p"><p class="label-font">{{vm.counts.consumerCount}}</p></td>
+                   </tr>
+                   <tr >
+                       <td class="p"><p class="label-font">Installed :</p></td>
+                       <td class="p"><p class="label-font">{{vm.counts.installed}}</p></td>
+                   </tr>
+                   <tr>
+                       <td class="p"><p class="label-font">Commissioned :</p></td>
+                       <td class="p"><p class="label-font">{{vm.counts.commissioned}}</p></td>
+                   </tr>
+                   <tr >
+                       <td class="p"><p class="label-font">Meters In Store :</p></td>
+                       <td class="p"><p class="label-font">{{vm.counts.meterInStore}}</p></td>
+                   </tr>
+                 </tbody>
+
+               </table>
+             </div>
+
+
+           </div>
+
+           <div layout="row" ng-show="vm.statisticsTable && vm.chartShow">
+             <div flex="30">
+               <!-- <md-select ng-model="vm.switch" ng-change="vm.displayFun(vm.switch)">
+                 <md-option value = "donutChart">Donut Chart</md-option>
+                 <md-option value = "barchart">Bar Chart</md-option>
+
+               </md-select> -->
+               <md-radio-group ng-model="vm.switch" required ng-click="vm.displayFun(vm.switch)" class="radio-align">
+                 <md-radio-button value="donutChart">Donut Chart</md-radio-button>
+                 <md-radio-button value="barchart">Bar Chart</md-radio-button>
+               </md-radio-group>
+             </div>
+           </div>
+
+
+           <div layout="row"  ng-show="vm.donut && vm.chartShow">
+             <div flex="100">
+                 <div id="donutchartdiv"></div>
+
+             </div>
+           </div>
+
+           <div layout="row" ng-show="vm.chart  && vm.chartShow">
+             <div flex="25">
+             </div>
+             <!-- <div flex="50" >
+               <div class="card" style="width:100%;">
+                   <nvd3 options="vm.discreteBarChart.options" data="vm.discreteBarChart.data"></nvd3>
+               </div>
+             </div> -->
+             <div id="chartdiv"></div>
+             </div>
+
+        </div>
+
+      </div>
+
+  </div>
+
+</div>

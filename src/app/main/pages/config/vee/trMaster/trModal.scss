@@ -1,0 +1,40 @@
+#eventsmaster-form {
+  font-size: 13px;
+  text-transform: uppercase;
+  thead tr {
+    font-size: 15px;
+  }
+  p {
+    margin-top: 0;
+  }
+  .last-p {
+    margin-top: 15px;
+  }
+  .md-toolbar-tools {
+    background-color: rgb(7, 128, 185);
+  }
+
+  .modal-align {
+    height   : auto;
+    width    : 800px;
+    padding  : 0 20px;
+    overflow : none;
+    .row-margin{
+      // padding: 12px;
+      // height: 70px;
+      .input-margin {
+        margin-top: -15px;
+      }
+    }
+    md-input-container {
+      margin: 10;
+    }
+    md-checkbox {
+      margin: 10;
+    }
+    .close-button {
+      color: #fff;
+      background-color: #c9302c;
+    }
+  }
+}

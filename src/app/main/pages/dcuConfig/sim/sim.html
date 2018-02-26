@@ -1,0 +1,199 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Asset Management</span>
+            </div>
+
+            <div class="headerTitle" >Maintain SIM</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+      <!-- <ms-hireachey></ms-hireachey> -->
+        <div layout="row">
+
+          <div class="form-wrapper md-whiteframe-1dp" flex="100">
+            <div ng-cloak>
+              <md-content>
+
+                <form name="simMaster" id="simmaster-form" ng-submit="vm.simForm()">
+                  <div layout="row">
+                    <div flex="45">
+                      <div layout="row">
+                        <div flex="50">
+                          <p class="label-font">Service Provider</p>
+                        </div>
+                        <md-input-container flex="50">
+                          <label>Select Service Provider</label>
+                          <md-select placeholder="select service provider"  required ng-model="vm.simSelected.serviceprovider">
+                            <md-option ng-repeat="x in vm.serviceprovider"  value="{{x.vendorId}}">{{x.vendorName}}</md-option>
+                          </md-select>
+                        </md-input-container>
+                      </div>
+                    </div>
+                    <div flex="10"></div>
+                    <div flex="45">
+                      <div layout="row">
+                        <div flex="50">
+                          <p class="label-font">Service Type</p>
+                        </div>
+                        <md-input-container flex="50">
+                          <md-select placeholder="slect service type"  ng-model="vm.simSelected.servicetypes" required>
+                            <md-option ng-repeat="x in vm.servicetypes"  value="{{x.lookupId}}">{{x.lookupCode}}</md-option>
+                          </md-select>
+                        </md-input-container>
+                      </div>
+                    </div>
+                  </div>
+                  <div layout="row">
+                    <div flex="45">
+                      <div layout="row">
+                        <div flex="50">
+                          <p class="label-font">Mobile Number</p>
+                        </div>
+                        <div flex="50">
+                          <md-input-container class="md-block" flex-gt-xs>
+                            <!-- <label>Phone</label> -->
+                            <input type="phone" name="phone" placeholder="phone" ng-model="vm.simSelected.phone" required minlength="10" maxlength="10">
+                              <div ng-messages="simMaster.phone.$error" ng-show="simMaster.phone.$dirty">
+                                <div ng-message="minlength">Please Enter 10 digit mobile Number!</div>
+                                <div ng-message="maxlength">Please Don't Enter more than 10 Digit !</div>
+                              </div>
+                          </md-input-container>
+                        </div>
+                      </div>
+                    </div>
+                    <div flex="10"></div>
+                    <div flex="45">
+                      <div layout="row">
+                        <div flex="50">
+                          <p class="label-font">SIM Number</p>
+                        </div>
+                        <div flex="50">
+                          <md-input-container class="md-block" flex-gt-xs>
+                            <label>SIM No</label>
+                            <input size="3"name="sim" ng-model="vm.simSelected.simno" required minlength="1" maxlength="14">
+                              <div ng-messages="simMaster.sim.$error" ng-show="simMaster.sim.$dirty">
+                                <div ng-message="minlength">please Enter 14 digit Sim number!</div>
+                                  <div ng-message="maxlength">please Don't Enter more than 14 digit Sim number!</div>
+                              </div>
+                          </md-input-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div layout="row">
+                    <div flex="45">
+                      <div layout="row">
+                        <div flex="50">
+                          <p class="label-font">DCU</p>
+                        </div>
+                        <div flex="50">
+                          <md-input-container class="md-block" flex-gt-xs>
+                            <label>DCU Serial No:</label>
+                            <md-select placeholder="select service number"  ng-model="vm.simSelected.dcuServiceNo" required>
+                              <md-option ng-repeat="y in vm.dcuServiceNo"  value="{{y.dcuSlno}}">{{y.dcuId}}</md-option>
+                            </md-select>
+                          </md-input-container>
+                        </div>
+                      </div>
+                    </div>
+                    <div flex="10"></div>
+                    <div flex="45">
+                      <div layout="row">
+                        <div flex="50">
+                          <p class="label-font">APN Name :</p>
+                        </div>
+                        <md-input-container flex="50">
+                          <input ng-model="vm.simSelected.apnname" placeholder="APN name" required>
+                        </md-input-container>
+                      </div>
+                    </div>
+                  </div>
+                  <div layout="row">
+                    <div flex="45">
+                      <div layout="row">
+                        <div flex="50">
+                          <p class="label-font">IP Type</p>
+                        </div>
+                        <div flex="50">
+                          <md-radio-group ng-model="vm.iptype" required ng-click="vm.typecSelectFun(vm.iptype)" class="radio-align">
+                            <md-radio-button value="static">Static</md-radio-button>
+                            <md-radio-button value="dynamic">Dynamic</md-radio-button>
+                          </md-radio-group>
+                        </div>
+                      </div>
+                    </div>
+                    <div flex="10"></div>
+                    <div flex="45">
+                      <div layout="row">
+                        <div flex="50">
+                          <p class="label-font">Type of IP :</p>
+                        </div>
+                        <div flex="50">
+                           <md-radio-group ng-click="vm.ipSelect(vm.ipaddr)" ng-model="vm.ipaddr" required  class="radio-align">
+                            <md-radio-button value="ipv4" ng-disabled="vm.staticShow">IPV4</md-radio-button>
+                            <md-radio-button value="ipv6" ng-disabled="vm.staticShow">IPV6</md-radio-button>
+                          </md-radio-group>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div layout="row" style="margin-top:15px;">
+                    <div flex="45">
+                      <div layout="row">
+                        <div flex="50" ><p class="label-font" style="margin-top:14px">IP Address :</p></div>
+                        <div>
+                          <table class="ip-align">
+                            <tr ng-show="vm.ipv4">
+                               <td><input type="input" id="ip1" ng-model="vm.ip1" ng-disabled="vm.staticShow" minlength="3" maxlength="3"  ng-keyup="vm.ip1keyupevt(vm.ip1)"></td>
+                               <td><input type="input" id="ip2" ng-model="vm.ip2" ng-disabled="vm.staticShow" minlength="3" maxlength="3" ng-keyup="vm.ip2keyupevt(vm.ip2)"></td>
+                               <td><input type="input" id="ip3" ng-model="vm.ip3"  ng-disabled="vm.staticShow" minlength="3" maxlength="3" ng-keyup="vm.ip3keyupevt(vm.ip3)"></td>
+                               <td><input type="input" id="ip4" ng-model="vm.ip4"  ng-disabled="vm.staticShow" minlength="3" maxlength="3"></td>
+                            </tr>
+                          </table>
+                        </div>
+                          <div>
+                          <table class="ip-align">
+                            <tr ng-show="vm.ipv6">
+                               <td><input type="input" id="ip5" ng-model="vm.ip5" ng-disabled="vm.staticShow" minlength="3" maxlength="3"  ng-keyup="vm.ip5keyupevt(vm.ip5)"></td>
+                               <td><input type="input" id="ip6" ng-model="vm.ip6"  ng-disabled="vm.staticShow" minlength="3" maxlength="3" ng-keyup="vm.ip6keyupevt(vm.ip6)"></td>
+                               <td><input type="input" id="ip7" ng-model="vm.ip7" ng-disabled="vm.staticShow" minlength="3" maxlength="3" ng-keyup="vm.ip7keyupevt(vm.ip7)"></td>
+                              <td><input type="input" id="ip8" ng-model="vm.ip8"  ng-disabled="vm.staticShow" minlength="3" maxlength="3" ng-keyup="vm.ip8keyupevt(vm.ip8)"></td>
+                              <td><input type="input" id="ip9" ng-model="vm.ip9" ng-disabled="vm.staticShow" minlength="3" maxlength="3" ng-keyup="vm.ip9keyupevt(vm.ip9)"></td>
+                               <td><input type="input" id="ip10" ng-model="vm.ip10"  ng-disabled="vm.staticShow" minlength="3" maxlength="3"></td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div flex="10"></div>
+                    <div flex="45">
+
+                    </div>
+                  </div>
+                  <div layout="row" style="margin-top:10px;">
+                    <div flex="45">
+                    </div>
+                    <div flex="10">
+                      <md-button type="submit"  class="md-accent md-raised">Submit</md-button>
+                    </div>
+                    <div flex="10">
+                      <md-button ng-click="vm.Clear.clearObj(vm.simSelected)" class="md-raised md-accent" aria-label="Submit">clear</md-button>
+                    </div>
+                  </div>
+                </form>
+              </md-content>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- / CONTENT -->
+</div>

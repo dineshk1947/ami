@@ -1,0 +1,83 @@
+
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <!-- <div class="header md-accent-bg" layout="row" layout-align="space-between" id="headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Master Data Management</span>
+            </div>
+
+            <div class="headerTitle">Time Zones</div>
+        </div>
+    </div> -->
+    <!-- / HEADER -->
+
+
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+<!--
+       <ms-hireachey></ms-hireachey> -->
+
+        <div layout="row">
+
+            <!-- BASIC FORM -->
+            <div class="form-wrapper md-whiteframe-1dp" flex="100">
+
+                <form name="basicForm" class="md-inline-form" ng-submit="vm.zoness()" id="timezones-form">
+
+
+
+                    <div layout="row" ng-repeat="each in vm.timezones track by $index">
+                        <div flex="10">
+
+                        </div>
+                        <md-input-container flex="10" class="zone-names">
+                          <p class="label-font">TimeZone{{$index+1}}</p>
+
+                         </md-input-container>
+                        <md-input-container flex="25">
+                            <input type="time" ng-model="each.start" placeholder="start time">
+                        </md-input-container>
+                        <md-input-container flex="25">
+                            <input type="time" ng-model="each.end" placeholder="end time">
+                        </md-input-container>
+                        <div flex="5">
+                          <span ng-show="each.valid" style="color:red;">Error</span>
+                        </div>
+                        <md-input-container flex="15">
+                          <md-switch ng-model="each.status" aria-label="Switch 1" ng-true-value="'Active'" ng-false-value="'In Active'" ng-change="vm.perform(1)" style="margin-top: 5px;">
+                               {{ each.status }}
+                          </md-switch>
+                        </md-input-container>
+                        <div flex="10">
+
+                        </div>
+                    </div>
+                    <div layout="row">
+                      <div flex="40">
+
+                      </div>
+                      <div flex="10">
+                          <md-button type="submit" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                      </div>
+
+                      <div flex="10">
+                        <md-button ng-click="vm.Clear.clearObj(vm.timezones)" class="md-raised md-accent">clear</md-button>
+                      </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+            <!-- / BASIC FORM -->
+
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+</div>

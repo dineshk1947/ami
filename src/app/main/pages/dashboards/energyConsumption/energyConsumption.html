@@ -1,0 +1,263 @@
+<div  class="page-layout simple fullwidth doc-page" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Dashboards</span>
+            </div>
+
+            <div class="headerTitle">Energy Consumption</div>
+        </div>
+        <!-- <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()" >
+          <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
+        </md-button> -->
+    </div>
+    <!-- / HEADER -->
+
+    <ms-hierarchys  ng-show="vm.showHeader"></ms-hierarchys>
+
+
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+        <div layout="row">
+          <div class="form-wrapper md-whiteframe-1dp" flex="100" id="energyConsumption">
+            <div layout="row">
+              <div flex="5">
+                <p class = "label-font">Year</p>
+              </div>
+              <md-input-container flex="15">
+                <md-select ng-model="vm.energyConsumption.year" placeholder="select year" ng-change="vm.getMonth()" >
+                  <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
+                  <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
+                  <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
+                </md-select>
+              </md-input-container>
+              <div flex="5">
+              </div>
+              <div flex="5">
+                <p class = "label-font">Month</p>
+              </div>
+              <md-input-container flex="15">
+                <md-select ng-model="vm.energyConsumption.month" placeholder="select month"  ng-disabled="vm.monthDisable" >
+                  <md-option ng-repeat="x in vm.month" value="{{x.value}}">{{x.month}}</md-option>
+                </md-select>
+              </md-input-container>
+              <div flex="5">
+              </div>
+                <div flex="3">
+                </div>
+                <md-input-container flex="15">
+                  <md-select  ng-model="vm.energyConsumption.catTypeId" placeholder="select category" class="md-underline" name="type" ng-change="vm.selection()">
+                    <md-option ng-repeat="x in vm.catType"  value="{{x.categoryTypeId}}">{{x.type}}</md-option>
+                  </md-select>
+                </md-input-container>
+                <div flex="5">
+                </div>
+                <!-- <div flex="10"> -->
+                  <md-button type="submit" ng-click="vm.energyConsumptionSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                  <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.energyConsumption)">clear</md-button>
+                <!-- </div> -->
+
+            </div>
+
+            <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.progressShow">
+              <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+
+            <div layout = "row">
+              <div flex="40">
+                <!-- <md-button type="submit" ng-click="vm.energyConsumptionSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button> -->
+              </div>
+              <div flex="5"></div>
+              <div flex="55">
+                <table  class="tb-stats" ng-show="vm.statisticsTable">
+                  <tbody>
+                    <tr>
+                        <td class="p"><p class="label-font">Total number Of Consumers</p></td>
+                        <td class="p"><p class="label-font">{{vm.counts.consumerCount}}</p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">High Consumption</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('hc')">{{vm.counts.highCount}}</a></p></td>
+                    </tr>
+                    <tr>
+                        <td class="p"><p class="label-font">Abnormally High	</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('ah')">{{vm.counts.abnormallyHighCount}}</a></p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">Low</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('l')">{{vm.counts.lowCount}}</a></p></td>
+                    </tr>
+                    <tr >
+                        <td class="p"><p class="label-font">Abnormally Low</p></td>
+                        <td class="p"><p class="label-font"><a href="#" ng-click="vm.displayData('al')">{{vm.counts.abnormallyLowCount}}</a></p></td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+
+            <div layout="row" ng-show="vm.dataTable && vm.tab1">
+              <div flex="100">
+                <div class="tab-heading">
+                  <p>{{vm.energyConsumptionHeading}}</p>
+                </div>
+                <table class="dataTable row-border hover dtable custom-table" datatable="ng" dt-options="vm.dtOptions" >
+                   <thead>
+                    <tr>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">S No</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text" >
+                         <div class="table-header">
+                             <span class="column-title">Meter Sno</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Average Consumption</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Recorded Consumption</span>
+                         </div>
+                       </th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                       <tr ng-repeat="item in vm.energyConsumptionObject">
+                         <td>{{$index+1}}</td>
+                         <td>{{item.mtrNo}}</td>
+                         <td>{{item.avegConsumption}}</td>
+                         <td >{{item.cumEngKvah}}</td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+            </div>
+
+            <div layout="row" ng-show="vm.dataTable && !vm.tab1">
+              <div flex="100">
+                <div class="tab-heading">
+                  <p>{{vm.energyConsumptionHeading}}</p>
+                </div>
+                <table class="dataTable row-border hover dtable custom-table" datatable="ng" dt-options="vm.dtOptions" >
+                   <thead>
+                    <tr>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">S No</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text" >
+                         <div class="table-header">
+                             <span class="column-title">Meter Sno</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Average Consumption</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Recorded Consumption</span>
+                         </div>
+                       </th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                       <tr ng-repeat="item in vm.energyConsumptionObject">
+                         <td>{{$index+1}}</td>
+                         <td>{{item.mtrNo}}</td>
+                         <td>{{item.avegConsumption}}</td>
+                         <td>{{item.cumEngKwh}}</td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+            </div>
+
+            <!-- <div layout="row" ng-show="vm.dataTable"  ng-if="vm.tab2" >
+              <div flex="100">
+                <div class="tab-heading">
+                  <p>{{vm.energyConsumptionHeading}}</p>
+                </div>
+                <table class="dataTable row-border hover dtable custom-table" datatable="ng" dt-options="vm.dtOptions" >
+                   <thead>
+                    <tr>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">S No</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text" >
+                         <div class="table-header">
+                             <span class="column-title">Meter Sno</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Average Consumption</span>
+                         </div>
+                       </th>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">Recorded Consumption</span>
+                         </div>
+                       </th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                       <tr ng-repeat="item in vm.energyConsumptionObject">
+                         <td>{{$index+1}}</td>
+                         <td>{{item.mtrNo}}</td>
+                         <td>{{item.avegConsumption}}</td>
+                         <td >{{item.cumEngKwh}}</td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+            </div> -->
+
+            <div layout="row" ng-show="vm.statisticsTable && vm.chartShow">
+              <div flex="30" >
+                <md-radio-group ng-model="vm.switch"  ng-click="vm.displayFun(vm.switch)" class="radio-align" >
+                  <md-radio-button value="donutChart">Donut Chart</md-radio-button>
+                  <md-radio-button value="barchart">Bar Chart</md-radio-button>
+                  <!-- <md-radio-button value="amchart">Am Bar Chart</md-radio-button> -->
+                </md-radio-group>
+              </div>
+            </div>
+
+            <div layout="row"  ng-show="vm.donut  && vm.chartShow">
+              <div flex="100">
+                  <div id="donutchartdiv"></div>
+
+              </div>
+            </div>
+
+            <div layout="row" ng-show="vm.chart  && vm.chartShow">
+              <div flex="25">
+              </div>
+              <!-- <div flex="50" >
+                <div class="card" style="width:100%;">
+                    <nvd3 options="vm.discreteBarChart.options" data="vm.discreteBarChart.data"></nvd3>
+                </div>
+              </div> -->
+              <div id="chartdiv"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- / CONTENT -->
+</div>

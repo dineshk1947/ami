@@ -1,0 +1,299 @@
+<md-dialog class="meterSearchPopup">
+  <form ng-cloak >
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Meter Prameters</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">X
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+     <div class="modal-align">
+       <div layout="row" >
+                <div layout="row">
+                  <div flex="80">
+                    <p class="label-font"><strong>Meter Serial No:</strong> </p>
+                   </div>
+                   <div flex="20">
+                    <p  class="data-font">{{ev.mtrslno}}</p>
+                   </div>
+                </div>
+          </div>
+
+          <div class="content">
+            <div layout="row">
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Meter Type :</p>
+                    </div>
+                    <p class="data-font">{{ev.meterType}}</p>
+                  </div>
+              </div>
+
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Consumer Name :</p>
+                    </div>
+                    <div flex="50">
+                      <p class="data-font">{{ev.consumerName}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Meter Connection Type :</p>
+                    </div>
+                    <p class="data-font">{{ev.meterConnectionType}}</p>
+                  </div>
+              </div>
+
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Manufacture Name :</p>
+                    </div>
+                    <p class="data-font">{{ev.manufactureName}}</p>
+                  </div>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Class Of Accuracy :</p>
+                    </div>
+                    <p class="data-font">{{ev.classOfAccuracy}}</p>
+                  </div>
+              </div>
+
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Protocol :</p>
+                    </div>
+                    <p class="data-font">{{ev.protocol}}</p>
+                  </div>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Meter Status :</p>
+                    </div>
+                    <p class="data-font">{{ev.meterStatus}}</p>
+                  </div>
+
+              </div>
+
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Meter Model :</p>
+                    </div>
+                    <p class="data-font">{{ev.meterModel}}</p>
+                  </div>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Meter Category :</p>
+                    </div>
+                    <p class="data-font">{{ev.meterCategory}}</p>
+                  </div>
+              </div>
+
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Demand Integration Period :</p>
+                    </div>
+                    <p class="data-font">{{ev.demandIntegrationPeriod}}</p>
+                  </div>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50" >
+                      <p class="label-font">Meter Category Type</p>
+                    </div>
+                    <p class="data-font">{{ev.meterCategoryType}}</p>
+                  </div>
+              </div>
+
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Load Profile Capture Period</p>
+                    </div>
+                    <p class="data-font">{{ev.loadProfileCapturePeriod}}</p>
+                  </div>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Meter Phase</p>
+                    </div>
+                    <p class="data-font">{{ev.mtrPhase}}</p>
+                  </div>
+              </div>
+
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Installed Date :</p>
+                    </div>
+                    <div flex="50">
+                    <p class="data-font">{{ev.mtrInstalledDate}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Time Of Usage :</p>
+                    </div>
+                    <p class="data-font">{{ev.timeOfUsage}}</p>
+                  </div>
+              </div>
+
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Commissioned Date :</p>
+                    </div>
+                    <div flex="50">
+                    <p class="data-font">{{ev.commissionedDate}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="100">
+                <h4 class="label-heading">GPS Area</h4>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                  <div layout="row">
+
+                    <div flex="50">
+                      <p class="label-font"> Latitude (Degrees):</p>
+                    </div>
+                    <div flex="50">
+                      <p class="data-font">{{ev.latitude}}</p>
+                    </div>
+                  </div>
+              </div>
+
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Longitude (Degrees) :</p>
+                    </div>
+                    <div flex="50">
+                    <p class="data-font">{{ev.longitude}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="100">
+                <h4 class="label-heading">Multiplication Factor</h4>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font"> Current Transformer :</p>
+                    </div>
+                    <div flex="50">
+                      <p class="data-font">{{ev.ctFactor}}</p>
+                    </div>
+                  </div>
+              </div>
+
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">Voltage Transformer :</p>
+                    </div>
+                    <div flex="50">
+                    <p class="data-font">{{ev.vtFactor}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="100">
+                <h4 class="label-heading">Meter Intial Readings</h4>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                  <div layout="row">
+
+                    <div flex="50">
+                      <p class="label-font">KWH :</p>
+                    </div>
+                    <div flex="50">
+                      <p class="data-font">{{ev.kwhRdg}}</p>
+                    </div>
+                  </div>
+              </div>
+
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">KVAH :</p>
+                    </div>
+                    <div flex="50">
+                      <p class="data-font">{{ev.kvahRdg}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="50">
+                  <div layout="row">
+                    <div flex="50">
+                      <p class="label-font">KVARH :</p>
+                    </div>
+                    <div flex="50">
+                      <p class="data-font">{{ev.kvarhRdg}}</p>
+                    </div>
+                  </div>
+              </div>
+
+              <div flex="50">
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="45"> </div>
+              <div flex="10">
+
+              </div>
+            </div>
+
+          </div>
+
+
+      </div>
+  </md-dialog-content>
+  </form>
+</md-dialog>

@@ -4,7 +4,7 @@
 
     <div layout="row">
       <div class="heading">
-          <p>Existing Meter Details</p>
+          <p class="label-heading">Existing Meter Details</p>
       </div>
     </div>
 
@@ -13,17 +13,23 @@
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Consumer Number :</p>
+              <p class="label-font auto-align">Consumer Number :</p>
             </div>
             <div flex="50">
-              <md-select ng-change="vm.getSno(vm.change.cId)"  ng-model="vm.change.cNo" placeholder="select Consumer Id" class="md-underline">
-                <md-option ng-repeat="x in vm.cNo"  value="{{x[0]}},{{x[1]}}">{{x[0]}}</md-option>
-              </md-select>
-              <!-- <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in query(searchText)">
-                <md-item-template>
-                  <span md-highlight-text="searchText">{{item}}</span>
-                </md-item-template>
-              </md-autocomplete> -->
+                <md-autocomplete
+                    md-selected-item="vm.selectedItem2"
+                    md-search-text-change="vm.searchTextChange(vm.searchText2)"
+                    md-search-text="vm.searchText2"
+                    md-selected-item-change="vm.getMeterSNo(vm.selectedItem2)"
+                    md-items="item in vm.changeCId | filter:vm.searchText2"
+                    md-item-text=item.consumerId
+                    md-min-length="0"
+                    placeholder="consumer number"
+                    ng-required="true">
+                  <md-item-template>
+                    <span md-highlight-text="vm.searchText2" md-highlight-flags="^i" > {{item.consumerId}}</span>
+                  </md-item-template>
+                </md-autocomplete>
             </div>
           </div>
         </div>
@@ -35,11 +41,11 @@
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Existing Meter Serial Number :</p>
+              <p class="label-font">Existing Meter SNo : </p>
             </div>
             <div flex="50">
-              <md-input-container class="md-block" flex-gt-sm>
-                <input ng-model="vm.change.sNo" placeholder="Enter Name" value="<b>vm.change.sNo</b>" disabled style="font-weight:600;color:#000;cursor: not-allowed;">
+              <md-input-container class="md-block" flex-gt-xs>
+                <input ng-model="vm.change.mSNo" value="<b>vm.change.mSNo</b>" disabled style="font-weight:600;color:#000;cursor: not-allowed;">
               </md-input-container>
             </div>
           </div>
@@ -48,41 +54,84 @@
     </div>
 
     <div layout="row">
-      <div flex="20" class="each-item">
-          <p>Last Reading :</p>
-      </div>
-
-      <div flex="15">
-        <md-input-container class="md-block" flex-gt-xs>
-          <input ng-model="vm.change.kwh" placeholder="KWH" >
-        </md-input-container>
-      </div>
-      <div flex="5">
-
-      </div>
-      <div flex="15">
-        <md-input-container class="md-block" flex-gt-xs>
-          <input ng-model="vm.change.kvah" placeholder="KVAH" >
-        </md-input-container>
-      </div>
-      <div flex="5">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p class="label-font">Status :</p>
+            </div>
+            <md-input-container flex="50">
+              <md-select ng-model="vm.change.status" placeholder="status" class="md-underline" required>
+                <md-option ng-repeat="x in vm.changeStatus"  value="{{x.lookupCode}}">{{x.lookupCode}}</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
 
       </div>
-      <div flex="15">
-        <md-input-container class="md-block" flex-gt-xs>
-          <input ng-model="vm.change.kvarh" placeholder="KVARH">
-        </md-input-container>
+      <div flex="10">
       </div>
-      <div flex="5">
+      <div flex="45">
+        <div class="each-item">
+          <div layout="row">
+            <div flex="50">
+              <p class="label-font">Reason For Change :</p>
+            </div>
 
-      </div>
-      <div flex="15">
-        <md-input-container class="md-block" flex-gt-xs>
-          <input ng-model="vm.change.demand" placeholder="Demand">
-        </md-input-container>
-      </div>
-      <div flex="5">
+              <md-input-container flex="50" class="md-block" flex-gt-xs>
+                <input ng-model="vm.change.reason" placeholder="reason for change">
+              </md-input-container>
 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div layout="row">
+      <div flex="45">
+        <div layout="row">
+          <div flex="50" class="each-item">
+              <p class="label-font">Last Reading :</p>
+          </div>
+          <div flex="50">
+            <div layout="row">
+              <div flex="50">
+                <md-input-container class="md-block" flex-gt-xs>
+                  <input type ="number" ng-model="vm.change.kwh" placeholder="kwh" >
+                </md-input-container>
+              </div>
+              <div flex="50">
+                <md-input-container class="md-block" flex-gt-xs>
+                  <input type ="number" ng-model="vm.change.kvah" placeholder="kvah" >
+                </md-input-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div flex="10">
+      </div>
+      <div flex="45">
+        <div layout="row">
+          <div flex="50">
+
+          </div>
+          <div flex="50" class="each-item">
+            <div layout="row">
+              <div flex="50">
+                <md-input-container class="md-block" flex-gt-xs>
+                  <input type ="number" ng-model="vm.change.kvarh" placeholder="kvarh">
+                </md-input-container>
+              </div>
+
+              <div flex="50">
+                <md-input-container class="md-block" flex-gt-xs>
+                  <input type ="number" ng-model="vm.change.demand" placeholder="demand">
+                </md-input-container>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -91,36 +140,43 @@
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Date Of Failure :</p>
+              <p class="label-font">Date Of Failure :</p>
             </div>
             <div flex="50">
-              <md-datepicker ng-model="vm.change.failDate" md-max-date="vm.maxDate" md-placeholder="Enter date" md-open-on-focus required></md-datepicker>
+              <md-datepicker ng-model="vm.change.failDate" md-max-date="vm.maxDate" md-placeholder="enter date" md-open-on-focus required></md-datepicker>
             </div>
           </div>
         </div>
       </div>
-
     </div>
 
     <div layout="row">
       <div class="heading">
-          <p>New Meter Details</p>
+          <p  class="label-heading">New Meter Details</p>
       </div>
     </div>
-
-
     <div layout="row">
       <div flex="45">
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Meter Serial No :</p>
+              <p class="label-font auto-align">Meter Serial No :</p>
             </div>
             <div flex="50">
-              <md-input-container>
-                <label></label>
-                <input ng-model="items.nmsno" placeholder="Meter Seial No">
-              </md-input-container>
+              <md-autocomplete
+                   md-selected-item="vm.selectedItem3"
+                   md-search-text-change="vm.searchTextChange(vm.searchText3)"
+                   md-search-text="vm.searchText3"
+                   md-selected-item-change="vm.selectedItemChange(vm.selectedItem3)"
+                   md-items="item in vm.changeMsNo | filter:vm.searchText3"
+                   md-item-text="item.mtrNo"
+                   md-min-length="0"
+                   placeholder="meter serial number"
+                   ng-required="true">
+                 <md-item-template>
+                   <span md-highlight-text="vm.searchText3" md-highlight-flags="^i" > {{item.mtrNo}}</span>
+                 </md-item-template>
+               </md-autocomplete>
             </div>
           </div>
         </div>
@@ -132,10 +188,10 @@
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Installed Date :</p>
+              <p class="label-font">Installed Date : </p>
             </div>
             <div flex="50">
-              <md-datepicker ng-model="vm.change.installedDate" md-max-date="vm.maxDate" md-placeholder="Enter date" md-open-on-focus required></md-datepicker>
+              <md-datepicker ng-model="vm.change.installedDate" md-max-date="vm.maxDate" md-placeholder="enter date" md-open-on-focus required></md-datepicker>
             </div>
           </div>
         </div>
@@ -145,14 +201,12 @@
       <div flex="45">
         <div class="each-item">
           <div layout="row">
-            <div flex="50">
-              <p>Estimation required for missing parameters :</p>
+            <div flex="85">
+              <p class="label-font">Estimation required for missing parameters :</p>
             </div>
-            <div flex="50">
-              <md-input-container flex="50">
+              <md-input-container flex="15">
                 <md-switch ng-model="vm.parameters" aria-label="Switch 1" ng-true-value="'Y'" ng-false-value="'N'"> {{vm.parameters}} </md-switch>
               </md-input-container>
-            </div>
           </div>
         </div>
       </div>
@@ -163,10 +217,10 @@
         <div class="each-item">
           <div layout="row">
             <div flex="50">
-              <p>Commisioned Date :</p>
+              <p class="label-font">Commisioned Date :</p>
             </div>
             <div flex="50">
-              <md-datepicker ng-model="vm.change.commisionedDate" md-max-date="vm.maxDate" md-placeholder="Enter date" md-open-on-focus required></md-datepicker>
+              <md-datepicker ng-model="vm.change.commisionedDate" md-max-date="vm.maxDate" md-placeholder="enter date" md-open-on-focus required></md-datepicker>
             </div>
           </div>
         </div>
@@ -179,6 +233,9 @@
       </div>
       <div flex="10">
         <md-button type="submit" class="md-accent md-raised">Submit</md-button>
+      </div>
+      <div flex="10">
+        <md-button ng-click="vm.Clear.clearObj(vm.change)" class="md-raised md-accent" aria-label="Submit">clear</md-button>
       </div>
       <div flex="45">
 

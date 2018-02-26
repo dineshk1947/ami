@@ -1,0 +1,68 @@
+#dcu-master {
+  padding: 0;
+  .layout-row {
+    p {
+      margin: 18px 0 0 5px;
+    }
+    md-input-container {
+      margin: 0;
+    }
+  }
+  md-icon {
+    margin-top: 12px;
+  }
+  button {
+    margin-top: -7px;
+  }
+  .md-accent {
+    margin: 20px 0 0 0;
+  }
+  .flex-45,.flex-60,.flex-40,.flex-30,.flex-70,.flex-50 {
+    height: 40px;
+  }
+  #dcu-change-form {
+    p {
+      margin: 18px 0 26px 0;
+    }
+    .flex-45,.flex-50 {
+      height: 55px;
+    }
+    .auto-align {
+      margin-top: 23px;
+    }
+  }
+  #dcu-config-form {
+    .flex-45 {
+      height: 45px;
+    }
+    .dcuip-align input {
+      width: 40px;
+    }
+     p {
+       margin: 25px 0 26px 0;
+     }
+     md-input-container {
+       margin: 10px 0;
+     }
+     .dcuip-align {
+       width: 40px;
+       margin-top:13px
+     }
+  }
+
+  md-toast {
+    &.error {
+      .md-toast-content {
+        background: #d9534f;
+        color: white;
+      }
+    }
+    &.success {
+      .md-toast-content {
+        background: #398439;
+        color: white;
+
+      }
+    }
+  }
+}

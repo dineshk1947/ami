@@ -1,0 +1,23 @@
+#instantTable {
+    min-height : auto;
+    min-height : initial;
+    overflow-x : scroll;
+}
+#instantPopup {
+    margin-left: 100px;
+    td, th {
+      border: 2px solid #dddddd;
+      border-style: ridge
+    }
+    th {
+      background-color: rgb(7, 128, 185);
+      color: #fff;
+    }
+    p {
+      margin: 0;
+    }
+    .mt{
+      margin-top: 10px;
+    }
+    margin-bottom: 100px;
+ }
