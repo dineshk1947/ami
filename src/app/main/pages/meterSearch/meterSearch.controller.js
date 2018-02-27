@@ -1,3 +1,5 @@
+//changes on 26feb controller
+
 (function() {
   'use strict';
 
@@ -44,10 +46,22 @@
 
     model.clearFun = function() {
       model.showProgress = false;
-      model.meterSearch.meterId = '';
-      model.meterSearch.serviceId = '';
+      model.meterSearch.meterNo = '';
+      model.meterSearch.consumerNo = '';
       model.meterSearch.consumerName = '';
-      model.meterTableShow = false;
+      model.showTable = false;
+      if (userDetails.levelName == "CIRCLE") {
+        model.divisionid = undefined;
+        model.subdivisionid = undefined;
+      }
+      else if (userDetails.levelName == "DIVISION") {
+        model.subdivisionid = undefined;
+      }
+      else if (userDetails.levelName == "REGION") {
+        model.circleid = undefined;
+        model.divisionid = undefined;
+        model.subdivisionid = undefined;
+      }
       model.sectionid = undefined;
       model.substationid = undefined;
       model.feederid = undefined;
@@ -339,6 +353,9 @@
           }
 
           if(userDetails.levelName == "CIRCLE"){
+            console.log("++++++++++++++++++++++++++");
+            console.log("Circle User");
+            console.log(userDetails);
             model.region=true;
             model.circle=true;
             model.regionName=userDetails.region;
@@ -370,6 +387,9 @@
           model.getCircles();
         }
           if(userDetails.levelName == "DISCOM"){
+              console.log("++++++++++++++++++++++++++");
+              console.log("Discom User");
+              console.log(userDetails);
               model.regionName=userDetails.region;
               model.discom= userDetails.hierarchyName;
               model.discomid=userDetails.hierarchyId;
@@ -388,6 +408,7 @@
 
           model.searchMeterFun = function() {
               model.showProgress = true;
+             model.showTable = false;
           //loc = model.modelArray;
               var date = new Date() + "";
               if (!(model.meterSearch.consumerNo  === undefined && model.meterSearch.consumerName === undefined && model.meterSearch.meterNo  === undefined)) {

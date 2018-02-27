@@ -121,6 +121,13 @@ function DialogController($scope, $mdDialog, Clear) {
           return true;
         }
 
+        $scope.Clear = function () {
+          //alert("hi");
+          $scope.addEventCode = "";
+          $scope.addEventName = "";
+          $scope.tamperFlag ="";
+        }
+
         $scope.addEventSubmit = function() {
           vm.progressShow = true;
           var data={};

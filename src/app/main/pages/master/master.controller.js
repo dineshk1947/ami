@@ -27,6 +27,36 @@
 
         }
 
+        vm.clearForm = function() {
+
+          console.log("vm.manufacturers",vm.manufacturers);
+
+          for (var i = 0; i < vm.categories.length; i++) {
+            console.log("vm.manufacturers",vm.manufacturers);
+            vm.categories[i].code="";
+            vm.categories[i].name="";
+          }
+          for (var i = 0; i < vm.manufacturers.length; i++) {
+            console.log("vm.manufacturers",vm.manufacturers);
+            vm.manufacturers[i].mcode="";
+            vm.manufacturers[i].mname="";
+          }
+          for (var i = 0; i <vm.types.length; i++) {
+            console.log("vm.manufacturers",vm.manufacturers);
+            vm.types[i].type="";
+          }
+          for (var i = 0; i < vm.classes.length; i++) {
+            vm.classes[i].class="";
+          }
+          for (var i = 0; i < vm.statuses.length; i++) {
+            vm.statuses[i].status="";
+          }
+          vm.selectedItem2="";
+          vm.selectedItem3="";
+          vm.change = {};
+        }
+
+
 
         vm.errorToast = function(mesg) {
         //  var pinTo = vm.getToastPosition();
@@ -402,7 +432,7 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
           return false;
         }
         if(change.installedDate > change.commisionedDate) {
-          vm.errorToast("Installed Date should be lessthan Commisioned Date");
+          vm.errorToast("Installed Date should be less than Commisioned Date");
           return false;
         }
         return true;

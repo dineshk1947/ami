@@ -6,7 +6,7 @@
         .controller('SimController', SimController);
     function SimController($http, $window, $mdToast, baseUrl1, Clear){
         var vm = this;
-        vm.Clear = Clear;
+        //vm.Clear = Clear;
         var ipType;
         vm.iptype = "static";
         vm.ipaddr = "ipv4";
@@ -18,6 +18,24 @@
         //   ipaddr : "ipv4";
         // }
         console.log(vm.staticShow);
+
+        vm.Clear = function () {
+          //alert("hi");
+          vm.simSelected ={};
+          vm.iptype = "";
+          vm.ipaddr = "";
+          vm.ip1 = "";
+          vm.ip2 = "";
+          vm.ip3 = "";
+          vm.ip4 = "";
+          vm.ip5 = "";
+          vm.ip6 = "";
+          vm.ip7 = "";
+          vm.ip8 = "";
+          vm.ip9 = "";
+          vm.ip10 = "";
+        }
+
        vm.errorToast = function(mesg) {
            $mdToast.show(
              $mdToast.simple()

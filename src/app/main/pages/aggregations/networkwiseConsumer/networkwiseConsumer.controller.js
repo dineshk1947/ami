@@ -32,12 +32,11 @@
         userDetails = currentUser.currentUser;
         console.log(userDetails.levelName);
         var hierarchyID;
-        console.log($rootScope.nag);
         if(userDetails.levelName == "SUB-DIVISION") {
           hierarchyID = userDetails.divisionId;
         }
 
-      
+
         //function to hide or show hierarchy
         vm.errorToast = function(mesg) {
           $mdToast.show(
@@ -316,6 +315,7 @@
               "type": "pie",
               "theme": "light",
               "innerRadius": "40%",
+              "colorField": "color",
               "gradientRatio": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, 0, 0.1, 0.2, 0.1, 0, -0.2, -0.5],
               "dataProvider": arr,
               "balloonText": "[[value]]",

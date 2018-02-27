@@ -145,8 +145,8 @@
            <div flex="50">
              <table style="margin-top:13px" class="dcuip-align">
                  <tr>
-                   <td><input type="input" id="ip1"  ng-model="vm.ip1" minlength="3" maxlength="3" ng-keyup="vm.ip1keyupevt(vm.ip1)" tabindex="13"></td>
                    <td><input type="input" id="ip2"  ng-model="vm.ip2" minlength="3" maxlength="3" ng-keyup="vm.ip2keyupevt(vm.ip2)" tabindex="14"></td>
+                   <td><input type="input" id="ip1"  ng-model="vm.ip1" minlength="3" maxlength="3" ng-keyup="vm.ip1keyupevt(vm.ip1)" tabindex="13"></td>
                    <td><input type="input" id="ip3"  ng-model="vm.ip3" minlength="3" maxlength="3" ng-keyup="vm.ip3keyupevt(vm.ip3)" tabindex="15"></td>
                    <td><input type="input" id="ip4"  ng-model="vm.ip4" minlength="3" maxlength="3" tabindex="16"></td>
                  </tr>
@@ -207,7 +207,7 @@
         <md-button type="submit" value="Submit" class="md-accent md-raised">Submit</md-button>
       </div>
       <div flex="10">
-        <md-button ng-click="vm.Clear.clearObj(vm.dcuSelected)" class="md-raised md-accent" aria-label="Submit">clear</md-button>
+        <md-button ng-click="vm.clearForm()" class="md-raised md-accent" aria-label="Submit">clear</md-button>
       </div>
     </div>
 </form>

@@ -32,7 +32,7 @@
                       <p class="data-font" > {{model.regionName}}</p>
                     </div>
                     <md-input-container flex="15" ng-show="model.region1">
-                        <md-select ng-change="model.getRegions()" ng-model="model.discomId" placeholder="select region" class="md-underline">
+                        <md-select ng-change="model.getCircles()" ng-model="model.regionid" placeholder="select region" class="md-underline">
                             <md-option ng-repeat="x in model.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
                         </md-select>
                     </md-input-container>
@@ -46,7 +46,7 @@
                       <p class="data-font"> {{model.circleName}}</p>
                     </div>
                     <md-input-container flex="15" ng-show="model.circle1">
-                        <md-select ng-change="model.getCircles()" ng-model="model.regionId" placeholder="select circle" class="md-underline">
+                        <md-select ng-change="model.getDivision()" ng-model="model.circleid" placeholder="select circle" class="md-underline">
                             <md-option ng-repeat="x in model.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
                         </md-select>
                     </md-input-container>
@@ -60,7 +60,7 @@
                       <p class="data-font"> {{model.divisionName}}</p>
                     </div>
                     <md-input-container flex="10" ng-show="model.division1">
-                        <md-select ng-change="model.getDivisions()" ng-model="model.divisionId" placeholder="select division" class="md-underline">
+                        <md-select ng-change="model.getSubDivisions()" ng-model="model.divisionid" placeholder="select division" class="md-underline">
                             <md-option ng-repeat="x in model.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
                         </md-select>
                     </md-input-container>

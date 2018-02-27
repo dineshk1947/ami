@@ -328,7 +328,18 @@
           }
 
       // Make Sbumit
+
+      // vm.clearForm2=function(){
+      //   //alert("HI");
+      //   console.log("manufacturers",vm.manufacturers);
+      //   for (var i = 0; i < vm.manufacturers.length; i++) {
+      //     vm.manufacturers[i].mcode="";
+      //     vm.manufacturers[i].mname="";
+      //   }
+      // }
+
       function validateMake(makes) {
+
          // temporory varaible for duplicate validation
         var count =0;
         if(makes.length == 0){
@@ -651,6 +662,31 @@
           var ipfield = $window.document.getElementById('ip4');
           ipfield.focus();
         }
+      }
+
+      vm.clearForm = function() {
+
+        for (var i = 0; i < vm.manufacturers.length; i++) {
+          console.log("vm.manufacturers",vm.manufacturers);
+          vm.manufacturers[i].mcode="";
+          vm.manufacturers[i].mname="";
+        }
+
+        for (var i = 0; i < vm.types.length; i++) {
+          vm.types[i].type="";
+        }
+        for (var i = 0; i < vm.statuses.length; i++) {
+          vm.statuses[i].status="";
+        }
+        vm.selectedItem="";
+        vm.selectedItem1="";
+        vm.dcuChange = {};
+
+        vm.dcuSelected = {};
+        vm.ip1 = "";
+        vm.ip2 = "";
+        vm.ip3 = "";
+        vm.ip4 = "";
       }
 
       vm.validateDcu = function() {
