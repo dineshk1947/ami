@@ -84,6 +84,8 @@
         var itemx = id;
         $scope.ev = {};
         $scope.ev = itemx;
+        itemx.mtrInstalledDate = splitDate1(new Date(itemx.installedDate) + "");
+        itemx.commissionedDate = splitDate1(new Date(itemx.commissionedDate) + "");
         $scope.estimationDisbaled = true;
         model.hide = function() {
           $mdDialog.hide();
@@ -467,10 +469,10 @@
                 // }
 
                 //DATE FORMAT AFTER POST
-                for (var i = 0; i < model.searchData.length; i++) {
-                  model.searchData[i].mtrInstalledDate = splitDate1(new Date(model.searchData[i].mtrInstalledDate) + "");
-                  model.searchData[i].commissionedDate = splitDate1(new Date(model.searchData[i].commissionedDate) + "");
-                }
+                // for (var i = 0; i < model.searchData.length; i++) {
+                //   // model.searchData[i].installedDate = splitDate1(new Date(model.searchData[i].installedDate) + "");
+                //   // model.searchData[i].commissionedDate = splitDate1(new Date(model.searchData[i].commissionedDate) + "");
+                // }
 
 
                 //model.successToast("Submitted Sucessfully.");

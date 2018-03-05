@@ -7,14 +7,14 @@
         .controller('NetworkwiseConsumerController', NetworkwiseConsumerController);
 
     /** @ngInject */
-    function NetworkwiseConsumerController($http,$mdToast,baseUrl3, $localStorage, $rootScope, Clear)
+    function NetworkwiseConsumerController($http,$mdToast,baseUrl3, $localStorage, $rootScope, Clear, MessageInfo)
     {
         var vm = this;
         vm.Clear =  Clear;
+        vm.networkwiseConsumer ={};
         var data = {};
         var arr = [];
         var obj = {};
-        vm.networkwiseConsumer ={};
         vm.progressShow=false;
         //var modalArray = $rootScope.modalArray;
 
@@ -23,7 +23,7 @@
         var wcspConsumerCount;
         var totalCount;
         var wctpConsumerCount;
-        vm.statisticsTable = false;
+        vm.networkwiseConsumer.statisticsTable = false;
         vm.switch = "";
         vm.chart = false;
         vm.donut = true;
@@ -38,24 +38,24 @@
 
 
         //function to hide or show hierarchy
-        vm.errorToast = function(mesg) {
-          $mdToast.show(
-            $mdToast.simple()
-              .textContent(mesg)
-              .position('top right')
-              .hideDelay(3000)
-              .toastClass('error')
-          );
-        };
-        vm.successToast = function(mesg, callback) {
-         $mdToast.show(
-           $mdToast.simple()
-             .textContent(mesg)
-             .position('top right')
-             .hideDelay(3000)
-             .toastClass('success')
-         );
-        };
+        // vm.errorToast = function(mesg) {
+        //   $mdToast.show(
+        //     $mdToast.simple()
+        //       .textContent(mesg)
+        //       .position('top right')
+        //       .hideDelay(3000)
+        //       .toastClass('error')
+        //   );
+        // };
+        // vm.successToast = function(mesg, callback) {
+        //  $mdToast.show(
+        //    $mdToast.simple()
+        //      .textContent(mesg)
+        //      .position('top right')
+        //      .hideDelay(3000)
+        //      .toastClass('success')
+        //  );
+        // };
 
 
         vm.displayFun = function(change) {
@@ -161,15 +161,18 @@
        var currMonth = d.getMonth();
 
        if(vm.networkwiseConsumer.fmonth ===undefined || vm.networkwiseConsumer.fyear===undefined || vm.networkwiseConsumer.tmonth===undefined || vm.networkwiseConsumer.tyear===undefined){
-         vm.errorToast("Please Select All Fields.");
+         //vm.errorToast("Please Select All Fields.");
+         MessageInfo.showMessage(1017, 'All Fields', '', '');
           return false;
        }
        if((vm.networkwiseConsumer.fyear == vm.networkwiseConsumer.tyear) && (vm.networkwiseConsumer.fmonth > vm.networkwiseConsumer.tmonth) ){
-         vm.errorToast("From Date Cannot be Less Than To Date");
+         //vm.errorToast("From Date Cannot be Less Than To Date");
+           MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
           return false;
        }
        if( vm.networkwiseConsumer.tyear < vm.networkwiseConsumer.fyear  ){
-         vm.errorToast("From Date Cannot be Less Than To Date");
+         //vm.errorToast("From Date Cannot be Less Than To Date");
+           MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
           return false;
        }
        return true;
@@ -180,7 +183,7 @@
         vm.networkwiseConsumerSubmit = function(){
           if(validatePage()) {
           vm.progressShow=true;
-          vm.statisticsTable = false;
+          vm.networkwiseConsumer.statisticsTable = false;
           var modelArray = [];
           modelArray = $rootScope.modelArray;
           console.log($rootScope.modelArray);
@@ -216,8 +219,7 @@
           data.hierarchyID = hierarchyID;
           data.modelArray = modelArray;
 
-          //console.log(data);
-          //http://dc3e828d.ngrok.io/mdm/aggregations/consumer-details
+          MessageInfo.showMessage(1005, 'From Date', 'To Date', '');
 
           console.log(data);
           $http({
@@ -238,8 +240,8 @@
             wcspConsumerCount = resp.wcspConsumerCount;
             wctpConsumerCount =resp.wctpConsumerCount;
 
-            vm.successToast("Submitted Sucessfully");
-            vm.statisticsTable= true;
+            //vm.successToast("Submitted Sucessfully");
+            vm.networkwiseConsumer.statisticsTable= true;
             vm.donut = true;
             vm.switch = "donutChart";
 
@@ -335,7 +337,8 @@
 
 
           }, function myError(response) {
-            vm.errorToast("Something went wrong.. Please try again");
+            //vm.errorToast("Something went wrong.. Please try again");
+              MessageInfo.showMessage(1010, '', '', '');
             console.log(response);
           });
         }

@@ -7,25 +7,27 @@
         .controller('EnergyConsumptionController', EnergyConsumptionController);
 
     /** @ngInject */
-    function EnergyConsumptionController($http, baseUrl2, $rootScope, $mdToast, Clear)
+    function EnergyConsumptionController($http, baseUrl2, $rootScope, $mdToast, Clear, MessageInfo)
     {
         var vm = this;
         vm.Clear = Clear;
+        vm.energyConsumption={};
+        // var modelArray = $rootScope.modelArray;
+        // console.log("$rootScope.modelArray Before",$rootScope.modelArray);
         vm.progressShow=false;
         vm.monthDisable= true;
-        vm.statisticsTable = false;
+        vm.energyConsumption.statisticsTable = false;
         vm.showHeader = false;
-        vm.dataTable = false;
+        vm.energyConsumption.dataTable = false;
         vm.switch = "";
         vm.chart = false;
         vm.donut = true;
-        vm.energyConsumption={};
         var arr = [];
         var obj = {};
         vm.tab1=false;
         //vm.chart = true;
         vm.energyConsumptionObject = [];
-        vm.chartShow=false;
+        vm.energyConsumption.chartShow=false;
 
         var abnormallyHighCursor;
         var abnormallyLowCusor;
@@ -50,26 +52,7 @@
           return dt.split(' ')[2] + "-" + dt.split(' ')[1] + "-" + dt.split(' ')[3];
         }
 
-        vm.errorToast = function(mesg) {
-          $mdToast.show(
-            $mdToast.simple()
-              .textContent(mesg)
-              .position('top right')
-              .hideDelay(3000)
-              .toastClass('error')
-          );
-        };
-
-        vm.successToast = function(mesg, callback) {
-         $mdToast.show(
-           $mdToast.simple()
-             .textContent(mesg)
-             .position('top right')
-             .hideDelay(3000)
-             .toastClass('success')
-         );
-      };
-
+  
       vm.displayFun = function(change) {
         console.log(change);
         if(change == "donutChart") {
@@ -82,7 +65,7 @@
       }
 
       vm.displayData = function(violated) {
-        vm.dataTable = true;
+        vm.energyConsumption.dataTable = true;
         console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         console.log(violated);
 
@@ -201,7 +184,8 @@
            var cat = vm.energyConsumption.catTypeId;
           if(frMonth == undefined ||  frYear  == undefined || cat == undefined )
           {
-            vm.errorToast("Please Select All Fields.");
+            //vm.errorToast("Please Select All Fields.");
+            MessageInfo.showMessage(1017, 'All Fields', '', '');
             return false;
           }
           return true;
@@ -223,8 +207,8 @@
 
           // Function to submit the form
         vm.energyConsumptionSubmit = function() {
-          vm.dataTable = false;
-          vm.statisticsTable = false;
+          vm.energyConsumption.dataTable = false;
+          vm.energyConsumption.statisticsTable = false;
           vm.donut = true;
           vm.chart = false;
           vm.energyConsumptionObject = [];
@@ -234,11 +218,11 @@
 
           if(validateEnergyConsumption()){
            vm.progressShow=true;
-           var location = [];
-             vm.location = [1008, null, null, null, null, null];
+           var modelArray = $rootScope.modelArray;
+            console.log("$rootScope.modelArray After",$rootScope.modelArray);
+          //  var location = [];
+          //  vm.location = [1008, null, null, null, null, null];
            var item;
-           //m.location = $rootScope.modelArray;
-           vm.energyConsumption.location = vm.location;
           var date = new Date() + "";
           var dateFormat = date.split(' ')[2] + "-" + date.split(' ')[1] + "-" + date.split(' ')[3];
           var selectDate;
@@ -248,9 +232,11 @@
           data.lastUpdatedBy = 1111;
           data.lastUpdatedDate = splitDate(date);
           data.lastUpdatedLogin = 1111;
+          data.modelArray = modelArray;
           console.log("ppppppppppppppppppppp");
           data.energyConsumption = vm.energyConsumption;
           console.log(data);
+          MessageInfo.showMessage(1005, '', '', '');
 
           $http({
               method : "POST",
@@ -258,7 +244,7 @@
               data: data
           }).then(function mySuccess(response) {
               console.log("}}}}}}}}}}}}}}}}", response);
-              vm.statisticsTable = true;
+              vm.energyConsumption.statisticsTable = true;
               vm.progressShow=false;
               var resp1 = response.data.statistics;
               var resp = response.data.statistics.counts;
@@ -266,14 +252,14 @@
               console.log(resp);
               console.log(resp1);
               if(resp.consumerCount>0){
-                vm.chartShow=true;
+                vm.energyConsumption.chartShow=true;
               }
               vm.abHighCapCount = vm.counts.abnormallyHighCount;
               vm.abLowCapCount = vm.counts.abnormallyLowCount;
               vm.hCapCount = vm.counts.highCount;
               vm.lowCapCount = vm.counts.lowCount;
               vm.totalCount = vm.counts.consumerCount;
-              vm.statisticsTable = true;
+              vm.energyConsumption.statisticsTable = true;
               vm.donut = true;
               vm.switch = "donutChart";
 
@@ -377,10 +363,12 @@
                 }
             });
 
-              vm.successToast("Submitted Sucessfully");
+              //vm.successToast("Submitted Sucessfully");
+              //MessageInfo.showMessage(1012, '', '', '');
           }, function myError(response) {
-              vm.errorToast("Something went wrong.. Please try again");
-              console.log(response);
+              //vm.errorToast("Something went wrong.. Please try again");
+                MessageInfo.showMessage(1010, '', '', '');
+                console.log(response);
           });
         }
       }

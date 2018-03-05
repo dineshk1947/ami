@@ -7,7 +7,7 @@
         .controller('NetworkDetailsController', NetworkDetailsController);
 
     /** @ngInject */
-    function NetworkDetailsController($http, $mdToast, baseUrl2, $rootScope, $localStorage, $interval)
+    function NetworkDetailsController($http, $mdToast, baseUrl2, $rootScope, $localStorage, $interval, MessageInfo)
     {
           var vm = this;
           var data = {};
@@ -30,6 +30,7 @@
             }
           }, 100);
 
+            MessageInfo.showMessage(1005, '', '', '');
 
         $http({
             method : "POST",

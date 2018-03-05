@@ -1,3 +1,4 @@
+
 (function ()
 {
     'use strict';
@@ -7,40 +8,37 @@
         .controller('AreawiseConsumptionController', AreawiseConsumptionController);
 
     /** @ngInject */
-    function AreawiseConsumptionController($http,$mdToast,baseUrl2,$cookies,$rootScope,$localStorage, Clear)
+    function AreawiseConsumptionController($http,$mdToast,baseUrl2,$cookies,$rootScope,$localStorage, Clear, MessageInfo)
     {
         var vm = this;
         vm.Clear =  Clear;
+        vm.areawiseConsumption ={};
         var data = {};
-        vm.statisticsTable= false;
+        vm.areawiseConsumption.statisticsTable= false;
         var userDetails = {};
         var currentUser = $localStorage.globals;
         userDetails = currentUser.currentUser;
         console.log(userDetails);
-        vm.areawiseConsumption ={};
-
-      
-
 
         //function to hide or show hierarchy
-        vm.errorToast = function(mesg) {
-          $mdToast.show(
-            $mdToast.simple()
-              .textContent(mesg)
-              .position('top right')
-              .hideDelay(3000)
-              .toastClass('error')
-          );
-        };
-        vm.successToast = function(mesg, callback) {
-         $mdToast.show(
-           $mdToast.simple()
-             .textContent(mesg)
-             .position('top right')
-             .hideDelay(3000)
-             .toastClass('success')
-         );
-        };
+        // vm.errorToast = function(mesg) {
+        //   $mdToast.show(
+        //     $mdToast.simple()
+        //       .textContent(mesg)
+        //       .position('top right')
+        //       .hideDelay(3000)
+        //       .toastClass('error')
+        //   );
+        // };
+        // vm.successToast = function(mesg, callback) {
+        //  $mdToast.show(
+        //    $mdToast.simple()
+        //      .textContent(mesg)
+        //      .position('top right')
+        //      .hideDelay(3000)
+        //      .toastClass('success')
+        //  );
+        // };
 
         vm.fmonthDisable= true;
           vm.tmonthDisable= true;
@@ -126,15 +124,18 @@
            var d = new Date();
            var currMonth = d.getMonth();
            if(vm.areawiseConsumption.fmonth ===undefined || vm.areawiseConsumption.fyear===undefined || vm.areawiseConsumption.tmonth===undefined || vm.areawiseConsumption.tyear===undefined || vm.areawiseConsumption.catTypeId===undefined){
-             vm.errorToast("Please Select All Fields.");
+             //vm.errorToast("Please Select All Fields.");
+              MessageInfo.showMessage(1017, 'All Fields', '', '');
              return false;
            }
            if((vm.areawiseConsumption.fyear == vm.areawiseConsumption.tyear) && (vm.areawiseConsumption.fmonth > vm.areawiseConsumption.tmonth) ){
-             vm.errorToast("From Date Cannot be Less Than To Date");
+             //vm.errorToast("From Date Cannot be Less Than To Date");
+             MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
              return false;
            }
            if( vm.areawiseConsumption.tyear < vm.areawiseConsumption.fyear  ){
-             vm.errorToast("From Date Cannot be Less Than To Date");
+             //vm.errorToast("From Date Cannot be Less Than To Date");
+             MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
              return false;
            }
            return true;
@@ -142,7 +143,7 @@
 
         vm.areaWiseConsumptionSubmit = function(){
            if(validatePage()){
-          vm.statisticsTable= false;
+          vm.areawiseConsumption.statisticsTable= false;
           vm.progressShow=true;
           var modelArray = [];
           modelArray = $rootScope.modelArray;
@@ -155,11 +156,13 @@
           console.log(conTyp1.type);
           data.conType= conTyp1.categoryTypeId;
           console.log(data.conType);
-          data.userId=6;
+          //data.userId=6;
           //data.userId = userDetails.userId;
-          //data.modelArray = modelArray;
-          //console.log(data.modelArray);
+          data.modelArray = modelArray;
+          console.log(data.modelArray);
           console.log(data);
+
+          MessageInfo.showMessage(1005, '', '', '');
 
           $http({
             method : "POST",
@@ -169,10 +172,10 @@
             console.log(response);
             vm.consumption = response.data.outBinds;
             console.log(response.data.outBinds.consumptionCount);
-            vm.successToast("Submitted Sucessfully");
-            vm.statisticsTable= true;
+            //vm.successToast("Submitted Sucessfully");
+            vm.areawiseConsumption.statisticsTable= true;
             vm.progressShow=false;
-            if(conTyp1.type == "Residential"){
+            if(conTyp1.type == "Domestic"){
               vm.consumptionUnit = "kWH";
               vm.demandUnit = "kW";
             }
@@ -181,7 +184,8 @@
               vm.demandUnit = "kVA";
             }
           }, function myError(response) {
-            vm.errorToast("Something went wrong.. Please try again");
+            //vm.errorToast("Something went wrong.. Please try again");
+             MessageInfo.showMessage(1010, '', '', '');
             console.log(response);
           });
         }

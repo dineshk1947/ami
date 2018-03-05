@@ -1,0 +1,94 @@
+.lp {
+  .top-block {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    padding: 10px;
+    margin-bottom: 15px;
+    .hierarchy-align {
+      .flex-15,.flex-5 {
+        height: 40px;
+      }
+      md-input-container{
+        margin: 0;
+      }
+    }
+    .lp-row {
+      display: flex;
+      text-align: center;
+      margin: auto;
+      .view-dates {
+        margin: 0 20px;
+        display: flex;
+        text-align: center;
+        p {
+          margin: 10px 0 5px;
+        }
+        md-datepicker {
+          button {
+            height: 20px;
+          }
+        }
+      }
+    }
+    .btn-align {
+      text-align: center;
+      margin: 20px 0 0;
+    }
+  }
+
+  .data-block {
+    .main {
+      display: flex;
+      text-transform: uppercase;
+      margin: auto;
+      font-size: 19px;
+      font-weight: 600;
+      img {
+        height: 80px
+      }
+      p {
+        margin-left: 15px;
+      }
+    }
+    .details {
+      width: 100%;
+      p:first-child {
+        text-align: center;
+        font-weight: 600;
+      }
+      p:nth-child(2) {
+        text-align: center;
+        //background-color: #039be5;
+        //color: #fff;
+        padding: 5px 15px;
+        margin: 0;
+        span {
+          margin: 0 20px;
+          span {
+            margin: 0;
+          }
+        }
+      }
+    }
+    .details-2 {
+      background-color: #039be5;
+      padding: 10px 15px;
+      font-weight: 600;
+      p {
+        margin: 0 0 8px;
+      }
+    }
+    .download-btn {
+      margin: 20px 0 0;
+      a {
+        background-color: #0a9de7;
+        color: #fff;
+        margin: 0 10px;
+        padding: 3px 10px;
+        border-radius: 8px;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

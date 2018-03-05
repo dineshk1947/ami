@@ -5,7 +5,7 @@
         .module('app.algconfig')
         .controller('AlgconfigController', AlgconfigController);
     /** @ngInject */
-    function AlgconfigController($http,baseUrl2, Clear)
+    function AlgconfigController($http,baseUrl2, Clear, MessageInfo)
     {
         var vm = this;
         vm.Clear = Clear;

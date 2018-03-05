@@ -11,13 +11,13 @@
 
             <div class="headerTitle">Energy Consumption</div>
         </div>
-        <!-- <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()" >
+        <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()" >
           <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
-        </md-button> -->
+        </md-button>
     </div>
     <!-- / HEADER -->
 
-    <ms-hierarchys  ng-show="vm.showHeader"></ms-hierarchys>
+    <ms-hierarchy3  ng-show="vm.showHeader"></ms-hierarchy3>
 
 
     <!-- CONTENT -->
@@ -59,7 +59,7 @@
                 </div>
                 <!-- <div flex="10"> -->
                   <md-button type="submit" ng-click="vm.energyConsumptionSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
-                  <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.energyConsumption)">clear</md-button>
+                  <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.energyConsumption,hierarchyObj,modelArray)">clear</md-button>
                 <!-- </div> -->
 
             </div>
@@ -74,7 +74,7 @@
               </div>
               <div flex="5"></div>
               <div flex="55">
-                <table  class="tb-stats" ng-show="vm.statisticsTable">
+                <table  class="tb-stats" ng-show="vm.energyConsumption.statisticsTable">
                   <tbody>
                     <tr>
                         <td class="p"><p class="label-font">Total number Of Consumers</p></td>
@@ -102,7 +102,7 @@
               </div>
             </div>
 
-            <div layout="row" ng-show="vm.dataTable && vm.tab1">
+            <div layout="row" ng-show="vm.energyConsumption.dataTable&& vm.tab1">
               <div flex="100">
                 <div class="tab-heading">
                   <p>{{vm.energyConsumptionHeading}}</p>
@@ -144,7 +144,7 @@
               </div>
             </div>
 
-            <div layout="row" ng-show="vm.dataTable && !vm.tab1">
+            <div layout="row" ng-show="vm.energyConsumption.dataTable&& !vm.tab1">
               <div flex="100">
                 <div class="tab-heading">
                   <p>{{vm.energyConsumptionHeading}}</p>
@@ -228,7 +228,7 @@
               </div>
             </div> -->
 
-            <div layout="row" ng-show="vm.statisticsTable && vm.chartShow">
+            <div layout="row" ng-show="vm.energyConsumption.statisticsTable && vm.energyConsumption.chartShow">
               <div flex="30" >
                 <md-radio-group ng-model="vm.switch"  ng-click="vm.displayFun(vm.switch)" class="radio-align" >
                   <md-radio-button value="donutChart">Donut Chart</md-radio-button>
@@ -238,14 +238,14 @@
               </div>
             </div>
 
-            <div layout="row"  ng-show="vm.donut  && vm.chartShow">
+            <div layout="row"  ng-show="vm.donut  && vm.energyConsumption.chartShow">
               <div flex="100">
                   <div id="donutchartdiv"></div>
 
               </div>
             </div>
 
-            <div layout="row" ng-show="vm.chart  && vm.chartShow">
+            <div layout="row" ng-show="vm.chart  && vm.energyConsumption.chartShow">
               <div flex="25">
               </div>
               <!-- <div flex="50" >

@@ -4,7 +4,7 @@
     angular
         .module('app.sim')
         .controller('SimController', SimController);
-    function SimController($http, $window, $mdToast, baseUrl1, Clear){
+    function SimController($http, $window, $mdToast, baseUrl1, Clear, MessageInfo){
         var vm = this;
         //vm.Clear = Clear;
         var ipType;
@@ -187,7 +187,7 @@
           var ip3nan=isNaN(vm.ip3);
           var ip4nan=isNaN(vm.ip4);
           if(ip1nan === true || ip2nan === true || ip3nan === true || ip4nan === true){
-               alert("Please Enter valid IP adress.");
+               //alert("Please Enter valid IP adress.");
               return false;
           }
         }else if(ipType == "ipv6"){
@@ -198,20 +198,23 @@
             var ip9nan=isNaN(vm.ip9);
             var ip10nan=isNaN(vm.ip10);
             if(ip5nan === true || ip6nan === true || ip7nan === true || ip8nan === true || ip9nan === true ||ip10nan === true){
-             alert("Please Enter valid IP adress.");
+             //alert("Please Enter valid IP adress.");
              return false;
              }
         }
         if(vm.simSelected.serviceprovider === undefined){
-            vm.errorToast("Please Select serviceprovide");
+            //vm.errorToast("Please Select serviceprovide");
+          MessageInfo.showMessage(1017, 'Service Provider', '', '');
           return false;
         }
         if(vm.simSelected.servicetypes === undefined){
-            vm.errorToast("Please Select serviceTypes");
+            //vm.errorToast("Please Select serviceTypes");
+            MessageInfo.showMessage(1017, 'Service Type', '', '');
           return false;
         }
         if(vm.simSelected.phone.toString().length <10 || vm.simSelected.phone.toString().length >10){
-            vm.errorToast("Please Enter 10 digit sim number");
+            //vm.errorToast("Please Enter 10 digit sim number");
+            MessageInfo.showMessage(1418, '', '', '');
           return false;
         }
          if(vm.simSelected.simno.toString().length <14){
@@ -220,12 +223,14 @@
          }
 
          if(vm.simSelected.dcuServiceNo === undefined){
-            vm.errorToast("Please Select Dcu No.");
+            //vm.errorToast("Please Select Dcu No.");
+            MessageInfo.showMessage(1017, 'Dcu No', '', '');
            return false;
          }
 
          if(vm.iptype == undefined){
-            vm.errorToast("Please Select Ip Type.");
+            //vm.errorToast("Please Select Ip Type.");
+            MessageInfo.showMessage(1017, 'Ip Type', '', '');
            return false;
          }
 
@@ -261,22 +266,28 @@
                }).then(function mySuccess(response) {
                  console.log("checking for the response",response);
                  if(response.data.message =="Success"){
-                   vm.successToast("Successfully Submitted...");
+                   //vm.successToast("Successfully Submitted...");
+                    MessageInfo.showMessage(1012, '', '', '');
                  }
                  if(response.data.message == "Mobile Number is Already Existed."){
-                   vm.errorToast("Mobile Number is Already Existed")
+                   //vm.errorToast("Mobile Number is Already Existed")
+                   MessageInfo.showMessage(1420, 'Mobile Number is', '', '');
                  }
                  if(response.data.message =="SIM Number is Already Existed."){
-                   vm.errorToast("SIM Number is Already Existed");
+                   //vm.errorToast("SIM Number is Already Existed");
+                   MessageInfo.showMessage(1420, 'SIM Number is', '', '');
                  }
                  if(response.data.message == "IP Address is Already Existed."){
-                   vm.errorToast("IP Address is Already Existed");
+                   //vm.errorToast("IP Address is Already Existed");
+                    MessageInfo.showMessage(1420, 'IP Address is', '', '');
                  }
                  if(response.data.message == ",IP Address is Already Existed."){
-                   vm.errorToast("IP Address is Already Existed");
+                   //vm.errorToast("IP Address is Already Existed");
+                   MessageInfo.showMessage(1420, 'IP Address is', '', '');
                  }
                  if(response.data.message == "DCU is Already Configured."){
-                   vm.errorToast("DCU is Already Configured.");
+                  // vm.errorToast("DCU is Already Configured.");
+                  MessageInfo.showMessage(1421, '', '', '');
                  }
                  if(response.data.message == "Mobile Number is Already Existed,IP Address is Already Existed"){
                    vm.errorToast("Mobile Number is Already Existed,IP Address is Already Existed");
@@ -293,7 +304,8 @@
 
                }, function myError(response) {
                  console.log("checking for the error after post",response);
-                 vm.errorToast("Someting Went Worng. !!!");
+                 //vm.errorToast("Someting Went Worng. !!!");
+                 MessageInfo.showMessage(1010, '', '', '');
                });
          }
      }

@@ -7,42 +7,24 @@
         .controller('UserAdminController', UserAdminController);
 
     /** @ngInject */
-    function UserAdminController($http, baseUrl2,$mdToast,$location,$localStorage) {
+    function UserAdminController($http, baseUrl2,$mdToast,$location,$localStorage, Clear, MessageInfo) {
         var vm = this;
         var userData = {};
         vm.adduser = {};
+        vm.Clear =  Clear;
+        vm.userdetails={};
+        vm.userDeactive={};
         var currentUser = $localStorage.globals;
         userData= currentUser.currentUser;
         console.log(userData);
         vm.minDate = new Date();
 
-        vm.clear= function () {
-          vm.adduser = {};
+        vm.clearForm = function() {
+          vm.userDeactive = {};
+          vm.selectedItem1="";
+          vm.userdetails ={};
+          vm.selectedItem="";
         }
-
-        vm.errorToast = function(mesg) {
-        //  var pinTo = vm.getToastPosition();
-           $mdToast.show(
-             $mdToast.simple()
-               .textContent(mesg)
-               .position('top right')
-               .hideDelay(3000)
-               .toastClass('error')
-
-             );
-         };
-         vm.successToast = function(mesg) {
-         //  var pinTo = vm.getToastPosition();
-
-          $mdToast.show(
-            $mdToast.simple()
-              .textContent(mesg)
-              .position('top right')
-              .hideDelay(3000)
-              .toastClass('success')
-
-          );
-        };
 
         $http({
             method : "GET",
@@ -88,6 +70,16 @@
         }, function myError(response1) {
             console.log(response1);
         });
+        $http({
+            method : "GET",
+            url : baseUrl2 + "mdm/userAdministration/user-status"
+        }).then(function mySuccess(response) {
+            console.log(response.data);
+            vm.status = response.data;
+            console.log(vm.status);
+        }, function myError(response1) {
+            console.log(response1);
+        });
 
         $http({
             method : "GET",
@@ -100,8 +92,10 @@
             console.log(response1);
         });
         vm.userId = null;
-
+        vm.userId1 = null;
+        // Assignrole Controller method
         vm.selectedItemChange = function(id) {
+          console.log("hi");
           var data ={};
           vm.userId = id.userId;
           data.userId = id.userId;
@@ -118,6 +112,29 @@
               console.log(vm.userdetails.userName);
               vm.sendExistingRole(vm.userdetails.roleName);
 
+          }, function myError(response) {
+              console.log(response);
+          });
+        }
+
+
+        vm.selectedItemChange1 = function(id1) {
+          console.log("hello");
+          console.log(id1);
+          var data ={};
+          vm.userId1 = id1.userId;
+          data.userId = id1.userId;
+          console.log(" ///////////////// ");
+          console.log(id1.userId);
+          $http({
+              method : "POST",
+              url : baseUrl2 + "mdm/user/user-details",
+              data: data
+          }).then(function mySuccess(response) {
+              console.log(response.data);
+              vm.userDeactive = response.data.statistics[0];
+              console.log(vm.userDeactive);
+              console.log(vm.userDeactive.userName);
           }, function myError(response) {
               console.log(response);
           });
@@ -147,28 +164,19 @@
           }
 
 
+          function validateUserRole() {
 
-
-          function validateUserRole(user) {
-            console.log(user);
-            if (user == undefined) {
-              vm.errorToast("Enter All the Details");
-              return false;
-            }
-            if (user.userName == undefined || user.userName == null) {
-              vm.errorToast("Enter user Id");
-              return false;
-            }
-            if (user.newRoleSelected == undefined || user.newRoleSelected == null) {
-              vm.errorToast("Enter NewRole");
-              return false;
+            if(vm.selectedItem==undefined || vm.userdetails.newRoleSelected==undefined)
+            {
+                MessageInfo.showMessage(1017, 'All Fields', '', '');
+                return false;
             }
             return true;
           }
 
 
           vm.userAssignSubmit = function(){
-            if (validateUserRole(vm.userdetails)) {
+            if (validateUserRole()) {
               var data ={};
               var dateFormat = splitDate(new Date());
               //vm.userId  = vm.selectedItem;
@@ -191,18 +199,76 @@
                 }).then(function mySuccess(response) {
                     console.log(response.data);
                     if (response.data.message == "Success") {
-                      vm.successToast("submit Sucessfully");
+                      //vm.successToast("submit Sucessfully");
+                       MessageInfo.showMessage(1012, '', '', '');
                       $location.path('/userAdmin');
                     }
 
                 }, function myError(response) {
                     console.log(response);
-                      vm.errorToast("Something went wrong.. Please try again");
+                      //vm.errorToast("Something went wrong.. Please try again");
+                       MessageInfo.showMessage(1010, '', '', '');
                 });
             }
           }
-          vm.userAddSubmit = function(){
+
+          function validateUserDeactive() {
+            if (vm.userDeactive.userName == undefined || vm.userDeactive.statusSelected == null || vm.userDeactive.date) {
+              MessageInfo.showMessage(1017, 'All Fields', '', '');
+              return false;
+            }
+            return true;
+          }
+
+          function validateUser(){
+            if(vm.adduser.employee==undefined || vm.adduser.designationselected==undefined || vm.adduser.locationselected==undefined || vm.adduser.roleselected==undefined || vm.adduser.userName1==undefined || vm.adduser.password1==undefined || vm.adduser.start==undefined )
+            {
+              //vm.errorToast("Please Select All Fields.");
+              MessageInfo.showMessage(1017, 'All Fields', '', '');
+              return false;
+            }
+
+            return true;
+          }
+
+
+          vm.userDeactiveSubmit = function(){
+            if (validateUserDeactive()) {
             var data ={};
+            console.log(vm.userId1);
+            vm.userDeactive.userId = vm.userId1;
+            data.lastUpdatedBy = userData.userId;
+            data.lastUpdatedDate =  splitDate(new Date());
+            data.lastUpdatedLogin = userData.userId;
+            data.userId = vm.userDeactive.userId;
+            data.status = vm.userDeactive.statusSelected;
+            data.endDate = splitDate(vm.userDeactive.date);
+            console.log(data);
+            $http({
+                method : "POST",
+                url : baseUrl2 + "mdm/userAdministration/user-deActivate",
+                data: data
+            }).then(function mySuccess(response) {
+                console.log(response.data);
+                if (response.data == "Success") {
+                  //vm.successToast("Submitted Sucessfully");
+                    MessageInfo.showMessage(1012, '', '', '');
+                }
+
+            }, function myError(response) {
+                console.log(response);
+                  //vm.errorToast("Something went wrong.. Please try again");
+                    MessageInfo.showMessage(1010, '', '', '');
+            });
+          }
+
+          }
+          vm.userAddSubmit = function(){
+
+            if(validateUser())
+            {
+            var data ={};
+            console.log(vm.adduser.employee);
             var employee = JSON.parse(vm.adduser.employee);
             data.empId = employee.empId;
             data.designationId = Number(vm.adduser.designationselected);
@@ -227,16 +293,21 @@
                 console.log("Response From DB",response);
 
                 if(response.data ==",User name is already existed."){
-                  vm.successToast("User name is already existed");
+                  //vm.successToast("User name is already existed");
+                  MessageInfo.showMessage(1420, 'User name', '', '');
+
                 }
                 if(response.data =="Success"){
-                  vm.successToast("Successfully Submitted");
+                  //vm.successToast("Successfully Submitted");
+                    MessageInfo.showMessage(1012, '', '', '');
                 }
             }, function myError(response) {
                 console.log(response);
-                  vm.errorToast("Something went wrong.. Please try again");
+                  //vm.errorToast("Something went wrong.. Please try again");
+                  MessageInfo.showMessage(1010, '', '', '');
             });
           }
+        }
 
 
 

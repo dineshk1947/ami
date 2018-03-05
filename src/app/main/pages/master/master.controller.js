@@ -7,7 +7,7 @@
         .controller('MasterController', MasterController);
 
     /** @ngInject */
-    function MasterController($http, $timeout, $q, $log, $mdToast, baseUrl2, $window, Clear)
+    function MasterController($http, $timeout, $q, $log, $mdToast, baseUrl2, $window, Clear, MessageInfo)
     {
         var vm = this;
         vm.Clear = Clear;
@@ -58,30 +58,30 @@
 
 
 
-        vm.errorToast = function(mesg) {
-        //  var pinTo = vm.getToastPosition();
-
-         $mdToast.show(
-           $mdToast.simple()
-             .textContent(mesg)
-             .position('top right')
-             .hideDelay(3000)
-             .toastClass('error')
-
-           );
-         };
-         vm.successToast = function(mesg) {
-         //  var pinTo = vm.getToastPosition();
-
-          $mdToast.show(
-            $mdToast.simple()
-              .textContent(mesg)
-              .position('top right')
-              .hideDelay(3000)
-              .toastClass('success')
-
-          );
-        };
+        // vm.errorToast = function(mesg) {
+        // //  var pinTo = vm.getToastPosition();
+        //
+        //  $mdToast.show(
+        //    $mdToast.simple()
+        //      .textContent(mesg)
+        //      .position('top right')
+        //      .hideDelay(3000)
+        //      .toastClass('error')
+        //
+        //    );
+        //  };
+        //  vm.successToast = function(mesg) {
+        //  //  var pinTo = vm.getToastPosition();
+        //
+        //   $mdToast.show(
+        //     $mdToast.simple()
+        //       .textContent(mesg)
+        //       .position('top right')
+        //       .hideDelay(3000)
+        //       .toastClass('success')
+        //
+        //   );
+        // };
 
         vm.masterSelected = {};
         vm.masterSelected.meterNo = undefined;
@@ -308,11 +308,13 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
                console.log(master.dip);
                console.log(master.lpc);
 
-            vm.errorToast("please select Field");
+            //vm.errorToast("please select Field");
+            MessageInfo.showMessage(1017, 'Field', '', '');
             return false;
           }
           if(master.installedDate > master.commisionedDate) {
-            vm.errorToast("Installed Date should be lessthan Commisioned Date");
+            //vm.errorToast("Installed Date should be lessthan Commisioned Date");
+            MessageInfo.showMessage(1008, 'Commisioned Date', 'Installed Date', '');
             return false;
           }
           return true;
@@ -345,7 +347,8 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
                 data: data
             }).then(function mySuccess(response) {
                 console.log(response);
-                vm.successToast("submit Sucessfully");
+                //vm.successToast("submit Sucessfully");
+                MessageInfo.showMessage(1012, '', '', '');
                 //$window.location.reload();
                 // Reset the form model.
                 vm.masterSelected = {};
@@ -354,7 +357,8 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
                //Since Angular 1.3, set back to untouched state.
               //  vm.masterform.$setUntouched();
             }, function myError(response) {
-                vm.errorToast("Something went wrong.. Please try again");
+                //vm.errorToast("Something went wrong.. Please try again");
+                MessageInfo.showMessage(1010, '', '', '');
                 console.log(response);
             });
           }
@@ -424,15 +428,18 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
         if(change.kwh == null || change.kvah == null ||
            change.kvarh == null || change.demand == null ||
            change.reason == null || change.status == undefined) {
-          vm.errorToast("please select Field");
+          //vm.errorToast("please select Field");
+          MessageInfo.showMessage(1017, 'Field', '', '');
           return false;
         }
         if(change.failDate > change.installedDate) {
-          vm.errorToast("Failure Date should be lessthan installed Date");
+          //vm.errorToast("Failure Date should be lessthan installed Date");
+          MessageInfo.showMessage(1008, 'Installed Date', 'Failure Date', '');
           return false;
         }
         if(change.installedDate > change.commisionedDate) {
-          vm.errorToast("Installed Date should be less than Commisioned Date");
+          //vm.errorToast("Installed Date should be less than Commisioned Date");
+          MessageInfo.showMessage(1008, 'Commisioned Date', 'Installed Date', '');
           return false;
         }
         return true;
@@ -477,9 +484,11 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
           }).then(function mySuccess(response) {
             console.log("***************************");
               console.log(response);
-              vm.successToast("Submitted Sucessfully");
+              //vm.successToast("Submitted Sucessfully");
+              MessageInfo.showMessage(1012, '', '', '');
           }, function myError(response) {
-              vm.errorToast("Something went wrong.. Please try again");
+              //vm.errorToast("Something went wrong.. Please try again");
+              MessageInfo.showMessage(1010, '', '', '');
               console.log(response);
           });
         }
@@ -615,12 +624,14 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
         var j = 0;
         var count = 0;
         if(cats.length == 0){
-            vm.errorToast("Enter atleast one category name and code");
+            //vm.errorToast("Enter atleast one category name and code");
+            MessageInfo.showMessage(1016, 'Category Name', 'Code', '');
             return false;
         }
         for (var i = 0; i < cats.length; i++) {
           if((cats[i].code =="" && cats[i].name !="") || (cats[i].code !="" && cats[i].name =="")) {
-            vm.errorToast("Enter both code and category name");
+            //vm.errorToast("Enter both code and category name");
+            MessageInfo.showMessage(1015, 'Category name', 'code', '');
           }
         }
         for(var i = 0; i < cats.length; i++) {
@@ -715,11 +726,13 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
                 data: data
             }).then(function mySuccess(response) {
                 console.log(response);
-                vm.successToast("Submitted Sucessfully");
+                //vm.successToast("Submitted Sucessfully");
+                MessageInfo.showMessage(1012, '', '', '');
                 //$window.location.reload();
             }, function myError(response) {
                 console.log(response);
-                vm.errorToast("Something went wrong.. Please try again");
+                //vm.errorToast("Something went wrong.. Please try again");
+                MessageInfo.showMessage(1010, '', '', '');
             });
           }
         }
@@ -735,7 +748,8 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
            var counter =0;
            var count =0;
            if(makes.length == 0){
-               vm.errorToast("Enter atleast one manufacturer name and code");
+               //vm.errorToast("Enter atleast one manufacturer name and code");
+               MessageInfo.showMessage(1014, 'Manufacturer Name', 'Code', '');
                return false;
            }
            for (var i = 0; i < makes.length; i++) {
@@ -744,7 +758,8 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
              }
            }
            if(counter >=1) {
-             vm.errorToast("Enter both manufacturer code and name");
+             //vm.errorToast("Enter both manufacturer code and name");
+              MessageInfo.showMessage(1015, 'Manufacturer Name', 'Code', '');
              return false;
            }
 
@@ -839,10 +854,12 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
                  data: data
              }).then(function mySuccess(response) {
                  console.log(response);
-                 vm.successToast("Submitted Sucessfully");
+                 //vm.successToast("Submitted Sucessfully");
+                  MessageInfo.showMessage(1012, '', '', '');
 
              }, function myError(response) {
-                vm.errorToast("Something went wrong.. Please try again");
+                //vm.errorToast("Something went wrong.. Please try again");
+                MessageInfo.showMessage(1010, '', '', '');
                  console.log(response);
              });
            }
@@ -856,7 +873,8 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
 
          function validateProto(protos) {
            if(protos.length == 0){
-               vm.errorToast("Enter atleast one protocol name");
+               //vm.errorToast("Enter atleast one protocol name");
+               MessageInfo.showMessage(1412, 'Protocol Name', '', '');
                return false;
            }
 
@@ -956,10 +974,11 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
                 data: data
             }).then(function mySuccess(response) {
                 console.log(response);
-                vm.successToast("Submitted Sucessfully");
+                MessageInfo.showMessage(1012, '', '', '');
 
             }, function myError(response) {
-               vm.errorToast("Something went wrong.. Please try again");
+               //vm.errorToast("Something went wrong.. Please try again");
+               MessageInfo.showMessage(1010, '', '', '');
                 console.log(response);
             });
            }
@@ -972,7 +991,8 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
 
          function validateType(types) {
            if(types.length == 0){
-               vm.errorToast("Enter atleast one type name");
+               //vm.errorToast("Enter atleast one type name");
+               MessageInfo.showMessage(1412, 'Type', '', '');
                return false;
            }
 
@@ -1057,10 +1077,12 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
                  data: data
              }).then(function mySuccess(response) {
                  console.log(response);
-                 vm.successToast("Submitted Sucessfully");
+                 //vm.successToast("Submitted Sucessfully");
+                 MessageInfo.showMessage(1012, '', '', '');
 
              }, function myError(response) {
-                 vm.errorToast("Something went wrong.. Please try again");
+                 //vm.errorToast("Something went wrong.. Please try again");
+                 MessageInfo.showMessage(1010, '', '', '');
                  console.log(response);
              });
            }
@@ -1072,7 +1094,8 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
 
          function validateClass(classes) {
            if(classes.length == 0){
-               vm.errorToast("Enter atleast one class of accuracy value");
+               //vm.errorToast("Enter atleast one class of accuracy value");
+               MessageInfo.showMessage(1412, 'Class of accuracy value', '', '');
                return false;
            }
 
@@ -1157,10 +1180,12 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
                  data: data
              }).then(function mySuccess(response) {
                  console.log(response);
-                 vm.successToast("Submitted Sucessfully");
+                 //vm.successToast("Submitted Sucessfully");
+                 MessageInfo.showMessage(1012, '', '', '');
 
              }, function myError(response) {
-                vm.errorToast("Something went wrong.. Please try again");
+                //vm.errorToast("Something went wrong.. Please try again");
+                MessageInfo.showMessage(1010, '', '', '');
                  console.log(response);
              });
            }
@@ -1175,7 +1200,9 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
 
          function validateStatus(statuses) {
            if(statuses.length == 0){
-               vm.errorToast("Enter atleast one status before submitting");
+               //vm.errorToast("Enter atleast one status before submitting");
+               MessageInfo.showMessage(1412, 'Status', '', '');
+
                return false;
            }
            var count = 0;
@@ -1256,10 +1283,12 @@ console.log("000000000000000000000000000000000000000");          if(master.meter
                  data: data
              }).then(function mySuccess(response) {
                  console.log(response);
-                 vm.successToast("Submitted Sucessfully");
+                 //vm.successToast("Submitted Sucessfully");
+                 MessageInfo.showMessage(1012, '', '', '');
 
              }, function myError(response) {
-                  vm.errorToast("Something went wrong.. Please try again");
+                  //vm.errorToast("Something went wrong.. Please try again");
+                  MessageInfo.showMessage(1010, '', '', '');
                  console.log(response);
              });
            }

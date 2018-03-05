@@ -6,7 +6,7 @@
         .module('app.billingDet')
         .controller('BillingDetContoller', BillingDetContoller);
 
-    function BillingDetContoller($http, $mdToast, baseUrl2, $mdDialog, MessageInfo, Clear) {
+    function BillingDetContoller($http, $mdToast, baseUrl2, $mdDialog, MessageInfo, Clear, $localStorage) {
         var vm = this;
         vm.Clear = Clear;
         //var valid = true;
@@ -82,7 +82,10 @@
           console.log("getTimezoneData");
           $http({
               method : "GET",
-              url : baseUrl2 + "mdm/get-timezones"
+              url : baseUrl2 + "mdm/get-timezones",
+              headers:  {
+                      "x-token" : $localStorage.globals.token
+                  }
           }).then(function mySuccess(response) {
             console.log("get timezones");
               vm.timezones = [];
@@ -228,7 +231,8 @@
             var timezone = vm.timezones[i];
             if((timezone.start === null && timezone.end != null) || (timezone.start != null && timezone.end === null)) {
               timezone.valid = true;
-              vm.errorToast("not a valid timezone times");
+              //vm.errorToast("not a valid timezone times");
+              MessageInfo.showMessage(1506, '', '', '');
               return false;
             }
             if(timezone.start === null || timezone.end === null) {
@@ -296,17 +300,22 @@
             $http({
                 method : "POST",
                 url : baseUrl2 + "mdm/time-zones",
-                data: data
+                data: data,
+                headers:  {
+                        "x-token" : $localStorage.globals.token
+                    }
             }).then(function mySuccess(response) {
                 console.log(response);
-                vm.successToast("Submitted Sucessfully");
+                //vm.successToast("Submitted Sucessfully");
+                MessageInfo.showMessage(1012, '', '', '');
                 setTimezoneData();
                 getTimezoneData();
             }, function myError(response) {
                 console.log(response);
             });
           } else {
-            vm.errorToast("not a valid timezone times");
+            //vm.errorToast("not a valid timezone times");
+            MessageInfo.showMessage(1506, '', '', '');
           }
 
         }
@@ -440,7 +449,8 @@
           }
 
           if(selectedSeasons.length === 0) {
-            vm.errorToast("cannot submit empty inputs");
+            //vm.errorToast("cannot submit empty inputs");
+            MessageInfo.showMessage(1412, 'Timezone', '', '');
             return false;
           }
 
@@ -497,10 +507,14 @@
             $http({
                 method : "POST",
                 url : baseUrl2 + "mdm/seasons",
-                data: data
+                data: data,
+                headers:  {
+                        "x-token" : $localStorage.globals.token
+                    }
             }).then(function mySuccess(response) {
                 console.log(response);
-                vm.successToast("Submitted Sucessfully");
+                //vm.successToast("Submitted Sucessfully");
+                MessageInfo.showMessage(1012, '', '', '');
                  //$state.reload();
                  setSeasonData();
                  getSeasonData();
@@ -511,7 +525,8 @@
             });
           }
           else {
-            vm.errorToast("Invalid input dates. Please correct and proceeddd.");
+            //vm.errorToast("Invalid input dates. Please correct and proceeddd.");
+            MessageInfo.showMessage(1416, '', '', '');
           }
 
         }
@@ -544,7 +559,10 @@
           console.log("getSeasonData");
           $http({
               method : "GET",
-              url : baseUrl2 + "mdm/get-seasons"
+              url : baseUrl2 + "mdm/get-seasons",
+              headers:  {
+                      "x-token" : $localStorage.globals.token
+                  }
           }).then(function mySuccess(response) {
             console.log("get seasons");
               vm.seasons = [];
@@ -681,6 +699,7 @@
           if(hols.length == 0){
 
               //vm.errorToast("Enter holiday name and date");
+
               return false;
           }
 
@@ -781,7 +800,10 @@
             $http({
                 method : "POST",
                 url : baseUrl2 + "mdm/holidays",
-                data: data
+                data: data,
+                headers:  {
+                        "x-token" : $localStorage.globals.token
+                    }
             }).then(function mySuccess(response) {
                 console.log(response);
                 MessageInfo.showMessage(1501, 'Holidays Info', '', '');
@@ -804,7 +826,10 @@
           console.log("getHolidayData");
           $http({
               method : "GET",
-              url : baseUrl2 + "mdm/get-holidays/" + year
+              url : baseUrl2 + "mdm/get-holidays/" + year,
+              headers:  {
+                      "x-token" : $localStorage.globals.token
+                  }
           }).then(function mySuccess(response) {
             console.log("get holidays");
               vm.holidays = [];

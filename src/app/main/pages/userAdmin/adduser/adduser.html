@@ -11,7 +11,7 @@
         </div>
 
           <md-input-container  flex="20">
-            <md-select    ng-model="vm.adduser.employee" placeholder="select Employee Name" class="md-underline" required>
+            <md-select    ng-model="vm.adduser.employee" placeholder="select Employee Name" class="md-underline" >
               <md-option ng-repeat="x in vm.userNames" value="{{x}}">{{x.employeeName}}</md-option>
             </md-select>
           </md-input-container>
@@ -26,7 +26,7 @@
               </div>
 
                 <md-input-container  flex="20">
-                  <md-select    ng-model="vm.adduser.designationselected" placeholder="select Designation" class="md-underline" required>
+                  <md-select    ng-model="vm.adduser.designationselected" placeholder="select Designation" class="md-underline" >
                     <md-option ng-repeat="x in vm.designation" value="{{x.designationId}}">{{x.designationCode}}</md-option>
                   </md-select>
                 </md-input-container>
@@ -40,7 +40,7 @@
               </div>
 
                 <md-input-container  flex="20">
-                  <md-select   ng-model="vm.adduser.locationselected" placeholder="select Location" class="md-underline" required>
+                  <md-select   ng-model="vm.adduser.locationselected" placeholder="select Location" class="md-underline" >
                     <md-option ng-repeat="x in vm.location" value="{{x}}">{{x.name}}</md-option>
                   </md-select>
                 </md-input-container>
@@ -54,7 +54,7 @@
               </div>
 
                 <md-input-container  flex="20">
-                  <md-select   ng-model="vm.adduser.roleselected" placeholder="select Role" class="md-underline" required>
+                  <md-select   ng-model="vm.adduser.roleselected" placeholder="select Role" class="md-underline" >
                     <md-option ng-repeat="x in vm.role" value="{{x.roleId}}">{{x.roleName}}</md-option>
                   </md-select>
                 </md-input-container>
@@ -68,7 +68,7 @@
               </div>
 
                 <md-input-container  md-no-float flex="20">
-                    <input type="text" name="userName" ng-model="vm.adduser.userName1" placeholder="User Name" required>
+                    <input type="text" name="userName" ng-model="vm.adduser.userName1" placeholder="User Name" >
                 </md-input-container>
 
           </div>
@@ -80,7 +80,7 @@
               </div>
 
                 <md-input-container  md-no-float flex="20">
-                    <input type="password" name="password" ng-model="vm.adduser.password1" placeholder="Password" required>
+                    <input type="password" name="password" ng-model="vm.adduser.password1" placeholder="Password" >
                 </md-input-container>
 
           </div>
@@ -92,7 +92,7 @@
                     <p class="label-font ">Start Date:</p>
                 </div>
                 <div flex="20">
-                  <md-datepicker ng-model="vm.adduser.start"  md-min-date="vm.minDate" md-placeholder="Enter date" md-open-on-focus required></md-datepicker>
+                  <md-datepicker ng-model="vm.adduser.start"  md-min-date="vm.minDate" md-placeholder="Enter date" md-open-on-focus ></md-datepicker>
                 </div>
             </div>
           <div layout="row">
@@ -101,7 +101,7 @@
 
           <div >
             <md-button type="submit"  class="md-accent md-raised">Submit</md-button>
-            <md-button  class="md-accent md-raised" ng-click="vm.clear()">Clear</md-button>
+            <md-button  class="md-accent md-raised" ng-click="vm.Clear.clearObj(vm.adduser)">Clear</md-button>
           </div>
         </div>
       </div>

@@ -65,8 +65,11 @@
             //Operations
             'app.operations',
 
-            //Reports
-            'app.reports',
+            //Reports Load Profile
+            'app.loadProfile',
+
+            // Reports Power Factor
+            'app.powerFactor',
 
             //Single And Multi Part Tariff Rates
             'app.singlemulti',
@@ -122,8 +125,10 @@
             // module for dinamic menu
              'app.menu',
 
-             'ngStorage'
+             'ngStorage',
 
+             //Aggregations Network Consumption
+             'app.networkwiseConsumption',
 
         ]);
 })();

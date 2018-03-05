@@ -7,11 +7,10 @@
         .controller('PowerQualityController', PowerQualityController);
 
     /** @ngInject */
-    function PowerQualityController($http, $mdToast, baseUrl2, $rootScope, Clear)
+    function PowerQualityController($http, $mdToast, baseUrl2, $rootScope, Clear, MessageInfo)
     {
       var vm = this;
       vm.Clear = Clear;
-
       vm.progressShow=false;
       var pfRange1List;
       var pfRange2List;
@@ -19,17 +18,15 @@
       var pfRange4List;
       var data = {};
       vm.powerQuality ={};
-      vm.statisticsTable = false;
+      vm.powerQuality.statisticsTable = false;
       vm.switch = "donutChart";
       vm.showHeader = false;
-      vm.dataTable = false;
+      vm.powerQuality.dataTable = false;
       vm.chart = false;
       vm.donut = true;
-      vm.chartShow=false;
+      vm.powerQuality.chartShow=false;
       var arr = [];
       var obj = {};
-
-
       vm.fmonthDisable= true;
       vm.tmonthDisable= true;
       var currDate= new Date();
@@ -94,26 +91,6 @@
         return dt.split(' ')[2] + "-" + dt.split(' ')[1] + "-" + dt.split(' ')[3];
       }
 
-      vm.errorToast = function(mesg) {
-        $mdToast.show(
-          $mdToast.simple()
-            .textContent(mesg)
-            .position('top right')
-            .hideDelay(3000)
-            .toastClass('error')
-        );
-      };
-      vm.successToast = function(mesg, callback) {
-       $mdToast.show(
-         $mdToast.simple()
-           .textContent(mesg)
-           .position('top right')
-           .hideDelay(3000)
-           .toastClass('success')
-       );
-      };
-
-    
 
       //function to hide or show hierarchy
       vm.hierarchyShow = function() {
@@ -157,15 +134,18 @@
 
 
         if(vm.powerQuality.fmonth ===undefined || vm.powerQuality.fyear===undefined || vm.powerQuality.tmonth===undefined || vm.powerQuality.tyear===undefined){
-          vm.errorToast("Please Select All Fields.");
+          //vm.errorToast("Please Select All Fields.");
+          MessageInfo.showMessage(1017, 'All Fields', '', '');
            return false;
         }
         if((vm.powerQuality.fyear == vm.powerQuality.tyear) && (vm.powerQuality.fmonth > vm.powerQuality.tmonth) ){
-          vm.errorToast("From Date Cannot be Less Than To Date");
+          //vm.errorToast("From Date Cannot be Less Than To Date");
+          MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
            return false;
         }
         if( vm.powerQuality.tyear < vm.powerQuality.fyear  ){
-          vm.errorToast("From Date Cannot be Less Than To Date");
+          //vm.errorToast("From Date Cannot be Less Than To Date");
+          MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
            return false;
         }
         return true;
@@ -176,17 +156,19 @@
         if(validatePage()){
         vm.progressShow=true;
         vm.powerQualityObject = [];
-        vm.dataTable = false;
-        vm.statisticsTable = false;
+        vm.powerQuality.dataTable = false;
+        vm.powerQuality.statisticsTable = false;
         vm.switch = "donutChart";
+        var modelArray = $rootScope.modelArray;
+        console.log("$rootScope.modelArray Before",$rootScope.modelArray);
         var arr = [];
         var obj = {};
 
-        var location = [];
-        vm.location = [1008, null, null, null, null, null];
+        // var location = [];
+        // vm.location = [1008, null, null, null, null, null];
         var item;
       //  vm.location = $rootScope.modelArray;
-        vm.powerQuality.location = vm.location;
+        //vm.powerQuality.location = vm.location;
         var date = new Date() + "";
         var dateFormat = date.split(' ')[2] + "-" + date.split(' ')[1] + "-" + date.split(' ')[3];
         data.createdDate = dateFormat;
@@ -196,7 +178,10 @@
         data.lastUpdatedDate = dateFormat;
         data.lastUpdatedLogin = 1111;
         data.powerFactor = vm.powerQuality;
+        data.modelArray=modelArray;
         console.log(data.powerFactor);
+
+        MessageInfo.showMessage(1005, '', '', '');
 
         $http({
             method : "POST",
@@ -205,7 +190,7 @@
         }).then(function mySuccess(response) {
             console.log("}}}}}}}}}}}}}}}}", data);
 
-            vm.statisticsTable = true;
+            vm.powerQuality.statisticsTable = true;
             vm.progressShow=false;
             var resp1 = response.data.statistics;
             var resp = response.data.statistics.counts;
@@ -213,7 +198,7 @@
             console.log(resp);
             console.log(resp1);
             if(resp.consumerCount>0){
-              vm.chartShow=true;
+              vm.powerQuality.chartShow=true;
             }
             pfRange1List = resp1.pfRange1List;
             pfRange2List = resp1.pfRange2List;
@@ -309,9 +294,10 @@
           });
 
 
-            vm.successToast("Submitted Sucessfully");
+            //vm.successToast("Submitted Sucessfully");
         }, function myError(response) {
-            vm.errorToast("Something went wrong.. Please try again");
+            //vm.errorToast("Something went wrong.. Please try again");
+              MessageInfo.showMessage(1010, '', '', '');
             console.log(response);
         });
       }
@@ -319,7 +305,7 @@
 
       //onclick each count displayData
       vm.displayData = function(violated) {
-        vm.dataTable = true;
+        vm.powerQuality.dataTable = true;
         console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         console.log(violated);
 

@@ -12,8 +12,12 @@
         var vm = this;
         vm.Clear = Clear;
 
-        var modelArray = [null, null, null, null, null, null];
-        modelArray[0] = 1008;
+        //var modelArray = $rootScope.modelArray;
+        var modelArray=[33001, 33002, 33003, null, null, null, null, null, null];
+        console.log("$rootScope.modelArray",modelArray);
+
+        //var modelArray = [null, null, null, null, null, null];
+        //modelArray[0] = 1008;
         var data = {};
         vm.progressShow=true;
 
@@ -23,102 +27,6 @@
           return dt.split(' ')[2] + "-" + dt.split(' ')[1] + "-" + dt.split(' ')[3];
         }
 
-        // vm.donutChart = {
-        //     options: {
-        //         chart: {
-        //             type      : 'pieChart',
-        //             height    : 200,
-        //             donut     : true,
-        //             x         : function (d)
-        //             {
-        //                 return d.key;
-        //             },
-        //             y         : function (d)
-        //             {
-        //                 return d.y;
-        //             },
-        //             showLabels: true,
-        //             transitionDuration: 500,
-        //             legend            : {
-        //                 margin: {
-        //                     top   : 5,
-        //                     right : 20,
-        //                     bottom: 5,
-        //                     left  : 0
-        //                 }
-        //             }
-        //         }
-        //     },
-        //
-        //     data: [
-        //         {
-        //             key: 'One',
-        //             y  : 5
-        //         },
-        //         {
-        //             key: 'Two',
-        //             y  : 2
-        //         },
-        //         {
-        //             key: 'Three',
-        //             y  : 9
-        //         },
-        //         {
-        //             key: 'Four',
-        //             y  : 7
-        //         }
-        //     ]
-        //
-        // };
-        //
-        // vm.donutChart2 = {
-        //     options: {
-        //         chart: {
-        //             type      : 'pieChart',
-        //
-        //             height    : 200,
-        //             donut     : true,
-        //             x         : function (d)
-        //             {
-        //                 return d.key;
-        //             },
-        //             y         : function (d)
-        //             {
-        //                 return d.y;
-        //             },
-        //             showLabels: true,
-        //             transitionDuration: 500,
-        //             legend            : {
-        //                 margin: {
-        //                     top   : 5,
-        //                     right : 20,
-        //                     bottom: 5,
-        //                     left  : 0
-        //                 }
-        //             }
-        //         }
-        //     },
-        //
-        //     data: [
-        //         {
-        //             key: 'One',
-        //             y  : 10
-        //         },
-        //         {
-        //             key: 'Two',
-        //             y  : 12
-        //         },
-        //         {
-        //             key: 'Three',
-        //             y  : 5
-        //         },
-        //         {
-        //             key: 'Four',
-        //             y  : 7
-        //         }
-        //     ]
-        //
-        // };
 
         vm.redirect = function(rd) {
           if(rd === "ed")
@@ -157,7 +65,7 @@
         var meterStatus ={};
         var arr = [];
         var obj = {};
-        meterStatus.location = modelArray;
+        //meterStatus.location = modelArray;
         var newMonth = d.getMonth() - 1;
         if(newMonth < 0){
             newMonth += 12;
@@ -167,7 +75,7 @@
         meterStatus.fromDate=splitDate(d);
         meterStatus.toDate=splitDate(new Date());
         data.meterStatus=meterStatus;
-        console.log("meterStatus", data);
+
 
 
         $http({
@@ -331,33 +239,35 @@
            powerFactor.fyear=FYear+"";
            powerFactor.tmonth=TMonth;
            powerFactor.tyear=TYear+"";
-           powerFactor.location = modelArray;
+           //powerFactor.location = modelArray;
 
            energyDemand.fmonth=FMonth;
            energyDemand.fyear=FYear+"";
            energyDemand.tmonth=TMonth;
            energyDemand.tyear=TYear+"";
-           energyDemand.catTypeId="10001";
-           energyDemand.location= modelArray;
+           energyDemand.catTypeId="2324";
+           //energyDemand.location= modelArray;
 
-           energyConsumption.catTypeId="10001";
+           energyConsumption.catTypeId="2324";
            energyConsumption.month=FMonth;
            energyConsumption.year=FYear;
-           energyConsumption.location= modelArray;
+           //energyConsumption.location= modelArray;
 
            data.powerFactor=powerFactor;
            data.energyDemand=energyDemand;
            data.energyConsumption=energyConsumption;
+           data.modelArray = modelArray;
+           console.log("Data is", data);
 
-           console.log("powerQuality", data);
-           console.log("energyDemand", data);
+
 
            $http({
                method : "POST",
                url : baseUrl2 + "mdm/dashboard/power-factor",
                data: data
            }).then(function mySuccess(response) {
-               console.log("}}}}}}}}}}}}}}}}//////",response);
+             vm.progressShow=false;
+               console.log("}}}}}}}}}}}}}}}}//////PF DB response",response);
                var PFresp1 = response.data.statistics;
                var PFresp = response.data.statistics.counts;
                var counts = PFresp;
@@ -429,7 +339,7 @@
                url : baseUrl2 + "mdm/dashboard/energy-demand",
                data: data
            }).then(function mySuccess(response) {
-               console.log("}}}}}}}}}}}}}}}}ED", response);
+               console.log("}}}}}}}}}}}}}}}}ED DB response", response);
                var EDresp1 = response.data.statistics;
                var EDresp = response.data.statistics.counts;
                var counts = EDresp;
@@ -514,7 +424,7 @@
                url : baseUrl2 + "mdm/dashboard/energy-consumption",
                data: data
            }).then(function mySuccess(response) {
-               console.log("}}}}}}}}}}}}}}}}EC", response);
+               console.log("}}}}}}}}}}}}}}}}EC DB response", response);
 
                var ECresp1 = response.data.statistics;
                var ECresp = response.data.statistics.counts;

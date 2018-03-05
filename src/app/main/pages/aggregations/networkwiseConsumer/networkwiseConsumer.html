@@ -100,7 +100,7 @@
                 </div>
 
               <md-button type="submit" ng-click="vm.networkwiseConsumerSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
-              <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.networkwiseConsumer)">clear</md-button>
+              <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.networkwiseConsumer,hierarchyObj,modelArray)">clear</md-button>
             </div>
             <div layout = "row">
               <div flex="40">
@@ -109,7 +109,7 @@
               <div flex="5"></div>
               <div flex="55">
                 <md-progress-circular md-mode="indeterminate" ng-show="vm.progressShow"></md-progress-circular>
-                <table class="area-stats" ng-show="vm.statisticsTable">
+                <table class="area-stats" ng-show="vm.networkwiseConsumer.statisticsTable">
                   <tbody>
                     <tr>
                         <td class="p"><p class="label-font">Total Consumers</p></td>
@@ -137,7 +137,7 @@
               </div>
             </div>
 
-            <div layout="row" ng-show="vm.statisticsTable">
+            <div layout="row" ng-show="vm.networkwiseConsumer.statisticsTable">
               <div flex="30">
                 <!-- <md-select ng-model="vm.switch" ng-change="vm.displayFun(vm.switch)">
                   <md-option value = "donutChart">Donut Chart</md-option>
@@ -152,15 +152,15 @@
             </div>
 
 
-            <div layout="row"  ng-show="vm.donut && vm.statisticsTable">
+            <div layout="row"  ng-show="vm.donut && vm.networkwiseConsumer.statisticsTable">
               <div flex="100">
                   <div id="networkDonutChartDiv"></div>
 
               </div>
             </div>
 
-            <!-- <div layout="row"  ng-show="vm.donut && vm.statisticsTable"> -->
-            <div layout="row" ng-show="vm.chart && vm.statisticsTable">
+            <!-- <div layout="row"  ng-show="vm.donut && vm.networkwiseConsumer.statisticsTable"> -->
+            <div layout="row" ng-show="vm.chart && vm.networkwiseConsumer.statisticsTable">
               <div flex="25">
               </div>
               <!-- <div flex="50" >

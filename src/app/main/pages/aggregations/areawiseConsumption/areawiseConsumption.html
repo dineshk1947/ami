@@ -104,12 +104,12 @@
             <div layout = "row">
               <div flex="40">
                 <md-button type="submit" ng-click="vm.areaWiseConsumptionSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
-                <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.areawiseConsumption)">clear</md-button>
+                <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.areawiseConsumption,hierarchyObj,modelArray)">clear</md-button>
               </div>
               <div flex="5"></div>
               <div flex="55">
                 <md-progress-circular md-mode="indeterminate" ng-show="vm.progressShow"></md-progress-circular>
-                <table  class="tb-stats" ng-show="vm.statisticsTable">
+                <table  class="tb-stats" ng-show="vm.areawiseConsumption.statisticsTable">
                   <tbody>
                     <tr>
                         <td class="p"><p class="label-font">Consumption:</p></td>
@@ -119,10 +119,10 @@
                         <td class="p"><p class="label-font">Demand:</p></td>
                         <td class="p"><p>{{vm.consumption.demandCount}} &nbsp; {{vm.demandUnit}} </p></td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td class="p"><p class="label-font">Tamper:</p></td>
                         <td class="p"><p>{{vm.consumption.tamperCount}}</p></td>
-                    </tr>
+                    </tr> -->
 
                   </tbody>
 

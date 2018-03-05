@@ -7,7 +7,7 @@
         .controller('defineTampersController', defineTampersController);
 
     /** @ngInject */
-    function defineTampersController(SampleData, $http, baseUrl2, $mdToast, $mdDialog, Clear)
+    function defineTampersController(SampleData, $http, baseUrl2, $mdToast, $mdDialog, Clear, MessageInfo)
     {
 
         var vm = this;
@@ -35,29 +35,6 @@
 
         }
 
-  vm.errorToast = function(mesg) {
-        $mdToast.show(
-          $mdToast.simple()
-            .textContent(mesg)
-            .position('top right')
-            .hideDelay(3000)
-            .toastClass('error')
-
-        );
-      };
-
-      vm.successToast = function(mesg, callback) {
-      //  var pinTo = vm.getToastPosition();
-
-       $mdToast.show(
-         $mdToast.simple()
-           .textContent(mesg)
-           .position('top right')
-           .hideDelay(3000)
-           .toastClass('success')
-
-       );
-     };
 
      vm.getData = function() {
        vm.progressShow = true;
@@ -115,7 +92,8 @@ function DialogController($scope, $mdDialog, Clear) {
          $scope.validateAddEvent = function() {
            console.log($scope.eachItem);
            if($scope.addEventName == null || $scope.addEventCode == null) {
-             vm.errorToast("Please provide both event name and event code before submitting");
+             //vm.errorToast("Please provide both event name and event code before submitting");
+               MessageInfo.showMessage(1015, 'event name', 'event code', '');
              return false;
            }
           return true;
@@ -156,10 +134,12 @@ function DialogController($scope, $mdDialog, Clear) {
               if(response.data.status = true) {
                  if(response.data.message == "ORA-00001: unique constraint (MMD.SYS_C006000) violated")
                  {
-                   vm.errorToast("Event Already exists. PLease check.");
+                   //vm.errorToast("Event Already exists. PLease check.");
+                   MessageInfo.showMessage(1420, 'Event', '', '');
                  }
                  else {
-                   vm.successToast("Submitted succesfully");
+                   //vm.successToast("Submitted succesfully");
+                    MessageInfo.showMessage(1012, '', '', '');
                  }
 
                 console.log(response);
@@ -169,7 +149,8 @@ function DialogController($scope, $mdDialog, Clear) {
                   vm.getData();
               }
               else {
-                vm.errorToast("Not updated in records, Try again");
+                //vm.errorToast("Not updated in records, Try again");
+                 MessageInfo.showMessage(1010, '', '', '');
               }
 
                 // $scope.eachItem = response.data.eachItem;
@@ -217,13 +198,14 @@ function DialogController($scope, $mdDialog, Clear) {
             data: data
         }).then(function mySuccess(response) {
             console.log(response);
-            vm.successToast("Tamper Detailes have been Updated Successfully.")
-            //vm.successToast("DCU Protocol Deatails Have Been Submitted Sucessfully.");
+            //vm.successToast("Tamper Detailes have been Updated Successfully.")
+             MessageInfo.showMessage(1002, 'Tamper Detailes', '', '');
 
         }, function myError(response) {
 
             console.log(response);
             //vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+            MessageInfo.showMessage(1010, '', '', '');
         });
 
       }

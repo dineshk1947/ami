@@ -7,7 +7,7 @@
         .controller('TamperAndEventsController', TamperAndEventsController);
 
     /** @ngInject */
-    function TamperAndEventsController($http, $mdToast, baseUrl2, $rootScope,Clear)
+    function TamperAndEventsController($http, $mdToast, baseUrl2, $rootScope,Clear, MessageInfo)
     {
         var vm = this;
         vm.Clear = Clear;
@@ -28,27 +28,6 @@
           console.log(dt);
           return dt.split(' ')[2] + "-" + dt.split(' ')[1] + "-" + dt.split(' ')[3];
         }
-
-      
-
-        vm.errorToast = function(mesg) {
-          $mdToast.show(
-            $mdToast.simple()
-              .textContent(mesg)
-              .position('top right')
-              .hideDelay(3000)
-              .toastClass('error')
-          );
-        };
-        vm.successToast = function(mesg, callback) {
-         $mdToast.show(
-           $mdToast.simple()
-             .textContent(mesg)
-             .position('top right')
-             .hideDelay(3000)
-             .toastClass('success')
-         );
-        };
 
         //function to hide or show hierarchy
         vm.hierarchyShow = function() {
@@ -98,15 +77,29 @@
 
         function validatePage() {
           if(vm.tampersEvents.fmonth ===undefined || vm.tampersEvents.fyear===undefined || vm.tampersEvents.tmonth===undefined || vm.tampersEvents.tyear===undefined ){
-            vm.errorToast("Please Select All Fields.");
+            //vm.errorToast("Please Select All Fields.");
+             MessageInfo.showMessage(1017, 'All Fields', '', '');
              return false;
           }
-          if(vm.tampersEvents.fyear > vm.tampersEvents.tyear){
-            vm.errorToast("From Date Cannot be Less Than To Date.");
+          // if(vm.tampersEvents.fyear > vm.tampersEvents.tyear){
+          //   //vm.errorToast("From Date Cannot be Less Than To Date.");
+          //   MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
+          //    return false;
+          // }
+          // if((vm.tampersEvents.fyear <= vm.tampersEvents.tyear) && vm.tampersEvents.fmonth > vm.tampersEvents.tmonth ){
+          //   //vm.errorToast("From Date Cannot be Less Than To Date.");
+          //   MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
+          //    return false;
+          // }
+
+          if((vm.tampersEvents.fyear == vm.tampersEvents.tyear) && (vm.tampersEvents.fmonth > vm.tampersEvents.tmonth) ){
+            //vm.errorToast("From Date Cannot be Less Than To Date");
+            MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
              return false;
           }
-          if((vm.tampersEvents.fyear <= vm.tampersEvents.tyear) && vm.tampersEvents.fmonth > vm.tampersEvents.tmonth ){
-            vm.errorToast("From Date Cannot be Less Than To Date.");
+          if( vm.tampersEvents.tyear < vm.tampersEvents.fyear  ){
+            //vm.errorToast("From Date Cannot be Less Than To Date");
+            MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
              return false;
           }
           return true;
@@ -115,11 +108,11 @@
         //onclick Submit get counts
         vm.energyDemandSubmit = function() {
           if(validatePage()){
-          var location = [];
-          vm.location = location;
+          // var location = [];
+          // vm.location = location;
           var item;
-          vm.location = $rootScope.modelArray;
-          vm.energyDemand.location = vm.location;
+          // vm.location = $rootScope.modelArray;
+          // vm.energyDemand.location = vm.location;
           var date = new Date() + "";
           var dateFormat = date.split(' ')[2] + "-" + date.split(' ')[1] + "-" + date.split(' ')[3];
           data.createdDate = dateFormat;
@@ -130,6 +123,8 @@
           data.lastUpdatedLogin = 1111;
           data.energyDemand = vm.energyDemand;
           console.log(data.energyDemand);
+
+          MessageInfo.showMessage(1005, '', '', '');
 
           $http({
               method : "POST",
@@ -184,9 +179,10 @@
               //arrTemp.shift();
               vm.donutChart.data = arrTemp;
 
-              vm.successToast("Submitted Sucessfully");
+              //vm.successToast("Submitted Sucessfully");
           }, function myError(response) {
-              vm.errorToast("Something went wrong.. Please try again");
+              //vm.errorToast("Something went wrong.. Please try again");
+              MessageInfo.showMessage(1010, '', '', '');
               console.log(response);
           });
         }

@@ -5,21 +5,21 @@
         <!-- <label for="">Discom:</label> -->
       </div>
       <div flex="15">
-        <p class="data-font"> {{model.discom}}</p>
+        <p class="data-font"> {{model.hierarchyObj.discom}}</p>
       </div>
 
         <div flex="10">
           <p class="label-font" >Region :</p>
           <!-- <label for="">Discom:</label> -->
         </div>
-        <div flex="15" ng-show="model.region">
-          <p class="data-font" > {{model.regionName}}</p>
+        <div flex="15" ng-show="model.hierarchyObj.region">
+          <p class="data-font" > {{model.hierarchyObj.regionName}}</p>
         </div>
 
 
-        <md-input-container flex="15" ng-show="model.region1">
-          <md-select ng-change="model.getCircles()"  ng-model="model.regionid" placeholder="select region" class="md-underline">
-            <md-option ng-repeat="x in model.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+        <md-input-container flex="15" ng-show="model.hierarchyObj.region1">
+          <md-select ng-change="model.getCircles()"  ng-model="model.hierarchyObj.regionid" placeholder="select region" class="md-underline">
+            <md-option ng-repeat="x in model.hierarchyObj.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
           </md-select>
         </md-input-container>
 
@@ -28,13 +28,13 @@
       <div flex="10">
         <p class="label-font">Circles :</p>
       </div>
-      <div flex="15" ng-show="model.circle">
-        <p class="data-font" >{{model.circleName}}</p>
+      <div flex="15" ng-show="model.hierarchyObj.circle">
+        <p class="data-font" >{{model.hierarchyObj.circleName}}</p>
       </div>
 
-      <md-input-container flex="15" ng-show="model.circle1">
-        <md-select  ng-change="model.getDivision()" ng-model="model.circleid" placeholder="select circle" class="md-underline">
-          <md-option ng-repeat="x in model.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+      <md-input-container flex="15" ng-show="model.hierarchyObj.circle1">
+        <md-select  ng-change="model.getDivision()" ng-model="model.hierarchyObj.circleid" placeholder="select circle" class="md-underline">
+          <md-option ng-repeat="x in model.hierarchyObj.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
         </md-select>
       </md-input-container>
 
@@ -42,12 +42,12 @@
       <div flex="10">
         <p class="label-font">Division :</p>
       </div>
-      <div flex="15" ng-show="model.division">
-        <p class="data-font" >{{model.divisionName}}</p>
+      <div flex="15" ng-show="model.hierarchyObj.division">
+        <p class="data-font" >{{model.hierarchyObj.divisionName}}</p>
       </div>
-      <md-input-container flex="15" ng-show="model.division1">
-        <md-select  ng-change="model.getSubDivisions()" ng-model="model.divisionid" placeholder="select division" class="md-underline">
-          <md-option ng-repeat="x in model.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+      <md-input-container flex="15" ng-show="model.hierarchyObj.division1">
+        <md-select  ng-change="model.getSubDivisions()" ng-model="model.hierarchyObj.divisionid" placeholder="select division" class="md-underline">
+          <md-option ng-repeat="x in model.hierarchyObj.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
         </md-select>
       </md-input-container>
 
@@ -56,12 +56,12 @@
       <div flex="10">
         <p class="label-font" >Sub Division:</p>
       </div>
-      <div flex="15" ng-show="model.subdivision">
-        <p class="data-font" >{{model.subdivisionName}}</p>
+      <div flex="15" ng-show="model.hierarchyObj.subdivision">
+        <p class="data-font" >{{model.hierarchyObj.subdivisionName}}</p>
       </div>
-      <md-input-container flex="15" ng-show="model.subdivision1" >
-        <md-select ng-change="model.getSections()" ng-model="model.subdivisionid" placeholder="select subdivision" class="md-underline">
-          <md-option ng-repeat="x in model.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+      <md-input-container flex="15" ng-show="model.hierarchyObj.subdivision1" >
+        <md-select ng-change="model.getSections()" ng-model="model.hierarchyObj.subdivisionid" placeholder="select subdivision" class="md-underline">
+          <md-option ng-repeat="x in model.hierarchyObj.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
         </md-select>
       </md-input-container>
 
@@ -69,12 +69,12 @@
     <div flex="10">
       <p class="label-font">Sections:</p>
     </div>
-    <div flex="15" ng-show="model.section">
-      <p class="data-font" >{{model.sectionid}}</p>
+    <div flex="15" ng-show="model.hierarchyObj.section">
+      <p class="data-font" >{{model.hierarchyObj.sectionid}}</p>
     </div>
-    <md-input-container flex="15" ng-show="model.section1">
-      <md-select  ng-change="model.getSubStations()" ng-model="model.sectionid" placeholder="select section" class="md-underline">
-        <md-option ng-repeat="x in model.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+    <md-input-container flex="15" ng-show="model.hierarchyObj.section1">
+      <md-select  ng-change="model.getSubStations()" ng-model="model.hierarchyObj.sectionid" placeholder="select section" class="md-underline">
+        <md-option ng-repeat="x in model.hierarchyObj.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
       </md-select>
 
     </md-input-container>
@@ -82,25 +82,25 @@
       <div flex="10" class="vhide">
         <p class="label-font">Sub Stations :</p>
       </div>
-      <div flex="15" ng-show="model.substation" class="vhide">
-        <p class="data-font" >{{model.substation}}</p>
+      <div flex="15" ng-show="model.hierarchyObj.substation" class="vhide">
+        <p class="data-font" >{{model.hierarchyObj.substation}}</p>
       </div>
 
-      <md-input-container flex="15" ng-show="model.substation1" class="vhide">
-        <md-select  ng-change="model.getFeeder()" ng-model="model.substationid" placeholder="select substation" class="md-underline">
-          <md-option ng-repeat="x in model.substations"  value="{{x.substationId}}">{{x.substation}}</md-option>
+      <md-input-container flex="15" ng-show="model.hierarchyObj.substation1" class="vhide">
+        <md-select  ng-change="model.getFeeder()" ng-model="model.hierarchyObj.substationid" placeholder="select substation" class="md-underline">
+          <md-option ng-repeat="x in model.hierarchyObj.substations"  value="{{x.substationId}}">{{x.substation}}</md-option>
         </md-select>
       </md-input-container>
 
       <div flex="10" class="vhide">
         <p class="label-font">Feeder :</p>
       </div>
-      <div flex="15" ng-show="model.feeder" class="vhide">
-        <p class="data-font" >{{model.feeder}}</p>
+      <div flex="15" ng-show="model.hierarchyObj.feeder" class="vhide">
+        <p class="data-font" >{{model.hierarchyObj.feeder}}</p>
       </div>
-      <md-input-container flex="15" ng-show="model.feeder1" class="vhide">
-        <md-select  ng-change="model.getDtr()" ng-model="model.feederid" placeholder="select feeder" class="md-underline">
-          <md-option ng-repeat="x in model.feeders"  value="{{x.feederId}}">{{x.feeder}}</md-option>
+      <md-input-container flex="15" ng-show="model.hierarchyObj.feeder1" class="vhide">
+        <md-select  ng-change="model.getDtr()" ng-model="model.hierarchyObj.feederid" placeholder="select feeder" class="md-underline">
+          <md-option ng-repeat="x in model.hierarchyObj.feeders"  value="{{x.feederId}}">{{x.feeder}}</md-option>
         </md-select>
       </md-input-container>
 
@@ -109,12 +109,12 @@
       <div flex="10">
         <p class="label-font">DTR :</p>
       </div>
-      <div flex="15" ng-show="model.dtr">
-        <p class="data-font" >{{model.dtr}}</p>
+      <div flex="15" ng-show="model.hierarchyObj.dtr">
+        <p class="data-font" >{{model.hierarchyObj.dtr}}</p>
       </div>
-      <md-input-container flex="15" ng-show="model.dtr1">
-        <md-select  ng-change="model.getMeter()" ng-model="model.dtrid" placeholder="select DTR" class="md-underline">
-          <md-option ng-repeat="x in model.dtrs"  value="{{x.dtrId}}">{{x.dtr}}</md-option>
+      <md-input-container flex="15" ng-show="model.hierarchyObj.dtr1">
+        <md-select  ng-change="model.getMeter()" ng-model="model.hierarchyObj.dtrid" placeholder="select DTR" class="md-underline">
+          <md-option ng-repeat="x in model.hierarchyObj.dtrs"  value="{{x.dtrId}}">{{x.dtr}}</md-option>
         </md-select>
       </md-input-container>
     </div>

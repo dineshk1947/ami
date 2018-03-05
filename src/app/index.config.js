@@ -14,15 +14,12 @@
         .factory('MessageInfo', MessageInfo)
         .factory('Clear',Clear);
 
-
     // This function is to generate error message that is coming from JSON
     MessageInfo.$inject = ['$http', '$mdToast'];
     function MessageInfo($http, $mdToast) {
       var service = {};
       service.showMessage = showMessage;
-
       return service;
-
       function showMessage(code, param1, param2, param3) {
         console.log("Error Message");
         console.log(param1);
@@ -65,20 +62,92 @@
          }
        }
 
-      // This function is to clear all fields in the form
-      function Clear() {
-        var service = {};
-        service.clearObj = clearObj;
-        return service;
+       // This function is to clear all fields in the form
+       Clear.$inject = [ '$rootScope', '$localStorage'];
+       function Clear($rootScope, $localStorage) {
+         var service = {};
+         service.clearObj = clearObj;
+         return service;
 
-        function clearObj(obj) {
-          for (var key in obj ) {
-            console.log(obj[key]);
-            obj[key] = undefined;
-          }
-          return obj;
-        }
-      }
+         function clearObj(obj1, obj2, obj3, param1,param2,param3,param4) {
+           console.log("In Clear");
+            console.log(obj1);
+            console.log(obj2);
+            console.log(obj3);
+            for (var key in obj1 ) {
+              console.log(obj1[key]);
+              if (typeof obj1[key] == "boolean") {
+                obj1[key] = false;
+              }
+              else {
+                obj1[key] = undefined;
+              }
+            }
+
+            if(obj2!==undefined)
+            {
+              var userDetails = {};
+              var currentUser = $localStorage.globals;
+              userDetails= currentUser.currentUser;
+             console.log("userDetails",userDetails);
+
+             if(userDetails.levelName == "DISCOM")
+             {
+               for (var i = 1; i < obj3.length; i++) {
+                 obj3[i] = null;
+               }
+             }
+              if(userDetails.levelName == "REGION")
+              {
+                for (var i = 2; i < obj3.length; i++) {
+                  obj3[i] = null;
+                }
+              }
+              if(userDetails.levelName == "CIRCLE"){
+               for (var i = 3; i < obj3.length; i++) {
+                 obj3[i] = null;
+               }
+              }
+              if(userDetails.levelName == "DIVISION"){
+               for (var i = 4; i < obj3.length; i++) {
+                 obj3[i] = null;
+               }
+              }
+              if(userDetails.levelName == "SUB-DIVISION"){
+                for (var i = 5; i < obj3.length; i++) {
+                  obj3[i] = null;
+                }
+              }
+
+              if(obj2.regionid){
+                 obj2.regionid="";
+              }
+              if(obj2.circleid){
+                obj2.circleid="";
+              }
+              if(obj2.divisionid){
+                obj2.divisionid="";
+              }
+              if(obj2.subdivisionid){
+                obj2.subdivisionid="";
+              }
+              if(obj2.sectionid){
+                obj2.sectionid="";
+              }
+              if(obj2.substationid){
+               obj2.substationid="";
+
+              }
+              if(obj2.feederid){
+                (obj2.feederid)="";
+              }
+              if(obj2.dtrid){
+                obj2.dtrid="";
+              }
+            }
+           return [obj1,obj2];
+         }
+       }
 
 
     AuthenticationService.$inject = ['$http', '$cookies', '$rootScope', '$timeout', '$localStorage'];
@@ -97,7 +166,7 @@
 
             $http({
                 method : "POST",
-                url : baseUrl2() + "mdm/auth/login",
+                url : baseUrl2() + "mdm/auth/login-user",
                 data: data
             }).then(function mySuccess(response) {
               var resp = response.data;
@@ -125,43 +194,56 @@
         }
 
         function SetCredentials(userDetails) {
+          var token;
+          $rootScope.globals = {
+              currentUser: userDetails,
+              token: token
+          };
 
-          // HEAD
-              $rootScope.globals = {
-                  currentUser: userDetails
-              };
-              var now = new Date(),
-              // this will set the expiration to 12 months
-              exp = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-              console.log(exp);
-              var cookieExp = new Date();
-              cookieExp.setTime(cookieExp.getTime() + 3000000);
-              $cookies.putObject('globals', $rootScope.globals, { expires: cookieExp });
+          $localStorage.globals = $rootScope.globals;
 
-            $rootScope.globals = {
-                currentUser: userDetails
-            };
-            var now = new Date(),
-            // this will set the expiration to 12 months
-            exp = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-            console.log(exp);
-            //var cookieExp = new Date();
-            //cookieExp.setTime(cookieExp.getTime() + 3000000000);
-            //$cookies.putObject('globals', $rootScope.globals, { expires: cookieExp });
-            $localStorage.globals = $rootScope.globals;
+          console.log("::::::::::::::::::::::::::::::::::::::::::: $localStorage");
+          console.log($localStorage.globals);
+          console.log("inside SetCredentials");
 
-            //console.log($cookies.getObject('globals'));
-            console.log("::::::::::::::::::::::::::::::::::::::::::: $localStorage");
-            console.log($localStorage.globals);
-            console.log("inside SetCredentials");
 
+
+
+          // // HEAD
+          //     $rootScope.globals = {
+          //         currentUser: userDetails
+          //     };
+          //     var now = new Date(),
+          //     // this will set the expiration to 12 months
+          //     exp = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          //     console.log(exp);
+          //     var cookieExp = new Date();
+          //     cookieExp.setTime(cookieExp.getTime() + 3000000);
+          //     $cookies.putObject('globals', $rootScope.globals, { expires: cookieExp });
+          //
+          //   $rootScope.globals = {
+          //       currentUser: userDetails
+          //   };
+          //   var now = new Date(),
+          //   // this will set the expiration to 12 months
+          //   exp = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          //   console.log(exp);
+          //   //var cookieExp = new Date();
+          //   //cookieExp.setTime(cookieExp.getTime() + 3000000000);
+          //   //$cookies.putObject('globals', $rootScope.globals, { expires: cookieExp });
+          //   $localStorage.globals = $rootScope.globals;
+          //
+          //   //console.log($cookies.getObject('globals'));
+          //   console.log("::::::::::::::::::::::::::::::::::::::::::: $localStorage");
+          //   console.log($localStorage.globals);
+          //   console.log("inside SetCredentials");
 
         }
 
         function ClearCredentials() {
             $rootScope.globals = {};
             $localStorage.globals = undefined;
-            $cookies.remove('globals');
+        //    $cookies.remove('globals');
             console.log("inside ClearCredentials");
 
         }
@@ -181,6 +263,20 @@
 
     }
 
+
+    // function baseUrl1(){
+    //   return 'http://1ccf6dd8.ngrok.io/';
+    // }
+    //
+    // function baseUrl2(){
+    //   return 'http://1ccf6dd8.ngrok.io/';
+    // }
+    // function baseUrl3(){
+    //   return 'http://1ccf6dd8.ngrok.io/';
+    // }
+    // function hierarchy(){
+    //   return 'http://mdm.vijaiami.com/';
+    // }
 
     function baseUrl1(){
       return 'http://mdm.vijaiami.com/';

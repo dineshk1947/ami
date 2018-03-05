@@ -7,11 +7,11 @@
         .controller('MeterCommController', MeterCommController);
 
     /** @ngInject */
-    function MeterCommController($http, $mdToast, baseUrl2, $rootScope, Clear)
+    function MeterCommController($http, $mdToast, baseUrl2, $rootScope, Clear, MessageInfo)
     {
         var vm = this;
         vm.Clear = Clear
-
+        // alert($rootScope.modelArray);
         vm.meterComm ={};
         vm.currDate = new Date();
         vm.switch = "donutChart";
@@ -24,7 +24,7 @@
           return dt.split(' ')[2] + "-" + dt.split(' ')[1] + "-" + dt.split(' ')[3];
         }
 
-      
+
 
 
         //hierarchy
@@ -39,25 +39,25 @@
           }
         }
         //errorToast
-        vm.errorToast = function(mesg) {
-          $mdToast.show(
-            $mdToast.simple()
-              .textContent(mesg)
-              .position('top right')
-              .hideDelay(3000)
-              .toastClass('error')
-          );
-        };
-        //successToast
-        vm.successToast = function(mesg, callback) {
-         $mdToast.show(
-           $mdToast.simple()
-             .textContent(mesg)
-             .position('top right')
-             .hideDelay(3000)
-             .toastClass('success')
-         );
-        };
+        // vm.errorToast = function(mesg) {
+        //   $mdToast.show(
+        //     $mdToast.simple()
+        //       .textContent(mesg)
+        //       .position('top right')
+        //       .hideDelay(3000)
+        //       .toastClass('error')
+        //   );
+        // };
+        // //successToast
+        // vm.successToast = function(mesg, callback) {
+        //  $mdToast.show(
+        //    $mdToast.simple()
+        //      .textContent(mesg)
+        //      .position('top right')
+        //      .hideDelay(3000)
+        //      .toastClass('success')
+        //  );
+        // };
         //Hide and show donutChart and bar chart
         vm.displayFun = function(change) {
           console.log("change",change);
@@ -88,7 +88,7 @@
           data.lastUpdatedDate = dateFormat;
           data.lastUpdatedLogin = 1111;
           data.meterComm = vm.meterComm;
-          console.log("checking data before post",data.meterComm);
+          MessageInfo.showMessage(1005, '', '', '');
 
           $http({
               method : "POST",
@@ -134,9 +134,10 @@
               //arrTemp.shift();
               vm.donutChart.data = arrTemp;
 
-              vm.successToast("Submitted Sucessfully");
+              //vm.successToast("Submitted Sucessfully");
           }, function myError(response) {
-              vm.errorToast("Something went wrong.. Please try again");
+              //vm.errorToast("Something went wrong.. Please try again");
+              MessageInfo.showMessage(1010, '', '', '');
               console.log(response);
           });
         }

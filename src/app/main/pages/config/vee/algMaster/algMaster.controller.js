@@ -5,7 +5,7 @@
         .module('app.algorithmMaster')
         .controller('algorithmMasterController', algorithmMasterController);
     /** @ngInject */
-    function algorithmMasterController(SampleData,$http,$mdDialog,baseUrl2,Clear)
+    function algorithmMasterController(SampleData,$http,$mdDialog,baseUrl2,Clear, MessageInfo)
     {
         var vm = this;
         vm.Clear = Clear;
@@ -82,26 +82,26 @@
                    $scope.algValues.editRequired="N"
                 }
             }
-
-            $scope.errorToast = function(mesg) {
-             $mdToast.show(
-              $mdToast.simple()
-                 .textContent(mesg)
-                 .position('top right')
-                 .hideDelay(3000)
-                 .toastClass('error')
-             );
-           };
-
-            $scope.successToast = function(mesg) {
-            $mdToast.show(
-              $mdToast.simple()
-                .textContent(mesg)
-                .position('top right')
-                .hideDelay(3000)
-                .toastClass('success')
-            );
-        };
+        //
+        //     $scope.errorToast = function(mesg) {
+        //      $mdToast.show(
+        //       $mdToast.simple()
+        //          .textContent(mesg)
+        //          .position('top right')
+        //          .hideDelay(3000)
+        //          .toastClass('error')
+        //      );
+        //    };
+        //
+        //     $scope.successToast = function(mesg) {
+        //     $mdToast.show(
+        //       $mdToast.simple()
+        //         .textContent(mesg)
+        //         .position('top right')
+        //         .hideDelay(3000)
+        //         .toastClass('success')
+        //     );
+        // };
 
         console.log("item is ",itemx);
           $scope.algValues = {};
@@ -267,27 +267,33 @@
                 console.log("KKKKKKKKKKKKKKKKKKKK");
                 console.log($scope.algValues);
                    if($scope.algValues.algName1 == undefined){
-                        $scope.errorToast("Please Select Algorithm Name.");
+                        //$scope.errorToast("Please Select Algorithm Name.");
+                        MessageInfo.showMessage(1017, 'Algorithm Name', '', '');
                         return false;
                     }
                     if($scope.algValues.failurType1 == undefined){
-                         $scope.errorToast("Please Select Failure Type.");
+                         //$scope.errorToast("Please Select Failure Type.");
+                          MessageInfo.showMessage(1017, 'Failure Type', '', '');
                          return false;
                      }
                      if($scope.algValues.notificRequired == "Y" && ( $scope.algValues.notificOnScreen ==undefined ||  $scope.algValues.notificOnScreen =="N"  ) &&  ($scope.algValues.notificSMS  ==undefined ||  $scope.algValues.notificSMS  =="N"  ) && ($scope.algValues.notificEmail   ==undefined ||  $scope.algValues.notificEmail   =="N"  )){
-                          $scope.errorToast("Please Select Atleast one among Onscreen / SMS / Email.");
+                          //$scope.errorToast("Please Select Atleast one among Onscreen / SMS / Email.");
+                          MessageInfo.showMessage(2002, '', '', '');
                           return false;
                       }
                       if($scope.algValues.notificRequired == "Y" && ($scope.algValues.notifyUser1 == undefined || $scope.algValues.notifyUser1 ==null)){
-                           $scope.errorToast("Please Select To Whom Notification should be sent.");
+                           //$scope.errorToast("Please Select To Whom Notification should be sent.");
+                           MessageInfo.showMessage(2003, 'Failure Type', '', '');
                            return false;
                        }
                        if($scope.algValues.notificRequired == "Y" && $scope.algValues.notifyUser1 == "PERSON" && $scope.algValues.mobile ==undefined ){
-                            $scope.errorToast("Please Enter Valid Mobile Number.");
+                            //$scope.errorToast("Please Enter Valid Mobile Number.");
+                            MessageInfo.showMessage(1417, 'Mobile Number', '', '');
                             return false;
                         }
                         if($scope.algValues.notificRequired == "Y" && $scope.algValues.notifyUser1 == "PERSON" && ($scope.algValues.email  == undefined || $scope.algValues.email  == "")){
-                             $scope.errorToast("Please Enter Valid Email Id.");
+                             //$scope.errorToast("Please Enter Valid Email Id.");
+                             MessageInfo.showMessage(1417, 'Email Id', '', '');
                              return false;
                          }
 
@@ -320,13 +326,15 @@
                              console.log();
                              if(response.data.message=="This Algorithm is Already Existed")
                              {
-                               $scope.errorToast(response.data.message)
+                               //$scope.errorToast(response.data.message)
+                               MessageInfo.showMessage(1420, 'Algorithm', '', '');
                                console.log(data);
                              }
                              if(response.data.message=="Success")
                              {
 
-                               $scope.successToast("Algorithm Details have been submitted Sucessfully.");
+                               //$scope.successToast("Algorithm Details have been submitted Sucessfully.");
+                                MessageInfo.showMessage(1414, 'Algorithm', '', '');
                                console.log(response.data.message);
                                getData();
                              }
@@ -368,7 +376,8 @@
                                data: data
                            }).then(function mySuccess(response) {
                                console.log(data);
-                               $scope.successToast("Algorithm Details have been Updated Sucessfully.");
+                               //$scope.successToast("Algorithm Details have been Updated Sucessfully.");
+                                MessageInfo.showMessage(1414, 'Algorithm', '', '');
                                getData();
 
                            }, function myError(response) {

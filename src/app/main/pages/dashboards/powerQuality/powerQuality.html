@@ -9,13 +9,13 @@
           </div>
           <div class="headerTitle"> Power Quality</div>
         </div>
-        <!-- <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()" >
+        <md-button  class="md-icon-button" ng-click="vm.hierarchyShow()" >
           <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
-        </md-button> -->
+        </md-button>
     </div>
     <!-- / HEADER -->
     <!-- CONTENT -->
-    <ms-hierarchys  ng-show="vm.showHeader"></ms-hierarchys>
+    <ms-hierarchy3  ng-show="vm.showHeader" ></ms-hierarchy3>
     <div class="content" layout="column">
       <div layout="row">
         <div class="form-wrapper md-whiteframe-1dp" flex="100" id="power-factor">
@@ -37,18 +37,6 @@
 
             <md-input-container flex="15">
               <md-select ng-model="vm.powerQuality.fmonth" placeholder="select month" ng-disabled="vm.fmonthDisable">
-                <!-- <md-option value = "01">January</md-option>
-                <md-option value = "02">Febraury</md-option>
-                <md-option value = "03">March</md-option>
-                <md-option value = "04">April</md-option>
-                <md-option value = "05">May</md-option>
-                <md-option value = "06">June</md-option>
-                <md-option value = "07">July</md-option>
-                <md-option value = "08">August</md-option>
-                <md-option value = "09">September</md-option>
-                <md-option value = "10">October</md-option>
-                <md-option value = "11">November</md-option>
-                <md-option value = "12">December</md-option> -->
                 <md-option ng-repeat="x in vm.fmonth" value="{{x.value}}">{{x.month}}</md-option>
               </md-select>
             </md-input-container>
@@ -71,25 +59,13 @@
               </div>
               <md-input-container flex="15">
                 <md-select ng-model="vm.powerQuality.tmonth" placeholder="select month" ng-disabled="vm.tmonthDisable">
-                  <!-- <md-option value = "01">January</md-option>
-                  <md-option value = "02">Febraury</md-option>
-                  <md-option value = "03">March</md-option>
-                  <md-option value = "04">April</md-option>
-                  <md-option value = "05">May</md-option>
-                  <md-option value = "06">June</md-option>
-                  <md-option value = "07">July</md-option>
-                  <md-option value = "08">August</md-option>
-                  <md-option value = "09">September</md-option>
-                  <md-option value = "10">October</md-option>
-                  <md-option value = "11">November</md-option>
-                  <md-option value = "12">December</md-option> -->
                     <md-option ng-repeat="x in vm.tmonth" value="{{x.value}}">{{x.month}}</md-option>
                  </md-select>
                 </md-input-container>
               <div flex="5">
               </div>
               <md-button type="submit"  class="md-accent md-raised"  ng-click="vm.powerQualitySubmit()">Submit</md-button>
-              <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.powerQuality)">clear</md-button>
+              <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.powerQuality,hierarchyObj,modelArray)">clear</md-button>
           </div>
 
           <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.progressShow">
@@ -101,7 +77,7 @@
               <!-- <md-button type="submit"  class="md-accent md-raised"  ng-click="vm.powerQualitySubmit()">Submit</md-button> -->
             </div>
             <div flex="60">
-              <table  class="tb-stats" ng-show="vm.statisticsTable">
+              <table  class="tb-stats" ng-show="vm.powerQuality.statisticsTable">
                 <tbody>
                   <tr>
                       <td class="p"><p class="label-font">Total number Of Consumers</p></td>
@@ -129,7 +105,7 @@
             </div>
           </div>
 
-          <div layout="row" ng-show="vm.dataTable">
+          <div layout="row" ng-show="vm.powerQuality.dataTable">
             <div flex="100">
               <div class="tab-heading">
                 <p>{{vm.powerQualityHeading}}</p>
@@ -173,7 +149,7 @@
             </div>
           </div>
 
-          <div layout="row" ng-show="vm.statisticsTable && vm.chartShow">
+          <div layout="row" ng-show="vm.powerQuality.statisticsTable && vm.powerQuality.chartShow">
             <div flex="30">
               <!-- <md-select ng-model="vm.switch" ng-change="vm.displayFun(vm.switch)">
                 <md-option value = "donutChart">Donut Chart</md-option>
@@ -187,14 +163,14 @@
             </div>
           </div>
 
-          <div layout="row"  ng-show="vm.donut && vm.chartShow">
+          <div layout="row"  ng-show="vm.donut && vm.powerQuality.chartShow">
             <div flex="100">
                 <div id="donutchartdiv"></div>
 
             </div>
           </div>
 
-          <div layout="row" ng-show="vm.chart && vm.chartShow">
+          <div layout="row" ng-show="vm.chart && vm.powerQuality.chartShow">
             <div flex="25">
             </div>
             <!-- <div flex="50" >

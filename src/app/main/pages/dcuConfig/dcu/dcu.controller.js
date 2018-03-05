@@ -7,30 +7,11 @@
         .controller('DcuController', DcuController);
 
     /** @ngInject */
-    function DcuController($http, $window, $mdToast, baseUrl1, $timeout, Clear) {
+    function DcuController($http, $window, $mdToast, baseUrl1, $timeout, Clear, MessageInfo) {
       var vm=this;
       vm.Clear = Clear;
       vm.progressShow =false;
       vm.maxDate = new Date();
-      vm.errorToast = function(mesg) {
-         $mdToast.show(
-           $mdToast.simple()
-             .textContent(mesg)
-             .position('top right')
-             .hideDelay(3000)
-             .toastClass('error')
-         );
-       };
-
-      vm.successToast = function(mesg, callback) {
-          $mdToast.show(
-            $mdToast.simple()
-              .textContent(mesg)
-              .position('top right')
-              .hideDelay(3000)
-              .toastClass('success')
-          );
-        };
 
       $('#ip1').keypress(validateNumber);
       $('#ip2').keypress(validateNumber);
@@ -230,8 +211,9 @@
       function validateProto(protos) {
           var t=0;
           if(protos.length == 0){
-              vm.errorToast("Please Enter Atleast One DCU Prototocol Value.");
-              return false;
+              //vm.errorToast("Please Enter Atleast One DCU Prototocol Value.");
+                MessageInfo.showMessage(1412, 'DCU Prototocol Value', '', '');
+                return false;
           }
 
           var count = 0;
@@ -259,7 +241,8 @@
           }
           if(count >=1) {
             //hols.valid = false;
-            vm.errorToast("Please do not enter Duplicate Protocol Names");
+            //vm.errorToast("Please do not enter Duplicate Protocol Names");
+            MessageInfo.showMessage(1413, 'Protocol Name', '', '');
             console.log(count);
             return false;
           }
@@ -315,12 +298,14 @@
                   data: data
               }).then(function mySuccess(response) {
                   console.log(response);
-                  vm.successToast("DCU Protocol Deatails Have Been Submitted Sucessfully.");
+                  //vm.successToast("DCU Protocol Deatails Have Been Submitted Sucessfully.");
+                    MessageInfo.showMessage(1414, 'DCU Protocol', '', '');
 
               }, function myError(response) {
 
                   console.log(response);
-                  vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+                  //vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+                    MessageInfo.showMessage(1010, '', '', '');
               });
 
 
@@ -343,13 +328,15 @@
          // temporory varaible for duplicate validation
         var count =0;
         if(makes.length == 0){
-            vm.errorToast("Please Enter Atleast One Manufacturer Name and Code.");
+            ///vm.errorToast("Please Enter Atleast One Manufacturer Name and Code.");
+              MessageInfo.showMessage(1014, 'Manufacturer Name', 'Code', '');
             return false;
         }
 
         for (var i = 0; i < makes.length; i++) {
           if((makes[i].mcode =="" && makes[i].mname !="") || (makes[i].mcode !="" && makes[i].mname =="")) {
-              vm.errorToast("Please Enter Both Manufacturer Code And Name.");
+              //vm.errorToast("Please Enter Both Manufacturer Code And Name.");
+                MessageInfo.showMessage(1015, 'Manufacturer Name', 'Code', '');
               return false;
           }
         }
@@ -380,7 +367,8 @@
        }
        if(count >=1) {
          console.log(count);
-         vm.errorToast("Please do not enter duplicate manufacturer values");
+         //vm.errorToast("Please do not enter duplicate manufacturer values");
+           MessageInfo.showMessage(1413, 'Manufacturer value', '', '');
          return false;
        }
         return true;
@@ -437,12 +425,14 @@
              data: data
          }).then(function mySuccess(response) {
              console.log(response);
-             vm.successToast("DCU Manufcaturer Details Have Been Submitted Succesfully.");
+             //vm.successToast("DCU Manufcaturer Details Have Been Submitted Succesfully.");
+              MessageInfo.showMessage(1414, 'DCU Manufcaturer', '', '');
 
          }, function myError(response) {
 
              console.log(response);
-             vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+             //vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+               MessageInfo.showMessage(1010, '', '', '');
          });
 
 
@@ -454,7 +444,8 @@
       function validateClass(types) {
         var t=0;
         if(types.length == 0){
-            vm.errorToast("Please Enter Atleast One Device Type.");
+            //vm.errorToast("Please Enter Atleast One Device Type.");
+             MessageInfo.showMessage(1412, 'Device Type', '', '');
             return false;
         }
         var count = 0;
@@ -481,7 +472,8 @@
          }
         if(count >=1) {
           console.log(count);
-          vm.errorToast("Please do not enter duplicate protocol names");
+          //vm.errorToast("Please do not enter duplicate protocol names");
+           MessageInfo.showMessage(1413, 'Protocol Name', '', '');
           return false;
         }
         return true;
@@ -534,12 +526,14 @@
               data: data
           }).then(function mySuccess(response) {
               console.log(response);
-              vm.successToast("DCU Type Deatails Have Been Submitted Sucessfully");
+              //vm.successToast("DCU Type Deatails Have Been Submitted Sucessfully");
+              MessageInfo.showMessage(1414, 'DCU Type', '', '');
 
           }, function myError(response) {
 
               console.log(response);
-              vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+              //vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+                MessageInfo.showMessage(1010, '', '', '');
           });
         }
       }
@@ -549,7 +543,8 @@
       function validateState(statuses) {
         var t=0;
         if(statuses.length == 0){
-            vm.errorToast("Please Enter Atleast One Status Value.");
+            //vm.errorToast("Please Enter Atleast One Status Value.");
+            MessageInfo.showMessage(1412, 'Status Value', '', '');
             return false;
         }
         var count = 0;
@@ -575,7 +570,8 @@
         }
         if(count >=1) {
           console.log(count);
-          vm.errorToast("Please do not enter duplicate Type names");
+          //vm.errorToast("Please do not enter duplicate Type names");
+          MessageInfo.showMessage(1413, 'Type Name', '', '');
           return false;
         }
         return true;
@@ -629,12 +625,14 @@
               data: data
           }).then(function mySuccess(response) {
               console.log(response);
-              vm.successToast("DCU Status Deatails Have Been Submitted Sucessfully");
+              //vm.successToast("DCU Status Deatails Have Been Submitted Sucessfully");
+                MessageInfo.showMessage(1414, 'DCU Status', '', '');
 
           }, function myError(response) {
 
               console.log(response);
-              vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+              //vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+              MessageInfo.showMessage(1010, '', '', '');
           });
         }
       }
@@ -709,12 +707,14 @@
         //alert(currdate);
         if(vm.dcuSelected.devicemakes == undefined)
         {
-          vm.errorToast("Please Select DCU MAKE.");
+          //vm.errorToast("Please Select DCU MAKE.");
+          MessageInfo.showMessage(1017, 'DCU Make', '', '');
           return false;
         }
         if(vm.dcuSelected.devicetypes == undefined)
         {
-          vm.errorToast("Please Select DCU Type.");
+          //vm.errorToast("Please Select DCU Type.");
+          MessageInfo.showMessage(1017, 'DCU Type', '', '');
           return false;
         }
         // if(vm.dcuSelected.deviceprotocols == undefined)
@@ -722,41 +722,49 @@
         //    vm.errorToast("Please Select DCU Protocol.");
         //     return false;
         // }
-        if(installeddate > currdate){
-            vm.errorToast("Installed date can't be a future date.");
-            return false;
-        }
-        if(commisioneddate > currdate){
-            vm.errorToast("Commisoned date can't be a future date.");
-            return false;
-        }
+        // if(installeddate > currdate){
+        //     vm.errorToast("Installed date can't be a future date.");
+        //     return false;
+        // }
+        // if(commisioneddate > currdate){
+        //     vm.errorToast("Commisoned date can't be a future date.");
+        //     return false;
+        // }
         if(commisioneddate < installeddate){
-            vm.errorToast("Commisoned date can't be a lesser than Installed date .");
+            //vm.errorToast("Commisoned date can't be a lesser than Installed date .");
+            MessageInfo.showMessage(1008, 'Commisoned date', 'Installed date', '');
             return false;
         }
         if(vm.dcuSelected.devicestatuses == undefined)
         {
-            vm.errorToast("Please Select DCU Staus.");
+            //vm.errorToast("Please Select DCU Staus.");
+            MessageInfo.showMessage(1017, 'DCU Staus', '', '');
             return false;
         }
         if(latnan == true){
-            vm.errorToast("Please Enter valid latitude.");
+            //vm.errorToast("Please Enter valid latitude.");
+            MessageInfo.showMessage(1408, 'Latitude', '', '');
             return false;
         }
         if(lannan == true){
-            vm.errorToast("Please Enter valid longitude.");
+            //vm.errorToast("Please Enter valid longitude.");
+            MessageInfo.showMessage(1408, 'Longitude', '', '');
             return false;
         }
         if(hesnan == true){
-            vm.errorToast("Please Enter valid HES ID.");
+            //vm.errorToast("Please Enter valid HES ID.");
+            MessageInfo.showMessage(1408, 'HES ID', '', '');
             return false;
         }
         if(pnan == true){
-            vm.errorToast("Please Enter valid port number.");
+            //vm.errorToast("Please Enter valid port number.");
+            MessageInfo.showMessage(1408, 'Port Number', '', '');
             return false;
         }
         if(ip1nan == true || ip2nan == true || ip3nan == true || ip4nan == true){
-            vm.errorToast("Please Enter valid IP adress.");var data = {};
+            //vm.errorToast("Please Enter valid IP adress.");
+            MessageInfo.showMessage(1408, 'IP adress', '', '');
+            var data = {};
             return false;
         }
 
@@ -799,13 +807,14 @@
           }).then(function mySuccess(response) {
               console.log(response);
               vm.progressShow = false;
-              vm.successToast("DCU Details Submitted Sucessfully with DCU S.No "+SerNo);
-
+              //vm.successToast("DCU Details Submitted Sucessfully with DCU S.No "+SerNo);
+              MessageInfo.showMessage(1414, 'DCU', '', '');
 
           }, function myError(response) {
 
               console.log(response);
-              vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+              //vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+              MessageInfo.showMessage(1010, '', '', '');
           });
 
         }
@@ -829,22 +838,24 @@
         //alert(commisioneddate);
         //alert(currdate);
 
-        if(changeinstalleddate > currdate){
-            vm.errorToast("Installed date can't be a future date.");
-            return false;
-        }
-        if(dcufailuredddate > currdate){
-            vm.errorToast("Failure date can't be a future date.");
-            return false;
-        }
+        // if(changeinstalleddate > currdate){
+        //     vm.errorToast("Installed date can't be a future date.");
+        //     return false;
+        // }
+        // if(dcufailuredddate > currdate){
+        //     vm.errorToast("Failure date can't be a future date.");
+        //     return false;
+        // }
         if(changeinstalleddate < dcufailuredddate){
-            vm.errorToast("Installed date can't be a lesser than Failure date .");
+            //vm.errorToast("Installed date can't be a lesser than Failure date .");
+            MessageInfo.showMessage(1008, 'Installed date', 'Failure date', '');
             return false;
         }
 
         if(vm.dcuChange.deviceChangeStatus == undefined)
         {
-            vm.errorToast("Please Select DCU Staus.");
+            //vm.errorToast("Please Select DCU Staus.");
+            MessageInfo.showMessage(1017, 'DCU Staus', '', '');
             return false;
         }
         // if(esr == nsr)
@@ -889,7 +900,8 @@
                 data: data
             }).then(function mySuccess(response) {
                 console.log(data);
-                vm.successToast("New DCU Details Have been Submitted Sucessfully.");
+                //vm.successToast("New DCU Details Have been Submitted Sucessfully.");
+                MessageInfo.showMessage(1411, '', '', '');
                 vm.dcuChange = {};
                 vm.selectedItem1 = "";
                 vm.selectedItem = "";
@@ -897,7 +909,8 @@
             }, function myError(response) {
 
                 console.log(response);
-                vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+                //vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+                MessageInfo.showMessage(1010, '', '', '');
             });
           }
 

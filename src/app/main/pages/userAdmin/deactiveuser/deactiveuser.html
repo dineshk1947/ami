@@ -1,0 +1,91 @@
+<form name="userDeactiveForm" class="md-inline-form" ng-submit="vm.userDeactiveSubmit()" id="user-deactive-form">
+  <md-content class="md-padding">
+    <div class="demo-md-panel-animation md-padding assignRole-class">
+      <div layout="row">
+        <div flex="30">
+        </div>
+        <div flex="20">
+          <p class="label-font auto-align">User ID:</p>
+        </div>
+        <div flex="20">
+           <md-autocomplete
+               md-selected-item="vm.selectedItem1"
+               md-search-text-change="vm.searchTextChange1(vm.searchText1)"
+               md-search-text="vm.searchText1"
+               md-selected-item-change="vm.selectedItemChange1(vm.selectedItem1)"
+               md-items="item in vm.user | filter:vm.searchText1"
+               md-item-text="item.userName"
+               md-min-length="0"
+               placeholder="User Name">
+             <md-item-template>
+               <span md-highlight-text="vm.searchText1" md-highlight-flags="^i" > {{item.userName}}</span>
+             </md-item-template>
+           </md-autocomplete>
+         </div>
+        </div>
+
+          <div layout="row">
+            <div flex="30">
+            </div>
+              <div flex="20">
+                  <p class="label-font auto-align">Designation:</p>
+              </div>
+              <div flex="20">
+                <p class="data-font">{{vm.userDeactive.designationCode}}</p>
+              </div>
+          </div>
+          <div layout="row">
+            <div flex="30">
+            </div>
+              <div flex="20">
+                  <p class="label-font auto-align">Location:</p>
+              </div>
+              <div flex="20">
+              <p class="data-font">{{vm.userDeactive.location}}</p>
+              </div>
+          </div>
+          <div layout="row">
+            <div flex="30">
+            </div>
+              <div flex="20">
+                  <p class="label-font auto-align">Role:</p>
+              </div>
+              <div flex="20">
+                <p class="data-font">{{vm.userDeactive.roleName}}</p>
+              </div>
+          </div>
+          <div layout="row">
+            <div flex="30">
+            </div>
+              <div flex="20">
+                  <p class="label-font auto-align">Status:</p>
+              </div>
+               <md-input-container flex="20">
+                     <md-select ng-model="vm.userDeactive.statusSelected" placeholder="Select Status" class="md-underline">
+                       <md-option ng-repeat="x in vm.status" value="{{x.lookupCode}}">{{x.meaning}}</md-option>
+                     </md-select>
+                </md-input-container>
+          </div>
+          <div layout="row">
+            <div flex="30">
+            </div>
+              <div flex="20">
+                  <p class="label-font auto-align">End Date:</p>
+              </div>
+              <div flex="20">
+               <md-datepicker ng-model="vm.userDeactive.date"   md-placeholder="Enter date" md-open-on-focus ></md-datepicker>
+             </div>
+          </div>
+          <div layout="row">
+            <div flex="40">
+            </div>
+            <div flex = "10">
+              <md-button type="submit"  class="md-accent md-raised">Submit</md-button>
+            </div>
+            <div flex="10">
+              <md-button  ng-click="vm.clearForm()" class="md-raised md-accent" >clear</md-button>
+            </div>
+          </div>
+      </div>
+    </md-content>
+</form>

@@ -4,9 +4,10 @@
   angular
   .module('app.related')
   .controller('RelatedController',RelatedController);
-  function RelatedController($http, $mdToast, baseUrl2, $rootScope, Clear) {
+  function RelatedController($http, $mdToast, baseUrl2, $rootScope, Clear, MessageInfo) {
     var vm = this;
-    vm.Clear = Clear
+    vm.Clear = Clear;
+    //hierarchyControl.HierarchyController();
 
     var data = {};
     vm.meterStatus ={};
@@ -16,10 +17,11 @@
     vm.chart = false;
     vm.donut = true;
     vm.currDate = new Date();
-    vm.chartShow=false;
+    vm.meterStatus.chartShow=false;
     var arr = [];
     var obj = {};
     vm.progressShow=false;
+    vm.hierarchyObj=$rootScope.hierarchyObj;
 
     var splitDate =  function(dt) {
       dt = dt + '';
@@ -36,26 +38,7 @@
         vm.showHeader=true;
       }
     }
-    vm.errorToast = function(mesg) {
-      $mdToast.show(
-        $mdToast.simple()
-          .textContent(mesg)
-          .position('top right')
-          .hideDelay(3000)
-          .toastClass('error')
-      );
-    };
-    vm.successToast = function(mesg, callback) {
-     $mdToast.show(
-       $mdToast.simple()
-         .textContent(mesg)
-         .position('top right')
-         .hideDelay(3000)
-         .toastClass('success')
-     );
-    };
 
-  
     //Hide and show donutChart and bar chart
     vm.displayFun = function(change) {
       console.log("change",change);
@@ -71,23 +54,25 @@
 
     function validMeter() {
       if(vm.meterStatus.fromDate ===undefined || vm.meterStatus.toDate===undefined){
-        vm.errorToast("Please Select Both From Date And To Date");
+         //vm.errorToast("Please Select Both From Date And To Date");
+         MessageInfo.showMessage(7002, '', '', '');
          return false;
       }
       if(vm.meterStatus.fromDate >= vm.meterStatus.toDate){
-        vm.errorToast("To Date Must Be Greater Than From Date. ");
+        //vm.errorToast("To Date Must Be Greater Than From Date. ");
+        MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
          return false;
       }
       return true;
     }
 
     //onclick Submit get counts
-    vm.statisticsTable = false;
+    vm.meterStatus.statisticsTable = false;
     vm.meterStatusSubmit = function() {
       if(validMeter()){
         vm.progressShow=true;
         vm.dataTable = false;
-        vm.statisticsTable = false;
+        vm.meterStatus.statisticsTable = false;
         vm.donut = true;
         vm.chart = false;
         //vm.energyConsumptionObject = [];
@@ -95,12 +80,11 @@
         var arr = [];
         var obj = {};
         var location = [];
-        vm.location = location;
+        //vm.location = location;
         var item;
 
-       //var modelArray =
-        vm.location = [1008, null, null, null, null, null];
-        vm.meterStatus.location = vm.location;
+        var modelArray = $rootScope.modelArray;
+        console.log("$rootScope.modelArray",$rootScope.modelArray);
 
         vm.meterStatus.fromDate = splitDate(vm.meterStatus.fromDate);
         vm.meterStatus.toDate = splitDate(vm.meterStatus.toDate);
@@ -114,20 +98,22 @@
         data.lastUpdatedDate = dateFormat;
         data.lastUpdatedLogin = 1111;
         data.meterStatus = vm.meterStatus;
-        console.log(data.meterStatus);
+        data.modelArray=modelArray;
+        console.log("data sent to DB",data);
+        MessageInfo.showMessage(1005, '', '', '');
 
         $http({
             method : "POST",
             url : baseUrl2 + "mdm/dashboard/meter-status",
             data: data
         }).then(function mySuccess(response) {
-            vm.statisticsTable = true;
+            vm.meterStatus.statisticsTable = true;
             vm.progressShow=false;
             var resp = response.data.statistics;
             vm.counts = resp;
             console.log(resp);
             if(resp.consumerCount>0){
-              vm.chartShow=true;
+              vm.meterStatus.chartShow=true;
             }
             vm.donut = true;
             vm.switch = "donutChart";
@@ -217,15 +203,17 @@
               }
           });
 
-            vm.successToast("Submitted Sucessfully");
+            //vm.successToast("Submitted Sucessfully");
         }, function myError(response) {
-            vm.errorToast("Something went wrong.. Please try again");
+            //vm.errorToast("Something went wrong.. Please try again");
+            MessageInfo.showMessage(1010, '', '', '');
             console.log(response);
         });
 
       }
 
     }
+  
 
   }
 

@@ -7,13 +7,14 @@
         .controller('AreawiseConsumerController', AreawiseConsumerController);
 
     /** @ngInject */
-    function AreawiseConsumerController($http,$mdToast,baseUrl3,$rootScope, Clear)
+    function AreawiseConsumerController($http,$mdToast,baseUrl3,$rootScope, Clear, MessageInfo)
     {
         var vm = this;
         vm.Clear =  Clear;
         var data = {};
         var arr = [];
         var obj = {};
+        vm.areawiseConsumer={};
         vm.progressShow = false;
 
         var htConsumerCount;
@@ -21,35 +22,34 @@
         var wcspConsumerCount;
         var wctpConsumerCount
         var totalCount;
-        vm.statisticsTable = false;
+        vm.areawiseConsumer.statisticsTable = false;
         vm.switch = "";
         vm.chart = false;
         vm.donut = true;
-        vm.areawiseConsumer={};
         vm.progressShow=false;
 
 
 
 
         //function to hide or show hierarchy
-        vm.errorToast = function(mesg) {
-          $mdToast.show(
-            $mdToast.simple()
-              .textContent(mesg)
-              .position('top right')
-              .hideDelay(3000)
-              .toastClass('error')
-          );
-        };
-        vm.successToast = function(mesg, callback) {
-         $mdToast.show(
-           $mdToast.simple()
-             .textContent(mesg)
-             .position('top right')
-             .hideDelay(3000)
-             .toastClass('success')
-         );
-        };
+        // vm.errorToast = function(mesg) {
+        //   $mdToast.show(
+        //     $mdToast.simple()
+        //       .textContent(mesg)
+        //       .position('top right')
+        //       .hideDelay(3000)
+        //       .toastClass('error')
+        //   );
+        // };
+        // vm.successToast = function(mesg, callback) {
+        //  $mdToast.show(
+        //    $mdToast.simple()
+        //      .textContent(mesg)
+        //      .position('top right')
+        //      .hideDelay(3000)
+        //      .toastClass('success')
+        //  );
+        // };
 
 
       vm.fmonthDisable= true;
@@ -158,15 +158,18 @@
        var currMonth = d.getMonth();
 
        if(vm.areawiseConsumer.fmonth ===undefined || vm.areawiseConsumer.fyear===undefined || vm.areawiseConsumer.tmonth===undefined || vm.areawiseConsumer.tyear===undefined){
-         vm.errorToast("Please Select All Fields.");
+         //vm.errorToast("Please Select All Fields.");
+         MessageInfo.showMessage(1017, 'All Fields', '', '');
           return false;
        }
        if((vm.areawiseConsumer.fyear == vm.areawiseConsumer.tyear) && (vm.areawiseConsumer.fmonth > vm.areawiseConsumer.tmonth) ){
-         vm.errorToast("From Date Cannot be Less Than To Date");
+         //vm.errorToast("From Date Cannot be Less Than To Date");
+          MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
           return false;
        }
        if( vm.areawiseConsumer.tyear < vm.areawiseConsumer.fyear  ){
-         vm.errorToast("From Date Cannot be Less Than To Date");
+         //vm.errorToast("From Date Cannot be Less Than To Date");
+          MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
           return false;
        }
        return true;
@@ -175,7 +178,7 @@
         vm.areawiseConsumerSubmit = function(){
           if(validatePage()){
           vm.progressShow=true;
-          vm.statisticsTable = false;
+          vm.areawiseConsumer.statisticsTable = false;
           var modelArray = [];
           modelArray = $rootScope.modelArray;
           console.log($rootScope.modelArray);
@@ -201,11 +204,7 @@
           //data.conType = vm.conType;
         //  data.userId = 1;
           data.modelArray = modelArray;
-
-
-          //console.log(data);
-          //http://dc3e828d.ngrok.io/mdm/aggregations/consumer-details
-
+          MessageInfo.showMessage(1005, '', '', '');
           console.log(data);
           $http({
             method : "POST",
@@ -224,8 +223,8 @@
             wctpConsumerCount = resp.wctpConsumerCount;
             wcspConsumerCount = resp.wcspConsumerCount;
 
-            vm.successToast("Submitted Sucessfully");
-            vm.statisticsTable= true;
+            //vm.successToast("Submitted Sucessfully");
+            vm.areawiseConsumer.statisticsTable= true;
             vm.donut = true;
             vm.switch = "donutChart";
 
@@ -319,7 +318,8 @@
           });
 
           }, function myError(response) {
-            vm.errorToast("Something went wrong.. Please try again");
+            //vm.errorToast("Something went wrong.. Please try again");
+            MessageInfo.showMessage(1010, '', '', '');
             console.log(response);
           });
         }

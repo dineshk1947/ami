@@ -13,7 +13,7 @@
       <md-icon class="fa fa-retweet" style="font-size:30px"></md-icon>
     </md-button>
   </div>
-  <ms-hierarchys ng-show="vm.showHeader"></ms-hierarchys>
+  <ms-hierarchy3 ng-show="vm.showHeader"></ms-hierarchy3>
 
   <!-- CONTENT -->
   <div class="content" layout="column">
@@ -38,7 +38,7 @@
             </div>
             <!-- <div flex="10"> -->
                <md-button type="submit" class="md-accent md-raised" ng-click="vm.meterStatusSubmit()">Submit</md-button>
-              <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.meterStatus)">clear</md-button>
+              <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.meterStatus,hierarchyObj,modelArray)">clear</md-button>
             <!-- </div> -->
             <div flex="10"></div>
            </div>
@@ -54,7 +54,7 @@
              <div flex="5"></div>
 
              <div flex="55">
-               <table  class="tb-stats" ng-if="vm.statisticsTable">
+               <table  class="tb-stats" ng-if="vm.meterStatus.statisticsTable">
                  <tbody>
                    <tr>
                        <td class="p"><p class="label-font">Total number Of Consumers :</p></td>
@@ -80,7 +80,7 @@
 
            </div>
 
-           <div layout="row" ng-show="vm.statisticsTable && vm.chartShow">
+           <div layout="row" ng-show="vm.meterStatus.statisticsTable && vm.meterStatus.chartShow">
              <div flex="30">
                <!-- <md-select ng-model="vm.switch" ng-change="vm.displayFun(vm.switch)">
                  <md-option value = "donutChart">Donut Chart</md-option>
@@ -95,14 +95,14 @@
            </div>
 
 
-           <div layout="row"  ng-show="vm.donut && vm.chartShow">
+           <div layout="row"  ng-show="vm.donut && vm.meterStatus.chartShow">
              <div flex="100">
                  <div id="donutchartdiv"></div>
 
              </div>
            </div>
 
-           <div layout="row" ng-show="vm.chart  && vm.chartShow">
+           <div layout="row" ng-show="vm.chart  && vm.meterStatus.chartShow">
              <div flex="25">
              </div>
              <!-- <div flex="50" >

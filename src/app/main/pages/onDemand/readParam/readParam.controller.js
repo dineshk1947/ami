@@ -11,9 +11,12 @@
     //   console.log("++++++++++++++++++++++++++");
     //   console.log("LoadProfileController");
     // }
-    function ReadParamController($http, $mdToast, baseUrl2, baseUrl1, $rootScope, $mdDialog, Clear) {
+    function ReadParamController($http, $mdToast, baseUrl2, baseUrl1, $rootScope, $mdDialog, Clear, MessageInfo) {
       console.log("ReadParamController");
         var vm = this;
+        vm.billing={};
+        vm.loadProfile={};
+        vm.tpEvents={};
         vm.Clear = Clear;
         vm.showHeader=false;
         vm.currDate = new Date();
@@ -113,11 +116,13 @@
           var eDate = new Date(vm.loadProfile.endDate);
           if($rootScope.meterId == undefined)
           {
-             vm.errorToast("Please Select Meter.");
+             //vm.errorToast("Please Select Meter.");
+             MessageInfo.showMessage(1017, 'Meter', '', '');
               return false;
           }
           if(eDate < sDate){
-              vm.errorToast("End Date Can not be Less than Start Date.");
+              //vm.errorToast("End Date Can not be Less than Start Date.");
+               MessageInfo.showMessage(1007, 'End Date', 'Start Date', '');
               return false;
           }
           return true;
@@ -168,10 +173,12 @@
                     vm.tableShow = false;
                   }
 
-                  vm.successToast("Submitted Sucessfully.");
+                  //vm.successToast("Submitted Sucessfully.");
+                  MessageInfo.showMessage(1012, '', '', '');
             }, function myError(response) {
                 console.log(response);
-                vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+                //vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+                MessageInfo.showMessage(1010, '', '', '');
             });
           }
         }
@@ -267,7 +274,8 @@
           {
             if(evtId==5555)
             {
-              vm.errorToast("Narrow the search.");
+              //vm.errorToast("Narrow the search.");
+              MessageInfo.showMessage(1011, '', '', '');
             }
           }
 
@@ -277,7 +285,8 @@
                 vm.tableDiasbled=true;
               }
               if(vm.requestStatus=="Failure") {
-                vm.successToast("Submitted Sucessfully.");
+                //vm.successToast("Submitted Sucessfully.");
+                MessageInfo.showMessage(1012, '', '', '');
                 vm.tableDiasbled=false;
               }
           }
@@ -304,11 +313,13 @@
               // }
               if(vm.tpEvents.eventId == undefined)
               {
-                 vm.errorToast("Please Select Event.");
+                 //vm.errorToast("Please Select Event.");
+                 MessageInfo.showMessage(1017, 'Event', '', '');
                   return false;
               }
               if(eDate < sDate){
-                  vm.errorToast("End Date Can not be Less than Start Date.");
+                  //vm.errorToast("End Date Can not be Less than Start Date.");
+                  MessageInfo.showMessage(1007, 'End Date', 'Start Date', '');
                   return false;
               }
               return true;
@@ -359,10 +370,12 @@
                       vm.viewDiasbled=true;
                       vm.tableDiasbled=false;
                     }
-                    vm.successToast("Request Has Been Sent. Please view the details below!");
+                    //vm.successToast("Request Has Been Sent. Please view the details below!");
+                    MessageInfo.showMessage(1005, '', '', '');
                 }, function myError(response) {
                     console.log(response);
-                    vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+                    //vm.errorToast("Sorry. We Are Having Some Techinical Issues With Regards To The Server. Please Try Later.");
+                    MessageInfo.showMessage(1010, '', '', '');
                 });
               }
           }

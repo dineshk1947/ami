@@ -6,7 +6,7 @@
         .module('app.eventsmaster')
         .controller('EventsMasterController', EventsMasterController);
 
-    function EventsMasterController($http, $mdToast, baseUrl2, $mdDialog, Clear) {
+    function EventsMasterController($http, $mdToast, baseUrl2, $mdDialog, Clear, MessageInfo) {
         var vm = this;
         vm.Clear = Clear;
         vm.progressShow = false;
@@ -25,35 +25,6 @@
         var title;
         //var notifyReq = "true";
           // to hom select start
-
-
-          vm.errorToast = function(mesg) {
-          //  var pinTo = vm.getToastPosition();
-
-           $mdToast.show(
-             $mdToast.simple()
-               .textContent(mesg)
-               .position('top right')
-               .hideDelay(3000)
-               .toastClass('error')
-
-             );
-           };
-           vm.successToast = function(mesg) {
-           //  var pinTo = vm.getToastPosition();
-
-            $mdToast.show(
-              $mdToast.simple()
-                .textContent(mesg)
-                .position('top right')
-                .hideDelay(3000)
-                .toastClass('success')
-
-            );
-          };
-
-
-
 
         vm.showModal = function(id) {
           console.log(":::;dialog");
@@ -174,22 +145,26 @@
             console.log("email add" + eve.emailAddress);
 
             if(eve.eventName == null) {
-              vm.errorToast("Select any event name before submitting");
+              //vm.errorToast("Select any event name before submitting");
+              MessageInfo.showMessage(1017, 'an Event', '', '');
               return false;
             }
 
            if(eve.notificationReq == "Y") {
              if((eve.emailFlag == "N" ||  eve.emailFlag == undefined) && (eve.smsFlag == "N" ||  eve.smsFlag == undefined) && (eve.onscreenFlag == "N" || eve.onscreenFlag == undefined)) {
-               vm.errorToast("Enable any notification type");
+               //vm.errorToast("Enable any notification type");
+               MessageInfo.showMessage(8002, '', '', '');
                return false;
              }
            }
            if((eve.notificationReq == "Y" && eve.designationCode == "PERSON") && (eve.personalMobile == null || eve.emailAddress == null)) {
-             vm.errorToast("Enter both mobile number and email");
+             //vm.errorToast("Enter both mobile number and email");
+             MessageInfo.showMessage(1015, 'Mobile number', 'Email', '');
              return false;
            }
            if(eve.notificationReq == "Y" && eve.designationCode == undefined) {
-             vm.errorToast("Select whom do you want to send the notification");
+             //vm.errorToast("Select whom do you want to send the notification");
+             MessageInfo.showMessage(8003, '', '', '');
              return false;
            }
            return true;
@@ -314,11 +289,13 @@
                     vm.progressShow = false;
                     console.log("===== " +response.data.status);
                       $scope.answer("Submited successfully");
-                      vm.successToast("Submitted succesfully");
+                      //vm.successToast("Submitted succesfully");
+                      MessageInfo.showMessage(1012, '', '', '');
                       singleGetData();
                   }
                   else {
-                    vm.errorToast("Not updated in records, Try again");
+                    //vm.errorToast("Not updated in records, Try again");
+                    MessageInfo.showMessage(1010, '', '', '');
                   }
 
                     // $scope.eachItem = response.data.eachItem;
@@ -392,11 +369,13 @@
                       console.log(response);
                       console.log("===== " +response.data.status);
                       $scope.answer("Updated successfully");
-                      vm.successToast("Updated succesfully");
+                      //vm.successToast("Updated succesfully");
+                      MessageInfo.showMessage(1002, 'Event', '', '');
                       getData();
                   }
                   else {
-                    vm.errorToast("Not updated in records, Try again");
+                    //vm.errorToast("Not updated in records, Try again");
+                    MessageInfo.showMessage(1010, '', '', '');
                   }
 
 

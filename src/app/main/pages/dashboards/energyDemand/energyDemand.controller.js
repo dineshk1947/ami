@@ -7,25 +7,24 @@
         .controller('EnergyDemandController', EnergyDemandController);
 
     /** @ngInject */
-    function EnergyDemandController($http, $mdToast, baseUrl2, $rootScope, Clear)
+    function EnergyDemandController($http, $mdToast, baseUrl2, $rootScope, Clear, MessageInfo)
     {
         var vm = this;
         vm.Clear = Clear;
-
+        vm.energyDemand = {};
         var slvList;
         var clvList;
         var drlvList;
         var data = {};
         var arr = [];
         var obj = {};
-        vm.statisticsTable = false;
+        vm.energyDemand.statisticsTable = false;
         vm.switch = "";
         vm.showHeader = false;
-        vm.dataTable = false;
+        vm.energyDemand.dataTable = false;
         vm.chart = false;
         vm.donut = true;
-        vm.energyDemand = {};
-        vm.chartShow=false;
+        vm.energyDemand.chartShow=false;
         vm.progressShow=false;
 
         vm.fmonthDisable= true;
@@ -92,26 +91,7 @@
           return dt.split(' ')[2] + "-" + dt.split(' ')[1] + "-" + dt.split(' ')[3];
         }
 
-        vm.errorToast = function(mesg) {
-          $mdToast.show(
-            $mdToast.simple()
-              .textContent(mesg)
-              .position('top right')
-              .hideDelay(3000)
-              .toastClass('error')
-          );
-        };
-        vm.successToast = function(mesg, callback) {
-         $mdToast.show(
-           $mdToast.simple()
-             .textContent(mesg)
-             .position('top right')
-             .hideDelay(3000)
-             .toastClass('success')
-         );
-        };
-        
-
+      
         //function to hide or show hierarchy
         vm.hierarchyShow = function() {
           if(vm.showHeader) {
@@ -160,15 +140,18 @@
 
         function validatePage() {
           if(vm.energyDemand.fmonth ===undefined || vm.energyDemand.fyear===undefined || vm.energyDemand.tmonth===undefined || vm.energyDemand.tyear===undefined || vm.energyDemand.catTypeId===undefined){
-            vm.errorToast("Please Select All Fields.");
+            //vm.errorToast("Please Select All Fields.");
+            MessageInfo.showMessage(1017, 'All Fields', '', '');
              return false;
           }
           if((vm.energyDemand.fyear == vm.energyDemand.tyear) && (vm.energyDemand.fmonth > vm.energyDemand.tmonth) ){
-            vm.errorToast("From Date Cannot be Less Than To Date");
+            //vm.errorToast("From Date Cannot be Less Than To Date");
+            MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
              return false;
           }
           if( vm.energyDemand.tyear < vm.energyDemand.fyear  ){
-            vm.errorToast("From Date Cannot be Less Than To Date");
+            //vm.errorToast("From Date Cannot be Less Than To Date");
+            MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
              return false;
           }
 
@@ -178,8 +161,8 @@
         //onclick Submit get counts
         vm.energyDemandSubmit = function() {
          if(validatePage()){
-          vm.dataTable = false;
-          vm.statisticsTable = false;
+          vm.energyDemand.dataTable = false;
+          vm.energyDemand.statisticsTable = false;
           vm.donut = true;
           vm.chart = false;
           vm.energyConsumptionObject = [];
@@ -187,13 +170,13 @@
           var arr = [];
           var obj = {};
           vm.progressShow=true;
-
-
-          var location = [];
-            vm.location = [1008, null, null, null, null, null];
+          var modelArray = $rootScope.modelArray;
+          console.log("$rootScope.modelArray",$rootScope.modelArray);
+          // var location = [];
+          //   vm.location = [1008, null, null, null, null, null];
           var item;
           //vm.location = $rootScope.modelArray;
-          vm.energyDemand.location = vm.location;
+          //vm.energyDemand.location = vm.location;
           var date = new Date() + "";
           var dateFormat = date.split(' ')[2] + "-" + date.split(' ')[1] + "-" + date.split(' ')[3];
           data.createdDate = dateFormat;
@@ -203,7 +186,10 @@
           data.lastUpdatedDate = dateFormat;
           data.lastUpdatedLogin = 1111;
           data.energyDemand = vm.energyDemand;
+          data.modelArray = modelArray;
           console.log(data.energyDemand);
+
+          MessageInfo.showMessage(1005, '', '', '');
 
           $http({
               method : "POST",
@@ -212,7 +198,7 @@
           }).then(function mySuccess(response) {
               console.log("}}}}}}}}}}}}}}}}");
 
-              vm.statisticsTable = true;
+              vm.energyDemand.statisticsTable = true;
               vm.progressShow=false;
               var resp1 = response.data.statistics;
               var resp = response.data.statistics.counts;
@@ -220,13 +206,13 @@
               console.log(resp);
               console.log(resp1);
               if(resp.consumerCount>0){
-                vm.chartShow=true;
+                vm.energyDemand.chartShow=true;
               }
               slvList = resp1.slvList;
               clvList = resp1.clvList;
               drlvList = resp1.drlvList;
 
-              vm.statisticsTable = true;
+              vm.energyDemand.statisticsTable = true;
               vm.donut = true;
               vm.switch = "donutChart";
 
@@ -317,9 +303,10 @@
                 }
             });
 
-              vm.successToast("Submitted Sucessfully");
+              //vm.successToast("Submitted Sucessfully");
           }, function myError(response) {
-              vm.errorToast("Something went wrong.. Please try again");
+              //vm.errorToast("Something went wrong.. Please try again");
+                MessageInfo.showMessage(1010, '', '', '');
               console.log(response);
           });
         }
@@ -327,7 +314,7 @@
 
         //onclick each count displayData
         vm.displayData = function(violated) {
-          vm.dataTable = true;
+          vm.energyDemand.dataTable = true;
           console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
           console.log(violated);
 

@@ -278,26 +278,31 @@
             if(threshold.veeParaCode == null || threshold.userName == null) {
               console.log("+++++++++++++++++++++++");
               vm.errorToast("Select both parameter name and username");
+
               return false;
             }
             if((threshold.minValue == undefined || threshold.minValue == null) && (threshold.maxValue == undefined || threshold.maxValue == null) && (threshold.minPercentage == undefined || threshold.minPercentage == null) && (threshold.maxPercentage == undefined || threshold.maxPercentage == null)) {
               console.log(threshold.minValue);
-              vm.errorToast("Enter atleast one value among min and max");
+              //vm.errorToast("Enter atleast one value among min and max");
+              MessageInfo.showMessage(9001, '', '', '');
               return false;
             }
             if (threshold.minValue < 0 || threshold.maxValue < 0 || threshold.minPercentage < 0 || threshold.maxPercentage < 0) {
               console.log(threshold.minValue);
-              vm.errorToast("value must be >= 0");
+              //vm.errorToast("value must be >= 0");
+              MessageInfo.showMessage(9002, '', '', '');
               return false;
             }
             if ((threshold.minValue >= threshold.maxValue && (threshold.minValue != null &&  threshold.maxValue != null)) ||  (threshold.minPercentage >= threshold.maxPercentage && (threshold.minPercentage != null && threshold.maxPercentage != null))) {
               console.log("max values:");
               console.log(threshold.maxValue);
-              vm.errorToast("Min Value & Max value sholud be less than Min Percentage, Max Percentage");
+              //vm.errorToast("Min Value & Max value sholud be less than Min Percentage, Max Percentage");
+              MessageInfo.showMessage(9003, '', '', '');
               return false;
             }
             if(threshold.effectiveDate == undefined) {
-              vm.errorToast("Enter effective date");
+              //vm.errorToast("Enter effective date");
+              MessageInfo.showMessage(1009, 'Effective Date', '', '');
               return false;
             }
             if ($scope.update) {
@@ -358,12 +363,14 @@
                         console.log(response);
                         console.log("===== " +response.data.message);
                         $scope.answer("Submited Successfully");
-                        vm.successToast("Submitted Successful");
+                        //vm.successToast("Submitted Successful");
+                          MessageInfo.showMessage(1012, '', '', '');
                         //singleGetData1();
                         getData(10001,107);
                     }
                     else {
-                      vm.errorToast("Not updated in records, Try again");
+                      //vm.errorToast("Not updated in records, Try again");
+                        MessageInfo.showMessage(1010, '', '', '');
                     }
                 }, function myError(response) {
                     console.log(response);
@@ -412,11 +419,13 @@
                       console.log(response);
                       console.log("===== " +response.data.message);
                       $scope.answer("Updated Successfully");
-                      vm.successToast("Updated Successful");
+                      //vm.successToast("Updated Successful");
+                        MessageInfo.showMessage(1002, 'Records', '', '');
                       getData();
                   }
                   else {
-                    vm.errorToast("Not updated in records, Try again");
+                    //vm.errorToast("Not updated in records, Try again");
+                      MessageInfo.showMessage(1010, '', '', '');
                   }
 
                 }, function myError(response) {
