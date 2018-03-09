@@ -1,0 +1,408 @@
+<div  class="page-layout simple fullwidth doc-page reports" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Reports</span>
+            </div>
+
+            <div class="headerTitle">Billing Reports / Energy</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+        <div layout="row">
+          <div class="form-wrapper md-whiteframe-1dp reports" flex="100" >
+            <div class="pf-tab">
+              <div class="top-block">
+                <div layout="row" class="hierarchy-align">
+                  <div flex="10">
+                    <p class="label-font">Discom :</p>
+                  </div>
+                  <div flex="15">
+                    <p class="data-font"> {{vm.billingEnergy.discom}}</p>
+                  </div>
+                  <div flex="10">
+                    <p class="label-font" >Region :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.billingEnergy.region">
+                    <p class="data-font" > {{vm.billingEnergy.regionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.billingEnergy.region1">
+                    <md-select ng-change="vm.getCircles()"  ng-model="vm.billEnergy.regionid" placeholder="select region" class="md-underline">
+                      <md-option ng-repeat="x in vm.billingEnergy.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Circles :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.billingEnergy.circle">
+                    <p class="data-font" >{{vm.billingEnergy.circleName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.billingEnergy.circle1">
+                    <md-select  ng-change="vm.getDivision()" ng-model="vm.billEnergy.circleid" placeholder="select circle" class="md-underline">
+                      <md-option ng-repeat="x in vm.billingEnergy.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Division :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.billingEnergy.division">
+                    <p class="data-font" >{{vm.billingEnergy.divisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.billingEnergy.division1">
+                    <md-select  ng-change="vm.getSubDivisions()" ng-model="vm.billEnergy.divisionid" placeholder="select division" class="md-underline">
+                      <md-option ng-repeat="x in vm.billingEnergy.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+                <div layout="row" class="hierarchy-align">
+                  <div flex="10">
+                    <p class="label-font" >Sub Division:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.billingEnergy.subdivision">
+                    <p class="data-font" >{{vm.billingEnergy.subdivisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.billingEnergy.subdivision1" >
+                    <md-select ng-change="vm.getSections()" ng-model="vm.billEnergy.subdivisionid" placeholder="select subdivision" class="md-underline">
+                      <md-option ng-repeat="x in vm.billingEnergy.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+
+                  <div flex="10">
+                    <p class="label-font">Sections:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.billingEnergy.section">
+                    <p class="data-font" >{{vm.billingEnergy.sectionid}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.billingEnergy.section1">
+                    <md-select ng-change="vm.getMeters()" ng-model="vm.billEnergy.sectionid" placeholder="select section" class="md-underline">
+                      <md-option ng-repeat="x in vm.billingEnergy.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+
+                  </md-input-container>
+
+                  <div flex="10">
+                    <p class="label-font">Meter:</p>
+                  </div>
+
+                  <md-autocomplete
+
+                     md-selected-item="vm.billEnergy.selectedItem"
+                     md-search-text-change="vm.searchTextChange(vm.billEnergy.searchText)"
+                     md-search-text="vm.billEnergy.searchText"
+                     md-selected-item-change="vm.setMeter(vm.billEnergy.selectedItem)"
+
+                     md-items="item in vm.billingEnergy.meters | filter:vm.billEnergy.searchText"
+                     md-item-text="item.mtrNo"
+                     md-min-length="0"
+                     placeholder="Enter meter"
+                     ng-required="true">
+
+                     <md-item-template>
+                       <span md-highlight-text="vm.billEnergy.searchText" md-highlight-flags="^i" > {{item.mtrNo}}</span>
+                     </md-item-template>
+
+                   </md-autocomplete>
+                 </div>
+                <div layout="row" class = "hierarchy-align">
+                  <div flex="5">
+                    <p class="label-font">From</p>
+                  </div>
+                  <md-input-container flex="15">
+                    <md-select ng-model="vm.billEnergy.fyear" placeholder="select year" ng-change = "vm.getMonth()">
+                      <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
+                      <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
+                      <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="5">
+                  </div>
+                  <md-input-container flex="15">
+                    <md-select ng-model="vm.billEnergy.fmonth" placeholder="select month" ng-disabled="vm.fmonthDisable">
+                      <md-option ng-repeat="x in vm.fmonth" value="{{x}}">{{x.month}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="5">
+                  </div>
+                  <div flex="5">
+                    <p class="label-font">To</p>
+                  </div>
+                  <md-input-container flex="15">
+                    <md-select ng-model="vm.billEnergy.tyear" placeholder="select year" ng-change = "vm.getMonth2()">
+                      <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
+                      <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
+                      <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="5">
+                  </div>
+                  <md-input-container flex="15">
+                    <md-select ng-model="vm.billEnergy.tmonth" placeholder="select month" ng-disabled="vm.tmonthDisable">
+                      <md-option ng-repeat="x in vm.tmonth" value="{{x}}">{{x.month}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="5">
+                  </div>
+                </div>
+                <div class="btn-align">
+                  <md-button type="submit" ng-click="vm.billingEnergySubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                  <md-button ng-click="vm.Clear.clearObj(vm.billEnergy)" class="md-raised md-accent">clear</md-button>
+                </div>
+                <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.progressShow">
+                  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+              </div>
+              <div class="data-block" ng-show = "vm.billEnergy.showReport">
+                <div layout="row">
+                  <div class="main">
+                    <span> <img src="assets/images/TSSPDCL.jpg" alt=""> </span>
+                    <span> <p>Telangana State Southern Power Distribution Company Limited</p> </span>
+                  </div>
+                </div>
+                <!-- <div layout="row">
+                  <div class="details">
+                    <p>Power Factor report for <span>{{ vm.fromMonth.month }} - {{ vm.billEnergy.fyear }} to {{ vm.toMonth.month }} - {{ vm.billEnergy.tyear }}</span></p>
+                    <p>
+                      <span class="label-font">SubStation :</span><span>{{vm.substation}}</span>
+                      <span class="label-font">Feeder :</span><span>{{vm.feeder}}</span>
+                      <span class="label-font">DTR :</span><span>{{vm.dtr}}</span>
+                      <span class="label-font">Meter :</span><span>{{vm.mtrslno}}</span>
+                    </p>
+                  </div>
+                </div> -->
+
+
+                <div layout="row" class="noMargin">
+                  <div class="details" >
+                    <p>Billing Energy report for <span>{{vm.frommonth.month}} - {{vm.billEnergy.fyear}} to {{vm.toMonth.month}} - {{vm.billEnergy.tyear}}</span></p>
+                  </div>
+                </div>
+                <div layout="row">
+                  <div flex="5">
+
+                  </div>
+                  <div flex="10">
+                      <p class="label-font auto-align">SubStation:</p>
+                  </div>
+                  <div flex="15">
+                    <p class="data-font">{{vm.substation}}</p>
+                  </div>
+                  <div flex="5">
+                      <p class="label-font auto-align">Feeder:</p>
+                  </div>
+                  <div flex="20">
+                    <p class="data-font">{{vm.feeder}}</p>
+                  </div>
+                  <div flex="5">
+                      <p class="label-font auto-align">DTR:</p>
+                  </div>
+                  <div flex="20">
+                    <p class="data-font">{{vm.dtr}}</p>
+                  </div>
+                  <div flex="5">
+                      <p class="label-font auto-align">Meter:</p>
+                  </div>
+                  <div flex="10">
+                    <p class="data-font">{{vm.mtrslno}}</p>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div layout="row" flex="100" id="tableScroll">
+                 <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="billingEnergyTable">
+                   <thead>
+                     <tr>
+                       <th class="secondary-text" rowspan="2">
+                         <div class="table-header">
+                             <span class="column-title">S No</span>
+                         </div>
+                       </th>
+                      <th class="secondary-text" rowspan="2">
+                        <div class="table-header">
+                            <span class="column-title">Meter S No</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" rowspan="2">
+                        <div class="table-header">
+                            <span class="column-title">Month</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="9">
+                        <div class="table-header">
+                            <span class="column-title">KWH</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="9">
+                        <div class="table-header">
+                            <span class="column-title">KVAH</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="2">
+                        <div class="table-header">
+                            <span class="column-title">KVARH</span>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ1</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ2</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ3</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ4</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ5</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ6</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ7</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ8</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title"> Cumm KWH</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ1</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ2</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ3</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ4</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ5</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ6</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ7</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">TZ8</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Cumm KVAH</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Lead</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Lag</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in vm.billingEnergy.meters">
+                      <td>{{$index+1}}</td>
+                      <td>{{item.mtrslno}}</td>
+                      <td>{{item.billingDate | date : 'MMM,yyyy'}}</td>
+                      <td>{{item.cumEngKwhTz1  | limitTo : 6}}</td>
+                      <td>{{item.cumEngKwhTz2  | limitTo : 6}}</td>
+                      <td>{{item.cumEngKwhTz3  | limitTo : 6}}</td>
+                      <td>{{item.cumEngKwhTz4  | limitTo : 6}}</td>
+                      <td>{{item.cumEngKwhTz5  | limitTo : 6}}</td>
+                      <td>{{item.cumEngKwhTz6  | limitTo : 6}}</td>
+                      <td>{{item.cumEngKwhTz7  | limitTo : 6}}</td>
+                      <td>{{item.cumEngKwhTz8  | limitTo : 6}}</td>
+                      <td>{{item.cumEngKwh  | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvahTz1 | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvahTz2 | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvahTz3 | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvahTz4 | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvahTz5 | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvahTz6 | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvahTz7 | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvahTz8 | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvah | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvarhLag | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvarhLead | limitTo : 6}}</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <div layout="row" class="download-btn">
+                <a href="#"><span>PDF</span></a>
+                <a href="#"><span>Excel</span></a>
+                <a href="#"><span>CSV</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / CONTENT -->
+</div>
