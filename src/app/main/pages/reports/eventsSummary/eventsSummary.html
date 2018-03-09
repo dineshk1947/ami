@@ -1,0 +1,246 @@
+<div  class="page-layout simple fullwidth doc-page reports" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Reports</span>
+            </div>
+            <div class="headerTitle">Events Summary</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+        <div layout="row">
+          <div class="form-wrapper md-whiteframe-1dp es" flex="100" >
+            <div class="pf-tab">
+              <div class="top-block">
+                <!-- <div layout="row" class="hierarchy-align">
+                  <div flex="10">
+                    <p class="label-font">Discom :</p>
+                  </div>
+                  <div flex="15">
+                    <p class="data-font"> {{vm.eventsSummary.discom}}</p>
+                  </div>
+                  <div flex="10">
+                    <p class="label-font" >Region :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.eventsSummary.region">
+                    <p class="data-font" > {{vm.eventsSummary.regionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.eventsSummary.region1">
+                    <md-select ng-change="vm.getCircles()"  ng-model="vm.eventsSummary.regionid" placeholder="select region" class="md-underline">
+                      <md-option ng-repeat="x in vm.eventsSummary.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Circles :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.eventsSummary.circle">
+                    <p class="data-font" >{{vm.eventsSummary.circleName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.eventsSummary.circle1">
+                    <md-select  ng-change="vm.getDivision()" ng-model="vm.eventsSummary.circleid" placeholder="select circle" class="md-underline">
+                      <md-option ng-repeat="x in vm.eventsSummary.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Division :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.eventsSummary.division">
+                    <p class="data-font" >{{vm.eventsSummary.divisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.eventsSummary.division1">
+                    <md-select  ng-change="vm.getSubDivisions()" ng-model="vm.eventsSummary.divisionid" placeholder="select division" class="md-underline">
+                      <md-option ng-repeat="x in vm.eventsSummary.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                </div> -->
+                <div layout="row" class="hierarchy-align">
+                  <!-- <div flex="10">
+                    <p class="label-font" >Sub Division:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.eventsSummary.subdivision">
+                    <p class="data-font" >{{vm.eventsSummary.subdivisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.eventsSummary.subdivision1" >
+                    <md-select ng-change="vm.getSections()" ng-model="vm.eventsSummary.subdivisionid" placeholder="select subdivision" class="md-underline">
+                      <md-option ng-repeat="x in vm.eventsSummary.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Sections:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.eventsSummary.section">
+                    <p class="data-font" >{{vm.eventsSummary.sectionid}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.eventsSummary.section1">
+                    <md-select  ng-change="vm.getSubStations()" ng-model="vm.eventsSummary.sectionid" placeholder="select section" class="md-underline">
+                     <md-option ng-repeat="x in vm.eventsSummary.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container> -->
+
+                  <div flex="10" class="vhide">
+                    <p class="label-font">Sub Stations :</p>
+                  </div>
+
+
+                  <md-input-container flex="15" class="vhide">
+                    <md-select  ng-change="vm.getFeeder()" ng-model="vm.summary.substationid" placeholder="select substation" class="md-underline">
+                      <md-option ng-repeat="x in vm.eventsSummary.substations"  value="{{x.substationId}}">{{x.subStation}}</md-option>
+                    </md-select>
+                  </md-input-container>
+
+                  <div flex="10" class="vhide">
+                    <p class="label-font">Feeder :</p>
+                  </div>
+
+                  <md-input-container flex="15" class="vhide">
+                    <md-select  ng-change="vm.getDtr()" ng-model="vm.summary.feederid" placeholder="select feeder" class="md-underline">
+                      <md-option ng-repeat="x in vm.eventsSummary.feeders"  value="{{x.feederId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+
+                  <div flex="10">
+                    <p class="label-font">DTR :</p>
+                  </div>
+
+                  <md-input-container flex="15" >
+                    <md-select  ng-change="vm.getMeters()" ng-model="vm.summary.dtrid" placeholder="select DTR" class="md-underline">
+                      <md-option ng-repeat="x in vm.eventsSummary.dtrs"  value="{{x.dtrId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Meter:</p>
+                  </div>
+                  <md-autocomplete
+                     md-no-cache = "noCache"
+                     md-selected-item="vm.summary.mtrNo"
+                     md-search-text-change="vm.searchTextChange(vm.summary.searchText)"
+                     md-search-text="vm.summary.searchText"
+                     md-selected-item-change="vm.getMeter(vm.summary.mtrNo)"
+                     md-items="item in vm.eventsSummary.meters  | filter:vm.summary.searchText"
+                     md-item-text="item.mtrNo"
+                     md-min-length="0"
+                     placeholder="Enter meter"
+                     ng-required="true">
+                     <md-item-template>
+                       <span md-highlight-text="vm.summary.searchText" md-highlight-flags="^i" > {{item.mtrNo}}</span>
+                     </md-item-template>
+                   </md-autocomplete>
+                 </div>
+                <div layout="row" class = "hierarchy-align">
+                  <div flex=20></div>
+                  <div flex="5">
+                    <p class="label-font">From</p>
+                  </div>
+                  <md-datepicker ng-model="vm.summary.fromdate"   md-placeholder="Enter From date" md-open-on-focus ></md-datepicker>
+                  <div flex="5">
+                  </div>
+
+                  <div flex="5">
+                    <p class="label-font">To</p>
+                  </div>
+                  <md-datepicker ng-model="vm.summary.todate"   md-placeholder="Enter To date" md-open-on-focus ></md-datepicker>
+                  <div flex="5">
+                  </div>
+
+                </div>
+                <div class="btn-align">
+                  <md-button type="submit"  ng-click="vm.eventsSummarySubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                  <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.summary)">clear</md-button>
+                </div>
+                <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.eventsSummary.progressShow">
+                  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+              </div>
+              <div class="data-block" ng-show = "vm.summary.showtabledata">
+              <!-- <div class="data-block"> -->
+                <div layout="row">
+                  <div class="main">
+                    <span> <img src="assets/images/TSSPDCL.jpg" alt=""> </span>
+                    <span> <p>Telangana State Southern Power Distribution Company Limited</p> </span>
+                  </div>
+                </div>
+                <div layout="row" class="noMargin">
+                  <div class="details">
+                    <p>Events Summary Report for <span>{{vm.summary.fromdate1}}  to {{vm.summary.todate1}}</span></p>
+                  </div>
+                </div>
+                <div layout="row">
+
+                      <div flex="10">
+                          <p class="label-font auto-align">SubStation:</p>
+                      </div>
+                      <div flex="15">
+                        <p class="data-font">{{vm.eventsSummary.details.subStation}}</p>
+                      </div>
+                      <div flex="10">
+                          <p class="label-font auto-align">Feeder:</p>
+                      </div>
+                      <div flex="20">
+                        <p class="data-font">{{vm.eventsSummary.details.feeder}}</p>
+                      </div>
+                      <div flex="10">
+                          <p class="label-font auto-align">DTR:</p>
+                      </div>
+                      <div flex="20">
+                        <p class="data-font">{{vm.eventsSummary.details.dtr}}</p>
+                      </div>
+                      <div flex="5">
+                          <p class="label-font auto-align">Meter:</p>
+                      </div>
+                      <div flex="10">
+                        <p class="data-font">{{vm.summary.mtrNo.mtrNo}}</p>
+                      </div>
+
+
+
+                </div>
+                <div layout="row" flex="100" id="tableScroll"class="noMargin">
+                 <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="eventTable">
+                   <thead>
+                     <tr>
+                       <th class="secondary-text" >
+                         <div class="table-header">
+                             <span class="column-title">S No</span>
+                         </div>
+                       </th>
+                        <th  class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">Group</span>
+                          </div>
+                        </th>
+                        <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">Count</span>
+                          </div>
+                        </th>
+
+                        </tr>
+
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="evnt in vm.eventsArr">
+                          <td>{{$index+1}}</td>
+                          <td>{{evnt.eventGroup}}</td>
+                          <td>{{evnt.eventCount}}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+                <div layout="row" class="download-btn">
+                  <a href="#"><span>PDF</span></a>
+                  <a href="#"><span>Excel</span></a>
+                  <a href="#"><span>CSV</span></a>
+                </div>
+              </div>
+            </div>
+          <!-- </div> -->
+          </div>
+        </div>
+    </div>
+    <!-- / CONTENT -->
+</div>
