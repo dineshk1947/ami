@@ -1,0 +1,263 @@
+<div  class="page-layout simple fullwidth doc-page reports" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Reports</span>
+            </div>
+            <div class="headerTitle">Billing Demand</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+        <div layout="row">
+          <div class="form-wrapper md-whiteframe-1dp bd" flex="100" >
+            <div class="pf-tab">
+              <div class="top-block">
+                <div layout="row" class="hierarchy-align">
+                  <div flex="10">
+                    <p class="label-font">Discom :</p>
+                  </div>
+                  <div flex="15">
+                    <p class="data-font"> {{vm.billingDemand.discom}}</p>
+                  </div>
+                  <div flex="10">
+                    <p class="label-font" >Region :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.billingDemand.region">
+                    <p class="data-font" > {{vm.billingDemand.regionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.billingDemand.region1">
+                    <md-select ng-change="vm.getCircles(vm.billDemand.regionid)"  ng-model="vm.billDemand.regionid" placeholder="select region" class="md-underline">
+                      <md-option ng-repeat="x in vm.billingDemand.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Circles :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.billingDemand.circle">
+                    <p class="data-font" >{{vm.billingDemand.circleName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.billingDemand.circle1">
+                    <md-select  ng-change="vm.getDivision(vm.billDemand.circleid)" ng-model="vm.billDemand.circleid" placeholder="select circle" class="md-underline">
+                      <md-option ng-repeat="x in vm.billingDemand.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Division :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.billingDemand.division">
+                    <p class="data-font" >{{vm.billingDemand.divisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.billingDemand.division1">
+                    <md-select  ng-change="vm.getSubDivisions(vm.billDemand.divisionid)" ng-model="vm.billDemand.divisionid" placeholder="select division" class="md-underline">
+                      <md-option ng-repeat="x in vm.billingDemand.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+                <div layout="row" class="hierarchy-align">
+                  <div flex="10">
+                    <p class="label-font" >Sub Division:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.billingDemand.subdivision">
+                    <p class="data-font" >{{vm.billingDemand.subdivisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.billingDemand.subdivision1" >
+                    <md-select ng-change="vm.getSections(vm.billDemand.subdivisionid)" ng-model="vm.billDemand.subdivisionid" placeholder="select subdivision" class="md-underline">
+                      <md-option ng-repeat="x in vm.billingDemand.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Sections:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.billingDemand.section">
+                    <p class="data-font" >{{vm.billingDemand.sectionid}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.billingDemand.section1">
+                    <md-select  ng-change="vm.getMeters(vm.billDemand.sectionid)" ng-model="vm.billDemand.sectionid" placeholder="select section" class="md-underline">
+                     <md-option ng-repeat="x in vm.billingDemand.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Meter:</p>
+                  </div>
+                  <md-autocomplete
+                     md-selected-item="vm.billDemand.selectedItem"
+                     md-search-text-change="vm.searchTextChange(vm.billDemand.searchText)"
+                     md-search-text="vm.billDemand.searchText"
+                     md-selected-item-change="vm.getMeter(vm.billDemand.selectedItem)"
+                     md-items="item in vm.billingDemand.meters  | filter:vm.billDemand.searchText"
+                     md-item-text="item.mtrNo"
+                     md-min-length="0"
+                     placeholder="Enter meter"
+                     ng-required="true">
+                     <md-item-template>
+                       <span md-highlight-text="vm.billDemand.searchText" md-highlight-flags="^i" > {{item.mtrNo}}</span>
+                     </md-item-template>
+                   </md-autocomplete>
+                 </div>
+                <div layout="row" class = "hierarchy-align">
+                  <div flex="5">
+                    <p class="label-font">From</p>
+                  </div>
+                  <md-input-container flex="15">
+                    <md-select ng-model="vm.billDemand.fyear" placeholder="select year" ng-change = "vm.getMonth()">
+                      <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
+                      <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
+                      <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="5">
+                  </div>
+                  <md-input-container flex="15">
+                    <md-select ng-model="vm.billDemand.fmonth" placeholder="select month" ng-disabled="vm.fmonthDisable">
+                      <md-option ng-repeat="x in vm.fmonth" value="{{x}}">{{x.month}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="5">
+                  </div>
+                  <div flex="5">
+                    <p class="label-font">To</p>
+                  </div>
+                  <md-input-container flex="15">
+                    <md-select ng-model="vm.billDemand.tyear" placeholder="select year" ng-change = "vm.getMonth2()">
+                      <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
+                      <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
+                      <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="5">
+                  </div>
+                  <md-input-container flex="15">
+                    <md-select ng-model="vm.billDemand.tmonth" placeholder="select month" ng-disabled="vm.tmonthDisable">
+                      <md-option ng-repeat="x in vm.tmonth" value="{{x}}">{{x.month}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="5">
+                  </div>
+                </div>
+                <div class="btn-align">
+                  <md-button type="submit"  ng-click="vm.billingDemandSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                  <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.billDemand)">clear</md-button>
+                </div>
+                <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.billingDemand.progressShow">
+                  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+              </div>
+              <!--  -->
+              <div class="data-block" ng-show = "vm.billDemand.showtabledata" >
+                <div layout="row">
+                  <div class="main">
+                    <span> <img src="assets/images/TSSPDCL.jpg" alt=""> </span>
+                    <span> <p>Telangana State Southern Power Distribution Company Limited</p> </span>
+                  </div>
+                </div>
+                <div layout="row" class="noMargin">
+                  <div class="details" >
+                    <p>Billing Demand report for <span>{{vm.frommonth.month}} - {{vm.billDemand.fyear}} to {{vm.frommonth.month}} - {{vm.billDemand.tyear}}</span></p>
+                  </div>
+                </div>
+                <div layout="row">
+
+                      <div flex="10">
+                          <p class="label-font auto-align">SubStation:</p>
+                      </div>
+                      <div flex="15">
+                        <p class="data-font">{{vm.billingDemand.dataList[0].substation}}</p>
+                      </div>
+                      <div flex="10">
+                          <p class="label-font auto-align">Feeder:</p>
+                      </div>
+                      <div flex="20">
+                        <p class="data-font">{{vm.billingDemand.dataList[0].feeder}}</p>
+                      </div>
+                      <div flex="10">
+                          <p class="label-font auto-align">DTR:</p>
+                      </div>
+                      <div flex="20">
+                        <p class="data-font">{{vm.billingDemand.dataList[0].dtr}}</p>
+                      </div>
+                      <div flex="5">
+                          <p class="label-font auto-align">Meter:</p>
+                      </div>
+                      <div flex="10">
+                        <p class="data-font">{{vm.billingDemand.dataList[0].mtrNo}}</p>
+                      </div>
+
+
+
+                </div>
+                <div layout="row" flex="100" id="tableScroll" class="noMargin">
+                 <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="eventTable">
+                   <thead>
+                     <tr>
+
+                       <th class="secondary-text" rowspan="2">
+                         <div class="table-header">
+                             <span class="column-title">S No</span>
+                         </div>
+                       </th>
+                        <th class="secondary-text" rowspan="2">
+                          <div class="table-header">
+                              <span class="column-title">Meter S No</span>
+                          </div>
+                        </th>
+                        <th  class="secondary-text" colspan="2">
+                          <div class="table-header">
+                              <span class="column-title">Demand</span>
+                          </div>
+                        </th>
+                        <th class="secondary-text" rowspan="2">
+                          <div class="table-header">
+                              <span class="column-title">Contracted Load</span>
+                          </div>
+                        </th>
+                        <th class="secondary-text" rowspan="2">
+                          <div class="table-header">
+                              <span class="column-title">Date of Occurance</span>
+                          </div>
+                        </th>
+                        </tr>
+                        <tr>
+
+                          <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">MD-KW</span>
+                            </div>
+                          </th>
+                          <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">MD-KVA</span>
+                            </div>
+                          </th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="evnt in vm.billingDemand.dataList">
+                          <td>{{$index+1}}</td>
+                          <td>{{evnt.mtrNo}}</td>
+                          <td>{{evnt.mdKw | limitTo :6}}</td>
+                          <td>{{evnt.mdKva | limitTo :6}}</td>
+                          <td>{{evnt.contractedLoad}}</td>
+                          <td>{{evnt.occuranceDate | date }}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+                <div layout="row" class="download-btn">
+                  <a href="#"><span>PDF</span></a>
+                  <a href="#"><span>Excel</span></a>
+                  <a href="#"><span>CSV</span></a>
+                </div>
+              </div>
+            </div>
+          <!-- </div> -->
+          </div>
+        </div>
+    </div>
+    <!-- / CONTENT -->
+</div>
