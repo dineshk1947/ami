@@ -9,11 +9,344 @@
                 <span class="parent">Reports</span>
             </div>
 
-            <div class="headerTitle">Load Profile</div>
+            <div class="headerTitle"> Reports / Load Profile Report</div>
         </div>
     </div>
     <!-- / HEADER -->
+
+    <div class="content" layout="column">
+          <div layout="row">
+            <div class="lp1" flex="100" >
+              <div class="pf-tab">
+                <div class="top-block">
+                  <div ng-show="vm.loadProfileReport.inputShow">
+
+                  <div layout="row" class="hierarchy-align" >
+                    <!-- <div flex="5"></div> -->
+                    <div flex="10" class="vhide">
+                      <p class="label-font">Sub Station :</p>
+                    </div>
+
+                    <md-input-container flex="10"  class="vhide">
+                      <md-select  ng-change="vm.getFeeder()" ng-model="vm.loadProfile.substationid" placeholder="select substation" class="md-underline">
+                        <md-option ng-repeat="x in vm.loadProfileReport.substations"  value="{{x.substationId}}">{{x.subStation}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                    <div flex="5" ></div>
+                    <div flex="10" class="vhide">
+                      <p class="label-font">Feeder :</p>
+                    </div>
+
+                    <md-input-container flex="10"  class="vhide">
+                      <md-select  ng-change="vm.getDtr()" ng-model="vm.loadProfile.feederid" placeholder="select feeder" class="md-underline">
+                        <md-option ng-repeat="x in vm.loadProfileReport.feeders"  value="{{x.feederId}}">{{x.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+
+                    <div flex="5"></div>
+
+                    <div flex="10">
+                      <p class="label-font">DTR :</p>
+                    </div>
+
+                    <md-input-container flex="10" >
+                      <md-select  ng-change="vm.getMeters()" ng-model="vm.loadProfile.dtrid" placeholder="select DTR" class="md-underline">
+                        <md-option ng-repeat="x in vm.loadProfileReport.dtrs"  value="{{x.dtrId}}">{{x.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                    <div flex="5"></div>
+                    <div flex="10">
+                      <p class="label-font">Meter:</p>
+                    </div>
+                    <!-- <div flex="5"></div> -->
+                    <!-- md-selected-item-change="vm.getMeter(vm.selectedItem)" -->
+
+                    <md-autocomplete flex="15" ng-model = "vm.loadProfile.mtrNo"
+                       md-no-cache="noCache"
+                       md-selected-item="vm.loadProfile.selectedItem"
+                       md-selected-item-change="vm.changeMtrObj(vm.loadProfile.selectedItem)"
+                       md-search-text-change="vm.searchTextChange(vm.loadProfile.searchText)"
+                       md-search-text="vm.loadProfile.searchText"
+                       md-items="item in vm.loadProfileReport.meters  | filter:vm.loadProfile.searchText"
+                       md-item-text="item.mtrNo"
+                       md-min-length="0"
+                       placeholder="Enter meter"
+                       ng-required="true">
+                       <md-item-template>
+                         <span md-highlight-text="vm.loadProfile.searchText" md-highlight-flags="^i" > {{item.mtrNo}}</span>
+                       </md-item-template>
+                     </md-autocomplete>
+                     <!-- <div flex="10"></div> -->
+                   </div>
+
+                  <div layout="row" class = "hierarchy-align">
+                    <div flex="20"></div>
+                    <div flex="10">
+                      <p class="label-font">From Date</p>
+                    </div>
+
+                    <div flex="15">
+                     <md-datepicker ng-model="vm.loadProfile.fdate"   md-placeholder="Enter date" md-open-on-focus md-max-date="vm.currDate"></md-datepicker>
+                   </div>
+                    <div flex="5">
+                    </div>
+
+                    <div flex="10">
+                      <p class="label-font">To Date</p>
+                    </div>
+
+                    <div flex="15">
+                     <md-datepicker ng-model="vm.loadProfile.todate"   md-placeholder="Enter date" md-open-on-focus md-max-date="vm.currDate"></md-datepicker>
+                   </div>
+                    <div flex="5">
+                    </div>
+
+                  </div>
+                  <div class="btn-align">
+                    <md-button type="submit"  ng-click="vm.loadProfileReportSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                    <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.loadProfile,modelArray)">clear</md-button>
+                  </div>
+                </div>
+                <!-- </div> -->
+
+                <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.loadProfileReport.progressShow">
+                   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                 </div>
+
+
     <!-- CONTENT -->
-  
+    <div  ng-if="vm.loadProfile.showReport">
+       <a href="" ng-click="vm.dynamicShow();vm.Clear.clearObj(vm.loadProfile,modelArray)">Generate Other Report</a>
+        <div layout="row">
+          <div class="" flex="100" >
+            <div class="pf-tab">
+              <div class="data-block" >
+                <!-- <md-button type="submit" ng-click="vm.loadProfileReportSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button> -->
+                <div layout="row">
+                  <div class="main">
+                    <span> <img src="assets/images/TSSPDCL.jpg" alt=""> </span>
+                    <span> <p>Telangana State Southern Power Distribution Company Limited</p> </span>
+                  </div>
+                </div>
+                <div layout="row" class="noMargin">
+                  <div class="details">
+                    <p>Power Factor report for <span>{{ vm.loadProfile.fdate|date }}  to  {{ vm.loadProfile.todate|date }}</span></p>
+                    <p>
+                      <span class="label-font">SubStation :</span><span>{{vm.subSationDisplayName}}</span>
+                      <span class="label-font">Feeder :</span><span>{{vm.feederDisplayName}}</span>
+                      <span class="label-font">DTR :</span><span>{{vm.dtrDisplayName}}</span>
+                      <span class="label-font">Meter :</span><span>{{vm.meterDisplayName}}</span>
+                    </p>
+                  </div>
+                </div>
+                <div layout="row" flex="100" id="tableScroll">
+                 <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions"  class="noMargin">
+                   <thead>
+                     <tr>
+                       <th class="secondary-text" rowspan="2">
+                         <div class="table-header">
+                             <span class="column-title">Date</span>
+                         </div>
+                       </th>
+                      <th class="secondary-text" colspan="3">
+                        <div class="table-header">
+                            <span class="column-title">Current</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="3">
+                        <div class="table-header">
+                            <span class="column-title">Voltage</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="2">
+                        <div class="table-header">
+                            <span class="column-title">Block Energy</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="4">
+                        <div class="table-header">
+                            <span class="column-title">Block Energy (KVARH)</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="2">
+                        <div class="table-header">
+                            <span class="column-title">Cumulative Energy</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="4">
+                        <div class="table-header">
+                            <span class="column-title">Cumulative Energy (KVARH)</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="2">
+                        <div class="table-header">
+                            <span class="column-title">Reactive Energy</span>
+                        </div>
+                      </th>
+
+                    </tr>
+                    <tr>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">R</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Y</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">B</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">R</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Y</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">B</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">KWH-Imp</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">KVAH-Imp</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Q1</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Q2</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Q3</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Q4</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">KWH - IMP</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">KWAH - IMP</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Q1</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Q2</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Q3</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Q4</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">High</br> V>103%</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Low</br> V < 97%</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in vm.loadProfileData">
+                      <td>{{item.realTimeClockDateTi |date}}
+                      <td>{{item.currentIr}}</td>
+                      <td>{{item.currentIy}} </td>
+                      <td>{{item.currentIb  | limitTo : 6}}</td>
+                      <td>{{item.voltageVrn  | limitTo : 6}}</td>
+                      <td>{{item.voltageVyn  | limitTo : 6}}</td>
+                      <td>{{item.voltageVbn  | limitTo : 6}}</td>
+                      <td>{{item.blockEnergyKwhImp  | limitTo : 6}}</td>
+                      <td>{{item.blockEnergyKvahImp  | limitTo : 6}}</td>
+                      <td>{{item.blockEnergyKvarhQ1  | limitTo : 6}}</td>
+                      <td>{{item.blockEnergyKvarhQ2  | limitTo : 4}}</td>
+                      <td>{{item.blockEnergyKvarhQ3  | limitTo : 6}}</td>
+                      <td>{{item.blockEnergyKvarhQ4 | limitTo : 6}}</td>
+                      <td>{{item.cumEnergyKwhImp | limitTo : 6}}</td>
+                      <td>{{item.cumEnergyKvahImp | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvarhQ1 | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvarhQ2 | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvarhQ3 | limitTo : 6}}</td>
+                      <td>{{item.cumEngKvarhQ4 | limitTo : 6}}</td>
+                      <!-- <td>{{item.cumEngKvahTz8 | limitTo : 6}}</td> -->
+                      <td>{{item.reactiveEngLow | limitTo : 6}}</td>
+                      <td>{{item.reactiveEngHigh | limitTo : 6}}</td>
+                      <!-- <td>12-Mar-2017</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>5</td>
+                      <td>5</td>
+                      <td>5</td>
+                      <td>5</td>
+                      <td>5</td>
+                      <td>5</td>
+                      <td>6</td>
+                      <td>7</td>
+                       <td>8</td>
+                      <td>8</td>
+                      <td>8</td>
+                      <td>8</td>
+                      <td>8</td>
+                      <td>8</td>
+                      <td>8</td>
+                      <td>8</td>
+                      <td>9</td> -->
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
     <!-- / CONTENT -->
 </div>

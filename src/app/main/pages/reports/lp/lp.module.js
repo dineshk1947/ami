@@ -16,7 +16,7 @@
                 views  : {
                     'content@app': {
                         templateUrl: 'app/main/pages/reports/lp/lp.html',
-                        controller : 'ReportsController as vm'
+                        controller : 'loadProfileReportsController as vm'
                     }
                 },
                 resolve: {

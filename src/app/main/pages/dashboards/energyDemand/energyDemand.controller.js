@@ -91,7 +91,7 @@
           return dt.split(' ')[2] + "-" + dt.split(' ')[1] + "-" + dt.split(' ')[3];
         }
 
-      
+
         //function to hide or show hierarchy
         vm.hierarchyShow = function() {
           if(vm.showHeader) {
@@ -196,7 +196,7 @@
               url : baseUrl2 + "mdm/dashboard/energy-demand",
               data: data
           }).then(function mySuccess(response) {
-              console.log("}}}}}}}}}}}}}}}}");
+              console.log("}}}}}}}}}}}}}}}}", response);
 
               vm.energyDemand.statisticsTable = true;
               vm.progressShow=false;
