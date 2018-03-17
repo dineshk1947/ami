@@ -76,8 +76,13 @@
             console.log(obj3);
             for (var key in obj1 ) {
               console.log(obj1[key]);
+              console.log(typeof obj1[key]);
+
               if (typeof obj1[key] == "boolean") {
                 obj1[key] = false;
+              }
+              else if (typeof obj1[key] == "string") {
+                obj1[key] = "";
               }
               else {
                 obj1[key] = undefined;
@@ -145,6 +150,8 @@
                 obj2.dtrid="";
               }
             }
+            // $rootScope.obj1 = obj1;
+            // $rootScope.obj2 = obj2;
            return [obj1,obj2];
          }
        }
@@ -193,8 +200,8 @@
             });
         }
 
-        function SetCredentials(userDetails) {
-          var token;
+        function SetCredentials(userDetails, token) {
+          
           $rootScope.globals = {
               currentUser: userDetails,
               token: token
@@ -264,32 +271,32 @@
     }
 
 
+    function baseUrl1(){
+      return 'http://b9509397.ngrok.io/';
+    }
+
+    function baseUrl2(){
+      return 'http://b9509397.ngrok.io/';
+    }
+    function baseUrl3(){
+      return 'http://b9509397.ngrok.io/';
+    }
+    function hierarchy(){
+      return 'http://b9509397.ngrok.io/';
+    }
+
     // function baseUrl1(){
-    //   return 'http://1ccf6dd8.ngrok.io/';
+    //   return 'http://mdm.vijaiami.com/';
     // }
     //
     // function baseUrl2(){
-    //   return 'http://1ccf6dd8.ngrok.io/';
+    //   return 'http://mdm.vijaiami.com/';
     // }
     // function baseUrl3(){
-    //   return 'http://1ccf6dd8.ngrok.io/';
+    //   return 'http://mdm.vijaiami.com/';
     // }
     // function hierarchy(){
     //   return 'http://mdm.vijaiami.com/';
     // }
-
-    function baseUrl1(){
-      return 'http://mdm.vijaiami.com/';
-    }
-
-    function baseUrl2(){
-      return 'http://mdm.vijaiami.com/';
-    }
-    function baseUrl3(){
-      return 'http://mdm.vijaiami.com/';
-    }
-    function hierarchy(){
-      return 'http://mdm.vijaiami.com/';
-    }
 
 })();

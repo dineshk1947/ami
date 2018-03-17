@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('app.loadProfile', ['ngDomToPdf'])
+        .module('app.installed', [])
         .config(config);
 
     /** @ngInject */
@@ -11,12 +11,12 @@
     {
         // State
         $stateProvider
-            .state('app.loadProfile', {
-                url    : '/reports/loadprofile',
+            .state('app.installed', {
+                url    : '/installed',
                 views  : {
                     'content@app': {
-                        templateUrl: 'app/main/pages/reports/lp/lp.html',
-                        controller : 'loadProfileReportsController as vm'
+                        templateUrl: 'app/main/pages/reports/assetManagement/installed/installed.html',
+                        controller : 'InstalledController as vm'
                     }
                 },
                 resolve: {

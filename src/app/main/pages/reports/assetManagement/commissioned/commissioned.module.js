@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('app.loadProfile', ['ngDomToPdf'])
+        .module('app.assetMgmtCommissioned', [])
         .config(config);
 
     /** @ngInject */
@@ -11,12 +11,12 @@
     {
         // State
         $stateProvider
-            .state('app.loadProfile', {
-                url    : '/reports/loadprofile',
+            .state('app.assetMgmtCommissioned', {
+                url    : '/commissioned',
                 views  : {
                     'content@app': {
-                        templateUrl: 'app/main/pages/reports/lp/lp.html',
-                        controller : 'loadProfileReportsController as vm'
+                        templateUrl: 'app/main/pages/reports/assetManagement/commissioned/commissioned.html',
+                        controller : 'CommissionedController as vm'
                     }
                 },
                 resolve: {
@@ -26,7 +26,6 @@
                     }
                 }
             });
-
 
     }
 })();

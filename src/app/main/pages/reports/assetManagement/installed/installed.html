@@ -1,0 +1,191 @@
+<div  class="page-layout simple fullwidth doc-page reports" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Reports</span>
+                <!-- <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">Asset Management</span> -->
+            </div>
+
+            <div class="headerTitle">Asset Management - Installed Meters</div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+
+        <div layout="row">
+          <div class=" be" flex="100" >
+            <div class="pf-tab">
+              <div class="top-block" ng-show="vm.installed.inputShow">
+                <div layout="row" class="hierarchy-align">
+                  <div flex="10">
+                    <p class="label-font">Discom :</p>
+                  </div>
+                  <div flex="15">
+                    <p class="data-font"> {{vm.installed.discom}}</p>
+                  </div>
+                  <div flex="10">
+                    <p class="label-font" >Region :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.installed.region">
+                    <p class="data-font" > {{vm.installed.regionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.installed.region1">
+                    <md-select ng-change="vm.getCircles(vm.installedReport.regionid)"  ng-model="vm.installedReport.regionid" placeholder="select region" class="md-underline">
+                      <md-option ng-repeat="x in vm.installed.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Circles :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.installed.circle">
+                    <p class="data-font" >{{vm.installed.circleName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.installed.circle1">
+                    <md-select  ng-change="vm.getDivision(vm.installedReport.circleid)" ng-model="vm.installedReport.circleid" placeholder="select circle" class="md-underline">
+                      <md-option ng-repeat="x in vm.installed.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Division :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.installed.division">
+                    <p class="data-font" >{{vm.installed.divisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.installed.division1">
+                    <md-select  ng-change="vm.getSubDivisions(vm.installedReport.divisionid)" ng-model="vm.installedReport.divisionid" placeholder="select division" class="md-underline">
+                      <md-option ng-repeat="x in vm.installed.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+                <div layout="row" class="hierarchy-align">
+                  <div flex="10">
+                    <p class="label-font" >Sub Division:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.installed.subdivision">
+                    <p class="data-font" >{{vm.installed.subdivisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.installed.subdivision1" >
+                    <md-select ng-change="vm.getSections(vm.installedReport.subdivisionid)" ng-model="vm.installedReport.subdivisionid" placeholder="select subdivision" class="md-underline">
+                      <md-option ng-repeat="x in vm.installed.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+
+                  <div flex="10">
+                    <p class="label-font">Sections:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.installed.section">
+                    <p class="data-font" >{{vm.installed.sectionid}}</p>
+                  </div>
+                  <!-- <md-input-container flex="15" ng-show="vm.installed.section1">
+                    <md-select ng-model="vm.installedReport.sectionid" placeholder="select section" class="md-underline">
+                      <md-option ng-repeat="x in vm.installed.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+
+                  </md-input-container> -->
+
+                  <md-input-container flex="15" ng-show="vm.installed.section1">
+                      <md-select  ng-model="vm.installedReport.sectionid" placeholder="select section" class="md-underline">
+                      <md-option ng-repeat="x in vm.installed.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+
+                  </md-input-container>
+
+                 </div>
+                 <div layout="row">
+                   <div flex=15></div>
+                  <div flex="10">
+                    <p class="label-font">From Date</p>
+                  </div>
+                  <div flex="20">
+                    <md-datepicker ng-model="vm.installedReport.fromDate" md-placeholder="Enter date" md-open-on-focus md-max-date="vm.currDate" required></md-datepicker>
+                  </div>
+                  <div flex="10">
+                    <p class="label-font">To Date</p>
+                  </div>
+                  <div flex="20">
+                    <md-datepicker ng-model="vm.installedReport.toDate" md-placeholder="Enter date" md-open-on-focus md-max-date="vm.currDate" required></md-datepicker>
+                  </div>
+                  <div flex="10"></div>
+                 </div>
+                <div class="btn-align">
+                  <md-button type="submit" ng-click="vm.installedSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                  <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.installedReport,vm.modelArray)">clear</md-button>
+                </div>
+                <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.progressShow">
+                  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+              </div>
+              <!-- ng-show = "vm.installedReport" -->
+              <div class="data-block" ng-if="vm.installed.showReport" >
+                <a href="" ng-click="vm.dynamicShow();vm.Clear.clearObj(vm.installedReport,vm.modelArray)">Generate Other Report</a>
+                <div layout="row">
+                  <div class="main">
+                    <span> <img src="assets/images/TSSPDCL.jpg" alt=""> </span>
+                    <span> <p>Telangana State Southern Power Distribution Company Limited</p> </span>
+                  </div>
+                </div>
+                <div layout="row">
+                  <div class="details">
+                    <p>Asset Management report of Installed Meters for <span>{{ vm.installedReport.fromDate | date }} to {{ vm.installedReport.toDate | date }}</span></p>
+                    <!-- <p>
+                      <span class="label-font">SubStation :</span><span>{{vm.substation}}</span>
+                      <span class="label-font">Feeder :</span><span>{{vm.feeder}}</span>
+                      <span class="label-font">DTR :</span><span>{{vm.dtr}}</span>
+                      <span class="label-font">Meter :</span><span>{{vm.mtrslno}}</span>
+                    </p> -->
+                  </div>
+                </div>
+                <div layout="row" flex="100" id="tableScroll">
+                 <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="installedTable">
+                   <thead>
+                     <tr>
+                       <th class="secondary-text">
+                         <div class="table-header">
+                             <span class="column-title">S No</span>
+                         </div>
+                       </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Meter Serial No</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Date of Installation</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Location</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in vm.installed.metersCount">
+                      <td>{{$index+1}}</td>
+                      <td>{{item.mtrNo}}</td>
+                      <td>{{item.installedDate | date}}</td>
+                      <td>{{item.location}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- <div layout="row" class="download-btn">
+                <a href="#"><span>PDF</span></a>
+                <a href="#"><span>Excel</span></a>
+                <a href="#"><span>CSV</span></a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / CONTENT -->
+</div>

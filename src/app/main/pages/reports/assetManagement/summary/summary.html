@@ -1,0 +1,188 @@
+<div  class="page-layout simple fullwidth doc-page reports" layout="column">
+    <!-- HEADER -->
+  <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+    <div layout="column" layout-align="space-between">
+      <div class="breadcrumb" layout="row" layout-align="start center">
+        <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+        <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+        <span class="parent">Reports</span>
+      </div>
+      <div class="headerTitle">Asset Management - Summary Report</div>
+        </div>
+      </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+        <div layout="row">
+          <div class=" bd" flex="100" >
+            <div class="pf-tab">
+              <div class="top-block">
+                <div ng-show="vm.assetInstCommunicated.inputShow">
+                <div layout="row" class="hierarchy-align">
+                  <div flex="10">
+                    <p class="label-font">Discom :</p>
+                  </div>
+                  <div flex="15">
+                    <p class="data-font"> {{vm.assetInstCommunicated.discom}}</p>
+                  </div>
+                  <div flex="10">
+                    <p class="label-font" >Region :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.assetInstCommunicated.region">
+                    <p class="data-font" > {{vm.assetInstCommunicated.regionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.assetInstCommunicated.region1">
+                    <md-select ng-change="vm.getCircles(vm.assetInstCom.regionid)"  ng-model="vm.assetInstCom.regionid" placeholder="select region" class="md-underline">
+                      <md-option ng-repeat="x in vm.assetInstCommunicated.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Circles :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.assetInstCommunicated.circle">
+                    <p class="data-font" >{{vm.assetInstCommunicated.circleName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.assetInstCommunicated.circle1">
+                    <md-select  ng-change="vm.getDivision(vm.assetInstCom.circleid)" ng-model="vm.assetInstCom.circleid" placeholder="select circle" class="md-underline">
+                      <md-option ng-repeat="x in vm.assetInstCommunicated.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Division :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.assetInstCommunicated.division">
+                    <p class="data-font" >{{vm.assetInstCommunicated.divisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.assetInstCommunicated.division1">
+                    <md-select  ng-change="vm.getSubDivisions(vm.assetInstCom.divisionid)" ng-model="vm.assetInstCom.divisionid" placeholder="select division" class="md-underline">
+                      <md-option ng-repeat="x in vm.assetInstCommunicated.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+                <div layout="row" class="hierarchy-align">
+                  <div flex="10">
+                    <p class="label-font" >Sub Division:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.assetInstCommunicated.subdivision">
+                    <p class="data-font" >{{vm.assetInstCommunicated.subdivisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.assetInstCommunicated.subdivision1" >
+                    <md-select ng-change="vm.getSections(vm.assetInstCom.subdivisionid)" ng-model="vm.assetInstCom.subdivisionid" placeholder="select subdivision" class="md-underline">
+                      <md-option ng-repeat="x in vm.assetInstCommunicated.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Sections:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.assetInstCommunicated.section">
+                    <p class="data-font" >{{vm.assetInstCommunicated.sectionid}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.assetInstCommunicated.section1">
+                    <md-select  ng-change="vm.getMeters(vm.assetInstCom.sectionid)" ng-model="vm.assetInstCom.sectionid" placeholder="select section" class="md-underline">
+                     <md-option ng-repeat="x in vm.assetInstCommunicated.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+
+
+                  <!-- <div flex="5">
+                    <p class="label-font">From</p>
+                  </div>
+                  <md-datepicker ng-model="vm.assetInstCom.fromdate"    md-open-on-focus ></md-datepicker>
+                  <div flex="5">
+                  </div>
+
+                  <div flex="5">
+                    <p class="label-font">To</p>
+                  </div>
+                  <md-datepicker ng-model="vm.assetInstCom.todate"   md-open-on-focus ></md-datepicker> -->
+
+                 </div>
+                 <div layout="row" class = "hierarchy-align">
+                   <div flex=15></div>
+                   <div flex="10">
+                     <p class="label-font">From</p>
+                   </div>
+                   <md-datepicker ng-model="vm.assetInstCom.fromdate"    md-open-on-focus ></md-datepicker>
+                   <div flex="5">
+                   </div>
+
+                   <div flex="5">
+                     <p class="label-font">To</p>
+                   </div>
+                   <md-datepicker ng-model="vm.assetInstCom.todate"   md-open-on-focus ></md-datepicker>
+                   <div flex="5">
+                   </div>
+
+                 </div>
+                <div class="btn-align">
+                  <md-button type="submit"  ng-click="vm.assetInstCommunicatedSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                  <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.assetInstCom)">clear</md-button>
+                </div>
+                    </div>
+                <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.assetInstCommunicated.progressShow">
+                  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+
+              <!--  -->
+              <div class="data-block" ng-if="vm.assetInstCom.showReport" >
+                <a href="" ng-click="vm.dynamicShow();vm.Clear.clearObj(vm.assetInstCom,modelArray)">Generate Other Report</a>
+                <div layout="row">
+                  <div class="main">
+                    <span> <img src="assets/images/TSSPDCL.jpg" alt=""> </span>
+                    <span> <p>Telangana State Southern Power Distribution Company Limited</p> </span>
+                  </div>
+                </div>
+                <div layout="row" class="noMargin">
+                  <div class="details" >
+                      <p>Asset Management - Summary Report for <span>{{vm.assetInstCom.fromdate1}}  to {{vm.assetInstCom.todate1}}</span></p>
+                  </div>
+                </div>
+
+                <div layout="row" flex="100" id="tableScroll" class="noMargin">
+                 <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="eventTable">
+                   <thead>
+                     <tr>
+
+                       <th class="secondary-text" >
+                         <div class="table-header">
+                             <span class="column-title">S No</span>
+                         </div>
+                       </th>
+                        <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">No of Meters Installed</span>
+                          </div>
+                        </th>
+                        <th  class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">No of Meters Commissioned</span>
+                          </div>
+                        </th>
+                        <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">No of Meters Communicated</span>
+                          </div>
+                        </th>
+
+                        </tr>
+
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="evnt in vm.assetInstCommunicated.dataList">
+                          <td>{{$index+1}}</td>
+                          <td>{{evnt.installedCount}}</td>
+                          <td>{{evnt.commissionedCount}}</td>
+                          <td>{{evnt.communicatedCount}}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+          </div>
+        </div>
+    </div>
+    <!-- / CONTENT -->
+</div>

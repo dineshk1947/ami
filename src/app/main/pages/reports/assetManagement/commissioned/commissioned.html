@@ -1,0 +1,204 @@
+<div  class="page-layout simple fullwidth doc-page reports" layout="column">
+    <!-- HEADER -->
+  <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+    <div layout="column" layout-align="space-between">
+      <div class="breadcrumb" layout="row" layout-align="start center">
+        <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+        <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+        <span class="parent">Reports</span>
+      </div>
+      <div class="headerTitle">Asset Management - Commissioned Meters</div>
+        </div>
+      </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+        <div layout="row">
+          <div class=" bd" flex="100" >
+            <div class="pf-tab">
+              <div class="top-block">
+                <div ng-show="vm.assetMgmtCommissioned.inputShow">
+                <div layout="row" class="hierarchy-align">
+                  <div flex="10">
+                    <p class="label-font">Discom :</p>
+                  </div>
+                  <div flex="15">
+                    <p class="data-font"> {{vm.assetMgmtCommissioned.discom}}</p>
+                  </div>
+                  <div flex="10">
+                    <p class="label-font" >Region :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.assetMgmtCommissioned.region">
+                    <p class="data-font" > {{vm.assetMgmtCommissioned.regionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.assetMgmtCommissioned.region1">
+                    <md-select ng-change="vm.getCircles(vm.assetCommissioned.regionid)"  ng-model="vm.assetCommissioned.regionid" placeholder="select region" class="md-underline">
+                      <md-option ng-repeat="x in vm.assetMgmtCommissioned.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Circles :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.assetMgmtCommissioned.circle">
+                    <p class="data-font" >{{vm.assetMgmtCommissioned.circleName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.assetMgmtCommissioned.circle1">
+                    <md-select  ng-change="vm.getDivision(vm.assetCommissioned.circleid)" ng-model="vm.assetCommissioned.circleid" placeholder="select circle" class="md-underline">
+                      <md-option ng-repeat="x in vm.assetMgmtCommissioned.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Division :</p>
+                  </div>
+                  <div flex="15" ng-show="vm.assetMgmtCommissioned.division">
+                    <p class="data-font" >{{vm.assetMgmtCommissioned.divisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.assetMgmtCommissioned.division1">
+                    <md-select  ng-change="vm.getSubDivisions(vm.assetCommissioned.divisionid)" ng-model="vm.assetCommissioned.divisionid" placeholder="select division" class="md-underline">
+                      <md-option ng-repeat="x in vm.assetMgmtCommissioned.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+                <div layout="row" class="hierarchy-align">
+                  <div flex="10">
+                    <p class="label-font" >Sub Division:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.assetMgmtCommissioned.subdivision">
+                    <p class="data-font" >{{vm.assetMgmtCommissioned.subdivisionName}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.assetMgmtCommissioned.subdivision1" >
+                    <md-select ng-change="vm.getSections(vm.assetCommissioned.subdivisionid)" ng-model="vm.assetCommissioned.subdivisionid" placeholder="select subdivision" class="md-underline">
+                      <md-option ng-repeat="x in vm.assetMgmtCommissioned.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <div flex="10">
+                    <p class="label-font">Sections:</p>
+                  </div>
+                  <div flex="15" ng-show="vm.assetMgmtCommissioned.section">
+                    <p class="data-font" >{{vm.assetMgmtCommissioned.sectionid}}</p>
+                  </div>
+                  <md-input-container flex="15" ng-show="vm.assetMgmtCommissioned.section1">
+                    <md-select  ng-change="vm.getMeters(vm.assetCommissioned.sectionid)" ng-model="vm.assetCommissioned.sectionid" placeholder="select section" class="md-underline">
+                     <md-option ng-repeat="x in vm.assetMgmtCommissioned.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+
+                 </div>
+                 <div layout="row" class = "hierarchy-align">
+                   <div flex=15></div>
+                   <div flex="10">
+                     <p class="label-font">From Date</p>
+                   </div>
+                   <md-datepicker ng-model="vm.assetCommissioned.fromdate"    md-open-on-focus ></md-datepicker>
+                   <div flex="5">
+                   </div>
+
+                   <div flex="5">
+                     <p class="label-font">To Date</p>
+                   </div>
+                   <md-datepicker ng-model="vm.assetCommissioned.todate"   md-open-on-focus ></md-datepicker>
+                   <div flex="5">
+                   </div>
+
+                 </div>
+                <div class="btn-align">
+                  <md-button type="submit"  ng-click="vm.assetMgmtCommissionedSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
+                  <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.assetCommissioned)">clear</md-button>
+                </div>
+                    </div>
+                <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.assetMgmtCommissioned.progressShow">
+                  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+
+              <!--  -->
+              <div class="data-block" ng-if="vm.assetCommissioned.showReport" >
+                <a href="" ng-click="vm.dynamicShow();vm.Clear.clearObj(vm.assetCommissioned,modelArray)">Generate Other Report</a>
+                <div layout="row">
+                  <div class="main">
+                    <span> <img src="assets/images/TSSPDCL.jpg" alt=""> </span>
+                    <span> <p>Telangana State Southern Power Distribution Company Limited</p> </span>
+                  </div>
+                </div>
+                <div layout="row" class="noMargin">
+                  <div class="details" >
+                      <p>Asset Management Report For Commissioned Meters for <span>{{vm.assetCommissioned.fromdate1}}  to {{vm.assetCommissioned.todate1}}</span></p>
+                  </div>
+                </div>
+                <!-- <div layout="row">
+
+                      <div flex="10">
+                          <p class="label-font auto-align">SubStation:</p>
+                      </div>
+                      <div flex="15">
+                        <p class="data-font">{{vm.assetMgmtCommissioned.dataList[0].substation}}</p>
+                      </div>
+                      <div flex="10">
+                          <p class="label-font auto-align">Feeder:</p>
+                      </div>
+                      <div flex="20">
+                        <p class="data-font">{{vm.assetMgmtCommissioned.dataList[0].feeder}}</p>
+                      </div>
+                      <div flex="10">
+                          <p class="label-font auto-align">DTR:</p>
+                      </div>
+                      <div flex="20">
+                        <p class="data-font">{{vm.assetMgmtCommissioned.dataList[0].dtr}}</p>
+                      </div>
+                      <div flex="5">
+                          <p class="label-font auto-align">Meter:</p>
+                      </div>
+                      <div flex="10">
+                        <p class="data-font">{{vm.assetMgmtCommissioned.dataList[0].mtrNo}}</p>
+                      </div>
+
+
+
+                </div> -->
+                <div layout="row" flex="100" id="tableScroll" class="noMargin">
+                 <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="eventTable">
+                   <thead>
+                     <tr>
+
+                       <th class="secondary-text" >
+                         <div class="table-header">
+                             <span class="column-title">S No</span>
+                         </div>
+                       </th>
+                        <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">Meter S No</span>
+                          </div>
+                        </th>
+                        <th  class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">Date of Commissioned</span>
+                          </div>
+                        </th>
+                        <th class="secondary-text">
+                          <div class="table-header">
+                              <span class="column-title">Location</span>
+                          </div>
+                        </th>
+
+                        </tr>
+
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="evnt in vm.assetMgmtCommissioned.dataList">
+                          <td>{{$index+1}}</td>
+                          <td>{{evnt.mtrNo}}</td>
+                          <td>{{evnt.commissionedDate | date}}</td>
+                          <td>{{evnt.location}}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+          </div>
+        </div>
+    </div>
+    <!-- / CONTENT -->
+</div>

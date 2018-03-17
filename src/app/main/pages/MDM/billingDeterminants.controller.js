@@ -80,6 +80,7 @@
 
         function getTimezoneData() {
           console.log("getTimezoneData");
+          console.log("$localStorage.globals.token",$localStorage.globals.token);
           $http({
               method : "GET",
               url : baseUrl2 + "mdm/get-timezones",

@@ -9,18 +9,18 @@
                 <span class="parent">Reports</span>
             </div>
 
-            <div class="headerTitle">Billing Consumption</div>
+            <div class="headerTitle">Billing Consumption Report</div>
         </div>
     </div>
     <!-- / HEADER -->
     <!-- CONTENT -->
     <div class="content" layout="column">
-
         <div layout="row">
-          <div class="form-wrapper md-whiteframe-1dp bc" flex="100" id="billingConsumption1">
+          <div class="reports" flex="100" id="billingConsumptionReport">
             <div class="pf-tab">
               <div class="top-block">
-                <div layout="row" class="hierarchy-align">
+                <div ng-show="vm.billingConsumption.inputShow">
+                <div layout="row" class="hierarchy-align" >
                   <!-- <div class="hierarchy-align">
 
                   </div> -->
@@ -110,11 +110,11 @@
                       <p class="label-font">Meter:</p>
                   </div>
                   <md-autocomplete
-
-                     md-selected-item="vm.billConsumption.selectedItem"
+                     md-no-cache = "noCache"
+                     md-selected-item="vm.billConsumption.mtrNo"
                      md-search-text-change="vm.searchTextChange(vm.billConsumption.searchText)"
                      md-search-text="vm.billConsumption.searchText"
-                     md-selected-item-change="vm.getMeter(vm.billConsumption.selectedItem)"
+                     md-selected-item-change="vm.getMeter(vm.billConsumption.mtrNo)"
                      md-items="item in vm.billingConsumption.meters | filter:vm.billConsumption.searchText"
                      md-item-text="item.mtrNo"
                      md-min-length="0"
@@ -187,15 +187,17 @@
                   <md-button type="submit"  ng-click="vm.billingConsumptionSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
                   <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.billConsumption)">clear</md-button>
                 </div>
+                </div>
 
                 <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.billingConsumption.progressShow">
                   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                 </div>
-              </div>
+
 
               <!-- ng-show="vm.billingTable" -->
 
-              <div class="data-block" ng-show="vm.billingTable">
+              <div class="data-block"  ng-if="vm.billingConsumption.showReport">
+                <a href="" ng-click="vm.dynamicShow();vm.Clear.clearObj(vm.billConsumption,modelArray)">Generate Other Report</a>
                 <div layout="row">
                   <div class="main">
                     <span> <img src="assets/images/TSSPDCL.jpg" alt=""> </span>
@@ -205,7 +207,7 @@
 
                 <div layout="row" class="noMargin">
                   <div class="details" >
-                    <p>Billing Consumption report for <span>{{vm.frommonth.month}} - {{vm.billConsumption.fyear}} to {{vm.frommonth.month}} - {{vm.billConsumption.tyear}}</span></p>
+                    <p>Billing Consumption report for <span>{{vm.fromMonth.month}} - {{vm.billConsumption.fyear}} to {{vm.toMonth.month}} - {{vm.billConsumption.tyear}}</span></p>
                   </div>
                 </div>
 
@@ -241,7 +243,7 @@
                 </div>
 
 
-                <div layout="row" flex="100" id="tableScroll" class="noMargin">
+                <div layout="row" flex="100" id="tableScroll" class="noMargin2">
                  <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="billingEnergyTable">
                    <thead>
                      <tr>
@@ -292,14 +294,15 @@
                   </tbody>
                 </table>
               </div>
-                <div layout="row" class="download-btn">
+                <!-- <div layout="row" class="download-btn">
                   <a href="#"><span>PDF</span></a>
                   <a href="#"><span>Excel</span></a>
                   <a href="#"><span>CSV</span></a>
-                </div>
+                </div> -->
 
 
               </div>
+            </div>
 
             </div>
           </div>

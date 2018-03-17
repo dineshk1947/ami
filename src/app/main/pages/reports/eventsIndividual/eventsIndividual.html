@@ -7,86 +7,28 @@
                 <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
                 <span class="parent">Reports</span>
             </div>
-            <div class="headerTitle">Events Individual</div>
+            <div class="headerTitle">Events Individual Report</div>
         </div>
     </div>
     <!-- / HEADER -->
     <!-- CONTENT -->
     <div class="content" layout="column">
         <div layout="row">
-          <div class="form-wrapper md-whiteframe-1dp es" flex="100" >
+          <div class="reports" flex="100" >
             <div class="pf-tab">
+              <!-- ng-show="vm.ei.inputShow" -->
               <div class="top-block">
-                <!-- <div layout="row" class="hierarchy-align">
-                  <div flex="10">
-                    <p class="label-font">Discom :</p>
-                  </div>
-                  <div flex="15">
-                    <p class="data-font"> {{vm.eventsIndividual.discom}}</p>
-                  </div>
-                  <div flex="10">
-                    <p class="label-font" >Region :</p>
-                  </div>
-                  <div flex="15" ng-show="vm.eventsIndividual.region">
-                    <p class="data-font" > {{vm.eventsIndividual.regionName}}</p>
-                  </div>
-                  <md-input-container flex="15" ng-show="vm.eventsIndividual.region1">
-                    <md-select ng-change="vm.getCircles()"  ng-model="vm.eventsIndividual.regionid" placeholder="select region" class="md-underline">
-                      <md-option ng-repeat="x in vm.eventsIndividual.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
-                    </md-select>
-                  </md-input-container>
-                  <div flex="10">
-                    <p class="label-font">Circles :</p>
-                  </div>
-                  <div flex="15" ng-show="vm.eventsIndividual.circle">
-                    <p class="data-font" >{{vm.eventsIndividual.circleName}}</p>
-                  </div>
-                  <md-input-container flex="15" ng-show="vm.eventsIndividual.circle1">
-                    <md-select  ng-change="vm.getDivision()" ng-model="vm.eventsIndividual.circleid" placeholder="select circle" class="md-underline">
-                      <md-option ng-repeat="x in vm.eventsIndividual.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
-                    </md-select>
-                  </md-input-container>
-                  <div flex="10">
-                    <p class="label-font">Division :</p>
-                  </div>
-                  <div flex="15" ng-show="vm.eventsIndividual.division">
-                    <p class="data-font" >{{vm.eventsIndividual.divisionName}}</p>
-                  </div>
-                  <md-input-container flex="15" ng-show="vm.eventsIndividual.division1">
-                    <md-select  ng-change="vm.getSubDivisions()" ng-model="vm.eventsIndividual.divisionid" placeholder="select division" class="md-underline">
-                      <md-option ng-repeat="x in vm.eventsIndividual.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
-                    </md-select>
-                  </md-input-container>
-                </div> -->
+                <div ng-show="vm.eventsIndividual.inputShow">
+
                 <div layout="row" class="hierarchy-align">
-                  <!-- <div flex="10">
-                    <p class="label-font" >Sub Division:</p>
-                  </div>
-                  <div flex="15" ng-show="vm.eventsIndividual.subdivision">
-                    <p class="data-font" >{{vm.eventsIndividual.subdivisionName}}</p>
-                  </div>
-                  <md-input-container flex="15" ng-show="vm.eventsIndividual.subdivision1" >
-                    <md-select ng-change="vm.getSections()" ng-model="vm.eventsIndividual.subdivisionid" placeholder="select subdivision" class="md-underline">
-                      <md-option ng-repeat="x in vm.eventsIndividual.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
-                    </md-select>
-                  </md-input-container>
-                  <div flex="10">
-                    <p class="label-font">Sections:</p>
-                  </div>
-                  <div flex="15" ng-show="vm.eventsIndividual.section">
-                    <p class="data-font" >{{vm.eventsIndividual.sectionid}}</p>
-                  </div>
-                  <md-input-container flex="15" ng-show="vm.eventsIndividual.section1">
-                    <md-select  ng-change="vm.getSubStations()" ng-model="vm.eventsIndividual.sectionid" placeholder="select section" class="md-underline">
-                     <md-option ng-repeat="x in vm.eventsIndividual.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
-                    </md-select>
-                  </md-input-container> -->
 
                   <div flex="10" class="vhide">
                     <p class="label-font">Sub Stations :</p>
                   </div>
-                  <md-input-container flex="15" ng-show="vm.eventsIndividual.substation1" class="vhide">
-                    <md-select  ng-change="vm.getFeeder()" ng-model="vm.eventsIndividual.substationid" placeholder="select substation" class="md-underline">
+
+
+                  <md-input-container flex="15" class="vhide">
+                    <md-select  ng-change="vm.getFeeder()" ng-model="vm.individual.substationid" placeholder="select substation" class="md-underline">
                       <md-option ng-repeat="x in vm.eventsIndividual.substations"  value="{{x.substationId}}">{{x.subStation}}</md-option>
                     </md-select>
                   </md-input-container>
@@ -94,16 +36,19 @@
                   <div flex="10" class="vhide">
                     <p class="label-font">Feeder :</p>
                   </div>
-                  <md-input-container flex="15" ng-show="vm.eventsIndividual.feeder1" class="vhide">
-                    <md-select  ng-change="vm.getDtr()" ng-model="vm.eventsIndividual.feederid" placeholder="select feeder" class="md-underline">
+
+                  <md-input-container flex="15" class="vhide">
+                    <md-select  ng-change="vm.getDtr()" ng-model="vm.individual.feederid" placeholder="select feeder" class="md-underline">
                       <md-option ng-repeat="x in vm.eventsIndividual.feeders"  value="{{x.feederId}}">{{x.name}}</md-option>
                     </md-select>
                   </md-input-container>
+
                   <div flex="10">
                     <p class="label-font">DTR :</p>
                   </div>
-                  <md-input-container flex="15" ng-show="vm.eventsIndividual.dtr1">
-                    <md-select  ng-change="vm.getMeters()" ng-model="vm.eventsIndividual.dtrid" placeholder="select DTR" class="md-underline">
+
+                  <md-input-container flex="15" >
+                    <md-select  ng-change="vm.getMeters()" ng-model="vm.individual.dtrid" placeholder="select DTR" class="md-underline">
                       <md-option ng-repeat="x in vm.eventsIndividual.dtrs"  value="{{x.dtrId}}">{{x.name}}</md-option>
                     </md-select>
                   </md-input-container>
@@ -112,66 +57,48 @@
                   </div>
                   <md-autocomplete
                      md-no-cache = "noCache"
-                     md-selected-item="vm.selectedItem"
-                     md-search-text-change="vm.searchTextChange(vm.searchText)"
-                     md-search-text="vm.searchText"
-                     md-selected-item-change="vm.getMeter(vm.selectedItem)"
-                     md-items="item in vm.eventsIndividual.meters  | filter:vm.searchText"
+                     md-selected-item="vm.individual.mtrNo"
+                     md-search-text-change="vm.searchTextChange(vm.individual.searchText)"
+                     md-search-text="vm.individual.searchText"
+                     md-selected-item-change="vm.getMeter(vm.individual.mtrNo)"
+                     md-items="item in vm.eventsIndividual.meters  | filter:vm.individual.searchText"
                      md-item-text="item.mtrNo"
                      md-min-length="0"
                      placeholder="Enter meter"
                      ng-required="true">
                      <md-item-template>
-                       <span md-highlight-text="vm.searchText" md-highlight-flags="^i" > {{item.mtrNo}}</span>
+                       <span md-highlight-text="vm.individual.searchText" md-highlight-flags="^i" > {{item.mtrNo}}</span>
                      </md-item-template>
                    </md-autocomplete>
                  </div>
                 <div layout="row" class = "hierarchy-align">
+                  <div flex=20></div>
                   <div flex="5">
                     <p class="label-font">From</p>
                   </div>
-                  <md-input-container flex="15">
-                    <md-select ng-model="vm.eventsIndividual.fyear" placeholder="select year" ng-change = "vm.getMonth()">
-                      <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
-                      <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
-                      <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
-                    </md-select>
-                  </md-input-container>
+                  <md-datepicker ng-model="vm.individual.fromdate"   md-placeholder="Enter From date" md-open-on-focus ></md-datepicker>
                   <div flex="5">
                   </div>
-                  <md-input-container flex="15">
-                    <md-select ng-model="vm.eventsIndividual.fmonth" placeholder="select month" ng-disabled="vm.fmonthDisable">
-                      <md-option ng-repeat="x in vm.fmonth" value="{{x}}">{{x.month}}</md-option>
-                    </md-select>
-                  </md-input-container>
-                  <div flex="5">
-                  </div>
+
                   <div flex="5">
                     <p class="label-font">To</p>
                   </div>
-                  <md-input-container flex="15">
-                    <md-select ng-model="vm.eventsIndividual.tyear" placeholder="select year" ng-change = "vm.getMonth2()">
-                      <md-option value = "{{vm.currentYear}}">{{vm.currentYear}}</md-option>
-                      <md-option value = "{{vm.pastYear1}}">{{vm.pastYear1}}</md-option>
-                      <md-option value = "{{vm.pastYear2}}">{{vm.pastYear2}}</md-option>
-                    </md-select>
-                  </md-input-container>
+                  <md-datepicker ng-model="vm.individual.todate"   md-placeholder="Enter To date" md-open-on-focus ></md-datepicker>
                   <div flex="5">
                   </div>
-                  <md-input-container flex="15">
-                    <md-select ng-model="vm.eventsIndividual.tmonth" placeholder="select month" ng-disabled="vm.tmonthDisable">
-                      <md-option ng-repeat="x in vm.tmonth" value="{{x}}">{{x.month}}</md-option>
-                    </md-select>
-                  </md-input-container>
-                  <div flex="5">
-                  </div>
+
                 </div>
                 <div class="btn-align">
                   <md-button type="submit"  ng-click="vm.eventsIndividualSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
-                  <!-- <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(az,vm.billingDemand)">clear</md-button> -->
+                  <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.individual)">clear</md-button>
                 </div>
-              </div>
-              <div class="data-block" ng-show = "vm.showtabledata">
+                </div>
+                <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.eventsIndividual.progressShow">
+                  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+
+              <div class="data-block" ng-if="vm.eventsIndividual.showReport">
+                <a href="" ng-click="vm.dynamicShow();vm.Clear.clearObj(vm.individual,modelArray)">Generate Other Report</a>
               <!-- <div class="data-block"> -->
                 <div layout="row">
                   <div class="main">
@@ -179,9 +106,9 @@
                     <span> <p>Telangana State Southern Power Distribution Company Limited</p> </span>
                   </div>
                 </div>
-                <div layout="row">
+                <div layout="row" class="noMargin">
                   <div class="details">
-                    <p>Events Summary Report for <span>{{vm.frommonth.month}} - {{vm.eventsIndividual.fyear}} to {{vm.tomonth.month}} - {{vm.eventsIndividual.tyear}}</span></p>
+                    <p>Events Summary Report for <span>{{vm.individual.fromdate1}}  to {{vm.individual.todate1}}</span></p>
                   </div>
                 </div>
                 <div layout="row">
@@ -190,75 +117,182 @@
                           <p class="label-font auto-align">SubStation:</p>
                       </div>
                       <div flex="15">
-                        <p class="data-font">{{vm.eventsIndividual.dataList[0].substation}}</p>
+                        <p class="data-font">{{vm.subSationDisplayName}}</p>
                       </div>
                       <div flex="10">
                           <p class="label-font auto-align">Feeder:</p>
                       </div>
                       <div flex="20">
-                        <p class="data-font">{{vm.eventsIndividual.dataList[0].feeder}}</p>
+                        <p class="data-font">{{vm.feederDisplayName}}</p>
                       </div>
                       <div flex="10">
                           <p class="label-font auto-align">DTR:</p>
                       </div>
                       <div flex="20">
-                        <p class="data-font">{{vm.eventsIndividual.dataList[0].dtr}}</p>
+                        <p class="data-font">{{vm.dtrDisplayName}}</p>
                       </div>
                       <div flex="5">
                           <p class="label-font auto-align">Meter:</p>
                       </div>
                       <div flex="10">
-                        <p class="data-font">{{vm.eventsIndividual.dataList[0].mtrNo}}</p>
+                        <p class="data-font">{{vm.individual.mtrNo.mtrNo}}</p>
                       </div>
 
 
 
                 </div>
-                <div layout="row" flex="100" id="tableScroll">
+                <div layout="row" flex="100" id="tableScroll"class="noMargin">
                  <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="eventTable">
                    <thead>
                      <tr>
-                       <th class="secondary-text" >
+                       <th class="secondary-text" rowspan="2">
                          <div class="table-header">
-                             <span class="column-title">S No</span>
+                             <span class="column-title">S.No</span>
                          </div>
                        </th>
-                        <th class="secondary-text">
-                          <div class="table-header">
-                              <span class="column-title">Event Name</span>
-                          </div>
-                        </th>
-                        <th  class="secondary-text">
-                          <div class="table-header">
-                              <span class="column-title">Group</span>
-                          </div>
-                        </th>
-                        <th class="secondary-text">
-                          <div class="table-header">
-                              <span class="column-title">Count</span>
-                          </div>
-                        </th>
+                       <th class="secondary-text" rowspan="2">
+                         <div class="table-header">
+                             <span class="column-title">Event Name</span>
+                         </div>
+                       </th>
+                      <th class="secondary-text" rowspan="2">
+                        <div class="table-header">
+                            <span class="column-title">Occurred Date</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" rowspan="2">
+                        <div class="table-header">
+                            <span class="column-title">Restored Date</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" rowspan="2">
+                        <div class="table-header">
+                            <span class="column-title">Duration</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="4">
+                        <div class="table-header">
+                            <span class="column-title">Current (AMP)</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="4">
+                        <div class="table-header">
+                            <span class="column-title">Voltage (V)</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="4">
+                        <div class="table-header">
+                            <span class="column-title">Power Factor</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" colspan="2">
+                        <div class="table-header">
+                            <span class="column-title">Cum. Energy (KWH)</span>
+                        </div>
+                      </th>
 
-                        </tr>
-
+                    </tr>
+                    <tr>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">R</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Y</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">B</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">SP / Total</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">R</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Y</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">B</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">SP / Total</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">R</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Y</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">B</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">SP / Total</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">IMP</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">EXP</span>
+                        </div>
+                      </th>
+                    </tr>
                       </thead>
                       <tbody>
-                        <tr ng-repeat="evnt in vm.eventsIndividual.dataList">
+                        <tr ng-repeat="item in vm.eventsIndividualDetails">
                           <td>{{$index+1}}</td>
-                          <td>{{evnt.mdKw}}</td>
-                          <td>{{evnt.mdKva}}</td>
-                          <td>{{evnt.contractedLoad}}</td>
+                          <td>{{item.eventName}}</td>
+                          <td>{{item.occurenceDate |date}}</td>
+                          <td>{{item.restorationDate |date}} </td>
+                          <td>{{item.elapsedTime}}</td>
+                          <td>{{item.rPhCurrent | limitTo : 6}}</td>
+                          <td>{{item.yPhCurrent | limitTo : 6}}</td>
+                          <td>{{item.bPhCurrent | limitTo : 6}}</td>
+                          <td>{{item.singlePhOrTotCur | limitTo : 6}}</td>
+                          <td>{{item.rPhVoltage | limitTo : 6}}</td>
+                          <td>{{item.yPhVoltage | limitTo : 6}}</td>
+                          <td>{{item.bPhVoltage | limitTo : 6}}</td>
+                          <td>{{item.singlePhOrTotVol | limitTo : 6}}</td>
+                          <td>{{item.rPhPowerFactor | limitTo : 6}}</td>
+                          <td>{{item.yPhPowerFactor | limitTo : 6}}</td>
+                          <td>{{item.bPhPowerFactor | limitTo : 6}}</td>
+                          <td>{{item.singlePhOrTotPf | limitTo : 6}}</td>
+                          <td>{{item.cumEnergyKwhImp}}</td>
+                          <td>{{item.cumEnergyKwhExp}}</td>
                         </tr>
                       </tbody>
                   </table>
                 </div>
-                <div layout="row" class="download-btn">
-                  <a href="#"><span>PDF</span></a>
-                  <a href="#"><span>Excel</span></a>
-                  <a href="#"><span>CSV</span></a>
-                </div>
               </div>
             </div>
+          </div>
           <!-- </div> -->
           </div>
         </div>

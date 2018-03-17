@@ -15,9 +15,11 @@
       vm.billConsumption = {};
       vm.billingTable = false;
       vm.billingConsumption.progressShow = false;
+      vm.billingConsumption.inputShow=true;
+      vm.billingConsumption.showReport=false;
 
       vm.dtOptions = {
-                  dom       : '<"top"f>rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
+                  dom       : '<"top"f>rt<"bottom"<"left"<"length"l><"pagination"p>><"right"<"info"i><"pagination"p>>>',
                   pagingType: 'simple',
                   autoWidth : false,
                   responsive: true
@@ -77,6 +79,10 @@
         {'month':"December",'value':"12"}
       ];
 
+      vm.dynamicShow=function (){
+        vm.billingConsumption.inputShow=true;
+        vm.billingConsumption.showReport=false;
+      }
       //currDate=splitDate(currDate); //30-Jan-2018
       vm.getMonth = function() {
         // alert("hi");
@@ -112,6 +118,8 @@
           console.log(response);
             vm.billingConsumption.regions = response.data;
             console.log(vm.billingConsumption.regions);
+             vm.getMeters();
+
         }, function myError(response) {
             console.log(response);
         });
@@ -129,6 +137,7 @@
         }).then(function mySuccess(response) {
             vm.billingConsumption.circles = response.data;
             console.log(vm.billingConsumption.circles);
+             vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -149,7 +158,8 @@
         }).then(function mySuccess(response) {
             vm.billingConsumption.divisions = response.data;
             console.log(vm.billingConsumption.divisions);
-            //vm.billingDemand.divisionid = vm.billingDemand.divisions[0].name;
+             vm.getMeters();
+            //vm.billingConsumption.divisionid = vm.billingConsumption.divisions[0].name;
         }, function myError(response) {
             console.log(response);
         });
@@ -170,6 +180,7 @@
         }).then(function mySuccess(response) {
             console.log(response.data);
             vm.billingConsumption.subdivisions = response.data;
+             vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -178,7 +189,7 @@
       //sections
       vm.getSections = function(item) {
         console.log("SubDivisionID");
-        console.log(vm.billingConsumption.subdivisionid);
+        console.log(item);
         vm.modelArray[4] = Number(item);
         for (var i = 5; i < vm.modelArray.length; i++) {
           vm.modelArray[i] = null;
@@ -191,31 +202,33 @@
             vm.billingConsumption.sections = response.data;
             console.log(response.data);
             console.log(vm.billingConsumption.sections);
+            vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
       }
 
-      //substations
-      vm.getSubStations = function(item) {
-        console.log("SectionID");
-        console.log(item);
-        vm.modelArray[5] = Number(item);
-        for (var i = 6; i < vm.modelArray.length; i++) {
-          vm.modelArray[i] = null;
-        }
-        console.log(vm.modelArray);
-        $http({
-            method : "GET",
-            url : hierarchy +"mdm/substation/"+item
-        }).then(function mySuccess(response) {
-            console.log(response.data);
-            vm.billingConsumption.substations = response.data;
-            console.log(vm.billingConsumption.substations);
-        }, function myError(response) {
-            console.log(response);
-        });
-      }
+      // //substations
+      // vm.getSubStations = function(item) {
+      //   console.log("SectionID");
+      //   console.log(item);
+      //   vm.modelArray[5] = Number(item);
+      //   for (var i = 6; i < vm.modelArray.length; i++) {
+      //     vm.modelArray[i] = null;
+      //   }
+      //   console.log(vm.modelArray);
+      //   $http({
+      //       method : "GET",
+      //       url : hierarchy +"mdm/substation/"+item
+      //   }).then(function mySuccess(response) {
+      //       console.log(response.data);
+      //       vm.billingConsumption.substations = response.data;
+      //       console.log(vm.billingConsumption.substations);
+      //       vm.getMeters();
+      //   }, function myError(response) {
+      //       console.log(response);
+      //   });
+      // }
 
 
 
@@ -312,38 +325,58 @@
      vm.getMeters();
 
 
-     function validatebillingConsumption(){
-       console.log(vm.billConsumption.selectedItem);
-       if(vm.billConsumption.fmonth === undefined || vm.billConsumption.fyear===undefined || vm.billConsumption.tmonth===undefined || vm.billConsumption.tyear===undefined || vm.billConsumption.selectedItem == undefined){
-         //vm.errorToast("Please Select All Fields.");
-         MessageInfo.showMessage(1017, 'Dates and Meter', '', '');
-          return false;
-       }
-       if((vm.billConsumption.fyear == vm.billConsumption.tyear) && (vm.billConsumption.fmonth > vm.billConsumption.tmonth) ){
-         //vm.errorToast("From Date Cannot be Less Than To Date");
-          MessageInfo.showMessage(1008, 'From Month', 'To Month', '');
-          return false;
-       }
-       if( vm.billConsumption.tyear < vm.billConsumption.fyear  ){
-         //vm.errorToast("From Date Cannot be Less Than To Date");
-          MessageInfo.showMessage(1008, 'From Year', 'To Year', '');
-          return false;
-       }
-       return true;
-     }
+
+          function validatebillingConsumption() {
+            console.log(vm.billConsumption);
+            var fromYear;
+            var toYear;
+            var fromMonth;
+            var toMonth;
+            console.log(Object.keys(vm.billConsumption).length);
+            if (vm.billConsumption.mtrNo == null || vm.billConsumption.mtrNo == undefined) {
+              MessageInfo.showMessage(1017, 'Meter No', '', '');
+               return false;
+            }
+            if (Object.keys(vm.billConsumption).length > 4) {
+              fromYear = Number(vm.billConsumption.fyear);
+              toYear = Number(vm.billConsumption.tyear);
+              fromMonth = Number(vm.fromMonth.value);
+              toMonth = Number(vm.toMonth.value);
+            }
+
+            if(vm.billConsumption.fmonth === undefined || vm.billConsumption.fyear===undefined || vm.billConsumption.tmonth===undefined || vm.billConsumption.tyear===undefined){
+              MessageInfo.showMessage(7002, '', '', '');
+               return false;
+            }
+            if(toYear < fromYear){
+               MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
+               return false;
+            }
+            if((fromYear == toYear) && (fromMonth > toMonth) ){
+               MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
+               return false;
+            }
+            return true;
+          }
 
 
      vm.billingConsumptionSubmit = function(){
+       if (vm.billConsumption.fmonth != undefined) {
+         vm.fromMonth = JSON.parse(vm.billConsumption.fmonth);
+       }
+       if (vm.billConsumption.tmonth != undefined) {
+         vm.toMonth = JSON.parse(vm.billConsumption.tmonth);
+       }
        if (validatebillingConsumption()) {
        vm.billingConsumption.progressShow = true;
        vm.frommonth = JSON.parse(vm.billConsumption.fmonth);
        vm.tomonth = JSON.parse(vm.billConsumption.tmonth);
-       data.fromDate = vm.billConsumption.fyear+"-"+vm.frommonth.value;
-       data.toDate = vm.billConsumption.tyear+"-"+vm.tomonth.value;
+       data.fromDate = vm.billConsumption.fyear+"-"+vm.fromMonth.value;
+       data.toDate = vm.billConsumption.tyear+"-"+vm.toMonth.value;
        data.modelArray = vm.modelArray;
        console.log(data.modelArray);
-       data.mtrNo = vm.billConsumption.selectedItem.mtrNo;
-       console.log(vm.billConsumption.selectedItem.mtrNo);
+       data.mtrNo = vm.billConsumption.mtrNo.mtrNo;
+       console.log(vm.billConsumption.mtrNo.mtrNo);
        console.log(data);
        $http({
          method : "POST",
@@ -355,7 +388,8 @@
          vm.billingConsumption.energyList = response.data.statistics.energyList;
          console.log(vm.billingConsumption.energyList);
          vm.billingConsumption.progressShow = false;
-         vm.billingTable = true;
+         vm.billingConsumption.inputShow = false;
+         vm.billingConsumption.showReport = true;
         //  vm.billingConsumption.feeder=response.data.statistics.energyList[0].feeder;
        }, function myError(response) {
          //vm.errorToast("Something went wrong.. Please try again");

@@ -201,8 +201,8 @@
                          <td>{{$index+1}}</td>
                          <td>{{item.mtrNo}}</td>
                          <td>{{item.occuranceName}}</td>
-                         <td>{{item.occuranceClock}}</td>
-                         <td>{{item.restorationClock}}</td>
+                         <td>{{item.occuranceClock |date}}</td>
+                         <td>{{item.restorationClock |date}}</td>
                          <td>{{item.timeElapsed}}</td>
                          <!-- <td>{{item.restorationClock}}</td> -->
                        </tr>

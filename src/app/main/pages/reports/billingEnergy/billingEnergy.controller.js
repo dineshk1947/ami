@@ -10,18 +10,25 @@
     function BillingEnergyController($http,$localStorage,hierarchy,MessageInfo, Clear)
     {
       var vm = this;
+      vm.billingEnergy={};
+      vm.billEnergy={};
+      vm.be={};
       vm.Clear = Clear;
+      // var resArr = vm.Clear.clearObj(vm.billEnergy,vm.modelArray);
+      // console.log(resArr);
       vm.progressShow = false;
-
+      // vm.be.inputShow=true;
+      // vm.be.showReport=false;
+      vm.be.inputShow=true;
+      vm.be.showReport=false;
       vm.dtOptions = {
-                  dom       : '<"top"f>rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
+                  dom       : '<"top"f>rt<"bottom"<"left"<"length"l><"pagination"p>><"right"<"info"i><"pagination"p>>>',
                   pagingType: 'simple',
                   autoWidth : false,
                   responsive: true
                 }
-      vm.billingEnergy={};
-      vm.billEnergy = {};
-      vm.billEnergy.showReport = false;
+      //vm.billEnergy = {};
+      vm.be.showReport = false;
       vm.progressShow = false;
       vm.billingEnergy.region=false;
       vm.billingEnergy.region1=false;
@@ -38,6 +45,11 @@
       vm.modelArray[0]= vm.billingEnergy.discomid;
       console.log(vm.modelArray);
       console.log(vm.billingEnergy.discom);
+
+      vm.dynamicShow=function (){
+        vm.be.inputShow=true;
+        vm.be.showReport=false;
+      }
 
 
       var dt = new Date();
@@ -114,6 +126,7 @@
           console.log(response);
             vm.billingEnergy.regions = response.data;
             console.log(vm.billingEnergy.regions);
+            vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -132,6 +145,7 @@
         }).then(function mySuccess(response) {
             vm.billingEnergy.circles = response.data;
             console.log(vm.billingEnergy.circles);
+            vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -153,6 +167,7 @@
             vm.billingEnergy.divisions = response.data;
             console.log(vm.billingEnergy.divisions);
             //vm.billingEnergy.divisionid = vm.billingEnergy.divisions[0].name;
+            vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -173,6 +188,7 @@
         }).then(function mySuccess(response) {
             console.log(response.data);
             vm.billingEnergy.subdivisions = response.data;
+            vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -194,6 +210,7 @@
             vm.billingEnergy.sections = response.data;
             console.log(response.data);
             console.log(vm.billingEnergy.sections);
+            vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -276,10 +293,10 @@
           vm.getRegions(vm.billingEnergy.discomid);
      }
 
-     vm.setMeter = function (item) {
-       console.log(item.mtrNo);
-       vm.mtrNo = item.mtrNo;
-     }
+    //  vm.setMeter = function (item) {
+    //    console.log(item.mtrNo);
+    //    vm.mtrNo = item.mtrNo;
+    //  }
 
      vm.getMeters = function (item) {
        if (item != null) {
@@ -309,17 +326,31 @@
 
 
      function validatebillingEnergy() {
-       if(vm.billEnergy.fmonth === undefined || vm.billEnergy.fyear===undefined || vm.billEnergy.tmonth===undefined || vm.billEnergy.tyear===undefined || vm.mtrNo == undefined){
-         MessageInfo.showMessage(1017, 'Dates and Meter', '', '');
+       console.log(vm.billEnergy);
+       var fromYear;
+       var toYear;
+       var fromMonth;
+       var toMonth;
+       if (vm.billEnergy.mtrNo == undefined) {
+         MessageInfo.showMessage(1017, 'Meter No', '', '');
           return false;
        }
-       if((vm.billEnergy.fyear == vm.billEnergy.tyear) && (vm.billEnergy.fmonth > vm.billEnergy.tmonth) ){
-         //vm.errorToast("From Date Cannot be Less Than To Date");
+       if (Object.keys(vm.billEnergy).length > 2) {
+         fromYear = Number(vm.billEnergy.fyear);
+         toYear = Number(vm.billEnergy.tyear);
+         fromMonth = Number(vm.fromMonth.value);
+         toMonth = Number(vm.toMonth.value);
+       }
+
+       if(vm.billEnergy.fmonth === undefined || vm.billEnergy.fyear===undefined || vm.billEnergy.tmonth===undefined || vm.billEnergy.tyear===undefined){
+         MessageInfo.showMessage(7002, '', '', '');
+          return false;
+       }
+       if(toYear < fromYear){
           MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
           return false;
        }
-       if( vm.billEnergy.tyear < vm.billingEnergy.fyear  ){
-         //vm.errorToast("From Date Cannot be Less Than To Date");
+       if((fromYear == toYear) && (fromMonth > toMonth) ){
           MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
           return false;
        }
@@ -328,51 +359,56 @@
 
 
      vm.billingEnergySubmit = function() {
-       if (validatebillingEnergy()) {
-       vm.progressShow = true;
-       if (vm.billEnergy.sectionid != null) {
-         vm.modelArray[5] = Number(vm.billEnergy.sectionid);
-         console.log(vm.modelArray[5]);
+       if (vm.billEnergy.fmonth != undefined) {
+         console.log(vm.billEnergy.fmonth);
+         var fromMonth = JSON.parse(vm.billEnergy.fmonth);
+         vm.fromMonth = fromMonth;
+         console.log(vm.billEnergy.tmonth);
        }
-       console.log(vm.billEnergy.fmonth);
-       var fromMonth = JSON.parse(vm.billEnergy.fmonth);
-       vm.fromMonth = fromMonth;
-       console.log(vm.billEnergy.tmonth);
+       if (vm.billEnergy.tmonth != undefined) {
+         var toMonth = JSON.parse(vm.billEnergy.tmonth);
+         vm.toMonth = toMonth;
+         console.log(vm.toMonth);
+       }
+       if (validatebillingEnergy()) {
+         vm.progressShow = true;
+         if (vm.billEnergy.sectionid != null) {
+           vm.modelArray[5] = Number(vm.billEnergy.sectionid);
+           console.log(vm.modelArray[5]);
+         }
 
-       var toMonth = JSON.parse(vm.billEnergy.tmonth);
-       vm.toMonth = toMonth;
-       console.log(vm.toMonth);
 
-       //vm.modelArray[6] = 33053;
-       vm.fromDate = vm.billEnergy.fyear + "-" + vm.fromMonth.value;
-       vm.toDate = vm.billEnergy.tyear + "-" + vm.toMonth.value;
-       console.log(vm.fromDate);
-       data.fromDate = vm.fromDate;
-       data.toDate = vm.toDate;
-       data.modelArray = vm.modelArray;
-       data.mtrNumber = vm.mtrNo;
-       console.log(vm.mtrNo);
-       console.log(data.modelArray);
-       $http({
-         method : "POST",
-         url : hierarchy + "/mdm/reports/billing-energy",
-         data: data
-       }).then(function mySuccess(response) {
-         console.log(response);
-         vm.progressShow = false;
-           vm.billingEnergy.meters = response.data.statistics.energyList;
-           vm.dtr = vm.billingEnergy.meters[0].dtr;
-           vm.feeder = vm.billingEnergy.meters[0].feeder;
-           vm.substation = vm.billingEnergy.meters[0].substation;
-           vm.mtrslno = vm.billingEnergy.meters[0].mtrslno;
-           vm.progressShow = false;
-           vm.billEnergy.showReport = true;
-           console.log(vm.billingEnergy.meters);
-           console.log(vm.billingEnergy.meters[0].cumEngKvah);
-       }, function myError(response) {
+         //vm.modelArray[6] = 33053;
+         vm.fromDate = vm.billEnergy.fyear + "-" + vm.fromMonth.value;
+         vm.toDate = vm.billEnergy.tyear + "-" + vm.toMonth.value;
+         console.log(vm.fromDate);
+         data.fromDate = vm.fromDate;
+         data.toDate = vm.toDate;
+         data.modelArray = vm.modelArray;
+         data.mtrNumber = vm.billEnergy.mtrNo.mtrNo;
+         console.log(vm.mtrNo);
+         console.log(data.modelArray);
+         $http({
+           method : "POST",
+           url : hierarchy + "mdm/reports/billing-energy",
+           data: data
+         }).then(function mySuccess(response) {
            console.log(response);
-       });
-     }
+           vm.progressShow = false;
+             vm.billingEnergy.meters = response.data.statistics.energyList;
+             vm.dtr = vm.billingEnergy.meters[0].dtr;
+             vm.feeder = vm.billingEnergy.meters[0].feeder;
+             vm.substation = vm.billingEnergy.meters[0].substation;
+             vm.mtrslno = vm.billingEnergy.meters[0].mtrslno;
+             vm.progressShow = false;
+             vm.be.inputShow=false;
+             vm.be.showReport=true;
+             console.log(vm.billingEnergy.meters);
+             console.log(vm.billingEnergy.meters[0].cumEngKvah);
+         }, function myError(response) {
+             console.log(response);
+         });
+       }
      }
      vm.getMeters();
 

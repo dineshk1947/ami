@@ -43,7 +43,7 @@
                MessageInfo.showMessage(1005, '', '', '');
               $http({
                   method : "GET",
-                  url : "http://mdm.vijaiami.com/mdm/auth/login-user?token="+$location.search().token,
+                  url : "http://b9509397.ngrok.io/mdm/auth/login-user?token="+$location.search().token,
               }).then(function mySuccess(data) {
                 console.log(data);
                 var user = data.data.userDetails[0];

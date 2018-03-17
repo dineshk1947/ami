@@ -1,16 +1,40 @@
 #login {
     height: 100%;
-    background: url('/assets/images/backgrounds/march.jpg') no-repeat;
+    // background: url('/assets/images/backgrounds/march.jpg') no-repeat;
+    background: #0892eb;
     background-size: cover;
+    .login-desc {
+      .align-desc {
+        padding: 128px;
+        img {
+          height: 90px;
+          margin-left: 150px;
+        }
+
+        .text {
+          font-size: 18px;
+          color: #fff;
+          margin-top: 5%;
+          text-transform: uppercase;
+          span {
+            font-size: 30px;
+            font-weight: 600;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
 
     #login-form-wrapper {
         flex: 1 0 auto;
-        padding: 32px;
+        padding: 0px 0px;
 
         #login-form {
+            height: -webkit-fill-available;
+            padding: 128px 60px;
             width: 384px;
             max-width: 384px;
-            padding: 32px;
+            //padding: 32px;
             background: #FFFFFF;
             text-align: center;
 
@@ -169,5 +193,4 @@
             }
         }
     }
-
 }

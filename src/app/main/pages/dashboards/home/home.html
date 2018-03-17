@@ -14,12 +14,10 @@
     </div>
     <!-- / HEADER -->
     <!-- CONTENT -->
-
     <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.progressShow" style="margin-top:200px">
              <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 
     </div>
-
     <div class="content" layout="column" id="dashboard-home" ng-show="!vm.progressShow">
 
         <div layout="row" class="each-row">
@@ -66,25 +64,15 @@
                 <div id="PFPieChart" ></div>
             </div>
           </div>
-
           <div flex="5">
-
           </div>
-          <!-- <div flex="30">
-            <div class="md-title">Power Quality</div>
-            <div class="card md-whiteframe-4dp"  ng-click="vm.redirect('pf')">
-                <div id="PFPieChart" ></div>
+          <div flex="30">
+            <div class="md-title">Events and Tampers</div>
+            <div class="card md-whiteframe-4dp"  ng-click="vm.redirect('te')">
+                <div id="eventsBarChart" ></div>
+                <div class="Yaxis"><b>Event Category</b></div>
             </div>
-          </div> -->
-          <div flex="5">
-
           </div>
-          <!-- <div flex="30">
-            <div class="md-title">VEE</div>
-            <div class="card md-whiteframe-4dp"  ng-click="vm.redirect('vee')">
-                <nvd3 options="vm.donutChart.options" data="vm.donutChart.data"></nvd3>
-            </div>
-          </div> -->
         </div>
 
         <div layout="row" class="each-row">

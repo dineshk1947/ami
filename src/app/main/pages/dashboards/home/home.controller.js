@@ -7,18 +7,26 @@
         .controller('HomeController', HomeController);
 
     /** @ngInject */
-    function HomeController($http, baseUrl2, $location, $rootScope, Clear)
+    function HomeController($http, baseUrl2, $location, $rootScope, Clear, $localStorage)
     {
         var vm = this;
         vm.Clear = Clear;
+        var data = {};
+        var userDetails = {};
+        var currentUser = $localStorage.globals;
+        userDetails = currentUser.currentUser;
+        console.log("userDetails",userDetails);
 
         //var modelArray = $rootScope.modelArray;
-        var modelArray=[33001, 33002, 33003, null, null, null, null, null, null];
-        console.log("$rootScope.modelArray",modelArray);
+        // var modelArray=[33001, 33002, 33003, null, null, null, null, null, null];
+        // console.log("$rootScope.modelArray",modelArray);
 
-        //var modelArray = [null, null, null, null, null, null];
+        var modelArray = [null, null, null, null, null, null,null,null,null];
+        console.log(modelArray);
+        vm.modelArray=modelArray;
         //modelArray[0] = 1008;
-        var data = {};
+
+
         vm.progressShow=true;
 
         var splitDate =  function(dt) {
@@ -26,6 +34,40 @@
           console.log(dt);
           return dt.split(' ')[2] + "-" + dt.split(' ')[1] + "-" + dt.split(' ')[3];
         }
+
+
+        if(userDetails.levelName == "SUB-DIVISION"){
+          vm.modelArray[0]= userDetails.discomId;
+          vm.modelArray[1]= userDetails.regionId;
+          vm.modelArray[2]= userDetails.circleId;
+          vm.modelArray[3] = userDetails.divisionId;
+          vm.modelArray[4]= userDetails.hierarchyId;
+        }
+
+        if(userDetails.levelName == "REGION"){
+          vm.modelArray[0]= userDetails.discomId;
+          vm.modelArray[1]= userDetails.hierarchyId;
+
+          }
+
+        if(userDetails.levelName == "DIVISION"){
+          vm.modelArray[0]= userDetails.discomId;
+          vm.modelArray[1]= userDetails.regionId;
+          vm.modelArray[2]= userDetails.circleId;
+          vm.modelArray[3] = userDetails.hierarchyId;
+        }
+
+        if(userDetails.levelName == "CIRCLE"){
+          vm.modelArray[0]= userDetails.discomId;
+          vm.modelArray[1]= userDetails.regionId;
+          vm.modelArray[2]= userDetails.hierarchyId;
+        }
+
+        if(userDetails.levelName == "DISCOM"){
+            vm.modelArray[0]= userDetails.hierarchyId;
+       }
+
+       console.log("vm.modelArray",vm.modelArray);
 
 
         vm.redirect = function(rd) {
@@ -147,14 +189,17 @@
         var powerFactor = {};
         var energyDemand = {};
         var energyConsumption ={};
+        var tampersEvents ={};
         var PFarr = [];
+        var tampersArr=[];
         var PFobj = {};
         var ECarr = [];
         var ECobj = {};
         var EDarr = [];
         var EDobj = {};
+        var tampersObj={}
         var dpf = new Date();
-        var powerQuality ={};
+        //var powerQuality ={};
         var TMonth = dpf.getMonth();
         var TYear= dpf.getFullYear();
         var FMonth=TMonth-1;
@@ -241,6 +286,16 @@
            powerFactor.tyear=TYear+"";
            //powerFactor.location = modelArray;
 
+          //  tampersEvents.fmonth=FMonth;
+          //  tampersEvents.fyear=FYear+"";
+          //  tampersEvents.tmonth=TMonth;
+          //  tampersEvents.tyear=TYear+"";
+
+           tampersEvents.fmonth="12";
+           tampersEvents.fyear="2017";
+           tampersEvents.tmonth="12";
+           tampersEvents.tyear="2017";
+
            energyDemand.fmonth=FMonth;
            energyDemand.fyear=FYear+"";
            energyDemand.tmonth=TMonth;
@@ -256,9 +311,10 @@
            data.powerFactor=powerFactor;
            data.energyDemand=energyDemand;
            data.energyConsumption=energyConsumption;
-           data.modelArray = modelArray;
+           data.modelArray = vm.modelArray;
+           data.tampersEvents=tampersEvents;
+           console.log("modelArray before post",modelArray);
            console.log("Data is", data);
-
 
 
            $http({
@@ -330,6 +386,106 @@
                    "enabled": true
                  }
                  } );
+           }, function myError(response) {
+               console.log(response);
+           });
+
+           // Tampers Events Post
+           $http({
+               method : "POST",
+               url : baseUrl2 + "mdm/dashboard/event-tampers",
+               data: data
+           }).then(function mySuccess(response) {
+             vm.progressShow=false;
+               console.log("}}}}}}}}}}}}}}}}//////Tampers DB response",response);
+               var tampersResp1 = response.data.statistics;
+               var tampersResp = response.data.statistics.counts;
+               var counts = tampersResp;
+               console.log(tampersResp);
+               console.log(tampersResp1);
+               for(var key in tampersResp) {
+                 console.log(key +  "\n");
+                 if (key  == 'volCount') {
+                   tampersObj.Title = "Voltage Violated"
+                   tampersObj.visits = tampersResp[key];
+                   tampersObj.color = "#a3b786";
+                   tampersArr.push(tampersObj);
+                 } else if ( key == 'curCount' ) {
+                   tampersObj.Title = "Current Violated"
+                   tampersObj.visits = tampersResp[key];
+                   tampersObj.color = "#ed7d8c";
+                   tampersArr.push(tampersObj);
+                 }
+                 else if ( key == 'pwrCount' ) {
+                   tampersObj.Title = "Power Violated"
+                   tampersObj.visits = tampersResp[key];
+                   tampersObj.color = "#86b4b7";
+                   tampersArr.push(tampersObj);
+                 }
+                 else if ( key == 'generalCount' ) {
+                   tampersObj.Title = "General Violated"
+                   tampersObj.visits = tampersResp[key];
+                   tampersObj.color="#c6abc4";
+                   tampersArr.push(tampersObj);
+                 }
+                 else if ( key == 'otrCount' ) {
+                   tampersObj.Title = "Others"
+                   tampersObj.visits = tampersResp[key];
+                   tampersObj.color="#c6c2ab";
+                   tampersArr.push(tampersObj);
+                 }
+                 else if ( key == 'nrlCount' ) {
+                   tampersObj.Title = "Non Roll Over"
+                   tampersObj.visits = tampersResp[key];
+                   tampersObj.color= "#d1ab8a";
+                   tampersArr.push(tampersObj);
+                 }
+                  else  if ( key == 'trnsCount' ) {
+                   tampersObj.Title = "Tansaction Violated"
+                   tampersObj.visits = tampersResp[key];
+                   tampersObj.color="#c6b7ab";
+                   tampersArr.push(tampersObj);
+                 }
+                 tampersObj = {};
+                 console.log("tampersArr",tampersArr);
+               }
+
+               var eventsBarChart = AmCharts.makeChart("eventsBarChart", {
+                 "theme": "light",
+                 "type": "serial",
+                 "startDuration": 2,
+                 "dataProvider": tampersArr,
+                 "labelsEnabled": false,
+                 "valueAxes": [{
+                     "position": "left",
+                     "title": "# Events"
+                 }],
+                 "graphs": [{
+                     "balloonText": "[[category]]: <b>[[value]]</b>",
+                     "fillColorsField": "color",
+                     "fillAlphas": 1,
+                     "lineAlpha": 0.1,
+                     "type": "column",
+                     "valueField": "visits"
+                 }],
+               "depth3D": 20,
+               "angle": 30,
+                 "chartCursor": {
+                     "categoryBalloonEnabled": false,
+                     "cursorAlpha": 0,
+                     "zoomable": false
+                 },
+                 "categoryField": "Title",
+                 "categoryAxis": {
+                     "gridPosition": "start",
+                     "labelRotation": 60,
+                     "labelsEnabled": false
+                 },
+                 "export": {
+                   "enabled": true
+                  }
+
+             });
            }, function myError(response) {
                console.log(response);
            });

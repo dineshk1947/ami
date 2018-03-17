@@ -14,7 +14,7 @@
       vm.Clear = Clear;
 
       vm.dtOptions = {
-                  dom       : '<"top"f>rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
+                  dom       : '<"top"f>rt<"bottom"<"left"<"length"l><"pagination"p>><"right"<"info"i><"pagination"p>>>',
                   pagingType: 'simple',
                   autoWidth : false,
                   responsive: true
@@ -113,119 +113,6 @@
         console.log(vm.tmonth);
       }
 
-      // //regions
-      // vm.getRegions = function() {
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy + "mdm/hierarchy/"+vm.loadProfileReport.discomid
-      //   }).then(function mySuccess(response) {
-      //     console.log(response);
-      //       vm.loadProfileReport.regions = response.data;
-      //       console.log(vm.loadProfileReport.regions);
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
-      //
-      // // circles
-      // vm.getCircles = function() {
-      //   console.log(vm.loadProfile.regionid);
-      //   console.log("RegionId");
-      //   vm.modelArray[1] = Number(vm.loadProfile.regionid);
-      //   console.log(vm.modelArray);
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy + "mdm/hierarchy/"+vm.loadProfile.regionid
-      //   }).then(function mySuccess(response) {
-      //       vm.loadProfileReport.circles = response.data;
-      //       console.log(vm.loadProfileReport.circles);
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
-      //
-      // //divisions
-      // vm.getDivision = function() {
-      //   console.log(vm.loadProfile.circleid);
-      //   console.log("CircleId");
-      //   vm.modelArray[2] = Number(vm.loadProfile.circleid);
-      //   for (var i = 3; i < vm.modelArray.length; i++) {
-      //     vm.modelArray[i] = null;
-      //   }
-      //   console.log(vm.modelArray);
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy + "mdm/hierarchy/"+vm.loadProfile.circleid
-      //   }).then(function mySuccess(response) {
-      //       vm.loadProfileReport.divisions = response.data;
-      //       console.log(vm.loadProfileReport.divisions);
-      //       //vm.loadProfileReport.divisionid = vm.loadProfileReport.divisions[0].name;
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
-
-      //subdivisions
-      // vm.getSubDivisions=function(){
-      //   console.log(vm.loadProfile.divisionid);
-      //   console.log("DivisionID");
-      //   vm.modelArray[3] = Number(vm.loadProfile.divisionid);
-      //   for (var i = 4; i < vm.modelArray.length; i++) {
-      //     vm.modelArray[i] = null;
-      //   }
-      //   console.log(vm.modelArray);
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy + "mdm/hierarchy/"+vm.loadProfile.divisionid
-      //   }).then(function mySuccess(response) {
-      //       console.log(response.data);
-      //       vm.loadProfileReport.subdivisions = response.data;
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
-      //
-      // //sections
-      // vm.getSections = function() {
-      //   console.log("SubDivisionID");
-      //   console.log(vm.loadProfile.subdivisionid);
-      //   vm.modelArray[4] = Number(vm.loadProfile.subdivisionid);
-      //   for (var i = 5; i < vm.modelArray.length; i++) {
-      //     vm.modelArray[i] = null;
-      //   }
-      //   console.log(vm.modelArray);
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy + "mdm/hierarchy/" + vm.loadProfile.subdivisionid
-      //   }).then(function mySuccess(response) {
-      //       vm.loadProfileReport.sections = response.data;
-      //       console.log(response.data);
-      //       console.log(vm.loadProfileReport.sections);
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
-
-      //substations
-      // vm.getSubStations = function() {
-      //   console.log("SectionID");
-      //   console.log(vm.loadProfileReport.sectionid);
-      //   vm.modelArray[5] = Number(vm.loadProfileReport.sectionid);
-      //   for (var i = 6; i < vm.modelArray.length; i++) {
-      //     vm.modelArray[i] = null;
-      //   }
-      //   console.log(vm.modelArray);
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy +"mdm/substation/"+vm.loadProfileReport.sectionid
-      //   }).then(function mySuccess(response) {
-      //       console.log(response.data);
-      //       vm.loadProfileReport.substations = response.data;
-      //       console.log(vm.loadProfileReport.substations);
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
 
       //feders
       vm.getFeeder = function() {
@@ -281,20 +168,14 @@
 
 
       if(userDetails.levelName == "SUB-DIVISION"){
-        // vm.loadProfileReport.region=true;
-        // vm.loadProfileReport.circle=true;
-        // vm.loadProfileReport.division=true;
-        // vm.loadProfileReport.subdivision=true;
+
         vm.loadProfileReport.discom = userDetails.discom;
         vm.loadProfileReport.regionName=userDetails.region;
         vm.loadProfileReport.circleName=userDetails.circle;
         vm.loadProfileReport.divisionName= userDetails.division;
         vm.loadProfileReport.subdivisionName=userDetails.hierarchyName;
         vm.loadProfileReport.subdivisionid = userDetails.hierarchyId;
-        // vm.loadProfileReport.section1 =true;
-        // vm.loadProfileReport.substation1=true;
-        // vm.loadProfileReport.feeder1= true;
-        // vm.loadProfileReport.dtr1=true;
+
         vm.modelArray[1]= userDetails.regionId;
         vm.modelArray[2]= userDetails.circleId;
         vm.modelArray[3] = userDetails.divisionId;
@@ -317,35 +198,19 @@
         }
 
       if(userDetails.levelName == "DIVISION"){
-        // vm.loadProfileReport.region=true;
-        // vm.loadProfileReport.circle=true;
-        // vm.loadProfileReport.division=true;
         vm.loadProfileReport.regionName=userDetails.region;
         vm.loadProfileReport.circleName=userDetails.circle;
         vm.loadProfileReport.divisionName= userDetails.hierarchyName;
         vm.loadProfileReport.divisionid=userDetails.hierarchyId;
-        // vm.loadProfileReport.subdivision1=true;
-        // vm.loadProfileReport.section1 =true;
-        // vm.loadProfileReport.substation1=true;
-        // vm.loadProfileReport.feeder1= true;
-        // vm.loadProfileReport.dtr1=true;
         vm.modelArray[1]= userDetails.regionId;
         vm.modelArray[2]= userDetails.circleId;
       //  vm.getSubDivisions();
       }
 
       if(userDetails.levelName == "CIRCLE"){
-        // vm.loadProfileReport.region=true;
-        // vm.loadProfileReport.circle=true;
         vm.loadProfileReport.regionName=userDetails.region;
         vm.loadProfileReport.circleName= userDetails.hierarchyName;
         vm.loadProfileReport.circleid=userDetails.hierarchyId;
-        // vm.loadProfileReport.division1=true;
-        // vm.loadProfileReport.subdivision1=true;
-        // vm.loadProfileReport.section1 =true;
-        // vm.loadProfileReport.substation1=true;
-        // vm.loadProfileReport.feeder1= true;
-        // vm.loadProfileReport.dtr1=true;
         vm.modelArray[1]= userDetails.regionId;
       //  vm.getDivision();
       }
@@ -354,14 +219,6 @@
           vm.loadProfileReport.regionName=userDetails.region;
           vm.loadProfileReport.discom= userDetails.hierarchyName;
           vm.loadProfileReport.discomid=userDetails.hierarchyId;
-          // vm.loadProfileReport.region1=true;
-          // vm.loadProfileReport.circle1=true;
-          // vm.loadProfileReport.division1=true;
-          // vm.loadProfileReport.subdivision1=true;
-          // vm.loadProfileReport.section1 =true;
-          // vm.loadProfileReport.substation1=true;
-          // vm.loadProfileReport.feeder1= true;
-          // vm.loadProfileReport.dtr1=true;
           vm.modelArray[0]= userDetails.hierarchyId;
           //vm.getRegions();
       }
@@ -415,6 +272,7 @@
 
      function validateeventsIndividual() {
        if(vm.loadProfile.fdate === undefined || vm.loadProfile.todate===undefined){
+         //alert(vm.loadProfile.fdate);
          //vm.errorToast("Please Select All Fields.");
          MessageInfo.showMessage(7002, '', '', '');
           return false;
@@ -483,6 +341,50 @@
      }
 
      }
+
+  //    function download_csv(csv, filename) {
+  //      var csvFile;
+  //      var downloadLink;
+  //      // CSV FILE
+  //      csvFile = new Blob([csv], {type: "text/csv"});
+  //      // Download link
+  //      downloadLink = document.createElement("a");
+  //      // File name
+  //      downloadLink.download = filename;
+  //      // We have to create a link to the file
+  //      downloadLink.href = window.URL.createObjectURL(csvFile);
+  //      // Make sure that the link is not displayed
+  //      downloadLink.style.display = "none";
+  //      // Add the link to your DOM
+  //      document.body.appendChild(downloadLink);
+  //      // Lanzamos
+  //      downloadLink.click();
+  //  }
+  //  function export_table_to_csv(html, filename) {
+  //    var csv = [];
+  //    var rows = document.querySelectorAll("#eventTable tr");
+   //
+  //      for (var i = 0; i < rows.length; i++) {
+  //      var row = [],
+  //      cols = rows[i].querySelectorAll("td,span");
+   //
+  //          for (var j = 0; j < cols.length; j++)
+  //              row.push(cols[j].innerText);
+   //
+  //      csv.push(row.join(","));
+  //    }
+   //
+  //      // Download CSV
+  //      download_csv(csv.join("\n"), filename);
+  //  }
+   //
+   //
+  //  vm.dataDownloadtoCSV= function(){
+  //    //alert("CSV");
+  //    var html = document.querySelector("#eventTable").outerHTML;
+  //    export_table_to_csv(html, "table.csv");
+  //  }
+
 
     }
 })();

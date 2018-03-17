@@ -11,10 +11,17 @@
     {
       var vm = this;
       vm.eventsSummary={};
+      vm.es={};
       vm.summary = {};
-      vm.summary.showtabledata =  false;
+      vm.es.showReport =  false;
+      vm.es.inputShow = true;
       vm.Clear = Clear;
       vm.eventsSummary.progressShow=false;
+
+      vm.dynamicShow=function (){
+        vm.es.inputShow = true;
+        vm.es.showReport = false;
+      }
 
       var splitDate =  function(dt) {
         console.log(dt);
@@ -26,7 +33,7 @@
       }
 
       vm.dtOptions = {
-                  dom       : '<"top"f>rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
+                  dom       : '<"top"f>rt<"bottom"<"left"<"length"l><"pagination"p>><"right"<"info"i><"pagination"p>>>',
                   pagingType: 'simple',
                   autoWidth : false,
                   responsive: true
@@ -109,120 +116,6 @@
         console.log(vm.tmonth);
       }
 
-      //regions
-      // vm.getRegions = function() {
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy + "mdm/hierarchy/"+vm.eventsSummary.discomid
-      //   }).then(function mySuccess(response) {
-      //     console.log(response);
-      //       vm.eventsSummary.regions = response.data;
-      //       console.log(vm.eventsSummary.regions);
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
-      //
-      // // circles
-      // vm.getCircles = function() {
-      //   console.log(vm.eventsSummary.regionid);
-      //   console.log("RegionId");
-      //   vm.modelArray[1] = Number(vm.eventsSummary.regionid);
-      //   console.log(vm.modelArray);
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy + "mdm/hierarchy/"+vm.eventsSummary.regionid
-      //   }).then(function mySuccess(response) {
-      //       vm.eventsSummary.circles = response.data;
-      //       console.log(vm.eventsSummary.circles);
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
-      //
-      // //divisions
-      // vm.getDivision = function() {
-      //   console.log(vm.eventsSummary.circleid);
-      //   console.log("CircleId");
-      //   vm.modelArray[2] = Number(vm.eventsSummary.circleid);
-      //   for (var i = 3; i < vm.modelArray.length; i++) {
-      //     vm.modelArray[i] = null;
-      //   }
-      //   console.log(vm.modelArray);
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy + "mdm/hierarchy/"+vm.eventsSummary.circleid
-      //   }).then(function mySuccess(response) {
-      //       vm.eventsSummary.divisions = response.data;
-      //       console.log(vm.eventsSummary.divisions);
-      //       //vm.eventsSummary.divisionid = vm.eventsSummary.divisions[0].name;
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
-      //
-      // //subdivisions
-      // vm.getSubDivisions=function(){
-      //   console.log(vm.eventsSummary.divisionid);
-      //   console.log("DivisionID");
-      //   vm.modelArray[3] = Number(vm.eventsSummary.divisionid);
-      //   for (var i = 4; i < vm.modelArray.length; i++) {
-      //     vm.modelArray[i] = null;
-      //   }
-      //   console.log(vm.modelArray);
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy + "mdm/hierarchy/"+vm.eventsSummary.divisionid
-      //   }).then(function mySuccess(response) {
-      //       console.log(response.data);
-      //       vm.eventsSummary.subdivisions = response.data;
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
-      //
-      // //sections
-      // vm.getSections = function() {
-      //   console.log("SubDivisionID");
-      //   console.log(vm.eventsSummary.subdivisionid);
-      //   vm.modelArray[4] = Number(vm.eventsSummary.subdivisionid);
-      //   for (var i = 5; i < vm.modelArray.length; i++) {
-      //     vm.modelArray[i] = null;
-      //   }
-      //   console.log(vm.modelArray);
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy + "mdm/hierarchy/" + vm.eventsSummary.subdivisionid
-      //   }).then(function mySuccess(response) {
-      //       vm.eventsSummary.sections = response.data;
-      //       console.log(response.data);
-      //       console.log(vm.eventsSummary.sections);
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
-      //
-      // //substations
-      // vm.getSubStations = function() {
-      //   console.log("SectionID");
-      //   console.log(vm.eventsSummary.sectionid);
-      //   vm.modelArray[5] = Number(vm.eventsSummary.sectionid);
-      //   for (var i = 6; i < vm.modelArray.length; i++) {
-      //     vm.modelArray[i] = null;
-      //   }
-      //   console.log(vm.modelArray);
-      //   $http({
-      //       method : "GET",
-      //       url : hierarchy +"mdm/substation/"+vm.eventsSummary.sectionid
-      //   }).then(function mySuccess(response) {
-      //       console.log(response.data);
-      //       vm.eventsSummary.substations = response.data;
-      //       console.log(vm.eventsSummary.substations);
-      //   }, function myError(response) {
-      //       console.log(response);
-      //   });
-      // }
-
 
       vm.getSubStations = function() {
 
@@ -234,9 +127,9 @@
           data: data
         }).then(function mySuccess(response) {
           console.log(response);
-          vm.getMeters();
             vm.eventsSummary.substations = response.data;
             console.log(vm.eventsSummary.substations);
+             vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -250,7 +143,6 @@
         for (var i = 7; i < vm.modelArray.length; i++) {
           vm.modelArray[i] = null;
         }
-
         console.log(vm.modelArray);
         $http({
             method : "GET",
@@ -260,7 +152,7 @@
         }).then(function mySuccess(response) {
             console.log(response.data);
             vm.eventsSummary.feeders = response.data;
-            vm.getMeters();
+             vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -284,8 +176,7 @@
           console.log("dtr");
             console.log(response.data);
             vm.eventsSummary.dtrs = response.data;
-            vm.getMeters();
-
+             vm.getMeters();
         }, function myError(response) {
           console.log("dtr");
             console.log(response);
@@ -294,14 +185,12 @@
 
 
       if(userDetails.levelName == "SUB-DIVISION"){
-
         vm.eventsSummary.discom = userDetails.discom;
         vm.eventsSummary.regionName=userDetails.region;
         vm.eventsSummary.circleName=userDetails.circle;
         vm.eventsSummary.divisionName= userDetails.division;
         vm.eventsSummary.subdivisionName=userDetails.hierarchyName;
         vm.eventsSummary.subdivisionid = userDetails.hierarchyId;
-
         vm.modelArray[1]= userDetails.regionId;
         vm.modelArray[2]= userDetails.circleId;
         vm.modelArray[3] = userDetails.divisionId;
@@ -312,30 +201,14 @@
           vm.eventsSummary.region=true;
           vm.eventsSummary.regionName= userDetails.hierarchyName;
           vm.eventsSummary.regionid=userDetails.hierarchyId;
-          // vm.eventsSummary.circle1=true;
-          // vm.eventsSummary.division1=true;
-          // vm.eventsSummary.subdivision1=true;
-          // vm.eventsSummary.section1 =true;
-          // vm.eventsSummary.substation1=true;
-          // vm.eventsSummary.feeder1= true;
-          // vm.eventsSummary.dtr1=true;
-          //vm.modelArray[0]= userDetails.regionId;
           vm.getSubStations();
         }
 
       if(userDetails.levelName == "DIVISION"){
-        // vm.eventsSummary.region=true;
-        // vm.eventsSummary.circle=true;
-        // vm.eventsSummary.division=true;
         vm.eventsSummary.regionName=userDetails.region;
         vm.eventsSummary.circleName=userDetails.circle;
         vm.eventsSummary.divisionName= userDetails.hierarchyName;
         vm.eventsSummary.divisionid=userDetails.hierarchyId;
-        // vm.eventsSummary.subdivision1=true;
-        // vm.eventsSummary.section1 =true;
-        // vm.eventsSummary.substation1=true;
-        // vm.eventsSummary.feeder1= true;
-        // vm.eventsSummary.dtr1=true;
         vm.modelArray[1]= userDetails.regionId;
         vm.modelArray[2]= userDetails.circleId;
         vm.getSubStations();
@@ -353,23 +226,14 @@
           vm.eventsSummary.regionName=userDetails.region;
           vm.eventsSummary.discom= userDetails.hierarchyName;
           vm.eventsSummary.discomid=userDetails.hierarchyId;
-          // vm.eventsSummary.region1=true;
-          // vm.eventsSummary.circle1=true;
-          // vm.eventsSummary.division1=true;
-          // vm.eventsSummary.subdivision1=true;
-          // vm.eventsSummary.section1 =true;
-          // vm.eventsSummary.substation1=true;
-          // vm.eventsSummary.feeder1= true;
-          // vm.eventsSummary.dtr1=true;
           vm.modelArray[0]= userDetails.hierarchyId;
           vm.getSubStations();
       }
 
 
      vm.getMeters = function() {
-       vm.eventsSummary.meters = {};
        if(vm.summary.dtrid != null){
-         vm.modelArray[8] = Number(vm.summary.sectionid);
+         vm.modelArray[8] = Number(vm.summary.dtrid);
        }
        data.modelArray = vm.modelArray;
        console.log(data.modelArray);
@@ -394,6 +258,12 @@
        if(vm.summary.fromdate === undefined || vm.summary.todate===undefined ){
          //vm.errorToast("Please Select All Fields.");
          MessageInfo.showMessage(7002, '', '', '');
+          return false;
+       }
+
+       if(vm.summary.fromdate > vm.summary.todate){
+         //vm.errorToast("Please Select All Fields.");
+           MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
           return false;
        }
        if(vm.summary.substationid === undefined){
@@ -450,7 +320,9 @@
          console.log("EventsArr");
          console.log(vm.eventsArr);
          vm.eventsSummary.progressShow=false;
-         vm.summary.showtabledata = true;
+         //vm.summary.showtabledata = true;
+         vm.es.inputShow=false;
+         vm.es.showReport=true;
        }, function myError(response) {
            console.log(response);
        });

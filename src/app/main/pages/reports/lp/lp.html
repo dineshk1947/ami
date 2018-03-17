@@ -9,14 +9,14 @@
                 <span class="parent">Reports</span>
             </div>
 
-            <div class="headerTitle"> Reports / Load Profile Report</div>
+            <div class="headerTitle">Load Profile Report</div>
         </div>
     </div>
     <!-- / HEADER -->
 
     <div class="content" layout="column">
           <div layout="row">
-            <div class="lp1" flex="100" >
+            <div class="reports" flex="100" >
               <div class="pf-tab">
                 <div class="top-block">
                   <div ng-show="vm.loadProfileReport.inputShow">
@@ -120,29 +120,69 @@
         <div layout="row">
           <div class="" flex="100" >
             <div class="pf-tab">
-              <div class="data-block" >
+              <div class="data-block ">
                 <!-- <md-button type="submit" ng-click="vm.loadProfileReportSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button> -->
-                <div layout="row">
+                <div layout="row" >
                   <div class="main">
                     <span> <img src="assets/images/TSSPDCL.jpg" alt=""> </span>
                     <span> <p>Telangana State Southern Power Distribution Company Limited</p> </span>
                   </div>
                 </div>
-                <div layout="row" class="noMargin">
+                <div layout="row" class="noMargin" pdf-content="element-to-download" class="container" pdf-content="element-to-download">
                   <div class="details">
-                    <p>Power Factor report for <span>{{ vm.loadProfile.fdate|date }}  to  {{ vm.loadProfile.todate|date }}</span></p>
-                    <p>
-                      <span class="label-font">SubStation :</span><span>{{vm.subSationDisplayName}}</span>
+                    <p>Load Profile Report for <span>{{ vm.loadProfile.fdate|date }}  to  {{ vm.loadProfile.todate|date }}</span></p>
+                    <!-- <p>
+                      <span class="label-font">SubStation :</span><span class="noLeftMargin">{{vm.subSationDisplayName}}</span>
                       <span class="label-font">Feeder :</span><span>{{vm.feederDisplayName}}</span>
                       <span class="label-font">DTR :</span><span>{{vm.dtrDisplayName}}</span>
                       <span class="label-font">Meter :</span><span>{{vm.meterDisplayName}}</span>
-                    </p>
+                    </p> -->
                   </div>
                 </div>
-                <div layout="row" flex="100" id="tableScroll">
-                 <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions"  class="noMargin">
+
+                <div layout="row">
+                  <div flex="5">
+
+                  </div>
+                  <div flex="10">
+                      <p class="label-font auto-align">SubStation:</p>
+                  </div>
+                  <div flex="15">
+                    <p class="data-font">{{vm.subSationDisplayName}}</p>
+                  </div>
+                  <div flex="5">
+                      <p class="label-font auto-align">Feeder:</p>
+                  </div>
+                  <div flex="20">
+                    <p class="data-font">{{vm.feederDisplayName}}</p>
+                  </div>
+                  <div flex="5">
+                      <p class="label-font auto-align">DTR:</p>
+                  </div>
+                  <div flex="20">
+                    <p class="data-font">{{vm.dtrDisplayName}}</p>
+                  </div>
+                  <div flex="5">
+                      <p class="label-font auto-align">Meter:</p>
+                  </div>
+                  <div flex="10">
+                    <p class="data-font">{{vm.meterDisplayName}}</p>
+                  </div>
+                </div>
+
+
+                <!-- <a href="" ng-click="vm.dynamicShow();vm.Clear.clearObj(vm.loadProfile,modelArray)">Generate Other Report</a>
+                 <span>&nbsp; &nbsp;</span>
+                 <a href="" ng-click="vm.dataDownloadtoCSV()">Download Report as CSV</a> -->
+                <div layout="row" flex="100" id="tableScroll" class="noMargin2">
+                 <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions"  class="noMargin" id="eventTable1" >
                    <thead>
                      <tr>
+                       <th class="secondary-text" rowspan="2">
+                         <div class="table-header">
+                             <span class="column-title">S.No</span>
+                         </div>
+                       </th>
                        <th class="secondary-text" rowspan="2">
                          <div class="table-header">
                              <span class="column-title">Date</span>
@@ -150,12 +190,12 @@
                        </th>
                       <th class="secondary-text" colspan="3">
                         <div class="table-header">
-                            <span class="column-title">Current</span>
+                            <span class="column-title">Current(Amp)</span>
                         </div>
                       </th>
                       <th class="secondary-text" colspan="3">
                         <div class="table-header">
-                            <span class="column-title">Voltage</span>
+                            <span class="column-title">Voltage(V)</span>
                         </div>
                       </th>
                       <th class="secondary-text" colspan="2">
@@ -253,7 +293,7 @@
                       </th>
                       <th class="secondary-text">
                         <div class="table-header">
-                            <span class="column-title">KWAH - IMP</span>
+                            <span class="column-title">KVAH - IMP</span>
                         </div>
                       </th>
                       <th class="secondary-text">
@@ -278,19 +318,20 @@
                       </th>
                       <th class="secondary-text">
                         <div class="table-header">
-                            <span class="column-title">High</br> V>103%</span>
+                            <span class="column-title">High</br> V&gt;103%</span>
                         </div>
                       </th>
                       <th class="secondary-text">
                         <div class="table-header">
-                            <span class="column-title">Low</br> V < 97%</span>
+                            <span class="column-title">Low</br> V &lt; 97%</span>
                         </div>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr ng-repeat="item in vm.loadProfileData">
-                      <td>{{item.realTimeClockDateTi |date}}
+                      <td>{{$index+1}}</td>
+                      <td>{{item.realTimeClockDateTi |date}}</td>
                       <td>{{item.currentIr}}</td>
                       <td>{{item.currentIy}} </td>
                       <td>{{item.currentIb  | limitTo : 6}}</td>
@@ -309,35 +350,242 @@
                       <td>{{item.cumEngKvarhQ2 | limitTo : 6}}</td>
                       <td>{{item.cumEngKvarhQ3 | limitTo : 6}}</td>
                       <td>{{item.cumEngKvarhQ4 | limitTo : 6}}</td>
-                      <!-- <td>{{item.cumEngKvahTz8 | limitTo : 6}}</td> -->
                       <td>{{item.reactiveEngLow | limitTo : 6}}</td>
                       <td>{{item.reactiveEngHigh | limitTo : 6}}</td>
-                      <!-- <td>12-Mar-2017</td>
-                      <td>1</td>
-                      <td>2</td>
-                      <td>3</td>
-                      <td>5</td>
-                      <td>5</td>
-                      <td>5</td>
-                      <td>5</td>
-                      <td>5</td>
-                      <td>5</td>
-                      <td>6</td>
-                      <td>7</td>
-                       <td>8</td>
-                      <td>8</td>
-                      <td>8</td>
-                      <td>8</td>
-                      <td>8</td>
-                      <td>8</td>
-                      <td>8</td>
-                      <td>8</td>
-                      <td>9</td> -->
                     </tr>
 
                   </tbody>
                 </table>
+
+                <table  id="eventTable" hidden style="border-color:black;border-width:1px">
+
+                  <thead>
+                    <tr>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Discom</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Report</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">From</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">To</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr >
+                      <td>TSSPDCL</td>
+                      <td>Power Factor Report</td>
+                      <td>20 Nov 2017</td>
+                      <td>1 Mar 2018</td>
+                    </tr>
+                    <tr >
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table  id="eventTable" hidden style="border-color:black;border-width:1px">
+
+                  <thead>
+                    <tr>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Sub Station</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Feeder</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">DTR</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Meter</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr >
+                      <td>{{vm.subSationDisplayName}}</td>
+                      <td>{{vm.feederDisplayName}}</td>
+                      <td>{{vm.dtrDisplayName}}</td>
+                      <td>{{vm.meterDisplayName}}</td>
+                    </tr>
+                    <tr >
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table  id="eventTable"  hidden>
+                  <thead>
+                    <tr>
+                      <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">S.No</span>
+                        </div>
+                      </th>
+                      <th class="secondary-text" >
+                        <div class="table-header">
+                            <span class="column-title">Date</span>
+                        </div>
+                      </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Current (R)</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Current (Y)</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Current (B)</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Voltage (R)</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Voltage (Y)</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Voltage (B)</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Block Energy (KWH-Imp)</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Block Energy (KVAH-Imp)</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Block Energy (KVARH) Q1</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Block Energy (KVARH) Q2</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Block Energy (KVARH) Q3</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Block Energy (KVARH) Q4</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Cumulative Energy (KWH-Imp)</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Cumulative Energy (KVARH-Imp)</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Cumulative Energy (KVARH) Q1</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Cumulative Energy (KVARH) Q2</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Cumulative Energy (KVARH) Q3</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Cumulative Energy (KVARH) Q4</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Reactive Energy High V&gt;103%</span>
+                       </div>
+                     </th>
+                     <th class="secondary-text" >
+                       <div class="table-header">
+                           <span class="column-title">Reactive Energy Low V&lt;97%</span>
+                       </div>
+                     </th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr ng-repeat="item in vm.loadProfileData">
+                     <td>{{$index+1}}</td>
+                     <td>{{item.realTimeClockDateTi }}</td>
+                     <td>{{item.currentIr}}</td>
+                     <td>{{item.currentIy}} </td>
+                     <td>{{item.currentIb  | limitTo : 6}}</td>
+                     <td>{{item.voltageVrn  | limitTo : 6}}</td>
+                     <td>{{item.voltageVyn  | limitTo : 6}}</td>
+                     <td>{{item.voltageVbn  | limitTo : 6}}</td>
+                     <td>{{item.blockEnergyKwhImp  | limitTo : 6}}</td>
+                     <td>{{item.blockEnergyKvahImp  | limitTo : 6}}</td>
+                     <td>{{item.blockEnergyKvarhQ1  | limitTo : 6}}</td>
+                     <td>{{item.blockEnergyKvarhQ2  | limitTo : 4}}</td>
+                     <td>{{item.blockEnergyKvarhQ3  | limitTo : 6}}</td>
+                     <td>{{item.blockEnergyKvarhQ4 | limitTo : 6}}</td>
+                     <td>{{item.cumEnergyKwhImp | limitTo : 6}}</td>
+                     <td>{{item.cumEnergyKvahImp | limitTo : 6}}</td>
+                     <td>{{item.cumEngKvarhQ1 | limitTo : 6}}</td>
+                     <td>{{item.cumEngKvarhQ2 | limitTo : 6}}</td>
+                     <td>{{item.cumEngKvarhQ3 | limitTo : 6}}</td>
+                     <td>{{item.cumEngKvarhQ4 | limitTo : 6}}</td>
+                     <td>{{item.reactiveEngLow | limitTo : 6}}</td>
+                     <td>{{item.reactiveEngHigh | limitTo : 6}}</td>
+                   </tr>
+
+                 </tbody>
+               </table>
               </div>
+
             </div>
           </div>
         </div>

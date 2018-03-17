@@ -1,22 +1,23 @@
 <div  class="page-layout simple fullwidth doc-page reports" layout="column">
     <!-- HEADER -->
-    <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
-        <div layout="column" layout-align="space-between">
-            <div class="breadcrumb" layout="row" layout-align="start center">
-                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">Reports</span>
-            </div>
-            <div class="headerTitle">Billing Demand</div>
+  <div class="header md-accent-bg" layout="row" layout-align="space-between" id = "headerDiv">
+    <div layout="column" layout-align="space-between">
+      <div class="breadcrumb" layout="row" layout-align="start center">
+        <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+        <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+        <span class="parent">Reports</span>
+      </div>
+      <div class="headerTitle">Billing Demand Report</div>
         </div>
-    </div>
+      </div>
     <!-- / HEADER -->
     <!-- CONTENT -->
     <div class="content" layout="column">
         <div layout="row">
-          <div class="form-wrapper md-whiteframe-1dp bd" flex="100" >
+          <div class=" bd" flex="100" >
             <div class="pf-tab">
               <div class="top-block">
+                <div ng-show="vm.billingDemand.inputShow">
                 <div layout="row" class="hierarchy-align">
                   <div flex="10">
                     <p class="label-font">Discom :</p>
@@ -85,10 +86,11 @@
                     <p class="label-font">Meter:</p>
                   </div>
                   <md-autocomplete
-                     md-selected-item="vm.billDemand.selectedItem"
+                     md-no-cache = "noCache"
+                     md-selected-item="vm.billDemand.mtrNo"
                      md-search-text-change="vm.searchTextChange(vm.billDemand.searchText)"
                      md-search-text="vm.billDemand.searchText"
-                     md-selected-item-change="vm.getMeter(vm.billDemand.selectedItem)"
+                     md-selected-item-change="vm.getMeter(vm.billDemand.mtrNo)"
                      md-items="item in vm.billingDemand.meters  | filter:vm.billDemand.searchText"
                      md-item-text="item.mtrNo"
                      md-min-length="0"
@@ -143,12 +145,14 @@
                   <md-button type="submit"  ng-click="vm.billingDemandSubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
                   <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.billDemand)">clear</md-button>
                 </div>
+                    </div>
                 <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.billingDemand.progressShow">
                   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                 </div>
-              </div>
+
               <!--  -->
-              <div class="data-block" ng-show = "vm.billDemand.showtabledata" >
+              <div class="data-block" ng-if="vm.billDemand.showReport" >
+                <a href="" ng-click="vm.dynamicShow();vm.Clear.clearObj(vm.billDemand,modelArray)">Generate Other Report</a>
                 <div layout="row">
                   <div class="main">
                     <span> <img src="assets/images/TSSPDCL.jpg" alt=""> </span>
@@ -157,11 +161,10 @@
                 </div>
                 <div layout="row" class="noMargin">
                   <div class="details" >
-                    <p>Billing Demand report for <span>{{vm.frommonth.month}} - {{vm.billDemand.fyear}} to {{vm.frommonth.month}} - {{vm.billDemand.tyear}}</span></p>
+                    <p>Billing Demand report for <span>{{vm.fromMonth.month}} - {{vm.billDemand.fyear}} to {{vm.toMonth.month}} - {{vm.billDemand.tyear}}</span></p>
                   </div>
                 </div>
                 <div layout="row">
-
                       <div flex="10">
                           <p class="label-font auto-align">SubStation:</p>
                       </div>
@@ -186,11 +189,8 @@
                       <div flex="10">
                         <p class="data-font">{{vm.billingDemand.dataList[0].mtrNo}}</p>
                       </div>
-
-
-
                 </div>
-                <div layout="row" flex="100" id="tableScroll" class="noMargin">
+                <div layout="row" flex="100" id="tableScroll" class="noMargin2">
                  <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="eventTable">
                    <thead>
                      <tr>
@@ -248,13 +248,14 @@
                       </tbody>
                   </table>
                 </div>
-                <div layout="row" class="download-btn">
+                <!-- <div layout="row" class="download-btn">
                   <a href="#"><span>PDF</span></a>
                   <a href="#"><span>Excel</span></a>
                   <a href="#"><span>CSV</span></a>
-                </div>
+                </div> -->
               </div>
             </div>
+          </div>
           <!-- </div> -->
           </div>
         </div>

@@ -130,5 +130,36 @@
              //Aggregations Network Consumption
              'app.networkwiseConsumption',
 
+             //Reports Billing Consumtion
+             'app.billingConsumption',
+
+             //Reports Billing Demand
+             'app.billingDemand',
+
+             //Reports Events Summay
+             'app.eventsSummary',
+
+             //Reports Billing Energy
+             'app.billingEnergy',
+
+             //Reports Events Individual
+             'app.eventsIndividual',
+
+             //assetManagement summary
+             'app.installedCommunicated',
+
+             //assetManagement commissioned
+             'app.assetMgmtCommissioned',
+
+             //assetManagement installed
+             'app.installed',
+
+             //asset Management communication
+
+             'app.communicated'
+
+
+
+
         ]);
 })();

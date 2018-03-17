@@ -16,14 +16,22 @@
       vm.billDemand = {};
       vm.billDemand.showtabledata =  false;
       vm.billingDemand.progressShow = false;
+      vm.billingDemand.inputShow = true;
+      vm.billDemand.showReport = false;
       vm.dtOptions = {
-                  dom       : '<"top"f>rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
+                  dom       : '<"top"f>rt<"bottom"<"left"<"length"l><"pagination"p>><"right"<"info"i><"pagination"p>>>',
                   pagingType: 'simple',
                   autoWidth : false,
                   responsive: true
                 }
       vm.billingDemand.region=false;
       vm.billingDemand.region1=false;
+
+      vm.dynamicShow=function (){
+        vm.billingDemand.inputShow=true;
+        vm.billingDemand.showReport=false;
+      }
+
       var data = {};
       var userDetails = {};
       console.log("In billingDemandController");
@@ -111,6 +119,7 @@
           console.log(response);
             vm.billingDemand.regions = response.data;
             console.log(vm.billingDemand.regions);
+             vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -128,6 +137,7 @@
         }).then(function mySuccess(response) {
             vm.billingDemand.circles = response.data;
             console.log(vm.billingDemand.circles);
+             vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -149,6 +159,7 @@
         }).then(function mySuccess(response) {
             vm.billingDemand.divisions = response.data;
             console.log(vm.billingDemand.divisions);
+             vm.getMeters();
             //vm.billingDemand.divisionid = vm.billingDemand.divisions[0].name;
         }, function myError(response) {
             console.log(response);
@@ -170,6 +181,7 @@
         }).then(function mySuccess(response) {
             console.log(response.data);
             vm.billingDemand.subdivisions = response.data;
+             vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -191,6 +203,7 @@
             vm.billingDemand.sections = response.data;
             console.log(response.data);
             console.log(vm.billingDemand.sections);
+            vm.getMeters();
         }, function myError(response) {
             console.log(response);
         });
@@ -294,56 +307,73 @@
 
 
 
+
+
      vm.billingDemandSubmit = function(){
+       if (vm.billDemand.fmonth != undefined) {
+         vm.fromMonth = JSON.parse(vm.billDemand.fmonth);
+       }
+       if (vm.billDemand.tmonth != undefined) {
+         vm.toMonth  = JSON.parse(vm.billDemand.tmonth);
+       }
        if (validatebillingDemand()) {
-      vm.billingDemand.progressShow=true;
-       data.modelArray = vm.modelArray;
-       data.mtrNo = vm.billDemand.selectedItem.mtrNo;
-       vm.frommonth = JSON.parse(vm.billDemand.fmonth);
-       vm.tomonth = JSON.parse(vm.billDemand.tmonth);
-       data.fromDate = vm.billDemand.fyear+"-"+vm.frommonth.value;
-       data.toDate = vm.billDemand.tyear+"-"+vm.tomonth.value;
-       $http({
-         method : "POST",
-         url : hierarchy + "mdm/reports/billing-demand",
-         data: data
-       }).then(function mySuccess(response) {
-         vm.billingDemand.progressShow=false;
-         console.log(response);
-         console.log(response.data.statistics.demandList);
-         vm.billingDemand.dataList = response.data.statistics.demandList;
-         vm.billDemand.showtabledata = true;
-       }, function myError(response) {
+         vm.billingDemand.progressShow=true;
+         data.modelArray = vm.modelArray;
+         data.mtrNo = vm.billDemand.mtrNo.mtrNo;
+         data.fromDate = vm.billDemand.fyear+"-"+vm.fromMonth.value;
+         data.toDate = vm.billDemand.tyear+"-"+vm.toMonth.value;
+         console.log(data);
+         $http({
+           method : "POST",
+           url : hierarchy + "mdm/reports/billing-demand",
+           data: data
+         }).then(function mySuccess(response) {
+           vm.billingDemand.progressShow=false;
            console.log(response);
-       });
+           console.log(response.data.statistics.demandList);
+           vm.billingDemand.dataList = response.data.statistics.demandList;
+           vm.billingDemand.inputShow = false;
+           vm.billDemand.showReport = true;
+         }, function myError(response) {
+             console.log(response);
+         });
+       }
      }
 
-     }
 
      function validatebillingDemand() {
-
-       if (vm.billDemand.selectedItem == undefined) {
+       console.log(vm.billDemand);
+       var fromYear;
+       var toYear;
+       var fromMonth;
+       var toMonth;
+       console.log(Object.keys(vm.billDemand).length);
+       if (vm.billDemand.mtrNo == null || vm.billDemand.mtrNo == undefined) {
          MessageInfo.showMessage(1017, 'Meter No', '', '');
           return false;
        }
-       if(vm.billDemand.fmonth === undefined || vm.billDemand.fyear === undefined || vm.billDemand.tmonth===undefined || vm.billDemand.tyear===undefined ){
-         //vm.errorToast("Please Select All Fields.");
-         MessageInfo.showMessage(1017, 'Dates and Meter', '', '');
-          return false;
+       if (Object.keys(vm.billDemand).length > 4) {
+         fromYear = Number(vm.billDemand.fyear);
+         toYear = Number(vm.billDemand.tyear);
+         fromMonth = Number(vm.fromMonth.value);
+         toMonth = Number(vm.toMonth.value);
        }
 
-       if((vm.billDemand.fyear == vm.billDemand.tyear) && (vm.billDemand.fmonth < vm.billDemand.tmonth) ){
-         //vm.errorToast("From Date Cannot be Less Than To Date");
+       if(vm.billDemand.fmonth === undefined || vm.billDemand.fyear===undefined || vm.billDemand.tmonth===undefined || vm.billDemand.tyear===undefined){
+         MessageInfo.showMessage(7002, '', '', '');
+          return false;
+       }
+       if(toYear < fromYear){
           MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
           return false;
        }
-       if( vm.billDemand.tyear < vm.billDemand.fyear  ){
-         //vm.errorToast("From Date Cannot be Less Than To Date");
-          MessageInfo.showMessage(1008, 'From Year', 'To Year', '');
+       if((fromYear == toYear) && (fromMonth > toMonth) ){
+          MessageInfo.showMessage(1008, 'From Date', 'To Date', '');
           return false;
        }
        return true;
      }
+
 
     }
 })();

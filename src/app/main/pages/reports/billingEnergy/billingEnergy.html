@@ -9,7 +9,7 @@
                 <span class="parent">Reports</span>
             </div>
 
-            <div class="headerTitle">Billing Reports / Energy</div>
+            <div class="headerTitle">Billing Energy Report</div>
         </div>
     </div>
     <!-- / HEADER -->
@@ -17,9 +17,10 @@
     <div class="content" layout="column">
 
         <div layout="row">
-          <div class="form-wrapper md-whiteframe-1dp reports" flex="100" >
+          <div class="reports" flex="100" >
             <div class="pf-tab">
               <div class="top-block">
+                <div ng-show="vm.be.inputShow">
                 <div layout="row" class="hierarchy-align">
                   <div flex="10">
                     <p class="label-font">Discom :</p>
@@ -34,7 +35,7 @@
                     <p class="data-font" > {{vm.billingEnergy.regionName}}</p>
                   </div>
                   <md-input-container flex="15" ng-show="vm.billingEnergy.region1">
-                    <md-select ng-change="vm.getCircles()"  ng-model="vm.billEnergy.regionid" placeholder="select region" class="md-underline">
+                    <md-select ng-change="vm.getCircles(vm.billEnergy.regionid)"  ng-model="vm.billEnergy.regionid" placeholder="select region" class="md-underline">
                       <md-option ng-repeat="x in vm.billingEnergy.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
                     </md-select>
                   </md-input-container>
@@ -45,7 +46,7 @@
                     <p class="data-font" >{{vm.billingEnergy.circleName}}</p>
                   </div>
                   <md-input-container flex="15" ng-show="vm.billingEnergy.circle1">
-                    <md-select  ng-change="vm.getDivision()" ng-model="vm.billEnergy.circleid" placeholder="select circle" class="md-underline">
+                    <md-select  ng-change="vm.getDivision(vm.billEnergy.circleid)" ng-model="vm.billEnergy.circleid" placeholder="select circle" class="md-underline">
                       <md-option ng-repeat="x in vm.billingEnergy.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
                     </md-select>
                   </md-input-container>
@@ -56,7 +57,7 @@
                     <p class="data-font" >{{vm.billingEnergy.divisionName}}</p>
                   </div>
                   <md-input-container flex="15" ng-show="vm.billingEnergy.division1">
-                    <md-select  ng-change="vm.getSubDivisions()" ng-model="vm.billEnergy.divisionid" placeholder="select division" class="md-underline">
+                    <md-select  ng-change="vm.getSubDivisions(vm.billEnergy.divisionid)" ng-model="vm.billEnergy.divisionid" placeholder="select division" class="md-underline">
                       <md-option ng-repeat="x in vm.billingEnergy.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
                     </md-select>
                   </md-input-container>
@@ -69,7 +70,7 @@
                     <p class="data-font" >{{vm.billingEnergy.subdivisionName}}</p>
                   </div>
                   <md-input-container flex="15" ng-show="vm.billingEnergy.subdivision1" >
-                    <md-select ng-change="vm.getSections()" ng-model="vm.billEnergy.subdivisionid" placeholder="select subdivision" class="md-underline">
+                    <md-select ng-change="vm.getSections(vm.billEnergy.subdivisionid)" ng-model="vm.billEnergy.subdivisionid" placeholder="select subdivision" class="md-underline">
                       <md-option ng-repeat="x in vm.billingEnergy.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
                     </md-select>
                   </md-input-container>
@@ -81,7 +82,7 @@
                     <p class="data-font" >{{vm.billingEnergy.sectionid}}</p>
                   </div>
                   <md-input-container flex="15" ng-show="vm.billingEnergy.section1">
-                    <md-select ng-change="vm.getMeters()" ng-model="vm.billEnergy.sectionid" placeholder="select section" class="md-underline">
+                    <md-select ng-change="vm.getMeters(vm.billEnergy.sectionid)" ng-model="vm.billEnergy.sectionid" placeholder="select section" class="md-underline">
                       <md-option ng-repeat="x in vm.billingEnergy.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
                     </md-select>
 
@@ -90,14 +91,13 @@
                   <div flex="10">
                     <p class="label-font">Meter:</p>
                   </div>
-
+                   <!-- md-selected-item-change="vm.setMeter(vm.billEnergy.mtrNo)" -->
                   <md-autocomplete
 
-                     md-selected-item="vm.billEnergy.selectedItem"
+                     md-no-cache = "noCache"
+                     md-selected-item="vm.billEnergy.mtrNo"
                      md-search-text-change="vm.searchTextChange(vm.billEnergy.searchText)"
                      md-search-text="vm.billEnergy.searchText"
-                     md-selected-item-change="vm.setMeter(vm.billEnergy.selectedItem)"
-
                      md-items="item in vm.billingEnergy.meters | filter:vm.billEnergy.searchText"
                      md-item-text="item.mtrNo"
                      md-min-length="0"
@@ -152,13 +152,15 @@
                 </div>
                 <div class="btn-align">
                   <md-button type="submit" ng-click="vm.billingEnergySubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
-                  <md-button ng-click="vm.Clear.clearObj(vm.billEnergy)" class="md-raised md-accent">clear</md-button>
+                  <md-button ng-click="vm.Clear.clearObj(vm.billEnergy,vm.modelArray)" class="md-raised md-accent">clear</md-button>
                 </div>
+                  </div>
                 <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.progressShow">
                   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                 </div>
-              </div>
-              <div class="data-block" ng-show = "vm.billEnergy.showReport">
+
+              <div class="data-block" ng-show = "vm.be.showReport">
+                 <a href="" ng-click="vm.dynamicShow();vm.Clear.clearObj(vm.billEnergy,vm.modelArray)">Generate Other Report</a>
                 <div layout="row">
                   <div class="main">
                     <span> <img src="assets/images/TSSPDCL.jpg" alt=""> </span>
@@ -180,7 +182,7 @@
 
                 <div layout="row" class="noMargin">
                   <div class="details" >
-                    <p>Billing Energy report for <span>{{vm.frommonth.month}} - {{vm.billEnergy.fyear}} to {{vm.toMonth.month}} - {{vm.billEnergy.tyear}}</span></p>
+                    <p>Billing Energy report for <span>{{vm.fromMonth.month}} - {{vm.billEnergy.fyear}} to {{vm.toMonth.month}} - {{vm.billEnergy.tyear}}</span></p>
                   </div>
                 </div>
                 <div layout="row">
@@ -212,22 +214,8 @@
                     <p class="data-font">{{vm.mtrslno}}</p>
                   </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <div layout="row" flex="100" id="tableScroll">
-                 <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="billingEnergyTable">
+                <div layout="row" flex="100" id="tableScroll" class="noMargin2">
+                 <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="eventTable">
                    <thead>
                      <tr>
                        <th class="secondary-text" rowspan="2">
@@ -394,14 +382,15 @@
                   </tbody>
                 </table>
               </div>
-              <div layout="row" class="download-btn">
+              <!-- <div layout="row" class="download-btn">
                 <a href="#"><span>PDF</span></a>
                 <a href="#"><span>Excel</span></a>
                 <a href="#"><span>CSV</span></a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
     <!-- / CONTENT -->

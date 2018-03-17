@@ -7,80 +7,19 @@
                 <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
                 <span class="parent">Reports</span>
             </div>
-            <div class="headerTitle">Events Summary</div>
+            <div class="headerTitle">Events Summary Report</div>
         </div>
     </div>
     <!-- / HEADER -->
     <!-- CONTENT -->
     <div class="content" layout="column">
         <div layout="row">
-          <div class="form-wrapper md-whiteframe-1dp es" flex="100" >
+          <div class="reports" flex="100" >
             <div class="pf-tab">
               <div class="top-block">
-                <!-- <div layout="row" class="hierarchy-align">
-                  <div flex="10">
-                    <p class="label-font">Discom :</p>
-                  </div>
-                  <div flex="15">
-                    <p class="data-font"> {{vm.eventsSummary.discom}}</p>
-                  </div>
-                  <div flex="10">
-                    <p class="label-font" >Region :</p>
-                  </div>
-                  <div flex="15" ng-show="vm.eventsSummary.region">
-                    <p class="data-font" > {{vm.eventsSummary.regionName}}</p>
-                  </div>
-                  <md-input-container flex="15" ng-show="vm.eventsSummary.region1">
-                    <md-select ng-change="vm.getCircles()"  ng-model="vm.eventsSummary.regionid" placeholder="select region" class="md-underline">
-                      <md-option ng-repeat="x in vm.eventsSummary.regions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
-                    </md-select>
-                  </md-input-container>
-                  <div flex="10">
-                    <p class="label-font">Circles :</p>
-                  </div>
-                  <div flex="15" ng-show="vm.eventsSummary.circle">
-                    <p class="data-font" >{{vm.eventsSummary.circleName}}</p>
-                  </div>
-                  <md-input-container flex="15" ng-show="vm.eventsSummary.circle1">
-                    <md-select  ng-change="vm.getDivision()" ng-model="vm.eventsSummary.circleid" placeholder="select circle" class="md-underline">
-                      <md-option ng-repeat="x in vm.eventsSummary.circles"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
-                    </md-select>
-                  </md-input-container>
-                  <div flex="10">
-                    <p class="label-font">Division :</p>
-                  </div>
-                  <div flex="15" ng-show="vm.eventsSummary.division">
-                    <p class="data-font" >{{vm.eventsSummary.divisionName}}</p>
-                  </div>
-                  <md-input-container flex="15" ng-show="vm.eventsSummary.division1">
-                    <md-select  ng-change="vm.getSubDivisions()" ng-model="vm.eventsSummary.divisionid" placeholder="select division" class="md-underline">
-                      <md-option ng-repeat="x in vm.eventsSummary.divisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
-                    </md-select>
-                  </md-input-container>
-                </div> -->
+                <div ng-show="vm.es.inputShow">
+
                 <div layout="row" class="hierarchy-align">
-                  <!-- <div flex="10">
-                    <p class="label-font" >Sub Division:</p>
-                  </div>
-                  <div flex="15" ng-show="vm.eventsSummary.subdivision">
-                    <p class="data-font" >{{vm.eventsSummary.subdivisionName}}</p>
-                  </div>
-                  <md-input-container flex="15" ng-show="vm.eventsSummary.subdivision1" >
-                    <md-select ng-change="vm.getSections()" ng-model="vm.eventsSummary.subdivisionid" placeholder="select subdivision" class="md-underline">
-                      <md-option ng-repeat="x in vm.eventsSummary.subdivisions"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
-                    </md-select>
-                  </md-input-container>
-                  <div flex="10">
-                    <p class="label-font">Sections:</p>
-                  </div>
-                  <div flex="15" ng-show="vm.eventsSummary.section">
-                    <p class="data-font" >{{vm.eventsSummary.sectionid}}</p>
-                  </div>
-                  <md-input-container flex="15" ng-show="vm.eventsSummary.section1">
-                    <md-select  ng-change="vm.getSubStations()" ng-model="vm.eventsSummary.sectionid" placeholder="select section" class="md-underline">
-                     <md-option ng-repeat="x in vm.eventsSummary.sections"  value="{{x.adminEntityValueId}}">{{x.name}}</md-option>
-                    </md-select>
-                  </md-input-container> -->
 
                   <div flex="10" class="vhide">
                     <p class="label-font">Sub Stations :</p>
@@ -152,11 +91,13 @@
                   <md-button type="submit"  ng-click="vm.eventsSummarySubmit()" class="md-raised md-accent" aria-label="Submit">Submit</md-button>
                   <md-button  class="md-accent md-raised"  ng-click="vm.Clear.clearObj(vm.summary)">clear</md-button>
                 </div>
+                  </div>
                 <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.eventsSummary.progressShow">
                   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                 </div>
-              </div>
-              <div class="data-block" ng-show = "vm.summary.showtabledata">
+
+              <div class="data-block" ng-if="vm.es.showReport">
+                <a href="" ng-click="vm.dynamicShow();vm.Clear.clearObj(vm.summary,modelArray)">Generate Other Report</a>
               <!-- <div class="data-block"> -->
                 <div layout="row">
                   <div class="main">
@@ -199,7 +140,7 @@
 
 
                 </div>
-                <div layout="row" flex="100" id="tableScroll"class="noMargin">
+                <div layout="row" flex="100" id="tableScroll" class="noMargin2">
                  <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions" id="eventTable">
                    <thead>
                      <tr>
@@ -231,13 +172,9 @@
                       </tbody>
                   </table>
                 </div>
-                <div layout="row" class="download-btn">
-                  <a href="#"><span>PDF</span></a>
-                  <a href="#"><span>Excel</span></a>
-                  <a href="#"><span>CSV</span></a>
-                </div>
               </div>
             </div>
+          </div>
           <!-- </div> -->
           </div>
         </div>

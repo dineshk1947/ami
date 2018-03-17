@@ -1,4 +1,4 @@
-.lp {
+.reports {
   .top-block {
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     padding: 10px;
@@ -36,6 +36,13 @@
   }
 
   .data-block {
+   .noMargin{
+     margin-top: -45px;
+   }
+   .noMargin2{
+     margin-top: -25px;
+   }
+
     .main {
       display: flex;
       text-transform: uppercase;
@@ -69,6 +76,31 @@
         }
       }
     }
+
+    .row-border {
+
+      thead {
+        tr:first-child {
+          height: 30px
+        }
+
+        tr {
+          th {
+            border: 1px solid #078acb;
+            width: 80px;
+            text-align: center;
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            width: 80px;
+            text-align: center;
+          }
+        }
+      }
+    }
     .details-2 {
       background-color: #039be5;
       padding: 10px 15px;
@@ -92,3 +124,6 @@
     }
   }
 }
+// .vhidee{
+// clip-path: polygon(0px 0px,0px 0px,0px 0px,0px 0px);
+// }
