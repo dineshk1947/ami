@@ -50,6 +50,7 @@
       model.meterSearch.consumerNo = '';
       model.meterSearch.consumerName = '';
       model.showTable = false;
+      console.log("checkng for the login user --------------------",userDetails.levelName);
       if (userDetails.levelName == "CIRCLE") {
         model.divisionid = undefined;
         model.subdivisionid = undefined;
@@ -62,10 +63,15 @@
         model.divisionid = undefined;
         model.subdivisionid = undefined;
       }
+      model.regionid = undefined;
+      model.circleid = undefined;
+      model.divisionid = undefined;
+      model.subdivisionid = undefined;
       model.sectionid = undefined;
       model.substationid = undefined;
       model.feederid = undefined;
       model.selectedItem = '';
+      modelArray = [null, null, null, null, null, null,null,null,null];
     }
     model.newMetr = function() {
       $location.path('/master');

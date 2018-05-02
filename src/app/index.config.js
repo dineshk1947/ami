@@ -201,7 +201,7 @@
         }
 
         function SetCredentials(userDetails, token) {
-          
+
           $rootScope.globals = {
               currentUser: userDetails,
               token: token
@@ -272,17 +272,17 @@
 
 
     function baseUrl1(){
-      return 'http://b9509397.ngrok.io/';
+      return 'http://03a5442b.ngrok.io/';
     }
 
     function baseUrl2(){
-      return 'http://b9509397.ngrok.io/';
+      return 'http://03a5442b.ngrok.io/';
     }
     function baseUrl3(){
-      return 'http://b9509397.ngrok.io/';
+      return 'http://03a5442b.ngrok.io/';
     }
     function hierarchy(){
-      return 'http://b9509397.ngrok.io/';
+      return 'http://03a5442b.ngrok.io/';
     }
 
     // function baseUrl1(){
